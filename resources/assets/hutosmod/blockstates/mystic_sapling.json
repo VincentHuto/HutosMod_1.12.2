@@ -1,0 +1,8 @@
+  
+{
+    "variants":
+    {
+        "stage=0": { "model": "hutosmod:mystic_sapling" },
+        "stage=1": { "model": "hutosmod:mystic_sapling" }
+    }
+}

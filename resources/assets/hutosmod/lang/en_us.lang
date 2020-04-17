@@ -1,0 +1,96 @@
+itemGroup.tabHutosMod=Hutos Mod
+item.ruby.name=Ruby
+item.blood_ingot.name=Bloody Ingot
+item.channeling_ingot.name=Conductive Ingot
+item.grey_ingot.name=Grey Ingot
+item.channeling_rod.name=Conductive stick
+item.null_crystal.name=Nullifying Gem
+item.nullifying_powder.name=Nullification Powder
+item.maker_activator.name=Wand Fabricator Conduit
+item.essence_drop.name=Essence Drop
+item.mana_debugtool.name=Mana Debug Tool
+item.mind_spike.name=Mind Spike
+
+item.magatamabead.name=Magatama Bead
+
+item.blood_sword.name=Bloody Sword
+item.blood_pickaxe.name=Bloody Pickaxe
+item.blood_shovel.name=Bloody Shovel
+item.blood_axe.name=Bloody Axe
+item.blood_hoe.name=Bloody Harvester
+
+item.blood_helmet.name=Bloody Helm
+item.blood_chestplate.name=Bloody Curiass
+item.blood_leggings.name=Bloody Grieves
+item.blood_boots.name=Bloody Boots
+
+item.mana_viewer.name=Mana Viewer
+item.mysterious_mask.name=Mysterious Mask
+item.mystic_tome.name=Mystic Tome
+item.wand_consume_mana.name=Wand of Mana Consumption
+item.wand_gain_mana.name=Wand Of Mana Absorption
+item.wand_fireball.name=Wand Of Fireballing
+item.wand_greatfireball.name=Wand Of Ghast
+item.wand_sacrifice.name=Wand Of Sacrifice
+item.wand_rending.name=Wand Of Rending
+item.wand_healself.name=Wand Of Healing
+item.wand_healother.name=Wand Of Generosity
+
+item.rune_metamorphosis.name=Metamorphosis Rune
+item.rune_lake.name=Arcane Lake Rune
+item.rune_clawmark.name=Clawmark Rune
+item.rune_rapture.name=Blood Rapture Rune
+item.rune_oedon.name=Oedon Rune
+
+item.rune_beast_c.name=Beasts Embrace Contract Rune
+item.rune_corruption_c.name=Corruption Contract Rune
+item.rune_impurity_c.name=Impurity Contract Rune
+item.rune_milkweed_c.name=Milkweed Contract Rune
+item.rune_radiance_c.name=Radiance Contract Rune
+
+name.CONTRACT=Contract Rune
+name.RUNE=Caryl Rune
+
+
+tile.display_glass.name=Display Glass
+tile.enchanted_stone.name=Enchanted Stone
+tile.enchanted_ore.name=Enchanted Ore
+tile.fusion_furnace.name=Fusion Furnace
+tile.wand_maker.name=Wand Fabricator
+tile.mana_belljar.name=Mana Belljar
+tile.mana_storagedrum.name=Mana Storage Drum
+tile.rune_station.name=Mind Rune Workshop
+tile.mystic_earth.name=Mystic Earth
+tile.mystic_media.name=Mystic Media
+tile.mystic_sapling.name=Mystic Sapling
+tile.mystic_log.name=Mystic Trunk
+tile.mystic_leaves.name=Mystic Leaves
+tile.mystic_vine.name=Mystic Vine
+
+gui.tooltip68=What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.
+gui.tooltip69=This is a test for tooltips
+
+entity.Test Mob.name=Test Mob
+entity.Colin.name=Colin
+entity.MaskedPraetor.name=Masked Praetor
+entity.Elemental.name=Mana Elemental
+
+effectrunic_health=Runic Health
+potion.effect.runic_health=Potion of Runic Health
+splash_potion.effect.runic_health=Splash Potion of Runic Health
+lingering_potion.effect.runic_health=Elixer of Runic Health
+tipped_arrow.effect.runic_health=Arrow of Runic Health
+
+effectmana_burn=Mana Burn
+potion.effect.mana_burn=Potion of Mana Burn
+splash_potion.effect.mana_burn=Splash Potion of Mana Burn
+lingering_potion.effect.mana_burn=Elixer of Mana Burn
+tipped_arrow.effect.mana_burn=Arrow of Mana Burn
+
+
+
+container.fusion_furnace=Fusion Furnace
+
+button.runes=Mind Runes
+button.inventory=Inv
+

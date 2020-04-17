@@ -1,0 +1,16 @@
+[
+{
+  "modid": "hutosmod",
+  "name": "Hutos Mod",
+  "description": "Trying out this 1.12.2 thing.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Huto"],
+  "credits": "The Forge and FML guys, for making Forge, and me for coding I guess?",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

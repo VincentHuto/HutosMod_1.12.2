@@ -1,0 +1,29 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:wand_maker" 
+        },
+    
+        "facing=south": 
+        { 
+            "model": "hutosmod:wand_maker" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:wand_maker","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:wand_maker","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:wand_maker","y":180 
+        }
+    }
+}

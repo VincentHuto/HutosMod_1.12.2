@@ -1,0 +1,13 @@
+{
+    "__comment": "Model for when two adgacent sides are connected.",
+	"parent": "block/cube",
+    "textures": {
+		"particle": "hutosmod:blocks/connected_cube/connected_cube0C",
+        "down": "hutosmod:blocks/connected_cube/connected_cube1C_e",
+		"up": "hutosmod:blocks/connected_cube/connected_cube4C",
+		"north": "hutosmod:blocks/connected_cube/connected_cube2C_uw",
+		"south": "hutosmod:blocks/connected_cube/connected_cube2C_ue",
+		"west": "hutosmod:blocks/connected_cube/connected_cube1C_u",
+		"east": "hutosmod:blocks/connected_cube/connected_cube4C"
+    }
+}

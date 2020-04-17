@@ -1,0 +1,29 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:mana_belljar" 
+        },
+    
+        "facing=south": 
+        { 
+            "model": "hutosmod:mana_belljar" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:mana_belljar","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:mana_belljar","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:mana_belljar","y":180 
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "__comment": "Model for when only one side is connected.",
+	"parent": "block/cube",
+    "textures": {
+		"particle": "hutosmod:blocks/connected_cube/connected_cube0C",
+        "down": "hutosmod:blocks/connected_cube/connected_cube0C",
+		"up": "hutosmod:blocks/connected_cube/connected_cube4C",
+		"north": "hutosmod:blocks/connected_cube/connected_cube1C_u",
+		"south": "hutosmod:blocks/connected_cube/connected_cube1C_u",
+		"west": "hutosmod:blocks/connected_cube/connected_cube1C_u",
+		"east": "hutosmod:blocks/connected_cube/connected_cube1C_u"
+    }
+}

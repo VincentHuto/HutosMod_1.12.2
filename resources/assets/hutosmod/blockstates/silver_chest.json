@@ -1,0 +1,29 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:silver_chest" 
+        },
+    
+        "facing=south": 
+        { 
+            "model": "hutosmod:silver_chest" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:silver_chest","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:silver_chest","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:silver_chest","y":180 
+        }
+    }
+}

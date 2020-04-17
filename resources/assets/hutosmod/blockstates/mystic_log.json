@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+        "axis=y":  { "model": "hutosmod:mystic_log" },
+        "axis=z":   { "model": "hutosmod:mystic_log", "x": 90 },
+        "axis=x":   { "model": "hutosmod:mystic_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "hutosmod:mystic_log" }
+    }
+}

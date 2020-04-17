@@ -1,0 +1,13 @@
+{
+    "__comment": "Model for when three adjacent sides are connected.",
+	"parent": "block/cube",
+    "textures": {
+		"particle": "hutosmod:blocks/connected_cube/connected_cube0C",
+        "down": "hutosmod:blocks/connected_cube/connected_cube2C_ue",
+		"up": "hutosmod:blocks/connected_cube/connected_cube4C",
+		"north": "hutosmod:blocks/connected_cube/connected_cube2C_uw",
+		"south": "hutosmod:blocks/connected_cube/connected_cube4C",
+		"west": "hutosmod:blocks/connected_cube/connected_cube2C_ue",
+		"east": "hutosmod:blocks/connected_cube/connected_cube4C"
+    }
+}

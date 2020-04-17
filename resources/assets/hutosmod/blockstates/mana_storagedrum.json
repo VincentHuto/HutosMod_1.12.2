@@ -1,0 +1,29 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:mana_storagedrum" 
+        },
+    
+        "facing=south": 
+        { 
+            "model": "hutosmod:mana_storagedrum" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:mana_storagedrum","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:mana_storagedrum","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:mana_storagedrum","y":180 
+        }
+    }
+}

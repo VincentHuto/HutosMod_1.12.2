@@ -1,0 +1,32 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:rune_station" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:rune_station" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:rune_station" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:rune_station","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:rune_station","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:rune_station","y":180 
+        }
+    }
+}

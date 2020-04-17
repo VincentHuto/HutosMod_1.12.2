@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+        "check_decay=true,decayable=true": { "model": "hutosmod:mystic_leaves" },
+        "check_decay=true,decayable=false": { "model": "hutosmod:mystic_leaves" },
+        "check_decay=false,decayable=true": { "model": "hutosmod:mystic_leaves" },
+        "check_decay=false,decayable=false": { "model": "hutosmod:mystic_leaves" }
+    }
+}
