@@ -3,7 +3,7 @@ package com.huto.hutosmod.items;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.MainClass;
-import com.huto.hutosmod.GUI.pages.GuiPageTome0;
+import com.huto.hutosmod.gui.pages.GuiPageTome0;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 

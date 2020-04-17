@@ -1,15 +1,8 @@
 package com.huto.hutosmod.keybinds;
 
-import com.huto.hutosmod.GUI.GuiRuneStation;
-import com.huto.hutosmod.GUI.pages.GuiPageTome0;
 import com.huto.hutosmod.mindrunes.network.PacketOpenRuneInventory;
 import com.huto.hutosmod.mindrunes.network.RunesPacketHandler;
-import com.huto.hutosmod.proxy.ClientProxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;

@@ -1,4 +1,4 @@
-package com.huto.hutosmod.GUI.pages;
+package com.huto.hutosmod.gui.pages;
 
 import com.huto.hutosmod.reference.Reference;
 

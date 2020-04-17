@@ -20,7 +20,6 @@ public class Reference {
 	public static final int GUI_SINTERING_FURNACE = 1;
 
     public static final int Gui_Fusion_Furnace = 2;
-    public static final int GUI_SILVER_CHEST = 4;
     public static final int GUI_Rune_Station = 6;
     public static final int Gui_Hud_Overlay_Runic = 3;
 	public static final Logger log = LogManager.getLogger(MODID.toUpperCase());

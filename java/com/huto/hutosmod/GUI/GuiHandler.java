@@ -1,4 +1,4 @@
-package com.huto.hutosmod.GUI;
+package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.container.ContainerFusionFurnace;
 import com.huto.hutosmod.container.ContainerRuneStation;
@@ -14,9 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import silver_chest.ContainerSilverChest;
-import silver_chest.GuiSilverChest;
-import silver_chest.TileEntitySilverChest;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -26,10 +23,7 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerFusionFurnace(player.inventory,
 					(TileEntityFusionFurnace) world.getTileEntity(new BlockPos(x, y, z)));
 		}
-		if (ID == Reference.GUI_SILVER_CHEST) {
-			return new ContainerSilverChest(player.inventory,
-					(TileEntitySilverChest) world.getTileEntity(new BlockPos(x, y, z)), player);
-		}
+		
 		if (ID == Reference.GUI_Rune_Station) {
 			return new ContainerRuneStation(player.inventory,
 					(TileEntityRuneStation) world.getTileEntity(new BlockPos(x, y, z)), player);
@@ -48,10 +42,7 @@ public class GuiHandler implements IGuiHandler {
 					(TileEntityFusionFurnace) world.getTileEntity(new BlockPos(x, y, z)));
 		}
 
-		if (ID == Reference.GUI_SILVER_CHEST) {
-			return new GuiSilverChest(player.inventory,
-					(TileEntitySilverChest) world.getTileEntity(new BlockPos(x, y, z)), player);
-		}
+		
 		if (ID == Reference.GUI_Rune_Station) {
 			return new GuiRuneStation(player.inventory,
 					(TileEntityRuneStation) world.getTileEntity(new BlockPos(x, y, z)), player);

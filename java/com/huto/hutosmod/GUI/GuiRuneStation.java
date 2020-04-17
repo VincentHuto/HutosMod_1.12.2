@@ -1,4 +1,4 @@
-package com.huto.hutosmod.GUI;
+package com.huto.hutosmod.gui;
 
 import java.awt.image.ImageProducer;
 

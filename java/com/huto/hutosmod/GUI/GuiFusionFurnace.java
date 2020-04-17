@@ -1,4 +1,4 @@
-package com.huto.hutosmod.GUI;
+package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.container.ContainerFusionFurnace;
 import com.huto.hutosmod.reference.Reference;
