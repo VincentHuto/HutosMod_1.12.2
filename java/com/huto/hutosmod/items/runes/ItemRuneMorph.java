@@ -2,7 +2,6 @@ package com.huto.hutosmod.items.runes;
 
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.items.ItemRune;
 import com.huto.hutosmod.mindrunes.RuneApi;
 import com.huto.hutosmod.mindrunes.RuneType;
 import com.huto.hutosmod.mindrunes.cap.IRune;

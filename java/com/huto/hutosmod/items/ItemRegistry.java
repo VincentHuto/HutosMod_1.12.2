@@ -3,6 +3,9 @@ package com.huto.hutosmod.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.items.armor.ArmorManaViewer;
+import com.huto.hutosmod.items.armor.ArmorMysteriousMask;
+import com.huto.hutosmod.items.armor.ArmourBase;
 import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
 import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
 import com.huto.hutosmod.items.runes.ItemContractRuneImpure;
@@ -13,6 +16,19 @@ import com.huto.hutosmod.items.runes.ItemRuneLake;
 import com.huto.hutosmod.items.runes.ItemRuneMorph;
 import com.huto.hutosmod.items.runes.ItemRuneOedon;
 import com.huto.hutosmod.items.runes.ItemRuneRapture;
+import com.huto.hutosmod.items.tools.ToolAxe;
+import com.huto.hutosmod.items.tools.ToolBloodSword;
+import com.huto.hutosmod.items.tools.ToolHoe;
+import com.huto.hutosmod.items.tools.ToolPickaxe;
+import com.huto.hutosmod.items.tools.ToolShovel;
+import com.huto.hutosmod.items.wands.ItemAbsorbWand;
+import com.huto.hutosmod.items.wands.ItemConsumeWand;
+import com.huto.hutosmod.items.wands.ItemFireballWand;
+import com.huto.hutosmod.items.wands.ItemGreatFireballWand;
+import com.huto.hutosmod.items.wands.ItemHealOthersWand;
+import com.huto.hutosmod.items.wands.ItemHealSelfWand;
+import com.huto.hutosmod.items.wands.ItemRendingWand;
+import com.huto.hutosmod.items.wands.ItemSacrificeWand;
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.init.SoundEvents;
@@ -48,7 +64,13 @@ public class ItemRegistry {
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");
 
-	
+	//Drum Upgrades
+
+	public static final Item upgrade_block = new ItemUpgrade("upgrade_block");
+	public static final Item upgrade_player = new ItemUpgrade("upgrade_player");
+	public static final Item upgrade_animal = new ItemUpgrade("upgrade_animal");
+	public static final Item upgrade_mob = new ItemUpgrade("upgrade_mob");
+
 	//Base Runes
 	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
 	public static final Item rune_lake = new ItemRuneLake("rune_lake");

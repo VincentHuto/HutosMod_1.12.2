@@ -1,8 +1,9 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.wands;
 
 import java.util.Random;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;

@@ -37,7 +37,7 @@ public class manaViewerHud extends Gui {
 		PacketHandler.INSTANCE.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.renders.manaViewerHud", "mana"));
 		String m = String.valueOf(mana);
 		FontRenderer fr = mc.fontRenderer;
-		DecimalFormat d = new DecimalFormat("#,##");
+		DecimalFormat d = new DecimalFormat("0.0");
 
 		final int vanillaExpLeftX = screenWidth / 2 - 91; // leftmost edge of the experience bar
 		final int vanillaExpTopY = screenHeight - 9; // top of the experience bar
@@ -138,9 +138,9 @@ public class manaViewerHud extends Gui {
 		GL11.glTranslatef(24, 21, 0);
 		GL11.glScalef(1.0f, 1.0f, 1);
 		// Shadow String
-		fr.drawString(m, -50, -20, 0x000000);
+		fr.drawString(d.format(mana), -50, -20, 0x000000);
 		// Blue String renders after so its on top
-		fr.drawString(m, -51, -20, 0x2F9AFF);
+		fr.drawString(d.format(mana), -51, -20, 0x2F9AFF);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		//GL11.glPopAttrib();

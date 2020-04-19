@@ -5,8 +5,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import silver_chest.SilverChest;
 
 public class BlockRegistry {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
@@ -19,7 +17,6 @@ public class BlockRegistry {
 	public static final Block wand_maker = new wand_makerBlock("wand_maker", Material.ROCK);
 	public static final Block mana_belljar = new mana_belljarBlock("mana_belljar", Material.GLASS);
 	public static final Block mana_storagedrum = new mana_storagedrumBlock("mana_storagedrum", Material.GLASS);
-	//public static final Block SILVER_CHEST = new SilverChest("silver_chest", Material.WOOD);
 	public static final Block Rune_Station = new runestationBlock("rune_station", Material.ROCK);
 
 	

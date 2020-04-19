@@ -1,8 +1,9 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.wands;
 
 import java.util.Random;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;
@@ -17,18 +18,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-public class ItemAbsorbWand extends Item {
+public class ItemConsumeWand extends Item {
 
 	public static float sync = 0;
 	public static float mana = 0;
 
-	public ItemAbsorbWand(String name) {
+	public ItemConsumeWand(String name) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
+		maxStackSize = 1;
 		setCreativeTab(MainClass.tabHutosMod);
 		ItemRegistry.ITEMS.add(this);
-		maxStackSize = 1;
-
 	}
 
 	@Override
@@ -42,20 +42,23 @@ public class ItemAbsorbWand extends Item {
 					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.ItemConsumeWand", "mana"));
 
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);
-		Random rand = new Random();
-		for (int countparticles = 0; countparticles <= 30; ++countparticles) {
-			if (worldIn.isRemote) {
-				worldIn.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+		if (mana.getMana() > 10F) {
+
+			Random rand = new Random();
+			for (int countparticles = 0; countparticles <= 30; ++countparticles) {
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL,
 						playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width,
 						playerIn.posY + rand.nextDouble() * (double) playerIn.height - (double) playerIn.getYOffset()
-								- 0.5,
+								- 1,
 						playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
-			}
 
-		}
-		mana.fill(20);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+			}
+			mana.consume(20);
+
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+
+		} else
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 	}
-
 }

@@ -2,7 +2,7 @@ package com.huto.hutosmod.container;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.items.ItemRune;
+import com.huto.hutosmod.items.runes.ItemRune;
 import com.huto.hutosmod.mindrunes.cap.IRune;
 
 import net.minecraft.inventory.IInventory;

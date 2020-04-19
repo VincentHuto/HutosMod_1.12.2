@@ -1,8 +1,9 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.armor;
 
 import java.util.Random;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ModelManaViewer;
 
 import net.minecraft.client.model.ModelBiped;

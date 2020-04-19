@@ -1,6 +1,7 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.tools;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.item.ItemSpade;
 

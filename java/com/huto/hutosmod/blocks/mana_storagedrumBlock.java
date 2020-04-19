@@ -3,6 +3,7 @@ package com.huto.hutosmod.blocks;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.items.ItemRegistry;
+import com.huto.hutosmod.items.ItemUpgrade;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
@@ -23,6 +24,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -39,7 +41,7 @@ public class mana_storagedrumBlock extends BlockBase {
 	public static final AxisAlignedBB STORAGE_DRUM = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB STORAGE_DRUM_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5, 1.0D);
-	
+
 	// Facing
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	{
@@ -123,69 +125,95 @@ public class mana_storagedrumBlock extends BlockBase {
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-	
+
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
 		super.onBlockDestroyedByPlayer(worldIn, pos, state);
-		//inner ring
-			for(int j=0; j<100; j++) {
-			/*	worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.sin(j)/9, Math.sin(j)/3, Math.cos(j)/9);
-				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.cos(j)/9, Math.sin(j)/3, Math.sin(j)/9);
-				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.sin(-j)/9, Math.sin(j)/3, Math.cos(-j)/9);
-				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.cos(-j)/9, Math.sin(j)/3, Math.sin(-j)/9);*/
-			}
-			//outer ring
-			for(int i=0; i<30; i++) {
-		worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.sin(i)/3, Math.sin(i)/3, Math.cos(i)/3);
-		worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.cos(i)/3, Math.sin(i)/3, Math.sin(i)/3);
-		worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.sin(-i)/3, Math.sin(i)/3, Math.cos(-i)/3);
-		worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5, pos.getY(), pos.getZ()+.5,Math.cos(-i)/3, Math.sin(i)/3, Math.sin(-i)/3);
-				
+		// inner ring
+		for (int j = 0; j < 100; j++) {
+			/*
+			 * worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5,
+			 * pos.getY(), pos.getZ()+.5,Math.sin(j)/9, Math.sin(j)/3, Math.cos(j)/9);
+			 * worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5,
+			 * pos.getY(), pos.getZ()+.5,Math.cos(j)/9, Math.sin(j)/3, Math.sin(j)/9);
+			 * worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5,
+			 * pos.getY(), pos.getZ()+.5,Math.sin(-j)/9, Math.sin(j)/3, Math.cos(-j)/9);
+			 * worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX()+.5,
+			 * pos.getY(), pos.getZ()+.5,Math.cos(-j)/9, Math.sin(j)/3, Math.sin(-j)/9);
+			 */
+		}
+		// outer ring
+		for (int i = 0; i < 30; i++) {
+			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
+					Math.sin(i) / 3, Math.sin(i) / 3, Math.cos(i) / 3);
+			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
+					Math.cos(i) / 3, Math.sin(i) / 3, Math.sin(i) / 3);
+			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
+					Math.sin(-i) / 3, Math.sin(i) / 3, Math.cos(-i) / 3);
+			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
+					Math.cos(-i) / 3, Math.sin(i) / 3, Math.sin(-i) / 3);
+
 		}
 	}
+
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float par7, float par8, float par9) {
 		TileEntityStorageDrum drum = (TileEntityStorageDrum) world.getTileEntity(pos);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		if (!player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
+		ItemStack stack = player.getHeldItem(hand);
+		Item stackItem = stack.getItem();
+
+		// If NOT sneaking and your hand IS empty
+		if (!player.isSneaking() && stack.isEmpty()) {
 			String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
 			player.sendMessage(new TextComponentString(message));
 
 		}
-		System.out.println(drum.getManaValue());
 
-		if (player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
+		// If player IS sneaking and isnt holding an extractor
+		if (player.isSneaking() && stackItem != ItemRegistry.mana_extractor) {
+			ModInventoryHelper.withdrawFromInventory(drum, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+		}
+
+		// If there is something in your hand add it to the block if its not an
+		// extractor
+		if (!stack.isEmpty() && stackItem instanceof ItemUpgrade) {
+			drum.addItem(player, stack, hand);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+		}
+
+		// If player is sneaking and hand is empty
+		if (player.isSneaking() && stack.isEmpty()) {
 			if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
 				drum.addManaValue(30);
 				mana.consume(30);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
 		}
-
-		if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_extractor) {
+		// If player NOT is sneaking and has an extractor
+		if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
 			if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
 				mana.fill(30);
-
 				drum.setManaValue(drum.getManaValue() - 30);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
 		}
-
-		if (player.getHeldItemMainhand().getItem() == ItemRegistry.magatamabead
-				&& player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot && drum.getTankLevel() < 9) {
+		// Upgrade clause
+		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
+				&& drum.getTankLevel() < 9) {
 			drum.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);
 
 		}
+		// Says the tank is full
 		if (drum.getManaValue() >= drum.getTankSize()) {
 			String message = String.format("§4Drum is full §r");
 			player.sendMessage(new TextComponentString(message));
 		}
-
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-
 		return true;
 	}
 
@@ -205,5 +233,4 @@ public class mana_storagedrumBlock extends BlockBase {
 		}
 	}
 
-	
 }

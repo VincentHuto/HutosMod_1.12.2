@@ -189,7 +189,6 @@ public class wand_makerBlock extends BlockBase implements IWandable {
 	@Override
 	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 		TileSimpleInventory inv = (TileSimpleInventory) world.getTileEntity(pos);
-
 		ModInventoryHelper.dropInventory(inv, world, state, pos);
 		super.breakBlock(world, pos, state);
 	}

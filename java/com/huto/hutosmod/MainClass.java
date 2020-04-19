@@ -55,5 +55,6 @@ public class MainClass {
 	@EventHandler
 	public static void PostInit(FMLServerStartingEvent event) {
 		RegistryHandler.serverRegistries(event);
+	
 	}
 }

@@ -7,11 +7,16 @@ item.channeling_rod.name=Conductive stick
 item.null_crystal.name=Nullifying Gem
 item.nullifying_powder.name=Nullification Powder
 item.maker_activator.name=Wand Fabricator Conduit
+item.mana_extractor.name=Mana Extractor
 item.essence_drop.name=Essence Drop
 item.mana_debugtool.name=Mana Debug Tool
 item.mind_spike.name=Mind Spike
-
 item.magatamabead.name=Magatama Bead
+
+item.upgrade_block.name=Drum Upgrade:Blocks
+item.upgrade_player.name=Drum Upgrade:Players
+item.upgrade_mob.name=Drum Upgrade:Mobs
+item.upgrade_animal.name=Drum Upgrade:Animal
 
 item.blood_sword.name=Bloody Sword
 item.blood_pickaxe.name=Bloody Pickaxe

@@ -3,7 +3,7 @@ package com.huto.hutosmod.events;
 import java.util.Random;
 
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.items.ToolBloodSword;
+import com.huto.hutosmod.items.tools.ToolBloodSword;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.potions.PotionInit;
 

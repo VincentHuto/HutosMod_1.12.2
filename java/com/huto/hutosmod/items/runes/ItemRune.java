@@ -1,9 +1,10 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.runes;
 
 import java.util.List;
 
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;

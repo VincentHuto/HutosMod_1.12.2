@@ -20,26 +20,14 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.items.DynamicItemStackHandler;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 
-public abstract class TileSimpleInventory extends TileMod {
+public abstract class TileSimpleInventory extends TileModMana {
 
 	protected SimpleItemStackHandler itemHandler = createItemHandler();
 	private static final String TAG_MANA = "mana";
-	IMana mana = this.getCapability(ManaProvider.MANA_CAP, null);
-	float manaValue = 0.0F;
-	
-	public float getManaValue() {
-		return manaValue;
-	}
-
-	public void setManaValue(float manaValue) {
-		this.manaValue = manaValue;
-	}
-	public void addManaValue(float manaValue) {
-		this.manaValue +=manaValue;
-	}
 	
 	@Override
 	public void readPacketNBT(NBTTagCompound par1NBTTagCompound) {
@@ -103,6 +91,7 @@ public abstract class TileSimpleInventory extends TileMod {
 		@Override
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			if(allowWrite) {
+				
 				return super.extractItem(slot, amount, simulate);
 			} else return ItemStack.EMPTY;
 		}

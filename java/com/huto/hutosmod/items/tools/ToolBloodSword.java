@@ -1,8 +1,9 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.tools;
 
 import java.util.List;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;

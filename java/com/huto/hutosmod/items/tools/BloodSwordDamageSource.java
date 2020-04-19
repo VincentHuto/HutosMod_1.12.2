@@ -1,4 +1,4 @@
-package com.huto.hutosmod.items;
+package com.huto.hutosmod.items.tools;
 
 import net.minecraft.util.DamageSource;
 
