@@ -1,7 +1,5 @@
 package com.huto.hutosmod.proxy;
 
-import org.lwjgl.input.Keyboard;
-
 import com.google.common.util.concurrent.ListenableFuture;
 import com.huto.hutosmod.events.MaskOverlayHandler;
 import com.huto.hutosmod.events.karmaViewHandler;
@@ -9,29 +7,23 @@ import com.huto.hutosmod.events.manaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.TextFormating;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
-import com.huto.hutosmod.mindrunes.GUI.GuiMindRunes;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
 import com.huto.hutosmod.models.ClientTickHandler;
+import com.huto.hutosmod.particles.ParticleTextureStitcher;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.renders.karmaViewHud;
 import com.huto.hutosmod.renders.manaViewerHud;
 import com.huto.hutosmod.renders.runicHealthRenderer;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
 
@@ -58,7 +50,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 		KeyBindRegistry.register();
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-
+	    MinecraftForge.EVENT_BUS.register(new ParticleTextureStitcher());
 	}
 
 	@Override
@@ -89,5 +81,4 @@ public class ClientProxy extends CommonProxy {
 	public long getWorldElapsedTicks() {
 		return ClientTickHandler.ticksInGame;
 	}
-
 }

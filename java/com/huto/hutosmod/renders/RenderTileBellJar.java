@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.tileentites.TileEntityBellJar;
+import com.huto.hutosmod.tileentity.TileEntityBellJar;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

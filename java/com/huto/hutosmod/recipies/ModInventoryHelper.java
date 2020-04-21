@@ -10,7 +10,7 @@
  */
 package com.huto.hutosmod.recipies;
 
-import com.huto.hutosmod.tileentites.TileSimpleInventory;
+import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,7 +47,7 @@ public class ModInventoryHelper {
 				return ret;
 	}
 
-	public static void dropInventory(TileSimpleInventory inv, World world, IBlockState state, BlockPos pos) {
+	public static void dropInventory(TileManaSimpleInventory inv, World world, IBlockState state, BlockPos pos) {
 		if(inv != null) {
 			for(int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
 				ItemStack itemstack = inv.getItemHandler().getStackInSlot(j1);
@@ -61,7 +61,7 @@ public class ModInventoryHelper {
 		}
 	}
 
-	public static void withdrawFromInventory(TileSimpleInventory inv, EntityPlayer player) {
+	public static void withdrawFromInventory(TileManaSimpleInventory inv, EntityPlayer player) {
 		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
 			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
 			if(!stackAt.isEmpty()) {

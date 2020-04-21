@@ -10,7 +10,7 @@ import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
 import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
 import com.huto.hutosmod.mindrunes.cap.IRune;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.tileentites.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -2,7 +2,7 @@ package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.container.ContainerFusionFurnace;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.tileentites.TileEntityFusionFurnace;
+import com.huto.hutosmod.tileentity.TileEntityFusionFurnace;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

@@ -2,11 +2,11 @@ package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.container.ContainerFusionFurnace;
 import com.huto.hutosmod.container.ContainerRuneStation;
-import com.huto.hutosmod.mindrunes.GUI.GuiMindRunes;
 import com.huto.hutosmod.mindrunes.container.ContainerPlayerExpanded;
+import com.huto.hutosmod.mindrunes.gui.GuiMindRunes;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.tileentites.TileEntityFusionFurnace;
-import com.huto.hutosmod.tileentites.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityFusionFurnace;
+import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

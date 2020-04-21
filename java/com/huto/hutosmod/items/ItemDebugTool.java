@@ -3,7 +3,8 @@ package com.huto.hutosmod.items;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+
 import net.minecraft.block.state.IBlockState;
 
 import net.minecraft.block.Block;

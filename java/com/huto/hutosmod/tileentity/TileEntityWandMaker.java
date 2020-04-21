@@ -1,4 +1,4 @@
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-public class TileEntityWandMaker extends TileSimpleInventory implements ITickable {
+public class TileEntityWandMaker extends TileManaSimpleInventory implements ITickable {
 	int cooldown = 0;
 	List<ItemStack> lastRecipe = null;
 	RecipeWandMaker currentRecipe;

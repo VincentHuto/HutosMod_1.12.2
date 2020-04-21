@@ -36,20 +36,21 @@ import com.huto.hutosmod.mindrunes.events.EventHandlerItem;
 import com.huto.hutosmod.mindrunes.events.IRunesItemHandler;
 import com.huto.hutosmod.mindrunes.network.RunesPacketHandler;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.particles.TextureStitcherBreathFX;
 import com.huto.hutosmod.potions.PotionEventHandler;
 import com.huto.hutosmod.potions.PotionInit;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.renders.RenderHandler;
 import com.huto.hutosmod.renders.RenderTileBellJar;
+import com.huto.hutosmod.renders.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
 import com.huto.hutosmod.renders.RenderTileWandMaker;
 import com.huto.hutosmod.sounds.SoundsHandler;
-import com.huto.hutosmod.tileentites.TileEntityBellJar;
-import com.huto.hutosmod.tileentites.TileEntityHandler;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
-import com.huto.hutosmod.tileentites.TileEntityWandMaker;
+import com.huto.hutosmod.tileentity.TileEntityBellJar;
+import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
+import com.huto.hutosmod.tileentity.TileEntityHandler;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.worldgen.ModWorldGen;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
 
@@ -71,8 +72,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class RegistryHandler {
+	//This is the page array for the book, needed because i dont know how to add the pages to their own like sub class
 	public static List<String> pageList = new ArrayList<String>();
-
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemRegistry.ITEMS.toArray(new Item[0]));
@@ -89,20 +90,17 @@ public class RegistryHandler {
 	@SideOnly(Side.CLIENT)
 	public static void onModelRegister(ModelRegistryEvent event) {
 		RenderHandler.registerEntityRenders();
-		MinecraftForge.EVENT_BUS.register(new TextureStitcherBreathFX());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class, new RenderTileEssecenceEnhancer());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
-
 		}
 		for (Block block : BlockRegistry.BLOCKS) {
 			MainClass.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
-
 		}
-
 	}
 
 	public static void serverRegistries(FMLServerStartingEvent event) {
@@ -142,7 +140,6 @@ public class RegistryHandler {
 		CapabilityManager.INSTANCE.register(IKarma.class, new KarmaStorage(), Karma.class);
 		CapabilityManager.INSTANCE.register(IRunesItemHandler.class, new CapabilityRunes<IRunesItemHandler>(),
 				RunesContainer.class);
-
 		CapabilityManager.INSTANCE.register(IRune.class, new RuneCapabilities.CapabilityItemRuneStorage(),
 				() -> new RuneItem(RuneType.OVERRIDE));
 		ModFurnaceRecipies.init();

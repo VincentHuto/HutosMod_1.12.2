@@ -1,5 +1,9 @@
 package com.huto.hutosmod.particles;
 
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Random;
+
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.client.Minecraft;
@@ -7,33 +11,28 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-/**
- * User: The Grey Ghost
- * Date: 24/12/2014
- * Custom Particle to illustrate how to add a Particle with your own texture and movement/animation behaviour
- */
-public class FlameParticle extends Particle
+public class ManaParticle extends Particle
 {
-  private final ResourceLocation flameRL = new ResourceLocation(Reference.MODID + ":particle/flame_fx");
-
+  private final ResourceLocation smoothBubbleRL = new ResourceLocation(Reference.MODID + ":particle/SmoothBuble1");
 
   /**
    * Construct a new FlameParticle at the given [x,y,z] position with the given initial velocity.
    */
-  public FlameParticle(World world, double x, double y, double z,
+  public ManaParticle(World world, double x, double y, double z,
                        double velocityX, double velocityY, double velocityZ)
   {
     super(world, x, y, z, velocityX, velocityY, velocityZ);
 
-    particleGravity = Blocks.FIRE.blockParticleGravity;  /// arbitrary block!  not required here since we have
     // overriden onUpdate()
-    particleMaxAge = 100; // not used since we have overridden onUpdate
+    particleMaxAge = 70; // not used since we have overridden onUpdate
 
-    final float ALPHA_VALUE = 0.99F;
+    final float ALPHA_VALUE = 0.79F;
     this.particleAlpha = ALPHA_VALUE;  // a value less than 1 turns on alpha blending. Otherwise, alpha blending is off
     // and the particle won't be transparent.
 
@@ -44,7 +43,7 @@ public class FlameParticle extends Particle
 
     // set the texture to the flame texture, which we have previously added using TextureStitchEvent
     //   (see TextureStitcherBreathFX)
-    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(flameRL.toString());
+    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(smoothBubbleRL.toString());
     setParticleTexture(sprite);  // initialise the icon to our custom texture
   }
 
@@ -92,23 +91,49 @@ public class FlameParticle extends Particle
   /**
    * call once per tick to update the Particle position, calculate collisions, remove when max lifetime is reached, etc
    */
+  
+	private EntityPlayer getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
+		final double TARGETING_DISTANCE = 16;
+		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
+				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
+		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
+		EntityPlayer nearestMob = null;
+		double closestDistance = Double.MAX_VALUE;
+		for (EntityPlayer nextMob : allNearbyMobs) {
+			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
+			if (nextClosestDistance < closestDistance) {
+				closestDistance = nextClosestDistance;
+				nearestMob = nextMob;
+			}
+		}
+		return nearestMob;
+	}
+  
   @Override
   public void onUpdate()
   {
     prevPosX = posX;
     prevPosY = posY;
     prevPosZ = posZ;
+    move(motionX, motionY, motionZ);  
+   EntityPlayer player = this.getNearestTargetableMob(world, posX, posY, posZ);
+	if(player!=null) {
+		DecimalFormat df = new DecimalFormat("0");
+		if(Double.parseDouble((df.format(posX))) == Double.parseDouble((df.format(player.posX))) && 
+				Double.parseDouble((df.format(posY))) == Double.parseDouble((df.format(player.posY+1))) &&
+				Double.parseDouble((df.format(posZ))) == Double.parseDouble((df.format(player.posZ)))) {
+			this.setExpired();
+		}else if(Double.parseDouble((df.format(posX))) == Double.parseDouble((df.format(player.posX))) && 
+				Double.parseDouble((df.format(posY))) == Double.parseDouble((df.format(player.posY+2))) &&
+		Double.parseDouble((df.format(posZ))) == Double.parseDouble((df.format(player.posZ)))) {
+			this.setExpired();
+		}
+	}
+    if (onGround ) {
+        this.setExpired();
 
-    move(motionX, motionY, motionZ);  // simple linear motion.  You can change speed by changing motionX, motionY,
-      // motionZ every tick.  For example - you can make the particle accelerate downwards due to gravity by
-      // final double GRAVITY_ACCELERATION_PER_TICK = -0.02;
-      // motionY += GRAVITY_ACCELERATION_PER_TICK;
-
-    // collision with a block makes the ball disappear.  But does not collide with entities
-    if (onGround) {  // onGround is only true if the particle collides while it is moving downwards...
-      this.setExpired();
     }
-
+    
     if (prevPosY == posY && motionY > 0) {  // detect a collision while moving upwards (can't move up at all)
       this.setExpired();
     }
@@ -157,8 +182,8 @@ public class FlameParticle extends Particle
     double maxU = this.particleTexture.getMaxU();
     double minV = this.particleTexture.getMinV();
     double maxV = this.particleTexture.getMaxV();
-
-    double scale = 0.1F * this.particleScale;  // vanilla scaling factor
+    Random rand = new Random();
+    double scale =0.3* this.particleScale*this.particleMaxAge/300;  // vanilla scaling factor
     final double scaleLR = scale;
     final double scaleUD = scale;
     double x = this.prevPosX + (this.posX - this.prevPosX) * partialTick - interpPosX;

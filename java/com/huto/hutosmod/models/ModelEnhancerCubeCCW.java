@@ -17,11 +17,11 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 
-public class ModelSpinningCubes extends ModelBase {
+public class ModelEnhancerCubeCCW extends ModelBase {
 
 	final ModelRenderer spinningCube;
 
-	public ModelSpinningCubes() {
+	public ModelEnhancerCubeCCW() {
 		spinningCube = new ModelRenderer(this, 42, 0);
 		spinningCube.addBox(0F, 0F, 0F, 1, 1, 1);
 		spinningCube.setRotationPoint(0F, 0F, 0F);
@@ -32,11 +32,11 @@ public class ModelSpinningCubes extends ModelBase {
 		GlStateManager.disableTexture2D();
 
 		final float modifier = 6F;
-		final float rotationModifier = 0.2F;
+		final float rotationModifier = 0.9F;
 		final float radiusBase = 0.35F;
-		final float radiusMod = 0.05F;
+		final float radiusMod = 0.09F;
 
-		double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3 * (origRepeat - repeat);
+		double ticks =ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks - 1.3 * (origRepeat - repeat);
 		float offsetPerCube = 360 / cubes;
 
 		GlStateManager.pushMatrix();
@@ -44,26 +44,27 @@ public class ModelSpinningCubes extends ModelBase {
 		for(int i = 0; i < cubes; i++) {
 			float offset = offsetPerCube * i;
 			float deg = (int) (ticks / rotationModifier % 360F + offset);
-			float rad = deg * (float) Math.PI / 180F;
+			float rad = deg * (float) Math.PI / 60F;
 			float radiusX = (float) (radiusBase + radiusMod * Math.sin(ticks / modifier));
 			float radiusZ = (float) (radiusBase + radiusMod * Math.cos(ticks / modifier));
-			float x =  (float) (radiusX * Math.cos(rad));
-			float z = (float) (radiusZ * Math.sin(rad));
-			float y = (float) Math.cos((ticks + 50 * i) / 5F) / 10F;
+			//flip the x and z sin and cos to make it spin cw or ccw
+			float x =  (float) (radiusX * Math.sin(rad));
+			float z = (float) (radiusZ * Math.cos(rad));
+			float y = (float) Math.cos((ticks + 50 * i) / 5F) / 20F;
 
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(x, y, z);
 			float xRotate = (float) Math.sin(ticks * rotationModifier) / 2F;
-			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.1F) / 2F + 0.5F);
+			float yRotate = (float) Math.max(0.6F, Math.sin(ticks * 0.9F) / 2F + 0.5F);
 			float zRotate = (float) Math.cos(ticks * rotationModifier) / 2F;
 
 			GlStateManager.rotate(deg, xRotate, yRotate, zRotate);
 			if(repeat < origRepeat) {
-				GlStateManager.color(1F, 1F, 1F, (float) repeat / (float) origRepeat * 0.4F);
+				GlStateManager.color(0.3F, 0F, 0F, (float) repeat / (float) origRepeat * 0.4F);
 				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GlStateManager.disableAlpha();
-			} else GlStateManager.color(1F, 1F, 1F, 1F);
+			} else GlStateManager.color(1F, 0F, 0F, 1F);
 
 			int light = 15728880;
 			int lightmapX = light % 65536;

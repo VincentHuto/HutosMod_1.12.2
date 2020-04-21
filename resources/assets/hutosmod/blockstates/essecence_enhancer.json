@@ -1,0 +1,30 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:essecence_enhancer" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:essecence_enhancer" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:essecence_enhancer" 
+        },
+        "facing=east": 
+        { 
+            "model": "hutosmod:essecence_enhancer","y":270 
+        },
+        "facing=west": 
+        { 
+            "model": "hutosmod:essecence_enhancer","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:essecence_enhancer","y":180 
+        }
+    }
+}

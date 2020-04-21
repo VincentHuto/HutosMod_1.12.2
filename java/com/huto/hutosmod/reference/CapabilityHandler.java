@@ -2,7 +2,7 @@ package com.huto.hutosmod.reference;
 
 import com.huto.hutosmod.karma.KarmaProvider;
 import com.huto.hutosmod.mana.ManaProvider;
-import com.huto.hutosmod.tileentites.TileMod;
+import com.huto.hutosmod.tileentity.TileMod;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

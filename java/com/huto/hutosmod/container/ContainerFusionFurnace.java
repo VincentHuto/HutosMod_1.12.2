@@ -1,7 +1,7 @@
 package com.huto.hutosmod.container;
 
 import com.huto.hutosmod.recipies.FusionFurnaceRecipes;
-import com.huto.hutosmod.tileentites.TileEntityFusionFurnace;
+import com.huto.hutosmod.tileentity.TileEntityFusionFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

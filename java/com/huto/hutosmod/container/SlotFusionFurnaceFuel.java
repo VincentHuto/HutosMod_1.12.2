@@ -1,6 +1,6 @@
 package com.huto.hutosmod.container;
 
-import com.huto.hutosmod.tileentites.TileEntityFusionFurnace;
+import com.huto.hutosmod.tileentity.TileEntityFusionFurnace;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

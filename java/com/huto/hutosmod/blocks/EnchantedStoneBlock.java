@@ -3,17 +3,13 @@ package com.huto.hutosmod.blocks;
 import java.util.List;
 import java.util.Random;
 
-import com.huto.hutosmod.particles.EntityBaseFX;
-import com.huto.hutosmod.particles.FlameParticle;
-import com.huto.hutosmod.particles.Helper;
-import com.huto.hutosmod.particles.TestParticle;
+import com.huto.hutosmod.particles.ManaParticle;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,48 +19,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EnchantedStoneBlock extends BlockBase {
 
+	/*
+	 * 
+	 * USE THE PARTICLE CODE HERE TO SHOW THE TRANSFER OF MANA IN THE STORAGE DRUM
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+
 	public EnchantedStoneBlock(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.ANVIL);
 		setHardness(5.0F);
 		setResistance(15.0F);
 		setHarvestLevel("pickaxe", 2);
-		//setLightLevel(1.0F);
 		setLightOpacity(1);
-		// setBlockUnbreakable();
-	}
-
-	
-	
-/*	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-
-		//super.updateTick(worldIn, pos, state, rand);
-
-		// the velocity vector is now calculated as the fireball's speed multiplied by
-					// the direction vector.
-		double velocityX = 0; // increase in x position every tick
-		double velocityY = 0; // increase in y position every tick;
-		double velocityZ = 0; // increase in z position every tick
-					final double SPEED_IN_BLOCKS_PER_SECOND = 2.0;
-					final double TICKS_PER_SECOND = 20;
-					final double SPEED_IN_BLOCKS_PER_TICK = SPEED_IN_BLOCKS_PER_SECOND / TICKS_PER_SECOND;
-
-					velocityX = SPEED_IN_BLOCKS_PER_TICK; // how much to increase the x position every
-																				// tick
-					velocityY = SPEED_IN_BLOCKS_PER_TICK; // how much to increase the y position every
-																				// tick
-					velocityZ = SPEED_IN_BLOCKS_PER_TICK ; // how much to increase the z position every
-																				// tick
-		
-		TestParticle newEffect1 = new TestParticle(worldIn, pos.getX(), pos.getY()+2, pos.getZ(), velocityX, velocityY, velocityZ, 100, 1000, 110,
-				1, 0, 1, 0.5, 1);
-
-		Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
 	}
 
 
-	  @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 
@@ -92,7 +66,7 @@ public class EnchantedStoneBlock extends BlockBase {
 			ypos = pos.getY() + 1.0;
 			zpos = pos.getZ() + 0.5;
 
-			EntityMob mobTarget = getNearestTargetableMob(worldIn, xpos, ypos, zpos);
+			EntityPlayer mobTarget = getNearestTargetableMob(worldIn, xpos, ypos, zpos);
 			Vec3d fireballDirection;
 			if (mobTarget == null) { // no target: fire straight upwards
 				fireballDirection = new Vec3d(0.0, 1.0, 0.0);
@@ -122,37 +96,32 @@ public class EnchantedStoneBlock extends BlockBase {
 			velocityY = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.y; // how much to increase the y position every
 																		// tick
 			velocityZ = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.z; // how much to increase the z position every
-																		// tick
 
-			// TestParticle newEffect = new TestParticle(worldIn, xpos, ypos, zpos,
-			// velocityX, velocityY, velocityZ, 150, 3, 0.5, 1, 1, 1, 0.5, 0);
-		TestParticle newEffect1 = new TestParticle(worldIn, xpos, ypos, zpos, velocityX, velocityY, velocityZ, 100,
-					1000, 110, 1, 0, 1, 0.5, 1);
 
-			// Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+			
+			ManaParticle newEffect = new ManaParticle(worldIn, xpos, ypos, zpos, velocityX, velocityY, velocityZ);
+		      Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
+//			
+//			for (int i = 0; i < 30; i++) {
+//				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, xpos, ypos, zpos, velocityX, velocityY*0.2,
+//						velocityZ);
+//				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, xpos, ypos, zpos, velocityX*1.3, velocityY*0.2,
+//						velocityZ*1.3);
+//				worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, xpos, ypos, zpos, velocityX/1.3, velocityY*0.2,
+//						velocityZ/1.3);
+//			}
 		}
 	}
 
-	*//**
-	 * Returns the nearest targetable mob to the indicated [xpos, ypos, zpos].
-	 * 
-	 * @param world
-	 * @param xpos  [x,y,z] position to s
-	 * @param ypos
-	 * @param zpos
-	 * @return the nearest mob, or null if none within range.
-	 *//*
-	private EntityMob getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
+	private EntityPlayer getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
 		final double TARGETING_DISTANCE = 16;
 		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
 				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
-
-		List<EntityMob> allNearbyMobs = world.getEntitiesWithinAABB(EntityMob.class, targetRange);
-		EntityMob nearestMob = null;
+		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
+		EntityPlayer nearestMob = null;
 		double closestDistance = Double.MAX_VALUE;
-		for (EntityMob nextMob : allNearbyMobs) {
+		for (EntityPlayer nextMob : allNearbyMobs) {
 			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
 			if (nextClosestDistance < closestDistance) {
 				closestDistance = nextClosestDistance;
@@ -161,5 +130,4 @@ public class EnchantedStoneBlock extends BlockBase {
 		}
 		return nearestMob;
 	}
-*/
 }

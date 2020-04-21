@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.font.TextFormating;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelMagatama;
-import com.huto.hutosmod.tileentites.TileEntityWandMaker;
+import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

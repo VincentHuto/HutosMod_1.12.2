@@ -8,7 +8,7 @@
  *
  * File Created @ [Jan 21, 2014, 9:18:28 PM (GMT)]
  */
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import javax.annotation.Nonnull;
 

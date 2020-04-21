@@ -1,4 +1,4 @@
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import com.huto.hutosmod.container.ContainerRuneStation;
 import com.huto.hutosmod.reference.Reference;

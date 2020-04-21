@@ -1,4 +1,4 @@
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -10,6 +10,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityBellJar.class, "mana_belljar");
 		GameRegistry.registerTileEntity(TileEntityStorageDrum.class, "mana_storagedrum");
 		GameRegistry.registerTileEntity(TileEntityRuneStation.class, "rune_station");
+		GameRegistry.registerTileEntity(TileEntityEssecenceEnhancer.class, "esscence_enhancer");
 
 	}
 }

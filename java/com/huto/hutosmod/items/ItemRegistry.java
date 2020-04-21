@@ -63,6 +63,7 @@ public class ItemRegistry {
 	public static final Item essence_drop = new ItemBase("essence_drop");
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");
+	public static final Item enhancedmagatama = new ItemBase("enhancedmagatama");
 
 	//Drum Upgrades
 

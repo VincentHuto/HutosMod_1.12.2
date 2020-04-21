@@ -1,7 +1,7 @@
 package com.huto.hutosmod.mindrunes.events;
 
-import com.huto.hutosmod.mindrunes.GUI.GuiMindRunes;
-import com.huto.hutosmod.mindrunes.GUI.GuiRuneButton;
+import com.huto.hutosmod.mindrunes.gui.GuiMindRunes;
+import com.huto.hutosmod.mindrunes.gui.GuiRuneButton;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;

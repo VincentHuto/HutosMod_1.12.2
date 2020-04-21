@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * Created by TGG on 19/06/2015.
  * Inserts our custom flame texture into the blocks+items texture sheet.
  */
-public class TextureStitcherBreathFX
+public class ParticleTextureStitcher
 {
   @SubscribeEvent
   public void stitcherEventPre(TextureStitchEvent.Pre event) {

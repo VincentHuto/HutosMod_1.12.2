@@ -1,40 +1,34 @@
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import java.util.List;
+import java.util.Random;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
-import com.huto.hutosmod.tileentites.TileSimpleInventory.SimpleItemStackHandler;
+import com.huto.hutosmod.particles.ManaParticle;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.capabilities.Capability;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityStorageDrum extends TileSimpleInventory implements ITickable {
+public class TileEntityStorageDrum extends TileManaSimpleInventory implements ITickable {
 
 	public static final String TAG_MANA = "mana";
 	public static final String TAG_LEVEL = "tankLevel";
@@ -139,18 +133,54 @@ public class TileEntityStorageDrum extends TileSimpleInventory implements ITicka
 
 	@Override
 	public void update() {
-
 		this.getSizeInventory();
+		
+		
+		if (world.isRemote) {
+			Random rand = new Random();
+			double xpos = pos.getX() + 0.5;
+			double ypos = pos.getY() + 1.0;
+			double zpos = pos.getZ() + 0.5;
+			double velocityX = 0,velocityY = 0, velocityZ = 0; 
+
+			// starting position = top of the pole
+			xpos = pos.getX() + 0.5;
+			ypos = pos.getY() + 2.0;
+			zpos = pos.getZ() + 0.5;
+
+			EntityPlayer mobTarget = getNearestTargetableMob(world, xpos, ypos, zpos);
+			Vec3d fireballDirection;
+			if (mobTarget == null) { // no target: fire straight upwards
+				fireballDirection = new Vec3d(0.0, 1.0, 0.0);
+			} else { 
+
+				fireballDirection = mobTarget.getPositionEyes(1.0F).subtract(xpos, ypos, zpos);
+				fireballDirection = fireballDirection.normalize();
+			}
+
+			final double SPEED_IN_BLOCKS_PER_SECOND = 2.0;
+			final double TICKS_PER_SECOND = 20;
+			final double SPEED_IN_BLOCKS_PER_TICK = SPEED_IN_BLOCKS_PER_SECOND / TICKS_PER_SECOND;
+			double newy = ypos+Math.sin(rand.nextInt(360))-1.5;
+			double newVX=(velocityX%(Math.random())*1.8);
+			double newVZ=(velocityZ%(Math.random())*1.8);
+			velocityX = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.x; // how much to increase the x position every
+			velocityY = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.y; // how much to increase the y position every
+			velocityZ = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.z; // how much to increase the z position every
+			
+			ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY,velocityZ);
+		   // FlameParticle newEffect = new FlameParticle(world, xpos, newy, zpos, (velocityX), velocityY, (velocityZ));
+		      Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+		    }
+		
 		// To check for a tile entity use this instead
-		// if(world.getTileEntity(pos) != null){
-		// if(world.getTileEntity(pos) instanceof TileEntityRadiusBlock){
+			// if(world.getTileEntity(pos) != null){
+			// if(world.getTileEntity(pos) instanceof TileEntityRadiusBlock){
 
 		// for a block use this instead
-		// if (world.getBlockState(pos).getBlock() != null) {
-		// if (world.getBlockState(pos).getBlock() == Blocks.COAL_BLOCK
-		// || world.getBlockState(pos).getBlock() == Blocks.DIAMOND_BLOCK) {
-		// System.out.println(world.getBlockState(pos).getBlock());
-		// }
+			// if (world.getBlockState(pos).getBlock() != null) {
+			// if (world.getBlockState(pos).getBlock() == Blocks.COAL_BLOCK){
+		
 
 		// Ease of use variables
 		int x = this.pos.getX();
@@ -194,9 +224,9 @@ public class TileEntityStorageDrum extends TileSimpleInventory implements ITicka
 				// This is seperate due to WandMaker having different properties because it has
 				// an inventory that i may want to interact with later
 				// May change this to instanceof TileSimpleInventory
-				if (world.getTileEntity(pos) instanceof TileSimpleInventory) {
+				if (world.getTileEntity(pos) instanceof TileManaSimpleInventory) {
 
-					TileSimpleInventory wandMaker = (TileSimpleInventory) world.getTileEntity(pos);
+					TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) world.getTileEntity(pos);
 					if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()) {
 						this.setManaValue(manaValue - 0.1f);
 						wandMaker.addManaValue(0.1f);
@@ -275,6 +305,23 @@ public class TileEntityStorageDrum extends TileSimpleInventory implements ITicka
 			return 7;
 		} else*/
 			return 4;
+	}
+	
+	private EntityPlayer getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
+		final double TARGETING_DISTANCE = 3;
+		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos-2, zpos - TARGETING_DISTANCE,
+				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
+		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
+		EntityPlayer nearestMob = null;
+		double closestDistance = Double.MAX_VALUE;
+		for (EntityPlayer nextMob : allNearbyMobs) {
+			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
+			if (nextClosestDistance < closestDistance) {
+				closestDistance = nextClosestDistance;
+				nearestMob = nextMob;
+			}
+		}
+		return nearestMob;
 	}
 
 }

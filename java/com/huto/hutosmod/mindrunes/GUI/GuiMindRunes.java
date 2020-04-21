@@ -1,4 +1,4 @@
-package com.huto.hutosmod.mindrunes.GUI;
+package com.huto.hutosmod.mindrunes.gui;
 
 import java.io.IOException;
 

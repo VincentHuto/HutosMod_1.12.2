@@ -1,19 +1,13 @@
 package com.huto.hutosmod.blocks;
 
-import javax.annotation.Nonnull;
-
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.items.ItemUpgrade;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
-import com.huto.hutosmod.tileentites.TileEntityBellJar;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
-import com.huto.hutosmod.tileentites.TileEntityWandMaker;
-import com.huto.hutosmod.tileentites.TileSimpleInventory;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -22,8 +16,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -202,7 +194,7 @@ public class mana_storagedrumBlock extends BlockBase {
 		}
 		// Upgrade clause
 		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
-				&& drum.getTankLevel() < 9) {
+				&& drum.getTankLevel() < 9 || stackItem == ItemRegistry.enhancedmagatama && drum.getTankLevel() < 9 ) {
 			drum.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);

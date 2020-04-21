@@ -11,7 +11,9 @@ item.mana_extractor.name=Mana Extractor
 item.essence_drop.name=Essence Drop
 item.mana_debugtool.name=Mana Debug Tool
 item.mind_spike.name=Mind Spike
-item.magatamabead.name=Magatama Bead
+item.magatamabead.name=Magatama bead
+
+item.enhancedmagatama.name=Enriched Magatama
 
 item.upgrade_block.name=Drum Upgrade:Blocks
 item.upgrade_player.name=Drum Upgrade:Players
@@ -64,7 +66,7 @@ tile.fusion_furnace.name=Fusion Furnace
 tile.wand_maker.name=Wand Fabricator
 tile.mana_belljar.name=Mana Belljar
 tile.mana_storagedrum.name=Mana Storage Drum
-tile.rune_station.name=Mind Rune Workshop
+tile.essecence_enhancer.name=Essecence Enhancer
 tile.mystic_earth.name=Mystic Earth
 tile.mystic_media.name=Mystic Media
 tile.mystic_sapling.name=Mystic Sapling

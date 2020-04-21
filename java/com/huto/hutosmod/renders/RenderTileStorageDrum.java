@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import com.huto.hutosmod.font.TextFormating;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

@@ -4,14 +4,8 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
-import com.huto.hutosmod.network.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipies.ModInventoryHelper;
-import com.huto.hutosmod.tileentites.TileEntityBellJar;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
-import com.huto.hutosmod.tileentites.TileEntityWandMaker;
-import com.huto.hutosmod.tileentites.TileSimpleInventory;
+import com.huto.hutosmod.tileentity.TileEntityBellJar;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,7 +14,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;

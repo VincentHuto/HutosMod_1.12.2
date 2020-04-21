@@ -7,8 +7,8 @@ import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
-import com.huto.hutosmod.tileentites.TileEntityWandMaker;
-import com.huto.hutosmod.tileentites.TileSimpleInventory;
+import com.huto.hutosmod.tileentity.TileEntityWandMaker;
+import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -188,7 +188,7 @@ public class wand_makerBlock extends BlockBase implements IWandable {
 
 	@Override
 	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-		TileSimpleInventory inv = (TileSimpleInventory) world.getTileEntity(pos);
+		TileManaSimpleInventory inv = (TileManaSimpleInventory) world.getTileEntity(pos);
 		ModInventoryHelper.dropInventory(inv, world, state, pos);
 		super.breakBlock(world, pos, state);
 	}

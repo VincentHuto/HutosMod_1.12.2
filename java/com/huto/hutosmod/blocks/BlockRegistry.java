@@ -18,6 +18,7 @@ public class BlockRegistry {
 	public static final Block mana_belljar = new mana_belljarBlock("mana_belljar", Material.GLASS);
 	public static final Block mana_storagedrum = new mana_storagedrumBlock("mana_storagedrum", Material.GLASS);
 	public static final Block Rune_Station = new runestationBlock("rune_station", Material.ROCK);
+	public static final Block essecence_enhancer = new essecence_enhancerBlock("essecence_enhancer", Material.ROCK);
 
 	
 	public static final Block Mystic_Earth = new BlockMysticEarth("mystic_earth",Material.GROUND);

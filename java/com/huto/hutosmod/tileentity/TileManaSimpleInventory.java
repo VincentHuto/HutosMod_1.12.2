@@ -8,7 +8,7 @@
  *
  * File Created @ [Jan 21, 2014, 9:56:24 PM (GMT)]
  */
-package com.huto.hutosmod.tileentites;
+package com.huto.hutosmod.tileentity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,19 +20,28 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public abstract class TileEntitySimpleInventory extends TileMod {
+import com.huto.hutosmod.items.DynamicItemStackHandler;
+import com.huto.hutosmod.mana.IMana;
+import com.huto.hutosmod.mana.ManaProvider;
+
+public abstract class TileManaSimpleInventory extends TileModMana {
 
 	protected SimpleItemStackHandler itemHandler = createItemHandler();
-
+	private static final String TAG_MANA = "mana";
+	
 	@Override
 	public void readPacketNBT(NBTTagCompound par1NBTTagCompound) {
 		itemHandler = createItemHandler();
 		itemHandler.deserializeNBT(par1NBTTagCompound);
+		manaValue = par1NBTTagCompound.getFloat(TAG_MANA);
+		System.out.println(manaValue);
 	}
 
 	@Override
 	public void writePacketNBT(NBTTagCompound par1NBTTagCompound) {
 		par1NBTTagCompound.merge(itemHandler.serializeNBT());
+		par1NBTTagCompound.setFloat(TAG_MANA, manaValue);
+
 	}
 
 	public abstract int getSizeInventory();
@@ -62,9 +71,9 @@ public abstract class TileEntitySimpleInventory extends TileMod {
 	protected static class SimpleItemStackHandler extends ItemStackHandler {
 
 		private final boolean allowWrite;
-		private final TileEntitySimpleInventory tile;
+		private final TileManaSimpleInventory tile;
 
-		public SimpleItemStackHandler(TileEntitySimpleInventory inv, boolean allowWrite) {
+		public SimpleItemStackHandler(TileManaSimpleInventory inv, boolean allowWrite) {
 			super(inv.getSizeInventory());
 			this.allowWrite = allowWrite;
 			tile = inv;
@@ -82,6 +91,7 @@ public abstract class TileEntitySimpleInventory extends TileMod {
 		@Override
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
 			if(allowWrite) {
+				
 				return super.extractItem(slot, amount, simulate);
 			} else return ItemStack.EMPTY;
 		}

@@ -1,7 +1,7 @@
 package com.huto.hutosmod.container;
 
-import com.huto.hutosmod.tileentites.TileEntityRuneStation;
-import com.huto.hutosmod.tileentites.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

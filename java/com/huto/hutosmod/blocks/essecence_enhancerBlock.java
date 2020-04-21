@@ -3,9 +3,15 @@ package com.huto.hutosmod.blocks;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
+import com.huto.hutosmod.mana.IMana;
+import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
+import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -30,12 +36,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class runestationBlock extends BlockBase {
+public class essecence_enhancerBlock extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final AxisAlignedBB RUNE_STATION = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
+	public static final AxisAlignedBB ESSECENCE_ENHANCER = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB RUNE_STATION_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
-	public runestationBlock(String name, Material material) {
+	public static final AxisAlignedBB ESSECENCE_ENHANCER_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+
+	public essecence_enhancerBlock(String name, Material material) {
 		super(name, material);
 		setCreativeTab(MainClass.tabHutosMod);
 		setHardness(8.0f);
@@ -52,14 +59,29 @@ public class runestationBlock extends BlockBase {
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityRuneStation();
+		return new TileEntityEssecenceEnhancer();
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		playerIn.openGui(MainClass.instance, Reference.GUI_Rune_Station, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			EnumFacing side, float par7, float par8, float par9) {
+		if (world.isRemote)
+			return true;
+
+		TileEntityEssecenceEnhancer te = (TileEntityEssecenceEnhancer) world.getTileEntity(pos);
+		ItemStack stack = player.getHeldItem(hand);
+		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+		if (player.isSneaking()) {
+			ModInventoryHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return true;
+		} else if (!stack.isEmpty()) {
+			boolean result = te.addItem(player, stack, hand);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return result;
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+		return false;
 	}
 
 	@Override
@@ -67,17 +89,6 @@ public class runestationBlock extends BlockBase {
 		TileEntityRuneStation tileentity = (TileEntityRuneStation) worldIn.getTileEntity(pos);
 		InventoryHelper.dropInventoryItems(worldIn, pos, tileentity);
 		super.breakBlock(worldIn, pos, state);
-	}
-
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		if (stack.hasDisplayName()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
-			if (tileentity instanceof TileEntityRuneStation) {
-				((TileEntityRuneStation) tileentity).setCustomName(stack.getDisplayName());
-			}
-		}
 	}
 
 	@Override
@@ -129,22 +140,21 @@ public class runestationBlock extends BlockBase {
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
-	
+
 	// Facing(kinda) more to do with facing of bounding boxes
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (((EnumFacing) state.getValue(FACING))) {
 		case SOUTH:
 		default:
-			return RUNE_STATION;
+			return ESSECENCE_ENHANCER;
 		case NORTH:
-			return RUNE_STATION;
+			return ESSECENCE_ENHANCER;
 		case EAST:
-			return RUNE_STATION_WE;
+			return ESSECENCE_ENHANCER_WE;
 		case WEST:
-			return RUNE_STATION_WE;
+			return ESSECENCE_ENHANCER_WE;
 		}
 	}
-
 
 }
