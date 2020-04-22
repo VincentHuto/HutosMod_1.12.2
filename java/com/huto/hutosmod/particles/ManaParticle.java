@@ -25,10 +25,15 @@ public class ManaParticle extends Particle
    * Construct a new FlameParticle at the given [x,y,z] position with the given initial velocity.
    */
   public ManaParticle(World world, double x, double y, double z,
-                       double velocityX, double velocityY, double velocityZ)
-  {
-    super(world, x, y, z, velocityX, velocityY, velocityZ);
+                       double velocityX, double velocityY, double velocityZ,float r,float g,float b)
+  
 
+  {
+	  
+    super(world, x, y, z, velocityX, velocityY, velocityZ);
+	this.particleRed=r;
+	this.particleGreen=g;
+  	this.particleBlue=b;
     // overriden onUpdate()
     particleMaxAge = 70; // not used since we have overridden onUpdate
 
@@ -40,7 +45,7 @@ public class ManaParticle extends Particle
     motionX = velocityX;
     motionY = velocityY;
     motionZ = velocityZ;
-
+    
     // set the texture to the flame texture, which we have previously added using TextureStitchEvent
     //   (see TextureStitcherBreathFX)
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(smoothBubbleRL.toString());

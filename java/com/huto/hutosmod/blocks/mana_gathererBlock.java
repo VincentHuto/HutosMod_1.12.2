@@ -1,20 +1,12 @@
 package com.huto.hutosmod.blocks;
 
-import javax.annotation.Nonnull;
-
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.mana.IMana;
-import com.huto.hutosmod.mana.ManaProvider;
-import com.huto.hutosmod.network.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
-import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
+import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
-import com.huto.hutosmod.tileentity.TileEntityWandMaker;
-import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -39,13 +31,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class essecence_enhancerBlock extends BlockBase implements IActivatable{
+public class mana_gathererBlock extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final AxisAlignedBB ESSECENCE_ENHANCER = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+	public static final AxisAlignedBB GATHERER = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75D, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB ESSECENCE_ENHANCER_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-
-	public essecence_enhancerBlock(String name, Material material) {
+	public static final AxisAlignedBB GATHERER_WE = new AxisAlignedBB(0.1875D, 0.0D,0.1875D, .8125D, 0.75, .8125D);
+	public mana_gathererBlock(String name, Material material) {
 		super(name, material);
 		setCreativeTab(MainClass.tabHutosMod);
 		setHardness(8.0f);
@@ -62,49 +53,13 @@ public class essecence_enhancerBlock extends BlockBase implements IActivatable{
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityEssecenceEnhancer();
+		return new TileEntityManaGatherer();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-			EnumFacing side, float par7, float par8, float par9) {
-		if (world.isRemote)
-			return true;
-
-		TileEntityEssecenceEnhancer te = (TileEntityEssecenceEnhancer) world.getTileEntity(pos);
-		ItemStack stack = player.getHeldItem(hand);
-		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-
-		if (player.isSneaking() && player.getHeldItemMainhand().getItem() != ItemRegistry.maker_activator) {
-			if (true) {
-				if(mana.getMana()>30) {
-				te.addManaValue(30);
-				mana.consume(30);
-				}
-				ModInventoryHelper.withdrawFromInventory(te, player);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-				return true;
-			}
-		}
-		if (player.isSneaking()) {
-			ModInventoryHelper.withdrawFromInventory(te, player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return true;
-		} else if (!stack.isEmpty()) {
-			boolean result = te.addItem(player, stack, hand);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return result;
-		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-		return false;
-	}
-
-
-	@Override
-	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
-		TileManaSimpleInventory inv = (TileManaSimpleInventory) world.getTileEntity(pos);
-		ModInventoryHelper.dropInventory(inv, world, state, pos);
-		super.breakBlock(world, pos, state);
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return true;
 	}
 
 	@Override
@@ -163,20 +118,14 @@ public class essecence_enhancerBlock extends BlockBase implements IActivatable{
 		switch (((EnumFacing) state.getValue(FACING))) {
 		case SOUTH:
 		default:
-			return ESSECENCE_ENHANCER;
+			return GATHERER;
 		case NORTH:
-			return ESSECENCE_ENHANCER;
+			return GATHERER;
 		case EAST:
-			return ESSECENCE_ENHANCER_WE;
+			return GATHERER_WE;
 		case WEST:
-			return ESSECENCE_ENHANCER_WE;
+			return GATHERER_WE;
 		}
-	}
-
-	@Override
-	public boolean onUsedByActivator(EntityPlayer player, ItemStack stack, World world, BlockPos pos, EnumFacing side) {
-		((TileEntityEssecenceEnhancer) world.getTileEntity(pos)).onWanded(player, stack);
-		return true;
 	}
 
 }

@@ -11,6 +11,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityStorageDrum.class, "mana_storagedrum");
 		GameRegistry.registerTileEntity(TileEntityRuneStation.class, "rune_station");
 		GameRegistry.registerTileEntity(TileEntityEssecenceEnhancer.class, "esscence_enhancer");
+		GameRegistry.registerTileEntity(TileEntityManaGatherer.class, "mana_gatherer");
 
 	}
 }

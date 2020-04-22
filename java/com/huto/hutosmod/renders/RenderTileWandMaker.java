@@ -1,5 +1,7 @@
 package com.huto.hutosmod.renders;
 
+import java.text.DecimalFormat;
+
 import javax.annotation.Nonnull;
 
 
@@ -23,18 +25,18 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 
 	final ModelMagatama magatamas = new ModelMagatama();
 	@Override
-	public void render(@Nonnull TileEntityWandMaker altar, double x, double y, double z, float partticks, int digProgress, float unused) {
+	public void render(@Nonnull TileEntityWandMaker te, double x, double y, double z, float partticks, int digProgress, float unused) {
 		
 		GlStateManager.pushMatrix();
 		GlStateManager.color(1F, 1F, 1F, 1F);
 		GlStateManager.translate(x, y, z);
 
 		int items = 0;
-		for(int i = 0; i < altar.getSizeInventory(); i++)
-			if(altar.getItemHandler().getStackInSlot(i).isEmpty())
+		for(int i = 0; i < te.getSizeInventory(); i++)
+			if(te.getItemHandler().getStackInSlot(i).isEmpty())
 				break;
 			else items++;
-		float[] angles = new float[altar.getSizeInventory()];
+		float[] angles = new float[te.getSizeInventory()];
 
 		float anglePer = 360F / items;
 		float totalAngle = 0F;
@@ -44,7 +46,7 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 		double time = ClientTickHandler.ticksInGame + partticks;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		for(int i = 0; i < altar.getSizeInventory(); i++) {
+		for(int i = 0; i < te.getSizeInventory(); i++) {
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.5F, 1.25F, 0.5F);
 			GlStateManager.rotate(angles[i] + (float) time, 0F, 1F, 0F);
@@ -56,7 +58,7 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 			GlStateManager.translate(0D, 0.175D+i*0.25, 0F);
 			//Block/Item Scale
 			GlStateManager.scale(0.5, 0.5, 0.5);
-			ItemStack stack = altar.getItemHandler().getStackInSlot(i);
+			ItemStack stack = te.getItemHandler().getStackInSlot(i);
 			Minecraft mc = Minecraft.getMinecraft();
 			if(!stack.isEmpty()) {
 				mc.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
@@ -72,7 +74,7 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 		GlStateManager.scale(0.25F, 0.25F, 0.25F);
 
 		//int repeat = 20;
-		int repeat = (int)altar.getManaValue()/9;
+		int repeat = (int)te.getManaValue()/9;
 
 		magatamas.renderMagatamas(9 ,repeat, repeat);
 		GlStateManager.enableAlpha();
@@ -81,8 +83,8 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 		
 		GlStateManager.enableAlpha();
 		
-		
-		String text = Float.toString(altar.getManaValue() )+ "";
+		DecimalFormat df = new DecimalFormat("0.00");
+		String text = df.format(te.getManaValue());
 		GlStateManager.translate(0, 1.75, -0.5);
 		GlStateManager.rotate(180, 1, 0, 1);;
 		GlStateManager.scale(0.1, 0.1, 0.1);

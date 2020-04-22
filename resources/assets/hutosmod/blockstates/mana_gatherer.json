@@ -1,0 +1,32 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:mana_gatherer" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:mana_gatherer" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:mana_gatherer" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:mana_gatherer","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:mana_gatherer","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:mana_gatherer","y":180 
+        }
+    }
+}

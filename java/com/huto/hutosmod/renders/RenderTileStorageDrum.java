@@ -1,6 +1,7 @@
 package com.huto.hutosmod.renders;
 
 import java.nio.FloatBuffer;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
@@ -196,50 +197,51 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		GlStateManager.color(1F, 1F, 1F, 1F);
 		GlStateManager.translate(x, y, z);
 
-		
-		//Add items above block
+		// Add items above block
 		int items = 0;
-		for(int k = 0; k < te.getSizeInventory(); k++)
-			if(te.getItemHandler().getStackInSlot(k).isEmpty())
+		for (int k = 0; k < te.getSizeInventory(); k++)
+			if (te.getItemHandler().getStackInSlot(k).isEmpty())
 				break;
-			else items++;
+			else
+				items++;
 		float[] angles = new float[te.getSizeInventory()];
 		float anglePer = 360F / items;
 		float totalAngle = 0F;
-		for(int k = 0; k < angles.length; k++)
+		for (int k = 0; k < angles.length; k++)
 			angles[k] = totalAngle += anglePer;
-		double time = ClientTickHandler.ticksInGame*14 + partticks;
+		double time = ClientTickHandler.ticksInGame * 14 + partticks;
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		for(int k = 0; k < te.getSizeInventory(); k++) {
+		for (int k = 0; k < te.getSizeInventory(); k++) {
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0.5F, 2F, 0.5F);
-			GlStateManager.rotate(angles[k] + (float) time, (float) Math.cos(k), (float) Math.cos(k), (float) Math.cos(k));
-			//Edit True Radius
+			GlStateManager.rotate(angles[k] + (float) time, (float) Math.cos(k), (float) Math.cos(k),
+					(float) Math.cos(k));
+			// Edit True Radius
 			GlStateManager.translate(0.025F, -0.5F, 0.025F);
 			GlStateManager.rotate(90F, 0F, 1F, 0F);
-			//Edit Radius Movement
-			GlStateManager.translate(0D, 0.175D+k*0.25, 0F);
-			//Block/Item Scale
+			// Edit Radius Movement
+			GlStateManager.translate(0D, 0.175D + k * 0.25, 0F);
+			// Block/Item Scale
 			GlStateManager.scale(0.5, 0.5, 0.5);
 			ItemStack stack = te.getItemHandler().getStackInSlot(k);
 			Minecraft mc = Minecraft.getMinecraft();
-			if(!stack.isEmpty()) {
+			if (!stack.isEmpty()) {
 				mc.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
 			}
 			GlStateManager.popMatrix();
 		}
-		
-		
-		//Draws the debug stats
+
+		// Draws the debug stats
 		GlStateManager.pushMatrix();
-		String text = Float.toString(te.getManaValue()) + "Mana";
+		DecimalFormat df = new DecimalFormat("0.00");
+		String text = df.format(te.getManaValue());
 		String text1 = Float.toString(te.getMaxMana()) + "Max";
-		String text2= Float.toString(te.getTankLevel()) + "Level";
-		String text3= Integer.toString(te.getSizeInventory()) + "Size Inv";
+		String text2 = Float.toString(te.getTankLevel()) + "Level";
+		String text3 = Integer.toString(te.getSizeInventory()) + "Size";
 
 		GlStateManager.translate(0, 2, 0);
 		GlStateManager.rotate(180, 1, 0, 1);
-		
+
 		GlStateManager.scale(0.08, 0.08, 0.08);
 		FontRenderer fontRenderer = this.getFontRenderer();
 		FontRenderer akloRenderer = TextFormating.getAkloFont();

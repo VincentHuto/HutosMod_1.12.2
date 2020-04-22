@@ -1,5 +1,7 @@
 package com.huto.hutosmod.renders;
 
+import java.text.DecimalFormat;
+
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.font.TextFormating;
@@ -77,26 +79,26 @@ public class RenderTileEssecenceEnhancer extends TileEntitySpecialRenderer<TileE
 		int repeat = 30;
 		// int repeat = (int)te.getManaValue()/9;
 		GlStateManager.translate(0F, .5F, 0F);
-		GlStateManager.scale(0.3F, 0.3F,0.3F);
+		GlStateManager.scale(0.3F, 0.3F, 0.3F);
 		cubesCW.renderSpinningCubes(3, repeat, repeat);
-		GlStateManager.scale(1.5F, 1.5F,1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 		GlStateManager.translate(0F, -1F, 0F);
 		cubesCCW.renderSpinningCubes(6, repeat, repeat);
-		GlStateManager.scale(1.5F, 1.5F,1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 		GlStateManager.translate(0F, -1F, 0F);
 		cubesCW.renderSpinningCubes(9, repeat, repeat);
-		GlStateManager.scale(1.5F, 1.5F,1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 		GlStateManager.translate(0F, -1F, 0F);
 		cubesCCW.renderSpinningCubes(12, repeat, repeat);
-		GlStateManager.scale(1.5F, 1.5F,1.5F);
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 		GlStateManager.translate(0F, -1F, 0F);
 		cubesCW.renderSpinningCubes(15, repeat, repeat);
 
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
-
-		String text = Float.toString(te.getManaValue()) + "";
+		DecimalFormat df = new DecimalFormat("0.00");
+		String text = df.format(te.getManaValue());
 		GlStateManager.translate(0, 1.75, -0.5);
 		GlStateManager.rotate(180, 1, 0, 1);
 		GlStateManager.scale(0.1, 0.1, 0.1);

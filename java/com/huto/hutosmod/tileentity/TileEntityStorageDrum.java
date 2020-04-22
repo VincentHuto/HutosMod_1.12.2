@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;
@@ -16,6 +17,7 @@ import com.huto.hutosmod.particles.ManaParticle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -35,6 +37,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 	public static final String TAG_SIZE = "tankSize";
 	public static float playerLimit;
 	public static float playerMana;
+
 	public IMana mana = this.getCapability(ManaProvider.MANA_CAP, null);
 	public int tankLevel = 0;
 
@@ -85,26 +88,6 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		return maxMana;
 	}
 
-	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
-		boolean did = false;
-		for (int i = 0; i < getSizeInventory(); i++)
-			if (itemHandler.getStackInSlot(i).isEmpty()) {
-				did = true;
-				ItemStack stackToAdd = stack.copy();
-				stackToAdd.setCount(1);
-				itemHandler.setStackInSlot(i, stackToAdd);
-				if (player == null || !player.capabilities.isCreativeMode) {
-					stack.shrink(1);
-				}
-				break;
-			}
-
-		if (did)
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-
-		return true;
-	}
-
 	@Override
 	public void readPacketNBT(NBTTagCompound tag) {
 		itemHandler = createItemHandler();
@@ -131,56 +114,91 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	}
 
+	public boolean checkAllowBlock() {
+		for (int i = 0; i < this.getSizeInventory(); i++) {
+			if (this.itemHandler.getStackInSlot(i).getItem() == ItemRegistry.upgrade_block) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkAllowPlayer() {
+		for (int i = 0; i < 4; i++) {
+			if (this.itemHandler.getStackInSlot(i).getItem() == ItemRegistry.upgrade_player) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void update() {
-		this.getSizeInventory();
-		
-		
-		if (world.isRemote) {
+		if (playerMana!=playerLimit) {
 			Random rand = new Random();
-			double xpos = pos.getX() + 0.5;
-			double ypos = pos.getY() + 1.0;
-			double zpos = pos.getZ() + 0.5;
-			double velocityX = 0,velocityY = 0, velocityZ = 0; 
+			if (checkAllowPlayer()) {
+				// Centering Variables
+				double xpos = pos.getX() + 0.5, ypos = pos.getY() + 2.0, zpos = pos.getZ() + 0.5;
+				double velocityX = 0, velocityY = 0, velocityZ = 0;
+				EntityPlayer playerTarget = getNearestTargetableMob(world, xpos, ypos, zpos);
+				Vec3d manaDirection;
+				if (playerTarget == null) { // no target: fire straight upwards
+					manaDirection = new Vec3d(0.0, 0.0, 0.0);
+				} else {
+					manaDirection = playerTarget.getPositionEyes(1.0F).subtract(xpos, ypos, zpos);
+					manaDirection = manaDirection.normalize();
+				}
+				final double SPEED_IN_BLOCKS_PER_SECOND = 2.0;
+				final double SPEED_IN_BLOCKS_PER_TICK = SPEED_IN_BLOCKS_PER_SECOND / 20;
+				double newy = ypos + Math.sin(rand.nextInt(360)) - 1.5;
+				double newVX = (velocityX % (Math.random()) * 1.8);
+				double newVZ = (velocityZ % (Math.random()) * 1.8);
+				velocityX = SPEED_IN_BLOCKS_PER_TICK * manaDirection.x; // how much to increase the x position every
+				velocityY = SPEED_IN_BLOCKS_PER_TICK * manaDirection.y; // how much to increase the y position every
+				velocityZ = SPEED_IN_BLOCKS_PER_TICK * manaDirection.z; // how much to increase the z position every
+				float r;
+				float g;
+				float b;
+				//Calculating the rgb values for the different tank levels
+				if (this.getManaValue() <= 300) {
+					r = 0.2F;
+					g = 0.0F;
+					b = 1.0F;
+					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+							r, g, b);
+					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+				} else if (this.getManaValue() > 301 && this.getManaValue() <= 600) {
+					r = 1.0F;
+					g = 0.0F;
+					b = 1.0F;
+					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+							r, g, b);
+					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+				} else if (this.getManaValue() > 601 && this.getManaValue() <= 900) {
+					r = 1.0F;
+					g = 0.0F;
+					b = 0.0F;
+					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+							r, g, b);
+					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+				} else {
+					r = 0.0F;
+					g = 0.0F;
+					b = 0.0F;
+					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+							r, g, b);
+					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
-			// starting position = top of the pole
-			xpos = pos.getX() + 0.5;
-			ypos = pos.getY() + 2.0;
-			zpos = pos.getZ() + 0.5;
-
-			EntityPlayer mobTarget = getNearestTargetableMob(world, xpos, ypos, zpos);
-			Vec3d fireballDirection;
-			if (mobTarget == null) { // no target: fire straight upwards
-				fireballDirection = new Vec3d(0.0, 1.0, 0.0);
-			} else { 
-
-				fireballDirection = mobTarget.getPositionEyes(1.0F).subtract(xpos, ypos, zpos);
-				fireballDirection = fireballDirection.normalize();
+				}
 			}
-
-			final double SPEED_IN_BLOCKS_PER_SECOND = 2.0;
-			final double TICKS_PER_SECOND = 20;
-			final double SPEED_IN_BLOCKS_PER_TICK = SPEED_IN_BLOCKS_PER_SECOND / TICKS_PER_SECOND;
-			double newy = ypos+Math.sin(rand.nextInt(360))-1.5;
-			double newVX=(velocityX%(Math.random())*1.8);
-			double newVZ=(velocityZ%(Math.random())*1.8);
-			velocityX = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.x; // how much to increase the x position every
-			velocityY = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.y; // how much to increase the y position every
-			velocityZ = SPEED_IN_BLOCKS_PER_TICK * fireballDirection.z; // how much to increase the z position every
-			
-			ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY,velocityZ);
-		   // FlameParticle newEffect = new FlameParticle(world, xpos, newy, zpos, (velocityX), velocityY, (velocityZ));
-		      Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-		    }
-		
+		}
 		// To check for a tile entity use this instead
-			// if(world.getTileEntity(pos) != null){
-			// if(world.getTileEntity(pos) instanceof TileEntityRadiusBlock){
+		// if(world.getTileEntity(pos) != null){
+		// if(world.getTileEntity(pos) instanceof TileEntityRadiusBlock){
 
 		// for a block use this instead
-			// if (world.getBlockState(pos).getBlock() != null) {
-			// if (world.getBlockState(pos).getBlock() == Blocks.COAL_BLOCK){
-		
+		// if (world.getBlockState(pos).getBlock() != null) {
+		// if (world.getBlockState(pos).getBlock() == Blocks.COAL_BLOCK){
 
 		// Ease of use variables
 		int x = this.pos.getX();
@@ -194,16 +212,15 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 				(double) (y + 1), (double) (z + 1))).grow(3);
 		// extracts a list of only players from the bounding box
 		List<EntityPlayer> playerList = this.world.<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, playerbb);
-
 		// Checks the player list to make sure it isnt running uselessly
-		if (!playerList.isEmpty()) {
+		if (!playerList.isEmpty() && this.checkAllowPlayer()) {
 			for (EntityPlayer entityplayer : playerList) {
 				PacketHandler.INSTANCE.sendToServer(new PacketGetMana(playerMana,
-						"com.huto.hutosmod.tileentites.TileEntityStorageDrum", "playerMana"));
+						"com.huto.hutosmod.tileentity.TileEntityStorageDrum", "playerMana"));
 				PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(playerLimit,
-						"com.huto.hutosmod.tileentites.TileEntityStorageDrum", "playerLimit"));
+						"com.huto.hutosmod.tileentity.TileEntityStorageDrum", "playerLimit"));
 				IMana pMana = entityplayer.getCapability(ManaProvider.MANA_CAP, null);
-				if (this.manaValue >= 50 && this.manaValue >= playerMana && playerMana <= playerLimit) {
+				if (this.manaValue >= 50 && this.manaValue >= playerMana && playerMana != playerLimit) {
 					this.setManaValue(manaValue - 0.1f);
 					pMana.fill(0.1F);
 				}
@@ -212,7 +229,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		// Checks block positions in a 3x3x3
 		for (BlockPos pos : radiusPositions) {
 			// Makes sure it doesnt run uselessly
-			if (world.getTileEntity(pos) != null) {
+			if (world.getTileEntity(pos) != null && this.checkAllowBlock()) {
 				if (world.getTileEntity(pos) instanceof TileModMana) {
 					TileModMana manaStor = (TileModMana) world.getTileEntity(pos);
 					if (this.manaValue >= 50 && this.manaValue >= manaStor.getManaValue()
@@ -221,11 +238,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 						manaStor.addManaValue(0.1f);
 					}
 				}
-				// This is seperate due to WandMaker having different properties because it has
-				// an inventory that i may want to interact with later
-				// May change this to instanceof TileSimpleInventory
 				if (world.getTileEntity(pos) instanceof TileManaSimpleInventory) {
-
 					TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) world.getTileEntity(pos);
 					if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()) {
 						this.setManaValue(manaValue - 0.1f);
@@ -282,34 +295,19 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		// NONENULLLIST OF A FIXED SIZE,no matter what, so if i wanna change this imma
 		// have to write my own itemstackhandler using a list inteasd of an array
 		// annnnnnnnnnnnnnd i dont want to right now
-/*
-		if (tankLevel <= 1) {
-			return 1;
-		}
-		if (tankLevel >= 2 && tankLevel <= 3) {
-			return 2;
-		}
-		if (tankLevel >= 4 && tankLevel <= 5) {
-			return 3;
-		}
-		if (tankLevel >= 6 && tankLevel <= 7) {
-			return 4;
-		}
-		if (tankLevel >= 8 && tankLevel <= 9) {
-			return 5;
-		}
-		if (tankLevel >= 10 && tankLevel <= 11) {
-			return 6;
-		}
-		if (tankLevel >= 12 && tankLevel <= 13) {
-			return 7;
-		} else*/
-			return 4;
+		/*
+		 * if (tankLevel <= 1) { return 1; } if (tankLevel >= 2 && tankLevel <= 3) {
+		 * return 2; } if (tankLevel >= 4 && tankLevel <= 5) { return 3; } if (tankLevel
+		 * >= 6 && tankLevel <= 7) { return 4; } if (tankLevel >= 8 && tankLevel <= 9) {
+		 * return 5; } if (tankLevel >= 10 && tankLevel <= 11) { return 6; } if
+		 * (tankLevel >= 12 && tankLevel <= 13) { return 7; } else
+		 */
+		return 4;
 	}
-	
+
 	private EntityPlayer getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
-		final double TARGETING_DISTANCE = 3;
-		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos-2, zpos - TARGETING_DISTANCE,
+		final double TARGETING_DISTANCE = 3.5;
+		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos - 2, zpos - TARGETING_DISTANCE,
 				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
 		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
 		EntityPlayer nearestMob = null;

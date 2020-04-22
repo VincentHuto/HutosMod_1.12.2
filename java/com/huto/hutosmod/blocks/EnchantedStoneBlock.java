@@ -38,7 +38,7 @@ public class EnchantedStoneBlock extends BlockBase {
 	}
 
 
-	@SideOnly(Side.CLIENT)
+	/*@SideOnly(Side.CLIENT)
 
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 
@@ -99,7 +99,7 @@ public class EnchantedStoneBlock extends BlockBase {
 
 
 			
-			ManaParticle newEffect = new ManaParticle(worldIn, xpos, ypos, zpos, velocityX, velocityY, velocityZ);
+			ManaParticle newEffect = new ManaParticle(worldIn, xpos, ypos, zpos, velocityX, velocityY, velocityZ,0.9F,0.0F,0.9F);
 		      Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
 //			
@@ -129,5 +129,5 @@ public class EnchantedStoneBlock extends BlockBase {
 			}
 		}
 		return nearestMob;
-	}
+	}*/
 }

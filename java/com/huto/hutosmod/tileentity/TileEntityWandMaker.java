@@ -34,7 +34,7 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 
-	
+	@Override
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
 		if (cooldown > 0 || stack.getItem() == ItemRegistry.maker_activator)
 			return false;
@@ -85,7 +85,6 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 	@Override
 	public void update() {
 		if (!world.isRemote) {
-
 			if (cooldown > 0) {
 				cooldown--;
 			}
@@ -130,7 +129,7 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 	}
 
 	public void updateRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.runeAltarRecipes)
+		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler)) {
 				ItemStack output = recipe.getOutput().copy();
 				EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -153,7 +152,7 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 	}
 
 	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.runeAltarRecipes)
+		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
 			if (recipe.matches(itemHandler))
 				return true;
 
@@ -190,7 +189,7 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
-			for (RecipeWandMaker recipe_ : ModWandRecipies.runeAltarRecipes) {
+			for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
 					break;

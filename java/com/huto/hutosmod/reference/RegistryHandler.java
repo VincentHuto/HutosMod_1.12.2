@@ -38,17 +38,20 @@ import com.huto.hutosmod.mindrunes.network.RunesPacketHandler;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.potions.PotionEventHandler;
 import com.huto.hutosmod.potions.PotionInit;
+import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.renders.RenderHandler;
 import com.huto.hutosmod.renders.RenderTileBellJar;
 import com.huto.hutosmod.renders.RenderTileEssecenceEnhancer;
+import com.huto.hutosmod.renders.RenderTileManaGatherer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
 import com.huto.hutosmod.renders.RenderTileWandMaker;
 import com.huto.hutosmod.sounds.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
+import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.worldgen.ModWorldGen;
@@ -94,6 +97,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class, new RenderTileEssecenceEnhancer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaGatherer.class, new RenderTileManaGatherer());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
@@ -144,6 +148,7 @@ public class RegistryHandler {
 				() -> new RuneItem(RuneType.OVERRIDE));
 		ModFurnaceRecipies.init();
 		ModWandRecipies.init();
+		ModEnhancerRecipies.init();
 		SoundsHandler.registerSounds();
 
 	}

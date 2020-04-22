@@ -10,7 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class ModWandRecipies {
-	public static final List<RecipeWandMaker> runeAltarRecipes = new ArrayList<>();
+	public static final List<RecipeWandMaker> wandMakerRecipies = new ArrayList<>();
 	public static RecipeWandMaker recipeFireballWand;
 	public static RecipeWandMaker recipeGreatFireballWand;
 	public static RecipeWandMaker recipeNullCrystal;
@@ -39,7 +39,7 @@ public class ModWandRecipies {
 	public static RecipeWandMaker registerRuneAltarRecipe(ItemStack output,float mana, Object... inputs) {
 		Preconditions.checkArgument(inputs.length <= 4);
 		RecipeWandMaker recipe = new RecipeWandMaker(output,mana, inputs);
-		runeAltarRecipes.add(recipe);
+		wandMakerRecipies.add(recipe);
 		return recipe;
 	}
 

@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class wand_makerBlock extends BlockBase implements IWandable {
+public class wand_makerBlock extends BlockBase implements IActivatable{
 	public static final AxisAlignedBB WAND_MAKER = new AxisAlignedBB(0.125D, 0.0D, 0.125D, .875D, 0.6875D, .875D);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB WAND_MAKER_WE = new AxisAlignedBB(0.125D, 0.0D,0.125D, .875D, 0.6875, .875D);
@@ -100,38 +100,37 @@ public class wand_makerBlock extends BlockBase implements IWandable {
 		if (world.isRemote)
 			return true;
 
-		TileEntityWandMaker altar = (TileEntityWandMaker) world.getTileEntity(pos);
+		TileEntityWandMaker te = (TileEntityWandMaker) world.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		System.out.println(altar.getManaValue());
 		if (player.isSneaking() && player.getHeldItemMainhand().getItem() != ItemRegistry.maker_activator) {
 			if (true) {
 				if(mana.getMana()>30) {
-				altar.addManaValue(30);
+				te.addManaValue(30);
 				mana.consume(30);
 				}
-				ModInventoryHelper.withdrawFromInventory(altar, player);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
+				ModInventoryHelper.withdrawFromInventory(te, player);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 				return true;
 			}
-		} else if (altar.isEmpty() && stack.isEmpty()) {
+		} else if (te.isEmpty() && stack.isEmpty()) {
 			// This is so if your making things in bulk it tell your inventory to insert the
 			// stuff from the last recipe
 			// altar.trySetLastRecipe(player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return true;
 		} else if (!stack.isEmpty()) {
-			boolean result = altar.addItem(player, stack, hand);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
+			boolean result = te.addItem(player, stack, hand);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return result;
 		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(altar);
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 
 		return false;
 	}
 
 	@Override
-	public boolean onUsedByWand(EntityPlayer player, ItemStack stack, World world, BlockPos pos, EnumFacing side) {
+	public boolean onUsedByActivator(EntityPlayer player, ItemStack stack, World world, BlockPos pos, EnumFacing side) {
 		((TileEntityWandMaker) world.getTileEntity(pos)).onWanded(player, stack);
 		return true;
 	}
