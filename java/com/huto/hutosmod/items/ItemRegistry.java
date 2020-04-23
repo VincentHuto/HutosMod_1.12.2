@@ -48,10 +48,8 @@ public class ItemRegistry {
 
 	// Lists
 	public static final List<Item> ITEMS = new ArrayList<Item>();
-
 	// Damage Source
 	public static final DamageSource BloodSwordDamageSource = new DamageSource("bloody").setDamageBypassesArmor();
-
 	// Items
 	public static final Item ruby = new ItemBase("ruby");
 	public static final Item null_crystal = new ItemBase("null_crystal");
@@ -64,49 +62,23 @@ public class ItemRegistry {
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");
 	public static final Item enhancedmagatama = new ItemBase("enhancedmagatama");
-
-	//Drum Upgrades
-
-	public static final Item upgrade_block = new ItemUpgrade("upgrade_block");
-	public static final Item upgrade_player = new ItemUpgrade("upgrade_player");
-	public static final Item upgrade_animal = new ItemUpgrade("upgrade_animal");
-	public static final Item upgrade_mob = new ItemUpgrade("upgrade_mob");
-
-	//Base Runes
-	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
-	public static final Item rune_lake = new ItemRuneLake("rune_lake");
-	public static final Item rune_clawmark = new ItemRuneClaw("rune_clawmark");
-	public static final Item rune_rapture = new ItemRuneRapture("rune_rapture");
-	public static final Item rune_oedon = new ItemRuneOedon("rune_oedon");
-	//Contract Runes
-	public static final Item rune_beast_c = new ItemContractRuneBeast("rune_beast_c");
-	public static final Item rune_corruption_c = new ItemContractRuneCorrupt("rune_corruption_c");
-	public static final Item rune_impurity_c = new ItemContractRuneImpure("rune_impurity_c");
-	public static final Item rune_milkweed_c = new ItemContractRuneMilkweed("rune_milkweed_c");
-	public static final Item rune_radiance_c = new ItemContractRuneRadiance("rune_radiance_c");
-	
-	//Activator
+	// Activator
 	public static final Item maker_activator = new ItemMakerActivator("maker_activator");
 	public static final Item mana_extractor = new ItemManaExtractor("mana_extractor");
-
 	public static final Item mana_debugtool = new ItemDebugTool("mana_debugtool");
 	public static final Item mystic_tome = new ItemMysticTome("mystic_tome");
-	
 	// Wands
 	public static final Item wand_consume_mana = new ItemConsumeWand("wand_consume_mana");
 	public static final Item wand_gain_mana = new ItemAbsorbWand("wand_gain_mana");
 	public static final Item wand_fireball = new ItemFireballWand("wand_fireball");
 	public static final Item wand_greatfireball = new ItemGreatFireballWand("wand_greatfireball");
-	//public static final Item wand_lightningbolt = new ItemLightningWand("wand_lightningbolt");
 	public static final Item wand_sacrifice = new ItemSacrificeWand("wand_sacrifice");
 	public static final Item wand_rending = new ItemRendingWand("wand_rending");
 	public static final Item wand_healself = new ItemHealSelfWand("wand_healself");
 	public static final Item wand_healother = new ItemHealOthersWand("wand_healother");
-
 	// Adding a toolMaterial
 	public static final ToolMaterial MATERIAL_BLOOD = EnumHelper.addToolMaterial("material_blood", 3, 256, 8.0F, 3.0F,
 			200);
-
 	// Tools
 	public static final ItemSword blood_sword = new ToolBloodSword("blood_sword", MATERIAL_BLOOD);
 	public static final ItemPickaxe blood_pickaxe = new ToolPickaxe("blood_pickaxe", MATERIAL_BLOOD);
@@ -117,7 +89,6 @@ public class ItemRegistry {
 	// Adding an armor Material
 	public static final ArmorMaterial armor_blood = EnumHelper.addArmorMaterial("armor_blood",
 			Reference.MODID + ":blood", 33, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_GLASS_BREAK, 3.0F);
-
 	public static final ArmorMaterial armor_mysterious_mask = EnumHelper.addArmorMaterial("armor_mysterious_mask",
 			Reference.MODID + ":mysterious_mask", 0, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_ANVIL_BREAK, 3.0F);
 	public static final ArmorMaterial armor_mana_viewer = EnumHelper.addArmorMaterial("armor_mana_viewer",
@@ -134,5 +105,23 @@ public class ItemRegistry {
 			EntityEquipmentSlot.HEAD);
 	public static final Item mana_viewer = new ArmorManaViewer("mana_viewer", armor_mana_viewer, 1,
 			EntityEquipmentSlot.HEAD);
+
+	// Drum Upgrades
+	public static final Item upgrade_block = new ItemUpgrade("upgrade_block");
+	public static final Item upgrade_player = new ItemUpgrade("upgrade_player");
+	public static final Item upgrade_animal = new ItemUpgrade("upgrade_animal");
+	public static final Item upgrade_mob = new ItemUpgrade("upgrade_mob");
+	// Contract Runes
+	public static final Item rune_beast_c = new ItemContractRuneBeast("rune_beast_c");
+	public static final Item rune_corruption_c = new ItemContractRuneCorrupt("rune_corruption_c");
+	public static final Item rune_impurity_c = new ItemContractRuneImpure("rune_impurity_c");
+	public static final Item rune_milkweed_c = new ItemContractRuneMilkweed("rune_milkweed_c");
+	public static final Item rune_radiance_c = new ItemContractRuneRadiance("rune_radiance_c");
+	// Base Runes
+	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
+	public static final Item rune_lake = new ItemRuneLake("rune_lake");
+	public static final Item rune_clawmark = new ItemRuneClaw("rune_clawmark");
+	public static final Item rune_rapture = new ItemRuneRapture("rune_rapture");
+	public static final Item rune_oedon = new ItemRuneOedon("rune_oedon");
 
 }

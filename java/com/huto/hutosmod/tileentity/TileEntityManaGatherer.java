@@ -20,7 +20,7 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 		double ypos = pos.getY() + 1.3;
 		double zpos = pos.getZ() + 0.5+((rand.nextDouble() -rand.nextDouble())*.3);
 		double velocityX = 0, velocityY = -0.2, velocityZ = 0;
-		ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,0.0F,0.9F,0.9F);
+		ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,0.0F,0.9F,0.9F,70,1);
 		//System.out.println(manaValue);
 		count++;
 		int mod = 3+rand.nextInt(10);

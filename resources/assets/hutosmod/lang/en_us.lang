@@ -54,11 +54,8 @@ item.rune_corruption_c.name=Corruption Contract Rune
 item.rune_impurity_c.name=Impurity Contract Rune
 item.rune_milkweed_c.name=Milkweed Contract Rune
 item.rune_radiance_c.name=Radiance Contract Rune
-
 name.CONTRACT=Contract Rune
 name.RUNE=Caryl Rune
-
-
 tile.display_glass.name=Display Glass
 tile.enchanted_stone.name=Enchanted Stone
 tile.enchanted_ore.name=Enchanted Ore
@@ -67,6 +64,7 @@ tile.wand_maker.name=Wand Fabricator
 tile.mana_belljar.name=Mana Belljar
 tile.mana_storagedrum.name=Mana Storage Drum
 tile.essecence_enhancer.name=Essecence Enhancer
+tile.mana_gatherer.name=Mana Gatherer
 tile.mystic_earth.name=Mystic Earth
 tile.mystic_media.name=Mystic Media
 tile.mystic_sapling.name=Mystic Sapling

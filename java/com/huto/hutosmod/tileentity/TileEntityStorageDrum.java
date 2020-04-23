@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
@@ -14,12 +15,15 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.particles.ManaParticle;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
@@ -134,7 +138,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	@Override
 	public void update() {
-		if (playerMana!=playerLimit) {
+		if (playerMana != playerLimit) {
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
@@ -159,47 +163,40 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 				float r;
 				float g;
 				float b;
-				//Calculating the rgb values for the different tank levels
+				float scaleF =(float) (1*rand.nextDouble());
+				// Calculating the rgb values for the different tank levels
 				if (this.getManaValue() <= 300) {
 					r = 0.2F;
 					g = 0.0F;
 					b = 1.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b);
+							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 				} else if (this.getManaValue() > 301 && this.getManaValue() <= 600) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 1.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b);
+							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 				} else if (this.getManaValue() > 601 && this.getManaValue() <= 900) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 0.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b);
+							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 				} else {
 					r = 0.0F;
 					g = 0.0F;
 					b = 0.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b);
+							r, g, b, 70,scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
 				}
 			}
 		}
-		// To check for a tile entity use this instead
-		// if(world.getTileEntity(pos) != null){
-		// if(world.getTileEntity(pos) instanceof TileEntityRadiusBlock){
-
-		// for a block use this instead
-		// if (world.getBlockState(pos).getBlock() != null) {
-		// if (world.getBlockState(pos).getBlock() == Blocks.COAL_BLOCK){
-
 		// Ease of use variables
 		int x = this.pos.getX();
 		int y = this.pos.getY();
@@ -229,45 +226,35 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		// Checks block positions in a 3x3x3
 		for (BlockPos pos : radiusPositions) {
 			// Makes sure it doesnt run uselessly
-			if (world.getTileEntity(pos) != null && this.checkAllowBlock()) {
-				if (world.getTileEntity(pos) instanceof TileModMana) {
-					TileModMana manaStor = (TileModMana) world.getTileEntity(pos);
-					if (this.manaValue >= 50 && this.manaValue >= manaStor.getManaValue()
-							&& manaStor.getManaValue() <= manaStor.getMaxMana()) {
-						this.setManaValue(manaValue - 0.1f);
-						manaStor.addManaValue(0.1f);
+			if (world.getTileEntity(pos) != null) {
+				if (this.checkAllowBlock()) {
+					if (world.getTileEntity(pos) instanceof TileModMana) {
+						TileModMana manaStor = (TileModMana) world.getTileEntity(pos);
+						if (this.manaValue >= 50 && this.manaValue >= manaStor.getManaValue()
+								&& manaStor.getManaValue() <= manaStor.getMaxMana()) {
+							this.setManaValue(manaValue - 0.1f);
+							manaStor.addManaValue(0.1f);
+						}
+					}
+					if (world.getTileEntity(pos) instanceof TileManaSimpleInventory) {
+						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) world.getTileEntity(pos);
+						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()) {
+							this.setManaValue(manaValue - 0.1f);
+							wandMaker.addManaValue(0.1f);
+						}
 					}
 				}
-				if (world.getTileEntity(pos) instanceof TileManaSimpleInventory) {
-					TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) world.getTileEntity(pos);
-					if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()) {
-						this.setManaValue(manaValue - 0.1f);
-						wandMaker.addManaValue(0.1f);
+				//Gatherers are place outside of the upgrade check
+				if (world.getTileEntity(pos) instanceof TileEntityManaGatherer) {
+					TileEntityManaGatherer manaG = (TileEntityManaGatherer) world.getTileEntity(pos);
+					if (manaG.getManaValue() > 0.1F) {
+						this.addManaValue(0.1F);
+						manaG.setManaValue(manaG.getManaValue() - 0.1f);
 					}
 				}
 			}
 		}
-
 	}
-
-	// THIS IS ALL DEFUNCT AND WAY LESS EFFICENT THANT THE ABOVE
-	// , But they do have the place this checks only in north south east or west one
-	// block, so adjecent use full for piping?
-	/*
-	 * for (EnumFacing direction : EnumFacing.VALUES) {
-	 * 
-	 * BlockPos neighbourPos = this.pos.offset(direction);
-	 * 
-	 * IBlockState neighbourState = world.getBlockState(neighbourPos);
-	 * 
-	 * Block neighbourBlock = neighbourState.getBlock();
-	 * 
-	 * if (neighbourBlock == Blocks.COAL_BLOCK) { System.out.println(pos);
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
 
 	@SideOnly(Side.CLIENT)
 	public boolean shouldRenderFace(EnumFacing face) {
@@ -291,17 +278,6 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	@Override
 	public int getSizeInventory() {
-		// SO THIS IS NOT GONNA WORK BECAUSE HOW ITEMSTACKHANDLER WORKS IS IT CREATS A
-		// NONENULLLIST OF A FIXED SIZE,no matter what, so if i wanna change this imma
-		// have to write my own itemstackhandler using a list inteasd of an array
-		// annnnnnnnnnnnnnd i dont want to right now
-		/*
-		 * if (tankLevel <= 1) { return 1; } if (tankLevel >= 2 && tankLevel <= 3) {
-		 * return 2; } if (tankLevel >= 4 && tankLevel <= 5) { return 3; } if (tankLevel
-		 * >= 6 && tankLevel <= 7) { return 4; } if (tankLevel >= 8 && tankLevel <= 9) {
-		 * return 5; } if (tankLevel >= 10 && tankLevel <= 11) { return 6; } if
-		 * (tankLevel >= 12 && tankLevel <= 13) { return 7; } else
-		 */
 		return 4;
 	}
 

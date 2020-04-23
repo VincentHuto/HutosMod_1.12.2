@@ -1,11 +1,14 @@
 package com.huto.hutosmod.tileentity;
 
+import java.util.Random;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.particles.ManaParticle;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.recipies.RecipeEnhancer;
@@ -13,6 +16,7 @@ import com.huto.hutosmod.recipies.RecipeWandMaker;
 import com.huto.hutosmod.tileentity.TileManaSimpleInventory.SimpleItemStackHandler;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -22,6 +26,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import scala.reflect.internal.Trees.This;
 
 public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory implements ITickable {
 	public static final String TAG_MANA = "mana";
@@ -31,6 +36,7 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 	private static final int SET_KEEP_TICKS_EVENT = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
+	public int count = 0;
 
 	@Override
 	public int getSizeInventory() {
@@ -125,13 +131,39 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 			if (cooldown > 0) {
 				cooldown--;
 			}
+		}
+		if (this.hasValidRecipe()) {
+			for (RecipeEnhancer recipe : ModEnhancerRecipies.enhancerRecipies) {
+				if (recipe.matches(itemHandler) && this.getManaValue() > recipe.getMana()) {
+					Random rand = new Random();
+					count++;
+					int mod = 3 + rand.nextInt(10);
+					if (count % mod == 0) {
+						double ypos = pos.getY() + 0.3;
+						
+						double velocityX = 0, velocityY = 0.1, velocityZ = 0;
+						ManaParticle newEffect = new ManaParticle(world, pos.getX()+0.1, ypos,pos.getZ()+0.9, velocityX, velocityY,
+								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
+						ManaParticle newEffect1 = new ManaParticle(world, pos.getX()+0.1, ypos,pos.getZ()+0.1, velocityX, velocityY,
+								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
+						ManaParticle newEffect2 = new ManaParticle(world, pos.getX()+0.9, ypos,pos.getZ()+0.1, velocityX, velocityY,
+								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
+						ManaParticle newEffect3 = new ManaParticle(world, pos.getX()+0.9, ypos,pos.getZ() +0.9, velocityX, velocityY,
+								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
 
+					}
+				}
+			}
 		}
 
 	}
 
 	public boolean hasValidRecipe() {
-		for (RecipeWandMaker recipe : ModWandRecipies.wandMakerRecipies)
+		for (RecipeEnhancer recipe : ModEnhancerRecipies.enhancerRecipies)
 			if (recipe.matches(itemHandler))
 				return true;
 
@@ -171,10 +203,13 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 			for (RecipeEnhancer recipe_ : ModEnhancerRecipies.enhancerRecipies) {
 				if (recipe_.matches(itemHandler)) {
 					recipe = recipe_;
+
 					break;
 				}
 			}
 		if (recipe != null && manaValue >= recipe.getMana()) {
+			System.out.println(this.currentRecipe);
+
 			ItemStack output = recipe.getOutput().copy();
 			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);

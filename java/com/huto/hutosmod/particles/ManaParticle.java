@@ -25,7 +25,7 @@ public class ManaParticle extends Particle
    * Construct a new FlameParticle at the given [x,y,z] position with the given initial velocity.
    */
   public ManaParticle(World world, double x, double y, double z,
-                       double velocityX, double velocityY, double velocityZ,float r,float g,float b)
+                       double velocityX, double velocityY, double velocityZ,float r,float g,float b,int age,float scale)
   
 
   {
@@ -34,20 +34,13 @@ public class ManaParticle extends Particle
 	this.particleRed=r;
 	this.particleGreen=g;
   	this.particleBlue=b;
-    // overriden onUpdate()
-    particleMaxAge = 70; // not used since we have overridden onUpdate
-
+    particleMaxAge = age; // not used since we have overridden onUpdate
+    this.particleScale = scale;
     final float ALPHA_VALUE = 0.79F;
-    this.particleAlpha = ALPHA_VALUE;  // a value less than 1 turns on alpha blending. Otherwise, alpha blending is off
-    // and the particle won't be transparent.
-
-    //the vanilla Particle constructor added random variation to our starting velocity.  Undo it!
+    this.particleAlpha = ALPHA_VALUE; 
     motionX = velocityX;
     motionY = velocityY;
     motionZ = velocityZ;
-    
-    // set the texture to the flame texture, which we have previously added using TextureStitchEvent
-    //   (see TextureStitcherBreathFX)
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(smoothBubbleRL.toString());
     setParticleTexture(sprite);  // initialise the icon to our custom texture
   }
@@ -188,7 +181,7 @@ public class ManaParticle extends Particle
     double minV = this.particleTexture.getMinV();
     double maxV = this.particleTexture.getMaxV();
     Random rand = new Random();
-    double scale =0.3* this.particleScale*this.particleMaxAge/300;  // vanilla scaling factor
+    double scale =0.5* (this.particleScale)*this.particleMaxAge/300;  // vanilla scaling factor
     final double scaleLR = scale;
     final double scaleUD = scale;
     double x = this.prevPosX + (this.posX - this.prevPosX) * partialTick - interpPosX;
