@@ -3,21 +3,21 @@
    
     "pattern":
     [
-        "RDR",
-        "RDR",
-        "RDR"
+        "OOO",
+        "OOO",
+        " MO"
     ],
    
     "key":
     {
-        "R":
+        "O":
         {
-            "item": "minecraft:redstone"
+            "item": "minecraft:obsidian"
         },
         
-        "D":
+        "M":
         {
-            "item": "minecraft:diamond"
+            "item": "hutosmod:mana_powder"
         }
     },
     
@@ -25,7 +25,7 @@
    
     "result":
     {
-        "item": "hutosmod:blood_ingot",
+        "item": "hutosmod:magatamabead",
         "count": 1
     }
 }

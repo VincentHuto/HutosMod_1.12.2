@@ -164,7 +164,7 @@ public class mana_storagedrumBlock extends BlockBase {
 		}
 
 		// If player IS sneaking and isnt holding an extractor
-		if (player.isSneaking() && stackItem != ItemRegistry.mana_extractor) {
+		if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
 			ModInventoryHelper.withdrawFromInventory(drum, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 		}

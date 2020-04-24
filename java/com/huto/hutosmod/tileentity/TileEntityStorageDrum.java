@@ -138,7 +138,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	@Override
 	public void update() {
-		if (playerMana != playerLimit) {
+		if (playerMana != playerLimit && manaValue>playerMana) {
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables

@@ -33,7 +33,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
 			
 		case 0:
 			
-			runGenerator(MYSTIC, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
+		//	runGenerator(MYSTIC, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
 			
 			break;
 			

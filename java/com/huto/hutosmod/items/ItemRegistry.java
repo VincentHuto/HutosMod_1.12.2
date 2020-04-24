@@ -52,16 +52,23 @@ public class ItemRegistry {
 	public static final DamageSource BloodSwordDamageSource = new DamageSource("bloody").setDamageBypassesArmor();
 	// Items
 	public static final Item ruby = new ItemBase("ruby");
-	public static final Item null_crystal = new ItemBase("null_crystal");
 	public static final Item blood_ingot = new ItemBase("blood_ingot");
 	public static final Item grey_ingot = new ItemBase("grey_ingot");
+	public static final Item grey_powder = new ItemBase("grey_powder");
+	public static final Item grey_crystal = new ItemBase("grey_crystal");
 	public static final Item nullifying_powder = new ItemBase("nullifying_powder");
+	public static final Item null_crystal = new ItemBase("null_crystal");
+	public static final Item mana_powder = new ItemBase("mana_powder");
+	public static final Item mana_crystal = new ItemBase("mana_crystal");
 	public static final Item channeling_rod = new ItemBase("channeling_rod");
 	public static final Item channeling_ingot = new ItemBase("channeling_ingot");
 	public static final Item essence_drop = new ItemBase("essence_drop");
+	public static final Item phantasmal_pane = new ItemBase("phantasmal_pane");
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");
 	public static final Item enhancedmagatama = new ItemBase("enhancedmagatama");
+	public static final Item energy_focus = new ItemBase("energy_focus");
+
 	// Activator
 	public static final Item maker_activator = new ItemMakerActivator("maker_activator");
 	public static final Item mana_extractor = new ItemManaExtractor("mana_extractor");
@@ -107,6 +114,8 @@ public class ItemRegistry {
 			EntityEquipmentSlot.HEAD);
 
 	// Drum Upgrades
+	public static final Item upgrade_wrench = new ItemBase("upgrade_wrench").setMaxStackSize(1);
+	public static final Item upgrade_blank = new ItemBase("upgrade_blank").setMaxStackSize(1);
 	public static final Item upgrade_block = new ItemUpgrade("upgrade_block");
 	public static final Item upgrade_player = new ItemUpgrade("upgrade_player");
 	public static final Item upgrade_animal = new ItemUpgrade("upgrade_animal");

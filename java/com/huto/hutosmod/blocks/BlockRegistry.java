@@ -20,6 +20,7 @@ public class BlockRegistry {
 	public static final Block Mystic_Log = new BlockLogBase("mystic_log");
 	public static final Block Mystic_Leaves = new BlockLeafBase("mystic_leaves");
 	public static final Block Mystic_Vine = new BlockMysticVine("mystic_vine");
+	public static final Block nether_block= new BlockNetherBlock("nether_block",Material.ROCK).setHardness(5F).setResistance(15F);
 	public static final Block Fusion_Furnace = new FusionFurnaceBlock("fusion_furnace");
 	public static final Block wand_maker = new wand_makerBlock("wand_maker", Material.ROCK);
 	public static final Block mana_belljar = new mana_belljarBlock("mana_belljar", Material.GLASS);

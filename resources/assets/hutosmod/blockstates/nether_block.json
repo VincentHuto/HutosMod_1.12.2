@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+        "axis=y":  { "model": "hutosmod:nether_block" },
+        "axis=z":   { "model": "hutosmod:nether_block", "x": 90 },
+        "axis=x":   { "model": "hutosmod:nether_block", "x": 90, "y": 90 },
+        "axis=none": { "model": "hutosmod:nether_block" }
+    }
+}
