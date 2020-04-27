@@ -53,13 +53,13 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		double heightModifier = 0;
 		// Check System that increments the mana based on amount and color
 		if (mana > 0 && mana <= 300)
-			heightModifier = mana / 300 * 1.4;
+			heightModifier = mana / 300 * 1.7;
 		if (mana > 300 && mana <= 600)
-			heightModifier = ((mana - 300) / 300) * 1.4;
+			heightModifier = ((mana - 280) / 300) * 1.4;
 		if (mana > 600 && mana <= 900) {
-			heightModifier = ((mana - 600) / 300) * 1.4;
+			heightModifier = ((mana - 580) / 300) * 1.4;
 		} else if (mana > 900) {
-			heightModifier = ((mana - 900) / 300) * 1.4;
+			heightModifier = ((mana - 880) / 300) * 1.4;
 
 		}
 

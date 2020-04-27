@@ -2,6 +2,7 @@ package com.huto.hutosmod.tileentity;
 
 import java.util.Random;
 
+import com.huto.hutosmod.biomes.BiomeRegistry;
 import com.huto.hutosmod.particles.ManaParticle;
 
 import net.minecraft.block.state.IBlockState;
@@ -27,8 +28,12 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 		if(count%mod==0) {
 			this.setManaValue(manaValue+0.1F);
 
+			if(world.getBiome(this.getPos()) == BiomeRegistry.TEST_BIOME) {
+				this.setManaValue(manaValue+0.3F);
+
+			}
+			
 		if(world.isRemote) {
-		
 			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 			}
 		}

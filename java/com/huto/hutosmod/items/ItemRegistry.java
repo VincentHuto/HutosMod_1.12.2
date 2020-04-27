@@ -58,16 +58,20 @@ public class ItemRegistry {
 	public static final Item grey_crystal = new ItemBase("grey_crystal");
 	public static final Item nullifying_powder = new ItemBase("nullifying_powder");
 	public static final Item null_crystal = new ItemBase("null_crystal");
+	public static final Item null_rod = new ItemBase("null_rod");
 	public static final Item mana_powder = new ItemBase("mana_powder");
 	public static final Item mana_crystal = new ItemBase("mana_crystal");
 	public static final Item channeling_rod = new ItemBase("channeling_rod");
 	public static final Item channeling_ingot = new ItemBase("channeling_ingot");
 	public static final Item essence_drop = new ItemBase("essence_drop");
+	public static final Item karmic_drop = new ItemBase("karmic_drop");
 	public static final Item phantasmal_pane = new ItemBase("phantasmal_pane");
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");
 	public static final Item enhancedmagatama = new ItemBase("enhancedmagatama");
 	public static final Item energy_focus = new ItemBase("energy_focus");
+	public static final Item purging_stone = new ItemPurgingStone("purging_stone");
+	public static final Item grand_purging_stone = new ItemGrandPurgingStone("grand_purging_stone");
 
 	// Activator
 	public static final Item maker_activator = new ItemMakerActivator("maker_activator");

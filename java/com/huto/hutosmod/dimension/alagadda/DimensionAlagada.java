@@ -63,7 +63,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 	public float calculateCelestialAngle(long worldTime, float partialTicks) {
 		// TODO Auto-generated method stub
 //		return 01.0f;
-		return 0.50f;
+		return 1f;
 
 	}
 

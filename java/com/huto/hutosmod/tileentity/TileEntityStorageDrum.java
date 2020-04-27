@@ -57,6 +57,8 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		this.tankLevel = tankLevel;
 	}
 
+	
+	
 	public float getTankSize() {
 
 		if (tankLevel == 0) {
@@ -111,6 +113,14 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	}
 
+	public boolean isNotFull() {
+		if (this.getManaValue() <= this.getMaxMana()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	@Override
 	public void onLoad() {
 		super.onLoad();
@@ -138,7 +148,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	@Override
 	public void update() {
-		if (playerMana != playerLimit && manaValue>playerMana) {
+		if (playerMana != playerLimit && manaValue > playerMana) {
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
@@ -163,7 +173,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 				float r;
 				float g;
 				float b;
-				float scaleF =(float) (1*rand.nextDouble());
+				float scaleF = (float) (1 * rand.nextDouble());
 				// Calculating the rgb values for the different tank levels
 				if (this.getManaValue() <= 300) {
 					r = 0.2F;
@@ -172,14 +182,14 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-				} else if (this.getManaValue() > 301 && this.getManaValue() <= 600) {
+				} else if (this.getManaValue() > 300 && this.getManaValue() <= 600) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 1.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-				} else if (this.getManaValue() > 601 && this.getManaValue() <= 900) {
+				} else if (this.getManaValue() > 600 && this.getManaValue() <= 900) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 0.0F;
@@ -191,7 +201,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 					g = 0.0F;
 					b = 0.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b, 70,scaleF);
+							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
 				}
@@ -225,35 +235,51 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		}
 		// Checks block positions in a 3x3x3
 		for (BlockPos pos : radiusPositions) {
+			TileEntity tile = world.getTileEntity(pos);
 			// Makes sure it doesnt run uselessly
-			if (world.getTileEntity(pos) != null) {
+			if (tile != null && this.getPos() != pos) {
 				if (this.checkAllowBlock()) {
-					if (world.getTileEntity(pos) instanceof TileModMana) {
-						TileModMana manaStor = (TileModMana) world.getTileEntity(pos);
-						if (this.manaValue >= 50 && this.manaValue >= manaStor.getManaValue()
-								&& manaStor.getManaValue() <= manaStor.getMaxMana()) {
+					if (tile instanceof TileModMana) {
+						TileModMana manaStor = (TileModMana) tile;
+						if (this.manaValue >= 50 && this.manaValue > manaStor.getManaValue() && this.maxMana > manaStor.maxMana){
+							double commonMax = Math.min(this.maxMana, manaStor.maxMana);
+							if(commonMax >= this.maxMana) {
+								System.out.println(commonMax);
 							this.setManaValue(manaValue - 0.1f);
 							manaStor.addManaValue(0.1f);
+							}
 						}
+						
 					}
-					if (world.getTileEntity(pos) instanceof TileManaSimpleInventory) {
-						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) world.getTileEntity(pos);
-						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()) {
+					if (tile instanceof TileManaSimpleInventory) {
+						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) tile;
+						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <= wandMaker.maxMana) {
+							double commonMax = Math.min(this.maxMana, wandMaker.maxMana);
+							if(commonMax <= this.maxMana) {
 							this.setManaValue(manaValue - 0.1f);
 							wandMaker.addManaValue(0.1f);
+							}
 						}
-					}
-				}
-				//Gatherers are place outside of the upgrade check
-				if (world.getTileEntity(pos) instanceof TileEntityManaGatherer) {
-					TileEntityManaGatherer manaG = (TileEntityManaGatherer) world.getTileEntity(pos);
-					if (manaG.getManaValue() > 0.1F) {
-						this.addManaValue(0.1F);
-						manaG.setManaValue(manaG.getManaValue() - 0.1f);
 					}
 				}
 			}
 		}
+		
+		for (EnumFacing face : EnumFacing.values()) {
+		    BlockPos adj = getPos().offset(face);
+		    TileEntity tile = world.getTileEntity(adj);
+		    if(tile instanceof TileEntityManaGatherer) {
+		    	TileEntityManaGatherer manaG = (TileEntityManaGatherer) tile;
+				if (manaG.getManaValue() > 0.1F && this.isNotFull()) {
+					this.addManaValue(0.1F);
+					manaG.setManaValue(manaG.getManaValue() - 0.1f);
+				}
+		    	
+		    }
+		    
+		}
+
+		
 	}
 
 	@SideOnly(Side.CLIENT)
