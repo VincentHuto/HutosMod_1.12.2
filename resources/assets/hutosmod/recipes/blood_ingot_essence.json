@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:essence_drop"
+        },
+        {
+            "item": "hutosmod:essence_drop"
+        },
+        {
+            "item": "hutosmod:essence_drop"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:blood_ingot",
+        "count": 1
+    }
+}

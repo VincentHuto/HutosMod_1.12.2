@@ -43,7 +43,7 @@ public class ItemGrandPurgingStone extends Item {
 					.sendToServer(new PacketGetKarma(karma, "com.huto.hutosmod.items.ItemGrandPurgingStone", "karma"));
 
 		IKarma karma = playerIn.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		if (karma.getKarma() <0 && karma.getKarma() > -60) {
+		if (karma.getKarma() <0 && karma.getKarma() > -100) {
 			karma.set(0);
 			itemStack.shrink(1);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);

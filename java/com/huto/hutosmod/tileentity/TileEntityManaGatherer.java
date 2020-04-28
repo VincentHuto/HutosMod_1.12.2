@@ -3,13 +3,16 @@ package com.huto.hutosmod.tileentity;
 import java.util.Random;
 
 import com.huto.hutosmod.biomes.BiomeRegistry;
+import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.particles.ManaParticle;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityManaGatherer extends TileModMana implements ITickable{
 	public int count=0;
@@ -28,7 +31,7 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 		if(count%mod==0) {
 			this.setManaValue(manaValue+0.1F);
 
-			if(world.getBiome(this.getPos()) == BiomeRegistry.TEST_BIOME) {
+			if(world.getBiome(this.getPos()) == BiomeRegistry.TEST_BIOME || checkStructure()) {
 				this.setManaValue(manaValue+0.3F);
 
 			}
@@ -38,6 +41,18 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 			}
 		}
 	}
+	
+	public boolean checkStructure() {
+	    BlockPos adj = getPos().offset(EnumFacing.DOWN);
+	    IBlockState blockState = world.getBlockState(adj);
+	    Block block = blockState.getBlock();
+	    if(block == BlockRegistry.enchanted_stone) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	@Override
 	public void readPacketNBT(NBTTagCompound tag) {
 		manaValue = tag.getFloat(TAG_MANA);
