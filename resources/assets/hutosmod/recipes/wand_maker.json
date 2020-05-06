@@ -1,0 +1,40 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "MFM",
+        "MNM",
+        "RRR"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "hutosmod:nether_block"
+        },
+        
+        "F":
+        {
+            "item": "hutosmod:energy_focus"
+        },
+        
+         "R":
+        {
+            "item": "hutosmod:runed_obsidian"
+        },
+         "L":
+        {
+            "item": "hutosmod:magatamabead"
+        }
+    },
+    
+    
+   
+    "result":
+    {
+        "item": "hutosmod:wand_gatherer",
+        "count": 1
+    }
+}

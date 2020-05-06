@@ -21,7 +21,8 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGenCustomTrees implements IWorldGenerator
 {
 	private final WorldGenerator MYSTIC = new WorldGenMysticTree();
-	
+	private final WorldGenerator MYSTIC_SMALL = new WorldGenSmallMysticTree();
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) 
 	{
@@ -33,7 +34,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
 			
 		case 0:
 			
-		//	runGenerator(MYSTIC, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
+			runGenerator(MYSTIC_SMALL, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
 			
 			break;
 			

@@ -8,6 +8,7 @@ import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
+import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
 import net.minecraft.block.SoundType;
@@ -32,10 +33,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class mana_storagedrumBlock extends BlockBase {
-	public static final AxisAlignedBB STORAGE_DRUM = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5, 1.0D);
+public class mana_capacitorBlock extends BlockBase {
+	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75D, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB STORAGE_DRUM_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5, 1.0D);
+	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D,0.1875D, .8125D, 0.75, .8125D);
 
 	// Facing
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -43,7 +44,7 @@ public class mana_storagedrumBlock extends BlockBase {
 		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
-	public mana_storagedrumBlock(String name, Material material) {
+	public mana_capacitorBlock(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.STONE);
 		setHardness(5.0F);
@@ -93,7 +94,7 @@ public class mana_storagedrumBlock extends BlockBase {
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityStorageDrum();
+		return new TileEntityManaCapacitor();
 	}
 
 	@Override
@@ -122,6 +123,67 @@ public class mana_storagedrumBlock extends BlockBase {
 	}
 
 	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			EnumFacing side, float par7, float par8, float par9) {
+		TileEntityManaCapacitor capac = (TileEntityManaCapacitor) world.getTileEntity(pos);
+		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+		ItemStack stack = player.getHeldItem(hand);
+		Item stackItem = stack.getItem();
+
+		// If NOT sneaking and your hand IS empty
+		if (!player.isSneaking() && stack.isEmpty()) {
+			String message = String.format("Capacitor contains §9%d§r mana ", (int) capac.getManaValue());
+			player.sendMessage(new TextComponentString(message));
+
+		}
+
+		// If player IS sneaking and isnt holding an extractor
+		if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
+			ModInventoryHelper.withdrawFromInventory(capac, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
+		}
+
+		// If there is something in your hand add it to the block if its not an
+		// extractor
+		if (!stack.isEmpty() && stackItem instanceof ItemUpgrade) {
+			capac.addItem(player, stack, hand);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
+		}
+
+		// If player is sneaking and hand is empty
+		if (player.isSneaking() && stack.isEmpty()) {
+			if (mana.getMana() > 10 && capac.getManaValue() <= capac.getTankSize() - 10) {
+				capac.addManaValue(10);
+				mana.consume(10);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
+			}
+		}
+		// If player NOT is sneaking and has an extractor
+		if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
+			if (capac.getManaValue() > 10 && mana.getMana() <= mana.manaLimit() - 10) {
+				mana.fill(10);
+				capac.setManaValue(capac.getManaValue() - 10);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
+			}
+		}
+		// Upgrade clause
+		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
+				&& capac.getTankLevel() < 3 || stackItem == ItemRegistry.enhancedmagatama && capac.getTankLevel() < 4 ) {
+			capac.addTankLevel(1);
+			player.getHeldItemMainhand().shrink(1);
+			player.getHeldItemOffhand().shrink(1);
+
+		}
+		// Says the tank is full
+		if (capac.getManaValue() >= capac.getTankSize()) {
+			String message = String.format("§CCapacitor is full §r");
+			player.sendMessage(new TextComponentString(message));
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
+		return true;
+	}
+	
+	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
 		super.onBlockDestroyedByPlayer(worldIn, pos, state);
 		// inner ring
@@ -138,7 +200,7 @@ public class mana_storagedrumBlock extends BlockBase {
 			 */
 		}
 		// outer ring
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 10; i++) {
 			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
 					Math.sin(i) / 3, Math.sin(i) / 3, Math.cos(i) / 3);
 			worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, pos.getX() + .5, pos.getY(), pos.getZ() + .5,
@@ -151,66 +213,6 @@ public class mana_storagedrumBlock extends BlockBase {
 		}
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-			EnumFacing side, float par7, float par8, float par9) {
-		TileEntityStorageDrum drum = (TileEntityStorageDrum) world.getTileEntity(pos);
-		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		ItemStack stack = player.getHeldItem(hand);
-		Item stackItem = stack.getItem();
-
-		// If NOT sneaking and your hand IS empty
-		if (!player.isSneaking() && stack.isEmpty()) {
-			String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
-			player.sendMessage(new TextComponentString(message));
-
-		}
-
-		// If player IS sneaking and isnt holding an extractor
-		if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
-			ModInventoryHelper.withdrawFromInventory(drum, player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-		}
-
-		// If there is something in your hand add it to the block if its not an
-		// extractor
-		if (!stack.isEmpty() && stackItem instanceof ItemUpgrade) {
-			drum.addItem(player, stack, hand);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-		}
-
-		// If player is sneaking and hand is empty
-		if (player.isSneaking() && stack.isEmpty()) {
-			if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
-				drum.addManaValue(30);
-				mana.consume(30);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-			}
-		}
-		// If player NOT is sneaking and has an extractor
-		if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
-			if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
-				mana.fill(30);
-				drum.setManaValue(drum.getManaValue() - 30);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-			}
-		}
-		// Upgrade clause
-		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
-				&& drum.getTankLevel() < 9 || stackItem == ItemRegistry.enhancedmagatama && drum.getTankLevel() < 9 ) {
-			drum.addTankLevel(1);
-			player.getHeldItemMainhand().shrink(1);
-			player.getHeldItemOffhand().shrink(1);
-
-		}
-		// Says the tank is full
-		if (drum.getManaValue() >= drum.getTankSize()) {
-			String message = String.format("§4Drum is full §r");
-			player.sendMessage(new TextComponentString(message));
-		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-		return true;
-	}
 
 	// Facing(kinda) more to do with facing of bounding boxes
 	@Override
@@ -218,19 +220,21 @@ public class mana_storagedrumBlock extends BlockBase {
 		switch (((EnumFacing) state.getValue(FACING))) {
 		case SOUTH:
 		default:
-			return STORAGE_DRUM;
+			return MANA_CAPACITOR;
 		case NORTH:
-			return STORAGE_DRUM;
+			return MANA_CAPACITOR;
 		case EAST:
-			return STORAGE_DRUM_WE;
+			return MANA_CAPACITOR_WE;
 		case WEST:
-			return STORAGE_DRUM_WE;
+			return MANA_CAPACITOR_WE;
 		}
 	}
+	
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add("§3Magical Storage! §r");
+		tooltip.add("§3Faster Storage! §r");
 		super.addInformation(stack, player, tooltip, advanced);
 		
 	}
+
 }

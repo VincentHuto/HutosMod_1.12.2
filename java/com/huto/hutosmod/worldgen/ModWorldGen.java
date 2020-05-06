@@ -25,7 +25,7 @@ public class ModWorldGen implements IWorldGenerator {
 
 	private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,IChunkProvider chunkProvider) {
 
-		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 0, 32,random.nextInt(3) + 4, 16);
+		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 0, 32,random.nextInt(3) + 4, 5);
 
 	}
 

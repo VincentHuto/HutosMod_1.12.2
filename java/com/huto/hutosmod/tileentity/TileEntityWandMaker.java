@@ -35,6 +35,12 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 	private static final int CRAFT_EFFECT_EVENT = 2;
 
 	@Override
+	public void onLoad() {
+		super.onLoad();
+		this.setMaxMana(300);
+	}
+	
+	@Override
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
 		if (cooldown > 0 || stack.getItem() == ItemRegistry.maker_activator)
 			return false;

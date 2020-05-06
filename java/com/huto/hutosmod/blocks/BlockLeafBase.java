@@ -26,9 +26,7 @@ public class BlockLeafBase extends BlockLeaves {
 	public static String type;
 
 	public BlockLeafBase(String name) {
-		type = name.replaceAll("_leaves", "").trim();
-		System.out.println(type);
-
+		type = name.replace("_leaves", "").trim();
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setSoundType(SoundType.PLANT);
@@ -42,12 +40,12 @@ public class BlockLeafBase extends BlockLeaves {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if (type == "mystic")
+		if (type.equalsIgnoreCase("mystic")){
 			return Item.getItemFromBlock(BlockRegistry.Mystic_Sapling);
-//		else if (type == "aluminium")
-//			return Item.getItemFromBlock(BlockInit.ALUMINIUM_SAPLING);
-		else
+			}
+		else {
 			return Item.getItemFromBlock(Blocks.SAPLING);
+		}
 	}
 
 	@Override

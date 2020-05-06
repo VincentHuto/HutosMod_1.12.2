@@ -37,12 +37,19 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	public int count = 0;
-
+	
 	@Override
 	public int getSizeInventory() {
 		return 1;
 	}
-
+	
+	
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		this.setMaxMana(200);
+	}
+	
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
 		boolean did = false;
 		for (int i = 0; i < getSizeInventory(); i++)
@@ -125,7 +132,6 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 	@Override
 	public void update() {
 		if (this.getItemHandler().getStackInSlot(0).getItem() == ItemRegistry.magatamabead) {
-			// System.out.println("Hello");
 		}
 		if (!world.isRemote) {
 			if (cooldown > 0) {
@@ -208,8 +214,6 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 				}
 			}
 		if (recipe != null && manaValue >= recipe.getMana()) {
-			System.out.println(this.currentRecipe);
-
 			ItemStack output = recipe.getOutput().copy();
 			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);

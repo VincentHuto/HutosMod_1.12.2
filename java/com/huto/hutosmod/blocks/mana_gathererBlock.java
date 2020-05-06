@@ -3,10 +3,17 @@ package com.huto.hutosmod.blocks;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
+import com.huto.hutosmod.items.ItemUpgrade;
+import com.huto.hutosmod.mana.IMana;
+import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
+import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
 import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -18,6 +25,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,6 +36,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -54,12 +63,6 @@ public class mana_gathererBlock extends BlockBase {
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileEntityManaGatherer();
-	}
-
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return true;
 	}
 
 	@Override

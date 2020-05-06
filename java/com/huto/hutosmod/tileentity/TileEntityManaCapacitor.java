@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityStorageDrum extends TileManaSimpleInventory implements ITickable {
+public class TileEntityManaCapacitor extends TileManaSimpleInventory implements ITickable {
 
 	public static final String TAG_MANA = "mana";
 	public static final String TAG_LEVEL = "tankLevel";
@@ -62,34 +62,19 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 	public float getTankSize() {
 
 		if (tankLevel == 0) {
-			return this.maxMana = 100;
+			return this.maxMana = 50;
 		}
 		if (tankLevel == 1) {
-			return this.maxMana = 200;
+			return this.maxMana = 100;
 		}
 		if (tankLevel == 2) {
-			return this.maxMana = 300;
+			return this.maxMana = 150;
 		}
 		if (tankLevel == 3) {
-			return this.maxMana = 400;
+			return this.maxMana = 200;
 		}
 		if (tankLevel == 4) {
-			return this.maxMana = 500;
-		}
-		if (tankLevel == 5) {
-			return this.maxMana = 600;
-		}
-		if (tankLevel == 6) {
-			return this.maxMana = 700;
-		}
-		if (tankLevel == 7) {
-			return this.maxMana = 800;
-		}
-		if (tankLevel == 8) {
-			return this.maxMana = 900;
-		}
-		if (tankLevel == 9) {
-			return this.maxMana = 1000;
+			return this.maxMana = 300;
 		}
 		return maxMana;
 	}
@@ -152,7 +137,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
-				double xpos = pos.getX() + 0.5, ypos = pos.getY() + 2.0, zpos = pos.getZ() + 0.5;
+				double xpos = pos.getX() + 0.5, ypos = pos.getY()+1, zpos = pos.getZ() + 0.5;
 				double velocityX = 0, velocityY = 0, velocityZ = 0;
 				EntityPlayer playerTarget = getNearestTargetableMob(world, xpos, ypos, zpos);
 				Vec3d manaDirection;
@@ -175,21 +160,21 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 				float b;
 				float scaleF = (float) (1 * rand.nextDouble());
 				// Calculating the rgb values for the different tank levels
-				if (this.getManaValue() <= 300) {
+				if (this.getManaValue() <= 50) {
 					r = 0.2F;
 					g = 0.0F;
 					b = 1.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-				} else if (this.getManaValue() > 300 && this.getManaValue() <= 600) {
+				} else if (this.getManaValue() > 50 && this.getManaValue() <= 100) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 1.0F;
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-				} else if (this.getManaValue() > 600 && this.getManaValue() <= 900) {
+				} else if (this.getManaValue() > 100 && this.getManaValue() <= 150) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 0.0F;
@@ -223,13 +208,13 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		if (!playerList.isEmpty() && this.checkAllowPlayer()) {
 			for (EntityPlayer entityplayer : playerList) {
 				PacketHandler.INSTANCE.sendToServer(new PacketGetMana(playerMana,
-						"com.huto.hutosmod.tileentity.TileEntityStorageDrum", "playerMana"));
+						"com.huto.hutosmod.tileentity.TileEntityManaCapacitor", "playerMana"));
 				PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(playerLimit,
-						"com.huto.hutosmod.tileentity.TileEntityStorageDrum", "playerLimit"));
+						"com.huto.hutosmod.tileentity.TileEntityManaCapacitor", "playerLimit"));
 				IMana pMana = entityplayer.getCapability(ManaProvider.MANA_CAP, null);
-				if (this.manaValue >= 50 && this.manaValue >= playerMana && playerMana != playerLimit) {
-					this.setManaValue(manaValue - 0.1f);
-					pMana.fill(0.1F);
+				if (this.manaValue >= 20 && this.manaValue >= playerMana && playerMana != playerLimit) {
+					this.setManaValue(manaValue - 0.4f);
+					pMana.fill(0.4F);
 				}
 			}
 		}
@@ -239,24 +224,25 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 			// Makes sure it doesnt run uselessly
 			if (tile != null && this.getPos() != pos) {
 				if (this.checkAllowBlock()) {
-					if (tile instanceof TileModMana&& !(tile instanceof TileEntityStorageDrum)) {
+					if (tile instanceof TileModMana && !(tile instanceof TileEntityManaCapacitor)) {
 						TileModMana manaStor = (TileModMana) tile;
-						if (this.manaValue >= 50 && this.manaValue > manaStor.getManaValue() && this.maxMana > manaStor.maxMana){
+						if (this.manaValue >= 20 && this.manaValue > manaStor.getManaValue() && this.maxMana > manaStor.maxMana){
 							double commonMax = Math.min(this.maxMana, manaStor.maxMana);
 							if(commonMax >= this.maxMana) {
-							this.setManaValue(manaValue - 0.1f);
-							manaStor.addManaValue(0.1f);
+								System.out.println(commonMax);
+							this.setManaValue(manaValue - 0.4f);
+							manaStor.addManaValue(0.4f);
 							}
 						}
 						
 					}
-					if (tile instanceof TileManaSimpleInventory && !(tile instanceof TileEntityStorageDrum)) {
+					if (tile instanceof TileManaSimpleInventory && !(tile instanceof TileEntityManaCapacitor)) {
 						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) tile;
-						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <= wandMaker.maxMana) {
+						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <= wandMaker.maxMana) {
 							double commonMax = Math.min(this.maxMana, wandMaker.maxMana);
 							if(commonMax <= this.maxMana) {
-							this.setManaValue(manaValue - 0.1f);
-							wandMaker.addManaValue(0.1f);
+							this.setManaValue(manaValue - 0.4f);
+							wandMaker.addManaValue(0.4f);
 							}
 						}
 					}
