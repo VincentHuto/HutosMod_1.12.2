@@ -50,6 +50,22 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 		this.setMaxMana(200);
 	}
 	
+	public RecipeEnhancer getCurrentRecipe() {
+			for (RecipeEnhancer recipe_ : ModEnhancerRecipies.enhancerRecipies) {
+				if (recipe_.matches(itemHandler)) {
+					currentRecipe = recipe_;
+				}
+			}
+		
+		return currentRecipe;
+	}
+
+
+	public void setCurrentRecipe(RecipeEnhancer currentRecipe) {
+		this.currentRecipe = currentRecipe;
+	}
+
+
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
 		boolean did = false;
 		for (int i = 0; i < getSizeInventory(); i++)
@@ -85,15 +101,15 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 
 	}
 
-	private IBlockState getState() {
+	public IBlockState getState() {
 		return world.getBlockState(pos);
 	}
 
-	private void setBlockToUpdate() {
+	public void setBlockToUpdate() {
 		sendUpdates();
 	}
 
-	private void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);

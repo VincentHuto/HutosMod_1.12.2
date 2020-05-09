@@ -73,7 +73,7 @@ public class RenderTileEssecenceEnhancer extends TileEntitySpecialRenderer<TileE
 		// Cube Render
 		GlStateManager.disableAlpha();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0.5F, 1F, 0.5F);
+		GlStateManager.translate(0.5F, 1.1F, 0.5F);
 		GlStateManager.rotate(90F, 1F, 90F, 1F);
 		GlStateManager.scale(0.65F, 0.65F, 0.65F);
 		int repeat = 30;
@@ -92,7 +92,7 @@ public class RenderTileEssecenceEnhancer extends TileEntitySpecialRenderer<TileE
 		cubesCCW.renderSpinningCubes(12, repeat, repeat);
 		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 		GlStateManager.translate(0F, -1F, 0F);
-		cubesCW.renderSpinningCubes(15, repeat, repeat);
+		//cubesCW.renderSpinningCubes(15, repeat, repeat);
 
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();

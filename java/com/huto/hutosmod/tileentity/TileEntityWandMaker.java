@@ -9,7 +9,9 @@ import javax.annotation.Nullable;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
+import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.recipies.RecipeWandMaker;
 
 import net.minecraft.block.state.IBlockState;
@@ -39,6 +41,16 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 		super.onLoad();
 		this.setMaxMana(300);
 	}
+	public RecipeWandMaker getCurrentRecipe() {
+		for (RecipeWandMaker recipe_ : ModWandRecipies.wandMakerRecipies) {
+			if (recipe_.matches(itemHandler)) {
+				currentRecipe = recipe_;
+			}
+		}
+	
+	return currentRecipe;
+}
+
 	
 	@Override
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
@@ -222,15 +234,15 @@ public class TileEntityWandMaker extends TileManaSimpleInventory implements ITic
 		}
 	}
 
-	private IBlockState getState() {
+	public IBlockState getState() {
 		return world.getBlockState(pos);
 	}
 
-	private void setBlockToUpdate() {
+	public void setBlockToUpdate() {
 		sendUpdates();
 	}
 
-	private void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);

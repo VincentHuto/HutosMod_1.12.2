@@ -272,15 +272,15 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 		return true;
 	}
 
-	private IBlockState getState() {
+	public IBlockState getState() {
 		return world.getBlockState(pos);
 	}
 
-	private void setBlockToUpdate() {
+	public void setBlockToUpdate() {
 		sendUpdates();
 	}
 
-	private void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);

@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "enabled=true,facing=down": { "model": "hutosmod:mana_hopper_down" },
+        "enabled=true,facing=north": { "model": "hutosmod:mana_hopper_side" },
+        "enabled=true,facing=south": { "model": "hutosmod:mana_hopper_side", "y": 180 },
+        "enabled=true,facing=west": { "model": "hutosmod:mana_hopper_side", "y": 270 },
+        "enabled=true,facing=east": { "model": "hutosmod:mana_hopper_side", "y": 90 },
+        "enabled=false,facing=down": { "model": "hutosmod:mana_hopper_down" },
+        "enabled=false,facing=north": { "model": "hutosmod:mana_hopper_side" },
+        "enabled=false,facing=south": { "model": "hutosmod:mana_hopper_side", "y": 180 },
+        "enabled=false,facing=west": { "model": "hutosmod:mana_hopper_side", "y": 270 },
+        "enabled=false,facing=east": { "model": "hutosmod:mana_hopper_side", "y": 90 }
+        
+        
+    }
+}

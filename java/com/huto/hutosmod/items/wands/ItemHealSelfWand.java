@@ -40,7 +40,7 @@ public class ItemHealSelfWand extends Item {
 		sync %= 10;
 		if (sync == 0)
 			PacketHandler.INSTANCE
-					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.ItemSelfHealingWand", "mana"));
+					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.wands.ItemSelfHealingWand", "mana"));
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);
 		
 		if (mana.getMana() > 20F) {

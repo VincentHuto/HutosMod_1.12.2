@@ -48,6 +48,7 @@ import com.huto.hutosmod.renders.RenderTileManaCapacitor;
 import com.huto.hutosmod.renders.RenderTileManaGatherer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
 import com.huto.hutosmod.renders.RenderTileWandMaker;
+import com.huto.hutosmod.renders.layers.LayerPlayerAura;
 import com.huto.hutosmod.sounds.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
@@ -60,6 +61,8 @@ import com.huto.hutosmod.worldgen.ModWorldGen;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -95,6 +98,10 @@ public class RegistryHandler {
 	@SideOnly(Side.CLIENT)
 	public static void onModelRegister(ModelRegistryEvent event) {
 		RenderHandler.registerEntityRenders();
+		
+
+		
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
@@ -132,6 +139,8 @@ public class RegistryHandler {
 	}
 
 	public static void initRegistries() {
+	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
+	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
@@ -157,6 +166,7 @@ public class RegistryHandler {
 	}
 
 	public static void postInitRegistries() {
+
 		MainClass.proxy.postInit();
 	}
 }

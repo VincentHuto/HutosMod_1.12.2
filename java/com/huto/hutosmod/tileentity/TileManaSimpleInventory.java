@@ -10,7 +10,9 @@
  */
 package com.huto.hutosmod.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -28,7 +30,7 @@ import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 
-public abstract class TileManaSimpleInventory extends TileModMana {
+public abstract class TileManaSimpleInventory extends TileModMana  {
 
 	protected SimpleItemStackHandler itemHandler = createItemHandler();
 	private static final String TAG_MANA = "mana";
@@ -87,6 +89,21 @@ public abstract class TileManaSimpleInventory extends TileModMana {
 		return super.getCapability(cap, side);
 	}
 
+	public IBlockState getState() {
+		return world.getBlockState(pos);
+	}
+
+	public void setBlockToUpdate() {
+		sendUpdates();
+	}
+
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, pos);
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
+		markDirty();
+	}
+	
 	/* Extension of ItemStackHandler that uses our own slot array, allows for control of writing,
 	   allows control over stack limits, and allows for itemstack-slot validation */
 	protected static class SimpleItemStackHandler extends ItemStackHandler {

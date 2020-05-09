@@ -43,7 +43,7 @@ public class ItemRendingWand extends Item {
 		sync %= 10;
 		if (sync == 0)
 			PacketHandler.INSTANCE
-					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.ItemRendingWand", "mana"));
+					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.wands.ItemRendingWand", "mana"));
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);
 
 		if (target instanceof EntityLiving) {

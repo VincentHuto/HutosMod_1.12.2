@@ -32,7 +32,7 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 			this.setManaValue(manaValue+0.1F);
 
 			if(world.getBiome(this.getPos()) == BiomeRegistry.TEST_BIOME || checkStructure()) {
-				this.setManaValue(manaValue+0.3F);
+				this.setManaValue(manaValue+0.9F);
 
 			}
 			
@@ -65,15 +65,15 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable{
 
 	}
 
-	private IBlockState getState() {
+	public IBlockState getState() {
 		return world.getBlockState(pos);
 	}
 
-	private void setBlockToUpdate() {
+	public void setBlockToUpdate() {
 		sendUpdates();
 	}
 
-	private void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);

@@ -24,7 +24,7 @@
         {
             "item": "hutosmod:runed_obsidian"
         },
-         "L":
+         "M":
         {
             "item": "hutosmod:magatamabead"
         }
@@ -34,7 +34,7 @@
    
     "result":
     {
-        "item": "hutosmod:wand_gatherer",
+        "item": "hutosmod:wand_maker",
         "count": 1
     }
 }

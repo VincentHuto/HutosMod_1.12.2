@@ -32,4 +32,7 @@ public class BlockRegistry {
 	public static final Block essecence_enhancer = new essecence_enhancerBlock("essecence_enhancer", Material.ROCK);
 	public static final Block mana_gatherer = new mana_gathererBlock("mana_gatherer", Material.ROCK);
 
+	
+	public static final Block mana_hopper = new mana_hopperBlock("mana_hopper", Material.ROCK);
+
 }

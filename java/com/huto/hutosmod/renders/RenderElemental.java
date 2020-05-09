@@ -25,7 +25,6 @@ public class RenderElemental extends RenderLiving<EntityElemental> {
 		super(manager, new ModelElemental(), 0.5F);
         this.addLayer(new LayerElemental(this));
 
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

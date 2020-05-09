@@ -14,6 +14,7 @@ import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -73,5 +74,15 @@ public class ModInventoryHelper {
 			}
 		}
 	}
-
+	public static void withdrawFromInventoryToInventory(TileManaSimpleInventory inv, IItemHandler inventory) {
+		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
+			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
+			if(!stackAt.isEmpty()) {
+				ItemStack copy = stackAt.copy();
+				ItemHandlerHelper.insertItem(inventory, stackAt, false);
+				inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
+				break;
+			}
+		}
+	}
 }

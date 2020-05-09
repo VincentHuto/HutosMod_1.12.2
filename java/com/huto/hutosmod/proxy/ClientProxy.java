@@ -15,9 +15,11 @@ import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.renders.karmaViewHud;
 import com.huto.hutosmod.renders.manaViewerHud;
 import com.huto.hutosmod.renders.runicHealthRenderer;
+import com.huto.hutosmod.renders.layers.LayerPlayerAura;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -50,12 +52,12 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 		KeyBindRegistry.register();
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-	    MinecraftForge.EVENT_BUS.register(new ParticleTextureStitcher());
+		MinecraftForge.EVENT_BUS.register(new ParticleTextureStitcher());
 	}
 
 	@Override
 	public void init() {
-		
+
 		TextFormating.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings,
 				new ResourceLocation(Reference.MODID, "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine,
 				true));

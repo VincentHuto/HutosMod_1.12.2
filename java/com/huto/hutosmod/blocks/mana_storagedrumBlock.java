@@ -6,6 +6,8 @@ import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.items.ItemUpgrade;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.network.PacketGetMana;
+import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
@@ -154,61 +156,65 @@ public class mana_storagedrumBlock extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float par7, float par8, float par9) {
-		TileEntityStorageDrum drum = (TileEntityStorageDrum) world.getTileEntity(pos);
-		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		ItemStack stack = player.getHeldItem(hand);
-		Item stackItem = stack.getItem();
+		if (!world.isRemote) {
 
-		// If NOT sneaking and your hand IS empty
-		if (!player.isSneaking() && stack.isEmpty()) {
-			String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
-			player.sendMessage(new TextComponentString(message));
+			TileEntityStorageDrum drum = (TileEntityStorageDrum) world.getTileEntity(pos);
+			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+			ItemStack stack = player.getHeldItem(hand);
+			Item stackItem = stack.getItem();
 
-		}
+			// If NOT sneaking and your hand IS empty
+			if (!player.isSneaking() && stack.isEmpty()) {
+				String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(message));
 
-		// If player IS sneaking and isnt holding an extractor
-		if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
-			ModInventoryHelper.withdrawFromInventory(drum, player);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-		}
+			}
 
-		// If there is something in your hand add it to the block if its not an
-		// extractor
-		if (!stack.isEmpty() && stackItem instanceof ItemUpgrade) {
-			drum.addItem(player, stack, hand);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-		}
-
-		// If player is sneaking and hand is empty
-		if (player.isSneaking() && stack.isEmpty()) {
-			if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
-				drum.addManaValue(30);
-				mana.consume(30);
+			// If player IS sneaking and isnt holding an extractor
+			if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
+				ModInventoryHelper.withdrawFromInventory(drum, player);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
-		}
-		// If player NOT is sneaking and has an extractor
-		if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
-			if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
-				mana.fill(30);
-				drum.setManaValue(drum.getManaValue() - 30);
+
+			// If there is something in your hand add it to the block if its not an
+			// extractor
+			if (!stack.isEmpty() && stackItem instanceof ItemUpgrade) {
+				drum.addItem(player, stack, hand);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
-		}
-		// Upgrade clause
-		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
-				&& drum.getTankLevel() < 9 || stackItem == ItemRegistry.enhancedmagatama && drum.getTankLevel() < 9 ) {
-			drum.addTankLevel(1);
-			player.getHeldItemMainhand().shrink(1);
-			player.getHeldItemOffhand().shrink(1);
 
+			// If player is sneaking and hand is empty
+			if (player.isSneaking() && stack.isEmpty()) {
+				if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
+					drum.addManaValue(30);
+					mana.consume(30);
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+				}
+			}
+			// If player NOT is sneaking and has an extractor
+			if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
+				if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
+					mana.fill(30);
+					drum.setManaValue(drum.getManaValue() - 30);
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+				}
+			}
+			// Upgrade clause
+			if (stackItem == ItemRegistry.magatamabead
+					&& player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot && drum.getTankLevel() < 9
+					|| stackItem == ItemRegistry.enhancedmagatama && drum.getTankLevel() < 9) {
+				drum.addTankLevel(1);
+				player.getHeldItemMainhand().shrink(1);
+				player.getHeldItemOffhand().shrink(1);
+
+			}
+			// Says the tank is full
+			if (drum.getManaValue() >= drum.getTankSize()) {
+				String message = String.format("§4Drum is full §r");
+				player.sendMessage(new TextComponentString(message));
+			}
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 		}
-		// Says the tank is full
-		if (drum.getManaValue() >= drum.getTankSize()) {
-			String message = String.format("§4Drum is full §r");
-			player.sendMessage(new TextComponentString(message));
-		}
-		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 		return true;
 	}
 
@@ -227,10 +233,11 @@ public class mana_storagedrumBlock extends BlockBase {
 			return STORAGE_DRUM_WE;
 		}
 	}
+
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add("§3Magical Storage! §r");
 		super.addInformation(stack, player, tooltip, advanced);
-		
+
 	}
 }

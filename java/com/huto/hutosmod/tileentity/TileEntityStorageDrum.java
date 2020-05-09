@@ -33,6 +33,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class TileEntityStorageDrum extends TileManaSimpleInventory implements ITickable {
 
@@ -48,7 +49,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 	public void addTankLevel(float tankValue) {
 		this.tankLevel += tankValue;
 	}
-
+	
 	public int getTankLevel() {
 		return tankLevel;
 	}
@@ -57,8 +58,6 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		this.tankLevel = tankLevel;
 	}
 
-	
-	
 	public float getTankSize() {
 
 		if (tankLevel == 0) {
@@ -146,9 +145,23 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		return false;
 	}
 
+	public boolean checkInv() {
+		for (int i = 0; i < this.getSizeInventory(); i++) {
+			if (this.getItemHandler().getStackInSlot(i) != null) {
+				return true;
+			}
+
+		}
+		return false;
+	}
+
 	@Override
 	public void update() {
-		if (playerMana != playerLimit && manaValue > playerMana) {
+		if(checkInv() == true){
+			sendUpdates();
+		
+		}
+if (playerMana != playerLimit && manaValue > playerMana) {
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
@@ -286,15 +299,15 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 		return true;
 	}
 
-	private IBlockState getState() {
+	public IBlockState getState() {
 		return world.getBlockState(pos);
 	}
 
-	private void setBlockToUpdate() {
+	public void setBlockToUpdate() {
 		sendUpdates();
 	}
 
-	private void sendUpdates() {
+	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);

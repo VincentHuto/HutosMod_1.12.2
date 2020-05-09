@@ -6,8 +6,11 @@ import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.items.tools.ToolBloodSword;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.potions.PotionInit;
+import com.huto.hutosmod.renders.layers.LayerPlayerAura;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -43,5 +46,12 @@ public class ModEventHandler {
 		}
 
 	}
+	public static LayerPlayerAura aura;
 
+	public void renderPlayer(RenderPlayerEvent.Pre e) {
+		 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(aura);;
+		 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(aura);;
+
+	}
+	
 }

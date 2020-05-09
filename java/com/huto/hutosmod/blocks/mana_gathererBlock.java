@@ -44,7 +44,8 @@ public class mana_gathererBlock extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 	public static final AxisAlignedBB GATHERER = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75D, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB GATHERER_WE = new AxisAlignedBB(0.1875D, 0.0D,0.1875D, .8125D, 0.75, .8125D);
+	public static final AxisAlignedBB GATHERER_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75, .8125D);
+
 	public mana_gathererBlock(String name, Material material) {
 		super(name, material);
 		setCreativeTab(MainClass.tabHutosMod);
@@ -113,6 +114,29 @@ public class mana_gathererBlock extends BlockBase {
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+			EnumFacing side, float par7, float par8, float par9) {
+		if (!world.isRemote) {
+			TileEntityManaGatherer drum = (TileEntityManaGatherer) world.getTileEntity(pos);
+			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+			System.out.println(mana.getMana());
+			ItemStack stack = player.getHeldItem(hand);
+			Item stackItem = stack.getItem();
+
+			// If player NOT is sneaking and has an extractor
+			if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
+				if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
+					mana.fill(30);
+					drum.setManaValue(drum.getManaValue() - 30);
+					drum.sendUpdates();
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+				}
+			}
+		}
+		return true;
 	}
 
 	// Facing(kinda) more to do with facing of bounding boxes

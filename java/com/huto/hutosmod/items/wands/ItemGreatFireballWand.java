@@ -47,7 +47,7 @@ public class ItemGreatFireballWand extends Item {
 		sync %= 10;
 		if (sync == 0)
 			PacketHandler.INSTANCE
-					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.ItemGreatFireballWand", "mana"));
+					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.wands.ItemGreatFireballWand", "mana"));
 
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);
 		if (mana.getMana() >=  10F) {
