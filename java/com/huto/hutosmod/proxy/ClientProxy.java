@@ -10,16 +10,15 @@ import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
 import com.huto.hutosmod.models.ClientTickHandler;
+import com.huto.hutosmod.particles.FXLightning;
 import com.huto.hutosmod.particles.ParticleTextureStitcher;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.renders.karmaViewHud;
 import com.huto.hutosmod.renders.manaViewerHud;
 import com.huto.hutosmod.renders.runicHealthRenderer;
-import com.huto.hutosmod.renders.layers.LayerPlayerAura;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,6 +27,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
+
+	@Override
+	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed,
+			int colorOuter, int colorInner) {
+		Minecraft.getMinecraft().effectRenderer.addEffect(new FXLightning(Minecraft.getMinecraft().world, vectorStart,
+				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
+	}
 
 	@Override
 	public void registerItemRenderer(Item item, int meta, String id) {

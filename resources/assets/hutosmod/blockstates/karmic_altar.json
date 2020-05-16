@@ -1,0 +1,30 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:karmic_altar" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:karmic_altar" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:karmic_altar" 
+        },
+        "facing=east": 
+        { 
+            "model": "hutosmod:karmic_altar","y":270 
+        },
+        "facing=west": 
+        { 
+            "model": "hutosmod:karmic_altar","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:karmic_altar","y":180 
+        }
+    }
+}

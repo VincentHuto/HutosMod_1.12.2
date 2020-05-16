@@ -27,6 +27,7 @@ import com.huto.hutosmod.items.wands.ItemFireballWand;
 import com.huto.hutosmod.items.wands.ItemGreatFireballWand;
 import com.huto.hutosmod.items.wands.ItemHealOthersWand;
 import com.huto.hutosmod.items.wands.ItemHealSelfWand;
+import com.huto.hutosmod.items.wands.ItemLightningWand;
 import com.huto.hutosmod.items.wands.ItemRendingWand;
 import com.huto.hutosmod.items.wands.ItemSacrificeWand;
 import com.huto.hutosmod.reference.Reference;
@@ -87,6 +88,8 @@ public class ItemRegistry {
 	public static final Item wand_rending = new ItemRendingWand("wand_rending");
 	public static final Item wand_healself = new ItemHealSelfWand("wand_healself");
 	public static final Item wand_healother = new ItemHealOthersWand("wand_healother");
+	public static final Item wand_lightning = new ItemLightningWand("wand_lightning");
+
 	// Adding a toolMaterial
 	public static final ToolMaterial MATERIAL_BLOOD = EnumHelper.addToolMaterial("material_blood", 3, 256, 8.0F, 3.0F,
 			200);

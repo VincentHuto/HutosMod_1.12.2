@@ -24,4 +24,17 @@ public class Reference {
     public static final int Gui_Hud_Overlay_Runic = 3;
 	public static final Logger log = LogManager.getLogger(MODID.toUpperCase());
 
+	//Colors 
+	public static	int white = 0xFFFFFF;
+	public static int black = 0x000000;
+	public static int red = 0xFF0000;
+	public static int green = 0x00FF00;
+	public static int blue = 0x0000FF;
+	public static int yellow = 0xFFFF00;
+	public static int teal = 0x00FFFF;
+	public static int purple = 0xFF00FF;
+	public static int orange = 0xFF7F00;
+	public static int brown = 0x634000;
+	public static int oxblood = 0x840063;
+
 }

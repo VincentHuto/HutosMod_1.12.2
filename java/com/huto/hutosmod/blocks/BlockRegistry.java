@@ -31,8 +31,7 @@ public class BlockRegistry {
 	public static final Block Rune_Station = new runestationBlock("rune_station", Material.ROCK);
 	public static final Block essecence_enhancer = new essecence_enhancerBlock("essecence_enhancer", Material.ROCK);
 	public static final Block mana_gatherer = new mana_gathererBlock("mana_gatherer", Material.ROCK);
-
-	
 	public static final Block mana_hopper = new mana_hopperBlock("mana_hopper", Material.ROCK);
+	public static final Block karmic_altar = new karmic_altarBlock("karmic_altar", Material.ROCK);
 
 }

@@ -36,18 +36,21 @@ public class CommonProxy {
 	public void postInit() {
 
 	}
-	
+
 	public void preInit() {
-		
+
 	}
+
 	public World getClientWorld() {
 		return null;
 	}
 
 	public void init() {
-		
+
 	}
 
+	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed,
+			int colorOuter, int colorInner) {
 
-	
+	}
 }

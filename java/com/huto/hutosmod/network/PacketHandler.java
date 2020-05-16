@@ -42,7 +42,7 @@ public class PacketHandler {
 		INSTANCE.registerMessage(PacketGetMana.Handler.class, PacketGetMana.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketGetKarma.Handler.class, PacketGetKarma.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketGetManaLimit.Handler.class, PacketGetManaLimit.class, nextID(), Side.SERVER);
-
+		
 	}
 
 }

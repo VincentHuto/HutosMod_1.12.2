@@ -86,13 +86,13 @@ public class ManaEventHandler {
 			}
 
 		case (1):
-			if (mana.getMana() > 400) {
-				if (mana.manaLimit() <= 400) {
+		/*	if (mana.getMana() > 400) {
+				if (mana.manaLimit() <= 300) {
 					mana.setLimit(400);
 
 					System.out.println("Set to 400");
 				}
-			}
+			}*/
 		case (2):
 			if (mana.getMana() > 500) {
 				// mana.setLimit(500);

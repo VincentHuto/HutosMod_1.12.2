@@ -22,9 +22,10 @@ public final class VanillaPacketDispatcher {
 	public static void dispatchTEToNearbyPlayers(TileEntity tile) {
 		SPacketUpdateTileEntity packet = tile.getUpdatePacket();
 
-		if(packet != null && tile.getWorld() instanceof WorldServer) {
-			PlayerChunkMapEntry chunk = ((WorldServer) tile.getWorld()).getPlayerChunkMap().getEntry(tile.getPos().getX() >> 4, tile.getPos().getZ() >> 4);
-			if(chunk != null) {
+		if (packet != null && tile.getWorld() instanceof WorldServer) {
+			PlayerChunkMapEntry chunk = ((WorldServer) tile.getWorld()).getPlayerChunkMap()
+					.getEntry(tile.getPos().getX() >> 4, tile.getPos().getZ() >> 4);
+			if (chunk != null) {
 				chunk.sendPacket(packet);
 			}
 		}
@@ -32,7 +33,7 @@ public final class VanillaPacketDispatcher {
 
 	public static void dispatchTEToNearbyPlayers(World world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
-		if(tile != null)
+		if (tile != null)
 			dispatchTEToNearbyPlayers(tile);
 	}
 

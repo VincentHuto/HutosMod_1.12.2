@@ -3,6 +3,7 @@ package com.huto.hutosmod;
 import com.huto.hutosmod.creativetabs.HutosTab;
 import com.huto.hutosmod.proxy.ClientProxy;
 import com.huto.hutosmod.proxy.CommonProxy;
+import com.huto.hutosmod.proxy.IProxy;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class MainClass {
+	public static IProxy iproxy;
 
 	@Instance
 	public static MainClass instance;

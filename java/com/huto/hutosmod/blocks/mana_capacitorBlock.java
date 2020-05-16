@@ -132,7 +132,7 @@ public class mana_capacitorBlock extends BlockBase {
 
 		// If NOT sneaking and your hand IS empty
 		if (!player.isSneaking() && stack.isEmpty()) {
-			String message = String.format("Capacitor contains §9%d§r mana ", (int) capac.getManaValue());
+			String message = String.format("Capacitor contains §9%d§r mana ",  capac.getManaValue());
 			player.sendMessage(new TextComponentString(message));
 
 		}

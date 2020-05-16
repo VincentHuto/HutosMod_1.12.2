@@ -98,5 +98,16 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 	@Override
 	public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {
 		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, .75F, 2f);
+		sync++;
+		sync %= 10;
+		if (sync == 0)
+			PacketHandler.INSTANCE.sendToServer(
+					new PacketGetMana(mana, "com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "mana"));
+		PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(manaLimit,
+				"com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "manaLimit"));
+		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+		mana.setLimit(300);
+
+		
 	}
 }
