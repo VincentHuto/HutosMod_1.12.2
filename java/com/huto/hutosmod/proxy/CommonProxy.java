@@ -8,6 +8,8 @@ import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -49,8 +51,17 @@ public class CommonProxy {
 
 	}
 
-	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed,
-			int colorOuter, int colorInner) {
+	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed, int colorOuter,
+			int colorInner) {
 
 	}
+
+	public RayTraceResult rayTrace(double blockReachDistance, float partialTicks, EntityPlayer player, World worldIn) {
+		return null;
+	}
+
+	public Vec3d getPositionEyes(float partialTicks, EntityPlayer player) {
+		return null;
+	}
+
 }

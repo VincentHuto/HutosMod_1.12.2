@@ -163,7 +163,7 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 
 		}
 
-		if (world.isRemote && checkConsumed()) {
+		if (true) {
 			EntityPlayer playerTarget = getNearestTargetablePlayer(world, pos.getX(), pos.getY(), pos.getZ());
 			EntityLiving mobTarget = getNearestTargetableMob(world, pos.getX(), pos.getY(), pos.getZ());
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
@@ -176,12 +176,8 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 				for (int i = 0; i < 10; i++) {
 					world.spawnParticle(EnumParticleTypes.PORTAL, xpos, ypos - .5, zpos, 0, 0.05, 0);
 				}
-				// MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(),
-				// Reference.oxblood, Reference.black);
-				// MainClass.proxy.lightningFX(vec, endVec, 1F, System.nanoTime(),
-				// Reference.oxblood, Reference.white);
-
-				MainClass.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), Reference.oxblood,
+//				MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.white, Reference.black);
+				MainClass.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), Reference.white,
 						Reference.black);
 
 			}
