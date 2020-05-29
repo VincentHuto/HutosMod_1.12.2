@@ -17,16 +17,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class RecipeEnhancer{
+public class RecipeManaFuser{
 
 	private final ItemStack output;
 	private final ImmutableList<Object> inputs;
 	private final float mana;
-	private EnumEssecenceType type;
-	public RecipeEnhancer(ItemStack output,float mana,EnumEssecenceType type, Object... inputs) {
+	public RecipeManaFuser(ItemStack output,float mana, Object... inputs) {
 		this.output = output;
 		this.mana = mana;
-		this.type = type;
 		ImmutableList.Builder<Object> inputsToSet = ImmutableList.builder();
 		for(Object obj : inputs) {
 			if(obj instanceof String || obj instanceof ItemStack)
@@ -92,8 +90,5 @@ public class RecipeEnhancer{
 	
 	public float getMana() {
 		return mana;
-	}
-	public EnumEssecenceType getRecipeType() {
-		return type;
 	}
 }

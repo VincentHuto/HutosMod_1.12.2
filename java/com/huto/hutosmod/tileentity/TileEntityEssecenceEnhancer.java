@@ -9,6 +9,7 @@ import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.particles.ManaParticle;
+import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.recipies.RecipeEnhancer;
@@ -37,34 +38,31 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	public int count = 0;
-	
+
 	@Override
 	public int getSizeInventory() {
 		return 1;
 	}
-	
-	
+
 	@Override
 	public void onLoad() {
 		super.onLoad();
 		this.setMaxMana(200);
 	}
-	
+
 	public RecipeEnhancer getCurrentRecipe() {
-			for (RecipeEnhancer recipe_ : ModEnhancerRecipies.enhancerRecipies) {
-				if (recipe_.matches(itemHandler)) {
-					currentRecipe = recipe_;
-				}
+		for (RecipeEnhancer recipe_ : ModEnhancerRecipies.enhancerRecipies) {
+			if (recipe_.matches(itemHandler)) {
+				currentRecipe = recipe_;
 			}
-		
+		}
+
 		return currentRecipe;
 	}
-
 
 	public void setCurrentRecipe(RecipeEnhancer currentRecipe) {
 		this.currentRecipe = currentRecipe;
 	}
-
 
 	public boolean addItem(@Nullable EntityPlayer player, ItemStack stack, @Nullable EnumHand hand) {
 		boolean did = false;
@@ -162,20 +160,35 @@ public class TileEntityEssecenceEnhancer extends TileManaSimpleInventory impleme
 					int mod = 3 + rand.nextInt(10);
 					if (count % mod == 0) {
 						double ypos = pos.getY() + 0.3;
-						
 						double velocityX = 0, velocityY = 0.1, velocityZ = 0;
-						ManaParticle newEffect = new ManaParticle(world, pos.getX()+0.1, ypos,pos.getZ()+0.9, velocityX, velocityY,
-								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
-						ManaParticle newEffect1 = new ManaParticle(world, pos.getX()+0.1, ypos,pos.getZ()+0.1, velocityX, velocityY,
-								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
-						ManaParticle newEffect2 = new ManaParticle(world, pos.getX()+0.9, ypos,pos.getZ()+0.1, velocityX, velocityY,
-								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
-						ManaParticle newEffect3 = new ManaParticle(world, pos.getX()+0.9, ypos,pos.getZ() +0.9, velocityX, velocityY,
-								velocityZ, 1.0F, 0.0F, 0.0F,30,4);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						if (recipe.getRecipeType() == EnumEssecenceType.KARMIC) {
+							ManaParticle newEffect = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 0.0F, 30, 4);
+							ManaParticle newEffect1 = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 0.0F, 30, 4);
+							ManaParticle newEffect2 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 0.0F, 30, 4);
+							ManaParticle newEffect3 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 0.0F, 30, 4);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						} else if (recipe.getRecipeType() == EnumEssecenceType.MANA) {
+
+							ManaParticle newEffect = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 0.0F, 0.0F, 1.0F, 30, 4);
+							ManaParticle newEffect1 = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 0.0F, 0.0F, 1.0F, 30, 4);
+							ManaParticle newEffect2 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 0.0F, 0.0F, 1.0F, 30, 4);
+							ManaParticle newEffect3 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 0.0F, 0.0F, 1.0F, 30, 4);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						}
 
 					}
 				}

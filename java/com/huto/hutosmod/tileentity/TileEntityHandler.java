@@ -15,6 +15,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityManaCapacitor.class, "mana_capacitor");
 		GameRegistry.registerTileEntity(TileEntityManaHopper.class, "mana_hopper");
 		GameRegistry.registerTileEntity(TileEntityKarmicAltar.class, "karmic_altar");
+		GameRegistry.registerTileEntity(TileEntityManaFuser.class, "mana_fuser");
 
 	}
 }

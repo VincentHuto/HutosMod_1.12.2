@@ -36,7 +36,8 @@ import net.minecraft.world.World;
 public class mana_capacitorBlock extends BlockBase {
 	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75D, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D,0.1875D, .8125D, 0.75, .8125D);
+	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75,
+			.8125D);
 
 	// Facing
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -132,7 +133,7 @@ public class mana_capacitorBlock extends BlockBase {
 
 		// If NOT sneaking and your hand IS empty
 		if (!player.isSneaking() && stack.isEmpty()) {
-			String message = String.format("Capacitor contains §9%d§r mana ",  capac.getManaValue());
+			String message = String.format("Capacitor contains §9" + capac.getManaValue() + "§r mana ");
 			player.sendMessage(new TextComponentString(message));
 
 		}
@@ -168,7 +169,7 @@ public class mana_capacitorBlock extends BlockBase {
 		}
 		// Upgrade clause
 		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
-				&& capac.getTankLevel() < 3 || stackItem == ItemRegistry.enhancedmagatama && capac.getTankLevel() < 4 ) {
+				&& capac.getTankLevel() < 3 || stackItem == ItemRegistry.enhancedmagatama && capac.getTankLevel() < 4) {
 			capac.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
 			player.getHeldItemOffhand().shrink(1);
@@ -182,7 +183,7 @@ public class mana_capacitorBlock extends BlockBase {
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(capac);
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
 		super.onBlockDestroyedByPlayer(worldIn, pos, state);
@@ -213,7 +214,6 @@ public class mana_capacitorBlock extends BlockBase {
 		}
 	}
 
-
 	// Facing(kinda) more to do with facing of bounding boxes
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -229,12 +229,12 @@ public class mana_capacitorBlock extends BlockBase {
 			return MANA_CAPACITOR_WE;
 		}
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.add("§3Faster Storage! §r");
 		super.addInformation(stack, player, tooltip, advanced);
-		
+
 	}
 
 }

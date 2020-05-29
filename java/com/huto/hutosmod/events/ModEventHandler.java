@@ -58,7 +58,7 @@ public class ModEventHandler {
 						resu.getBlockPos().getZ());
 				Vector3 vec = Vector3.fromEntityCenter(e.player).add(0, 1, 0);
 				MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.green);
-				manaCap.consume(1);
+				//manaCap.consume(1);
 			}
 		}
 	}
@@ -71,8 +71,7 @@ public class ModEventHandler {
 			Vector3 hitVec = new Vector3(resu.getBlockPos().getX(), resu.getBlockPos().getY(),
 					resu.getBlockPos().getZ());
 			Vector3 vec = Vector3.fromEntityCenter(e.getEntityPlayer());
-			// MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(),
-			// Reference.black, Reference.green);
+			MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.green);
 		}
 
 	}

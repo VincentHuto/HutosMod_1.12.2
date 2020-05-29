@@ -7,6 +7,7 @@ import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
+import com.huto.hutosmod.tileentity.TileEntityManaFuser;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
@@ -30,18 +31,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class wand_makerBlock extends BlockBase implements IActivatable{
-	public static final AxisAlignedBB WAND_MAKER = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
+public class mana_fuserBlock extends BlockBase implements IActivatable {
+	public static final AxisAlignedBB MANA_FUSER = new AxisAlignedBB(0, 0, 0, 1, 0.9375, 1);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB WAND_MAKER_WE = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
-
+	public static final AxisAlignedBB MANA_FUSER_WE = new AxisAlignedBB(0, 0, 0, 1, 0.9375, 1);
 	// Facing
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	{
 		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
-	public wand_makerBlock(String name, Material material) {
+	public mana_fuserBlock(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.STONE);
 		setHardness(5.0F);
@@ -77,7 +77,7 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer) {
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
 	private boolean canBlockStay(World worldIn, BlockPos pos) {
@@ -91,7 +91,7 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityWandMaker();
+		return new TileEntityManaFuser();
 	}
 
 	@Override
@@ -100,26 +100,21 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 		if (world.isRemote)
 			return true;
 
-		TileEntityWandMaker te = (TileEntityWandMaker) world.getTileEntity(pos);
+		TileEntityManaFuser te = (TileEntityManaFuser) world.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		if (player.isSneaking() && player.getHeldItemMainhand().getItem() != ItemRegistry.maker_activator) {
-			if (true) {
-				if(mana.getMana()>30) {
+		if (player.isSneaking()) {
+			if (mana.getMana() > 30) {
 				te.addManaValue(30);
 				mana.consume(30);
-				}
-				ModInventoryHelper.withdrawFromInventory(te, player);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-				return true;
 			}
-		} else if (te.isEmpty() && stack.isEmpty()) {
-			// This is so if your making things in bulk it tell your inventory to insert the
-			// stuff from the last recipe
-			// altar.trySetLastRecipe(player);
+			ModInventoryHelper.withdrawFromInventory(te, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return true;
-		} else if (!stack.isEmpty()) {
+
+		}
+
+		if (!player.isSneaking() && !stack.isEmpty()) {
 			boolean result = te.addItem(player, stack, hand);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return result;
@@ -131,7 +126,7 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 
 	@Override
 	public boolean onUsedByActivator(EntityPlayer player, ItemStack stack, World world, BlockPos pos, EnumFacing side) {
-		((TileEntityWandMaker) world.getTileEntity(pos)).onWanded(player, stack);
+		((TileEntityManaFuser) world.getTileEntity(pos)).onWanded(player, stack);
 		return true;
 	}
 
@@ -145,7 +140,7 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 		if (!this.canBlockStay(worldIn, pos)) {
 			worldIn.setBlockToAir(pos);
 			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(),
-					new ItemStack(BlockRegistry.wand_maker));
+					new ItemStack(BlockRegistry.mana_fuser));
 		}
 	}
 
@@ -175,13 +170,13 @@ public class wand_makerBlock extends BlockBase implements IActivatable{
 		switch (((EnumFacing) state.getValue(FACING))) {
 		case SOUTH:
 		default:
-			return WAND_MAKER;
+			return MANA_FUSER;
 		case NORTH:
-			return WAND_MAKER;
+			return MANA_FUSER;
 		case EAST:
-			return WAND_MAKER_WE;
+			return MANA_FUSER_WE;
 		case WEST:
-			return WAND_MAKER_WE;
+			return MANA_FUSER_WE;
 		}
 	}
 

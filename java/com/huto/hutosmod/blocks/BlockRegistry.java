@@ -33,5 +33,6 @@ public class BlockRegistry {
 	public static final Block mana_gatherer = new mana_gathererBlock("mana_gatherer", Material.ROCK);
 	public static final Block mana_hopper = new mana_hopperBlock("mana_hopper", Material.ROCK);
 	public static final Block karmic_altar = new karmic_altarBlock("karmic_altar", Material.ROCK);
+	public static final Block mana_fuser = new mana_fuserBlock("mana_fuser", Material.ROCK);
 
 }

@@ -163,7 +163,7 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 
 		}
 
-		if (true) {
+		if (checkConsumed()) {
 			EntityPlayer playerTarget = getNearestTargetablePlayer(world, pos.getX(), pos.getY(), pos.getZ());
 			EntityLiving mobTarget = getNearestTargetableMob(world, pos.getX(), pos.getY(), pos.getZ());
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
