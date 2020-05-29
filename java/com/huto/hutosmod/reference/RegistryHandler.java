@@ -16,6 +16,7 @@ import com.huto.hutosmod.entities.RegisterEntities;
 import com.huto.hutosmod.events.ModEventHandler;
 import com.huto.hutosmod.gui.GuiHandler;
 import com.huto.hutosmod.items.ItemRegistry;
+import com.huto.hutosmod.jei.JeiPlugin;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.Karma;
 import com.huto.hutosmod.karma.KarmaEventHandler;
@@ -141,13 +142,11 @@ public class RegistryHandler {
 		RunesPacketHandler.init();
 		DimensionRegistry.registerDimension();
 		PacketHandler.registerMessages(Reference.MODID);
-
 	}
 
 	public static void initRegistries() {
 	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
 	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
-
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
