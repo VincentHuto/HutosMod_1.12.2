@@ -20,6 +20,10 @@ public class ModEnhancerRecipies {
 	public static RecipeEnhancer recipeEnhancedShovel;
 	public static RecipeEnhancer recipeEnhancedAxe;
 	public static RecipeEnhancer recipeEnhancedHoe;
+	public static RecipeEnhancer recipeEnhancedHelm;
+	public static RecipeEnhancer recipeEnhancedChestplate;
+	public static RecipeEnhancer recipeEnhancedPants;
+	public static RecipeEnhancer recipeEnhancedBoots;
 	public static RecipeEnhancer recipeManaGem;
 	public static RecipeEnhancer recipeChannelingRod;
 	public static RecipeEnhancer recipeManaDust;
@@ -45,11 +49,20 @@ public class ModEnhancerRecipies {
 				new ItemStack(ItemRegistry.grey_crystal, 1));
 		recipeManaDust = registerEnhancerRecipe(new ItemStack(ItemRegistry.mana_powder, 1), 10, EnumEssecenceType.MANA,
 				new ItemStack(ItemRegistry.grey_powder, 1));
+		recipeEnhancedHelm = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_helmet, 1), 200,
+				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_HELMET, 1));
+		recipeEnhancedChestplate = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_chestplate, 1), 200,
+				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_CHESTPLATE, 1));
+		recipeEnhancedPants = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_leggings, 1), 200,
+				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_LEGGINGS, 1));
+		recipeEnhancedBoots = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_boots, 1), 200,
+				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_BOOTS, 1));
+
 	}
 
 	public static RecipeEnhancer registerEnhancerRecipe(ItemStack output, float mana, EnumEssecenceType type,
 			Object... inputs) {
-		Preconditions.checkArgument(inputs.length <= 2);
+		Preconditions.checkArgument(inputs.length <= 1);
 		RecipeEnhancer recipe = new RecipeEnhancer(output, mana, type, inputs);
 		enhancerRecipies.add(recipe);
 		return recipe;

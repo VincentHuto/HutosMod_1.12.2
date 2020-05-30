@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "hutosmod:runed_obsidian"
+        },
+        {
+            "item": "hutosmod:essence_drop"
+        }
+    ],
+    "result": {
+        "item": "hutosmod:activated_obsidian",
+        "count": 1
+    }
+}
