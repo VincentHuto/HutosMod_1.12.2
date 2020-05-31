@@ -49,7 +49,7 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 	public void addTankLevel(float tankValue) {
 		this.tankLevel += tankValue;
 	}
-	
+
 	public int getTankLevel() {
 		return tankLevel;
 	}
@@ -157,11 +157,11 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 
 	@Override
 	public void update() {
-		if(checkInv() == true){
+		if (checkInv() == true) {
 			sendUpdates();
-		
+
 		}
-if (playerMana != playerLimit && manaValue > playerMana) {
+		if (playerMana != playerLimit && manaValue > playerMana) {
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
@@ -252,46 +252,47 @@ if (playerMana != playerLimit && manaValue > playerMana) {
 			// Makes sure it doesnt run uselessly
 			if (tile != null && this.getPos() != pos) {
 				if (this.checkAllowBlock()) {
-					if (tile instanceof TileModMana&& !(tile instanceof TileEntityStorageDrum)) {
+					if (tile instanceof TileModMana && !(tile instanceof TileEntityStorageDrum)) {
 						TileModMana manaStor = (TileModMana) tile;
-						if (this.manaValue >= 50 && this.manaValue > manaStor.getManaValue() && this.maxMana > manaStor.maxMana){
+						if (this.manaValue >= 50 && this.manaValue > manaStor.getManaValue()
+								&& this.maxMana > manaStor.maxMana) {
 							double commonMax = Math.min(this.maxMana, manaStor.maxMana);
-							if(commonMax >= this.maxMana) {
-							this.setManaValue(manaValue - 0.1f);
-							manaStor.addManaValue(0.1f);
+							if (commonMax >= this.maxMana) {
+								this.setManaValue(manaValue - 0.1f);
+								manaStor.addManaValue(0.1f);
 							}
 						}
-						
+
 					}
 					if (tile instanceof TileManaSimpleInventory && !(tile instanceof TileEntityStorageDrum)) {
 						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) tile;
-						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <= wandMaker.maxMana) {
+						if (this.manaValue >= 50 && this.manaValue > wandMaker.getManaValue()
+								&& wandMaker.getManaValue() <= wandMaker.maxMana) {
 							double commonMax = Math.min(this.maxMana, wandMaker.maxMana);
-							if(commonMax <= this.maxMana) {
-							this.setManaValue(manaValue - 0.1f);
-							wandMaker.addManaValue(0.1f);
+							if (commonMax <= this.maxMana) {
+								this.setManaValue(manaValue - 0.1f);
+								wandMaker.addManaValue(0.1f);
 							}
 						}
 					}
 				}
 			}
 		}
-		
+
 		for (EnumFacing face : EnumFacing.values()) {
-		    BlockPos adj = getPos().offset(face);
-		    TileEntity tile = world.getTileEntity(adj);
-		    if(tile instanceof TileEntityManaGatherer) {
-		    	TileEntityManaGatherer manaG = (TileEntityManaGatherer) tile;
+			BlockPos adj = getPos().offset(face);
+			TileEntity tile = world.getTileEntity(adj);
+			if (tile instanceof TileEntityManaGatherer) {
+				TileEntityManaGatherer manaG = (TileEntityManaGatherer) tile;
 				if (manaG.getManaValue() > 0.1F && this.isNotFull()) {
 					this.addManaValue(0.1F);
 					manaG.setManaValue(manaG.getManaValue() - 0.1f);
 				}
-		    	
-		    }
-		    
+
+			}
+
 		}
 
-		
 	}
 
 	@SideOnly(Side.CLIENT)

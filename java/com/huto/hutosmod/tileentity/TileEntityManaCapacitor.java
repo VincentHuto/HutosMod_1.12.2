@@ -102,6 +102,8 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 		if (this.getManaValue() <= this.getMaxMana()) {
 			return true;
 		} else {
+			this.manaValue = this.getMaxMana();
+
 			return false;
 		}
 	}

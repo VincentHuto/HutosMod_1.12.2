@@ -6,6 +6,7 @@ import java.util.List;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.biomes.BiomeRegistry;
 import com.huto.hutosmod.blocks.BlockRegistry;
+import com.huto.hutosmod.blocks.FluidInit;
 import com.huto.hutosmod.commands.CommandClearKarma;
 import com.huto.hutosmod.commands.CommandClearMana;
 import com.huto.hutosmod.commands.CommandDimensionTeleport;
@@ -16,7 +17,6 @@ import com.huto.hutosmod.entities.RegisterEntities;
 import com.huto.hutosmod.events.ModEventHandler;
 import com.huto.hutosmod.gui.GuiHandler;
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.jei.JeiPlugin;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.Karma;
 import com.huto.hutosmod.karma.KarmaEventHandler;
@@ -51,7 +51,6 @@ import com.huto.hutosmod.renders.RenderTileManaCapacitor;
 import com.huto.hutosmod.renders.RenderTileManaGatherer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
 import com.huto.hutosmod.renders.RenderTileWandMaker;
-import com.huto.hutosmod.renders.layers.LayerPlayerAura;
 import com.huto.hutosmod.sounds.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
@@ -66,13 +65,13 @@ import com.huto.hutosmod.worldgen.ModWorldGen;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -103,10 +102,7 @@ public class RegistryHandler {
 	@SideOnly(Side.CLIENT)
 	public static void onModelRegister(ModelRegistryEvent event) {
 		RenderHandler.registerEntityRenders();
-		
-
-		
-		
+		RenderHandler.registerCustomMeshesAndStates();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
@@ -134,6 +130,7 @@ public class RegistryHandler {
 	}
 
 	public static void preInitRegistries(FMLPreInitializationEvent event) {
+		FluidInit.registerFluids();
 		BiomeRegistry.registerBiomes();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomTrees(), 0);

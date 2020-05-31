@@ -33,7 +33,7 @@ public class FuserRecipeCatagory implements IRecipeCategory<FuserRecipeWrapper> 
 	public FuserRecipeCatagory(IGuiHelper guiHelper) {
 		background = guiHelper.createBlankDrawable(150, 110);
 		localizedName = I18n.format("hutosmod.jei.manafuser");
-		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/petalOverlay.png"), 0, 0, 150,
+		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/fuserOverlay.png"), 0, 0, 150,
 				110);
 	}
 

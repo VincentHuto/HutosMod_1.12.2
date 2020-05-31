@@ -1,16 +1,13 @@
 package com.huto.hutosmod;
 
 import com.huto.hutosmod.creativetabs.HutosTab;
-import com.huto.hutosmod.proxy.ClientProxy;
 import com.huto.hutosmod.proxy.CommonProxy;
 import com.huto.hutosmod.proxy.IProxy;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.LoaderState;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -20,8 +17,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class MainClass {
@@ -35,7 +30,11 @@ public class MainClass {
 
 	// Creative Tabs
 	public static final CreativeTabs tabHutosMod = new HutosTab("tabHutosMod");
-	
+
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
+
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event) {
 		RegistryHandler.preInitRegistries(event);
@@ -46,7 +45,7 @@ public class MainClass {
 	public static void init(FMLInitializationEvent event) {
 		RegistryHandler.initRegistries();
 		proxy.init();
-		}
+	}
 
 	@EventHandler
 	public static void PostInit(FMLPostInitializationEvent event) {
@@ -57,6 +56,6 @@ public class MainClass {
 	@EventHandler
 	public static void PostInit(FMLServerStartingEvent event) {
 		RegistryHandler.serverRegistries(event);
-	
+
 	}
 }
