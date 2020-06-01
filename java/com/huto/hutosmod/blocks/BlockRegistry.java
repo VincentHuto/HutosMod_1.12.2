@@ -41,6 +41,7 @@ public class BlockRegistry {
 	public static final Block mana_hopper = new mana_hopperBlock("mana_hopper", Material.ROCK);
 	public static final Block karmic_altar = new karmic_altarBlock("karmic_altar", Material.ROCK);
 	public static final Block mana_fuser = new mana_fuserBlock("mana_fuser", Material.ROCK);
+	public static final Block karmic_extractor = new karmic_extractorBlock("karmic_extractor", Material.ROCK);
 
 	// Fluids
 	public static final Block WHITE_WATER_FLUID = new BlockWhiteWaterFluid("white_water", FluidInit.WHITE_WATER_FLUID,

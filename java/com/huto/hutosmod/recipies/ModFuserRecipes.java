@@ -28,15 +28,6 @@ public class ModFuserRecipes {
 				new ItemStack(ItemRegistry.karmic_drop, 1), new ItemStack(ItemRegistry.readied_pane, 1));
 		}
 
-	/**
-	 * Registers a Rune Altar Recipe.
-	 * 
-	 * @param output The ItemStack to craft.
-	 * @param inputs The objects for crafting. Can be ItemStack,
-	 *               MappableStackWrapper or String (case for Ore Dictionary). The
-	 *               array can't be larger than 4.
-	 * @return The recipe created.
-	 */
 	public static RecipeManaFuser registerRuneAltarRecipe(ItemStack output,float mana, Object... inputs) {
 		Preconditions.checkArgument(inputs.length <= 4);
 		RecipeManaFuser recipe = new RecipeManaFuser(output,mana, inputs);

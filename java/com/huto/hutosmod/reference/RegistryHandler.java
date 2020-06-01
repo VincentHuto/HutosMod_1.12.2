@@ -47,6 +47,7 @@ import com.huto.hutosmod.renders.RenderHandler;
 import com.huto.hutosmod.renders.RenderTileBellJar;
 import com.huto.hutosmod.renders.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.renders.RenderTileKarmicAltar;
+import com.huto.hutosmod.renders.RenderTileKarmicExtractor;
 import com.huto.hutosmod.renders.RenderTileManaCapacitor;
 import com.huto.hutosmod.renders.RenderTileManaGatherer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
@@ -56,6 +57,7 @@ import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
 import com.huto.hutosmod.tileentity.TileEntityKarmicAltar;
+import com.huto.hutosmod.tileentity.TileEntityKarmicExtractor;
 import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
 import com.huto.hutosmod.tileentity.TileEntityManaFuser;
 import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
@@ -114,6 +116,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaCapacitor.class, new RenderTileManaCapacitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicAltar.class, new RenderTileKarmicAltar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaFuser.class, new RenderTileManaFuser());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicExtractor.class, new RenderTileKarmicExtractor());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");

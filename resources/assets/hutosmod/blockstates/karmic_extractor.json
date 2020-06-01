@@ -1,0 +1,32 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:karmic_extractor" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:karmic_extractor" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:karmic_extractor" 
+        },
+    
+        "facing=east": 
+        { 
+            "model": "hutosmod:karmic_extractor","y":270 
+        },
+    
+        "facing=west": 
+        { 
+            "model": "hutosmod:karmic_extractor","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:karmic_extractor","y":180 
+        }
+    }
+}
