@@ -1,48 +1,45 @@
 package com.huto.hutosmod.entities;
 
-import java.util.Calendar;
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Predicates;
+import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.sounds.SoundsHandler;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -54,8 +51,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityColin extends EntityMob implements IRangedAttackMob {
 	public static final ResourceLocation ColinTable = LootTableList
@@ -70,21 +65,19 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 	public EntityColin(World worldIn) {
 		super(worldIn);
 		this.setSize(0.6F, 1.95F);
-
+		this.isImmuneToFire = true;
 	}
 
 	@Override
 	protected void initEntityAI() {
-
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
-		// this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.SUGAR, false));
-		// this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
-		this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(7, new EntityAILookIdle(this));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this.tasks.addTask(3, new EntityColin.AIFireballAttack(this));
+		this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0, false));
+//		this.tasks.addTask(1, new EntityAIMoveTowardsRestriction(this, 5.0D));
+		// this.tasks.addTask(2, new EntityAISwimming(this));
+		// this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0D));
+		this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		// this.tasks.addTask(6, new EntityAILookIdle(this));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 
 	}
 
@@ -95,11 +88,10 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 
 	@Override
 	protected void applyEntityAttributes() {
-		// TODO Auto-generated method stub
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
 	}
 
 	/**
@@ -148,7 +140,7 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 	public boolean isVulnerable() {
 		return this.getHealth() <= this.getMaxHealth() / 4.0F;
 	}
-	
+
 	/*
 	 * @Override public EntityCow createChild(EntityAgeable ageable) { return new
 	 * EntityColin(world); }
@@ -194,6 +186,7 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 
 	@Override
 	public void onLivingUpdate() {
+
 		if (this.livingTicks <= 180) {
 
 			++this.livingTicks;
@@ -216,11 +209,14 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 
 			// i>n n is how frequent itl be n spawn per tick
 			for (int i = 0; i < 0.0005; ++i) {
+
 				this.world.spawnParticle(EnumParticleTypes.TOTEM,
 						this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width,
 						this.posY + this.rand.nextDouble() * (double) this.height,
 						this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
-
+				Vector3 vec = Vector3.fromEntityCenter(this).add(0, -2, 0);
+				Vector3 endVec = vec.add(0, 3.5, 0);
+				MainClass.proxy.lightningFX(endVec, vec, 5F, System.nanoTime(), Reference.white, Reference.oxblood);
 				// this.world.createExplosion(this, posX, posY, posZ, 2, true);
 
 			}
@@ -321,4 +317,99 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 	public void setSwingingArms(boolean swingingArms) {
 	}
 
+	static class AIFireballAttack extends EntityAIBase {
+		private final EntityColin blaze;
+		private int attackStep;
+		private int attackTime;
+
+		public AIFireballAttack(EntityColin blazeIn) {
+			this.blaze = blazeIn;
+			this.setMutexBits(3);
+		}
+
+		/**
+		 * Returns whether the EntityAIBase should begin execution.
+		 */
+		public boolean shouldExecute() {
+			EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();
+			return entitylivingbase != null && entitylivingbase.isEntityAlive();
+		}
+
+		/**
+		 * Execute a one shot task or start executing a continuous task
+		 */
+		public void startExecuting() {
+			this.attackStep = 0;
+		}
+
+		/**
+		 * Keep ticking a continuous task that has already been started
+		 */
+		public void updateTask() {
+			--this.attackTime;
+			EntityLivingBase entitylivingbase = this.blaze.getAttackTarget();
+			double d0 = this.blaze.getDistanceSq(entitylivingbase);
+
+			if (d0 < 4.0D) {
+				if (this.attackTime <= 0) {
+					this.attackTime = 20;
+					this.blaze.attackEntityAsMob(entitylivingbase);
+				}
+
+				this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY,
+						entitylivingbase.posZ, 1.0D);
+			} else if (d0 < this.getFollowDistance() * this.getFollowDistance()) {
+				double d1 = entitylivingbase.posX - this.blaze.posX;
+				double d2 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F)
+						- (this.blaze.posY + (double) (this.blaze.height / 2.0F));
+				double d3 = entitylivingbase.posZ - this.blaze.posZ;
+
+				if (this.attackTime <= 0) {
+					++this.attackStep;
+
+					if (this.attackStep == 1) {
+						this.attackTime = 10;
+					} else if (this.attackStep <= 4) {
+						this.attackTime = 6;
+					} else {
+						this.attackTime = 30;
+						this.attackStep = 0;
+					}
+
+					if (this.attackStep > 1) {
+						float f = MathHelper.sqrt(MathHelper.sqrt(d0)) * 0.5F;
+						this.blaze.world.playEvent((EntityPlayer) null, 1018,
+								new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
+
+						for (int i = 0; i < 1; ++i) {
+							EntityLightningBolt bolt = new EntityLightningBolt(this.blaze.world,
+									d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2,
+									d3 + this.blaze.getRNG().nextGaussian() * (double) f, false);
+							EntitySmallFireball entitySmallFireball = new EntitySmallFireball(this.blaze.world,
+									this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2,
+									d3 + this.blaze.getRNG().nextGaussian() * (double) f);
+							entitySmallFireball.posY = this.blaze.posY + (double) (this.blaze.height / 2.0F) + 0.5D;
+							bolt.posY = this.blaze.posY + (double) (this.blaze.height / 2.0F) + 0.5D;
+
+							this.blaze.world.spawnEntity(entitySmallFireball);
+
+						}
+					}
+				}
+
+				this.blaze.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+			} else {
+				this.blaze.getNavigator().clearPath();
+				this.blaze.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY,
+						entitylivingbase.posZ, 1.0D);
+			}
+
+			super.updateTask();
+		}
+
+		private double getFollowDistance() {
+			IAttributeInstance iattributeinstance = this.blaze.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
+			return iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
+		}
+	}
 }

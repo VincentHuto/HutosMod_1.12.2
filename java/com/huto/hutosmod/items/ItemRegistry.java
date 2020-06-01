@@ -66,6 +66,8 @@ public class ItemRegistry {
 	public static final Item channeling_ingot = new ItemBase("channeling_ingot");
 	public static final Item essence_drop = new ItemBase("essence_drop");
 	public static final Item karmic_drop = new ItemBase("karmic_drop");
+	public static final Item karmic_bar = new ItemBase("karmic_bar");
+	public static final Item readied_pane = new ItemBase("readied_pane");
 	public static final Item phantasmal_pane = new ItemBase("phantasmal_pane");
 	public static final Item mind_spike = new ItemBase("mind_spike");
 	public static final Item magatamabead = new ItemBase("magatamabead");

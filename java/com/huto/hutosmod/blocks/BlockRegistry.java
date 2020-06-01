@@ -21,8 +21,7 @@ public class BlockRegistry {
 	public static final Block Mystic_Earth = new BlockMysticEarth("mystic_earth", Material.GROUND);
 	public static final Block Mystic_Media = new BlockBase("mystic_media", Material.ROCK).setHardness(5F)
 			.setResistance(15F);
-	// public static final Block Connected_Cube= new
-	// BlockConnectedTexture("connected_cube",Material.ROCK);
+	//public static final Block Connected_Cube = new BlockConnectedTexture("connected_cube", Material.ROCK);
 	public static final Block Mystic_Sapling = new BlockSaplingBase("mystic_sapling");
 	public static final Block Mystic_Log = new BlockLogBase("mystic_log");
 	public static final Block Mystic_Leaves = new BlockLeafBase("mystic_leaves");

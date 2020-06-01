@@ -17,7 +17,6 @@ public class FluidInit {
 	public static void registerFluids() {
 		registerFluid(WHITE_WATER_FLUID);
 		registerFluid(primal_ooze_fluid);
-
 	}
 
 	public static void registerFluid(Fluid fluid) {

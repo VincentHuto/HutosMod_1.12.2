@@ -19,9 +19,10 @@ item.mana_debugtool.name=Mana Debug Tool
 item.mind_spike.name=Mind Spike
 item.magatamabead.name=Magatama bead
 item.enhancedmagatama.name=Enriched Magatama
+item.readied_pane.name=Readied Pane
 item.phantasmal_pane.name=Phantasmal Pane
 item.energy_focus.name=Energy Focus
-
+item.karmic_bar.name=Karmic Doped Bar
 item.upgrade_blank.name=Blank Upgrade
 item.upgrade_block.name=Drum Upgrade:Blocks
 item.upgrade_player.name=Drum Upgrade:Players

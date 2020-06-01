@@ -99,7 +99,7 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 	}
 
 	public boolean isNotFull() {
-		if (this.getManaValue() <= this.getMaxMana()) {
+		if (this.getManaValue() <= (this.getMaxMana()-0.5)) {
 			return true;
 		} else {
 			this.manaValue = this.getMaxMana();

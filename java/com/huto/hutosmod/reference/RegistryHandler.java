@@ -84,8 +84,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class RegistryHandler {
-	//This is the page array for the book, needed because i dont know how to add the pages to their own like sub class
+	// This is the page array for the book, needed because i dont know how to add
+	// the pages to their own like sub class
 	public static List<String> pageList = new ArrayList<String>();
+
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemRegistry.ITEMS.toArray(new Item[0]));
@@ -106,7 +108,8 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class, new RenderTileEssecenceEnhancer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class,
+				new RenderTileEssecenceEnhancer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaGatherer.class, new RenderTileManaGatherer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaCapacitor.class, new RenderTileManaCapacitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicAltar.class, new RenderTileKarmicAltar());
@@ -142,8 +145,12 @@ public class RegistryHandler {
 	}
 
 	public static void initRegistries() {
-	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
-	//	 Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(new LayerPlayerAura(new RenderPlayer( Minecraft.getMinecraft().getRenderManager())));;
+		// Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(new
+		// LayerPlayerAura(new RenderPlayer(
+		// Minecraft.getMinecraft().getRenderManager())));;
+		// Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(new
+		// LayerPlayerAura(new RenderPlayer(
+		// Minecraft.getMinecraft().getRenderManager())));;
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
