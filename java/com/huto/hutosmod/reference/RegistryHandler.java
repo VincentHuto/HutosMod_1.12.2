@@ -17,6 +17,7 @@ import com.huto.hutosmod.entities.RegisterEntities;
 import com.huto.hutosmod.events.ModEventHandler;
 import com.huto.hutosmod.gui.GuiHandler;
 import com.huto.hutosmod.gui.pages.GuiTomePage;
+import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.Karma;
@@ -72,6 +73,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -89,9 +91,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class RegistryHandler {
-	// This is the page array for the book, needed because i dont know how to add
-	// the pages to their own like sub class
-	public static List<GuiTomePage> pageList = new ArrayList<GuiTomePage>();
 
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
@@ -149,28 +148,23 @@ public class RegistryHandler {
 		DimensionRegistry.registerDimension();
 		PacketHandler.registerMessages(Reference.MODID);
 	}
-	public static String MYSTIC_TOME_PAGE_0 = "mystictome.page.0.text";
-	public static String MYSTIC_TOME_PAGE_1 = "mystictome.page.1.text";
-	public static String MYSTIC_TOME_PAGE_2 = "mystictome.page.2.text";
-	public static String MYSTIC_TOME_PAGE_3 = "mystictome.page.3.text";
-	public static String MYSTIC_TOME_PAGE_4 = "mystictome.page.4.text";
-	public static String MYSTIC_TOME_PAGE_5 = "mystictome.page.5.text";
-	public static String MYSTIC_TOME_PAGE_6 = "mystictome.page.6.text";
-	public static String MYSTIC_TOME_PAGE_7 = "mystictome.page.7.text";
-	public static String MYSTIC_TOME_PAGE_8 = "mystictome.page.8.text";
+	
+	// This is the page array for the book, needed because i dont know how to add
+		// the pages to their own like sub class
+	public static List<GuiTomePage> IntroPageList = new ArrayList<GuiTomePage>();
 
 	public static void initRegistries() {
 
 		// LEXICON PAGES
-		pageList.add(new GuiTomePage(0, "Page 0", "In the Begining", new ItemStack(ItemRegistry.channeling_ingot), I18n.format(MYSTIC_TOME_PAGE_0)));
-		pageList.add(new GuiTomePage(1, "Page 1", "A World of essence", new ItemStack(ItemRegistry.essence_drop),I18n.format(MYSTIC_TOME_PAGE_1)));
-		pageList.add(new GuiTomePage(2, "Page 2", "Channeling Basics", new ItemStack(ItemRegistry.channeling_rod),I18n.format(MYSTIC_TOME_PAGE_2)));
-		pageList.add(new GuiTomePage(3, "Page 3", "Nullification", new ItemStack(ItemRegistry.null_crystal),I18n.format(MYSTIC_TOME_PAGE_3)));
-		pageList.add(new GuiTomePage(4, "Page 4", "The power of vitals", new ItemStack(ItemRegistry.blood_ingot),I18n.format(MYSTIC_TOME_PAGE_4)));
-		pageList.add(new GuiTomePage(5, "Page 5", "The power of vitals 2", new ItemStack(ItemRegistry.rune_clawmark),I18n.format(MYSTIC_TOME_PAGE_5)));
-		pageList.add(new GuiTomePage(6, "Page 6", "The power of vitals 3", new ItemStack(ItemRegistry.blood_chestplate),I18n.format(MYSTIC_TOME_PAGE_6)));
-		pageList.add(new GuiTomePage(7, "Page 7", "The power of vitals 4", new ItemStack(ItemRegistry.wand_consume_mana),I18n.format(MYSTIC_TOME_PAGE_7)));
-		pageList.add(new GuiTomePage(8, "Page 8", "The power of vitals 5", new ItemStack(BlockRegistry.mana_capacitor),I18n.format(MYSTIC_TOME_PAGE_8)));
+		IntroPageList.add(new GuiTomePage(0, "Page 0", "In the Begining", new ItemStack(ItemRegistry.channeling_ingot), I18n.format(TomePageLib.INTRO_PAGE_0)));
+		IntroPageList.add(new GuiTomePage(1, "Page 1", "A World of essence", new ItemStack(ItemRegistry.essence_drop),I18n.format(TomePageLib.INTRO_PAGE_1)));
+		IntroPageList.add(new GuiTomePage(2, "Page 2", "Channeling Basics", new ItemStack(ItemRegistry.channeling_rod),I18n.format(TomePageLib.INTRO_PAGE_2)));
+		IntroPageList.add(new GuiTomePage(3, "Page 3", "Nullification", new ItemStack(ItemRegistry.null_crystal),I18n.format(TomePageLib.INTRO_PAGE_3)));
+		IntroPageList.add(new GuiTomePage(4, "Page 4", "The power of vitals", new ItemStack(ItemRegistry.blood_ingot),I18n.format(TomePageLib.INTRO_PAGE_4)));
+		IntroPageList.add(new GuiTomePage(5, "Page 5", "The power of vitals 2", new ItemStack(ItemRegistry.rune_clawmark),I18n.format(TomePageLib.INTRO_PAGE_5)));
+		IntroPageList.add(new GuiTomePage(6, "Page 6", "The power of vitals 3", new ItemStack(ItemRegistry.blood_chestplate),I18n.format(TomePageLib.INTRO_PAGE_6)));
+		IntroPageList.add(new GuiTomePage(7, "Page 7", "The power of vitals 4", new ItemStack(ItemRegistry.wand_consume_mana),I18n.format(TomePageLib.INTRO_PAGE_7)));
+		IntroPageList.add(new GuiTomePage(8, "Page 8", "The power of vitals 5", new ItemStack(BlockRegistry.mana_capacitor),I18n.format(TomePageLib.INTRO_PAGE_8)));
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());

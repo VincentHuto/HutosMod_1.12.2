@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
@@ -19,34 +20,26 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiTomePage extends GuiScreen {
+public class GuiTomeTitle extends GuiScreen {
 
 	final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/book.png");
+
 	int guiWidth = 175;
 	int guiHeight = 228;
 	int left, top;
-	final int BUTTONCLOSE = 0, ARROWF = 1, ARROWB = 2, TITLEBUTTON = 3;
+	final int BUTTONCLOSE = 0;
+	final int BUTTONRED = 1;
+	final int BUTTONYELLOW = 2;
+	final int BUTTONBLUE = 3;
+	final int BUTTONGREEN = 4;
+	final int BUTTONWHITE = 5;
 
 	GuiButton buttonclose;
-	GuiButtonArrowForward arrowF;
-	GuiButtonArrowBackward arrowB;
-	GuiButtonTextured buttonTitle;
+	GuiButtonTextured redButton, yellowButton, blueButton, greenButton, whiteButton;
 	GuiTextField textBox;
-
-	int pageNum;
-	String title;
-	String subtitle;
-	ItemStack icon;
-	String text;
-
-	public GuiTomePage(int pageNumIn, String titleIn, String subtitleIn, ItemStack iconIn, String textIn) {
-		this.title = titleIn;
-		this.subtitle = subtitleIn;
-		this.icon = iconIn;
-		this.text = textIn;
-		this.pageNum = pageNumIn;
-
-	}
+	String title = "TITLE";
+	String subtitle = "HUTOSMOD";
+	ItemStack icon = new ItemStack(ItemRegistry.mana_crystal);
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -69,33 +62,20 @@ public class GuiTomePage extends GuiScreen {
 		{
 			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title), centerY + 10, 0);
 			GlStateManager.scale(1, 1, 1);
-			fontRenderer.drawString("Pg." + String.valueOf(pageNum), 90, 0, 0000000);
 			fontRenderer.drawString(title, 0, 0, 8060954);
 			fontRenderer.drawString(subtitle, 0, 10, 8060954);
 
 		}
 		GlStateManager.popMatrix();
 
-		GlStateManager.pushMatrix();
-		{
-			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title), centerY + 10, 0);
-			GlStateManager.scale(0.9, 1, 1);
-			GlStateManager.translate(-45, 20, 0);
-			fontRenderer.drawSplitString(text, 0, 0, 175, 0);
-
-		}
-		GlStateManager.popMatrix();
-
 		// super.drawScreen(mouseX, mouseY, partialTicks);
-		buttonclose.drawButton(mc, mouseX, mouseY, 111);
-		if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-			arrowF.drawButton(mc, mouseX, mouseY, 111);
-		}
-		if (pageNum != 0) {
+		buttonclose.drawButton(mc, mouseX, mouseY, 16);
+		redButton.drawButton(mc, mouseX, mouseY, 16);
+		yellowButton.drawButton(mc, mouseX, mouseY, 16);
+		blueButton.drawButton(mc, mouseX, mouseY, 16);
+		greenButton.drawButton(mc, mouseX, mouseY, 16);
+		whiteButton.drawButton(mc, mouseX, mouseY, 16);
 
-			arrowB.drawButton(mc, mouseX, mouseY, 211);
-		}
-		buttonTitle.drawButton(mc, mouseX, mouseY, 311);
 		GlStateManager.translate(3, 0, 0);
 		GlStateManager.pushMatrix();
 		{
@@ -111,10 +91,30 @@ public class GuiTomePage extends GuiScreen {
 		// text.add(icon.getDisplayName());
 		drawTooltip(text, mouseX, mouseY, centerX, centerY, 16 * 2, 16 * 2);
 
-		List<String> titlePage = new ArrayList<String>();
-		titlePage.add(I18n.format("Title"));
-		titlePage.add(I18n.format("Return to Catagories"));
-		drawTooltip(titlePage, mouseX, mouseY, left - guiWidth + 157, top + guiHeight - 209, 16, 16);
+		List<String> cat1 = new ArrayList<String>();
+		cat1.add(I18n.format("Introduction"));
+		cat1.add(I18n.format("Magic and its basis"));
+		drawTooltip(cat1, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174, 16, 16);
+
+		List<String> cat2 = new ArrayList<String>();
+		cat2.add(I18n.format("The World"));
+		cat2.add(I18n.format("Mana All Around Us"));
+		drawTooltip(cat2, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 18, 16, 16);
+
+		List<String> cat3 = new ArrayList<String>();
+		cat3.add(I18n.format("Equipables"));
+		cat3.add(I18n.format("Mystical Wearables"));
+		drawTooltip(cat3, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 36, 16, 16);
+
+		List<String> cat4 = new ArrayList<String>();
+		cat4.add(I18n.format("Wands"));
+		cat4.add(I18n.format("Magical Conduction"));
+		drawTooltip(cat4, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 54, 16, 16);
+
+		List<String> cat5 = new ArrayList<String>();
+		cat5.add(I18n.format("Runes"));
+		cat5.add(I18n.format("Chiseling your own mind"));
+		drawTooltip(cat5, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 72, 16, 16);
 	}
 
 	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height) {
@@ -123,25 +123,26 @@ public class GuiTomePage extends GuiScreen {
 		}
 	}
 
-	int i = (this.width - 175) / 2;
-	int j = this.height / 2;
-
 	@Override
 	public void initGui() {
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
+		int sideLoc = left + guiWidth - 88 - 72;
+		int verticalLoc = top + guiHeight - 174;
+
 		buttonList.clear();
 		buttonList.add(buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 135, top + guiHeight - 21, 100, 20,
 				"Close"));
-		if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-			buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
-		}
-		if (pageNum != 0) {
-			buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
-		}
-		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 157,
-				top + guiHeight - 209, 16, 16, 175, 64));
-
+		buttonList.add(
+				redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc, top + guiHeight - 174, 16, 16, 175, 32));
+		buttonList.add(yellowButton = new GuiButtonTextured(texture, BUTTONYELLOW, sideLoc, verticalLoc + 18, 16, 16,
+				191, 32));
+		buttonList.add(
+				blueButton = new GuiButtonTextured(texture, BUTTONBLUE, sideLoc, verticalLoc + 36, 16, 16, 207, 32));
+		buttonList.add(
+				greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc, verticalLoc + 54, 16, 16, 223, 32));
+		buttonList.add(
+				whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc, verticalLoc + 72, 16, 16, 239, 32));
 		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 155, top + guiHeight - 227, 14, 14);
 		updateButtons();
 		super.initGui();
@@ -150,9 +151,11 @@ public class GuiTomePage extends GuiScreen {
 
 	public void updateButtons() {
 		buttonclose.enabled = true;
+
 	}
 
 	public void updateTextBoxes() {
+
 		if (!textBox.getText().isEmpty()) {
 			if (!textBox.isFocused()) {
 				int searchNum = Integer.parseInt(textBox.getText());
@@ -174,27 +177,27 @@ public class GuiTomePage extends GuiScreen {
 		case BUTTONCLOSE:
 			mc.displayGuiScreen(null);
 			break;
-		case ARROWF:
-			if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum + 1)));
-				break;
+		case BUTTONRED:
+			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(0));
 
-			} else if (pageNum == (RegistryHandler.IntroPageList.size() - 1)) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum)));
-				break;
-			}
-
-		case ARROWB:
-			if (pageNum != 0) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum - 1)));
-				break;
-			} else if (pageNum == 0) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum)));
-				break;
-			}
-		case TITLEBUTTON:
-			mc.displayGuiScreen(new GuiTomeTitle());
 			break;
+		case BUTTONYELLOW:
+			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(1));
+
+			break;
+		case BUTTONBLUE:
+			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(2));
+
+			break;
+		case BUTTONGREEN:
+			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(3));
+
+			break;
+		case BUTTONWHITE:
+			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(4));
+
+			break;
+
 		}
 
 		updateButtons();

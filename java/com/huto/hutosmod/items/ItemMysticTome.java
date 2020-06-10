@@ -3,6 +3,7 @@ package com.huto.hutosmod.items;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.reference.RegistryHandler;
@@ -38,14 +39,13 @@ public class ItemMysticTome extends Item {
 
 		if (worldIn.isRemote) {
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
-		}else {
-			Minecraft.getMinecraft().displayGuiScreen(RegistryHandler.pageList.get(0));
+		} else {
+			Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle());
 		}
 
 		return super.onItemRightClick(worldIn, player, hand);
 	}
-	
-	
+
 	@Nonnull
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
