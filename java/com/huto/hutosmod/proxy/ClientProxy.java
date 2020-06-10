@@ -5,7 +5,7 @@ import com.huto.hutosmod.events.MaskOverlayHandler;
 import com.huto.hutosmod.events.karmaViewHandler;
 import com.huto.hutosmod.events.manaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
-import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
@@ -91,12 +91,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 
-		TextFormating.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings,
+		ModTextFormatting.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings,
 				new ResourceLocation(Reference.MODID, "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine,
 				true));
 		if (Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager) {
 			((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager())
-					.registerReloadListener(TextFormating.getAkloFont());
+					.registerReloadListener(ModTextFormatting.getAkloFont());
 		}
 	}
 

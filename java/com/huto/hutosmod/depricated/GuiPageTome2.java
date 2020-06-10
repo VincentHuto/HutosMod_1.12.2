@@ -1,9 +1,10 @@
-package com.huto.hutosmod.gui.pages;
+/*package com.huto.hutosmod.depricated;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.gui.pages.GuiTomePage;
 import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.client.Minecraft;
@@ -15,11 +16,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 
-public class GuiPageTome1 extends GuiTomePage {
- 
-    String title = getClass().getSimpleName().replace("Gui", "").replace("Tome", " ");
-    String subtitle = "A World of essence";
+public class GuiPageTome2 extends GuiTomePage {
 
+    String title = getClass().getSimpleName().replace("Gui", "").replace("Tome", " ");
+    String subtitle = "Channeling Basics";
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -55,12 +55,12 @@ public class GuiPageTome1 extends GuiTomePage {
         arrowB.drawButton(mc, mouseX, mouseY, 211);
 
         GlStateManager.translate(3, 0, 0);
-        ItemStack icon = new ItemStack(ItemRegistry.essence_drop);
+        ItemStack icon = new ItemStack(ItemRegistry.channeling_rod);
         GlStateManager.pushMatrix();
         {
             GlStateManager.translate(centerX, centerY, 0);
             GlStateManager.scale(2, 2, 2);
-            mc.getRenderItem().renderItemAndEffectIntoGUI(icon, 0, 3);
+            mc.getRenderItem().renderItemAndEffectIntoGUI(icon, 1, 2);
         }
         GlStateManager.popMatrix();
         textBox.drawTextBox();
@@ -70,6 +70,8 @@ public class GuiPageTome1 extends GuiTomePage {
         drawTooltip(text, mouseX, mouseY, centerX, centerY, 16 * 2, 16 * 2);
     }
 
+    
+    
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         switch (button.id) {
@@ -77,10 +79,10 @@ public class GuiPageTome1 extends GuiTomePage {
                 mc.displayGuiScreen(null);
                 break;
             case ARROWF:
-                mc.displayGuiScreen(new GuiPageTome2());
+                mc.displayGuiScreen(new GuiPageTome3());
                 break;
             case ARROWB:
-                mc.displayGuiScreen(new GuiPageTome0());
+                mc.displayGuiScreen(new GuiPageTome1());
                 break;
         }
         updateButtons();
@@ -88,4 +90,4 @@ public class GuiPageTome1 extends GuiTomePage {
     }
 
 
-}
+}*/

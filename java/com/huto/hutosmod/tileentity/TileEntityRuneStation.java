@@ -27,7 +27,7 @@ public class TileEntityRuneStation extends TileEntityLockableLoot implements ITi
 	@Override
 	public int getSizeInventory() 
 	{
-		return 4;
+		return 5;
 	}
 	
 	@Override

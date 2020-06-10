@@ -3,7 +3,7 @@ package com.huto.hutosmod.items.runes;
 import java.util.List;
 
 import com.huto.hutosmod.MainClass;
-import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -34,7 +34,7 @@ public class ItemRune extends Item {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		FontRenderer LC = TextFormating.getAkloFont();
+		FontRenderer LC = ModTextFormatting.getAkloFont();
 		tooltip.add("§5Form: " + level + "§r");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 

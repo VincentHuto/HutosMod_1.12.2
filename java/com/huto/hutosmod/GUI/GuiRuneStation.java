@@ -36,7 +36,9 @@ public class GuiRuneStation extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+
 		GlStateManager.color(1.0f, 1.0f, 1.0f);
+		this.drawDefaultBackground();
 		this.mc.getTextureManager().bindTexture(GUI_Rune_Station);
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
@@ -61,10 +63,10 @@ public class GuiRuneStation extends GuiContainer {
 			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneMilkweed) {
 
 				color = 55555555;
-			}else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneRadiance) {
+			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneRadiance) {
 
 				color = 55555555;
-			}else {
+			} else {
 
 				color = 10000000;
 			}

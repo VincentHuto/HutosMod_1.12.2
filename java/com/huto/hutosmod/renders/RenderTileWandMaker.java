@@ -4,9 +4,7 @@ import java.text.DecimalFormat;
 
 import javax.annotation.Nonnull;
 
-
-
-import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelMagatama;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
@@ -89,7 +87,7 @@ public class RenderTileWandMaker extends TileEntitySpecialRenderer<TileEntityWan
 		GlStateManager.rotate(180, 1, 0, 1);;
 		GlStateManager.scale(0.1, 0.1, 0.1);
         FontRenderer fontRenderer = this.getFontRenderer();
-        FontRenderer akloRenderer = TextFormating.getAkloFont();
+        FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
         akloRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
 
 		GlStateManager.popMatrix();

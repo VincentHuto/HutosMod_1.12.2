@@ -136,6 +136,7 @@ public class ItemRegistry {
 	public static final Item rune_milkweed_c = new ItemContractRuneMilkweed("rune_milkweed_c");
 	public static final Item rune_radiance_c = new ItemContractRuneRadiance("rune_radiance_c");
 	// Base Runes
+	public static final Item rune_blank = new ItemBase("rune_blank");
 	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
 	public static final Item rune_lake = new ItemRuneLake("rune_lake");
 	public static final Item rune_clawmark = new ItemRuneClaw("rune_clawmark");

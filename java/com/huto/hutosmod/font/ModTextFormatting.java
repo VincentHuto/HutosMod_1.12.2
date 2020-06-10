@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class TextFormating {
+public class ModTextFormatting {
 	@SideOnly(Side.CLIENT)
 	private static FontRenderer aklo_font;
 	@SideOnly(Side.CLIENT)

@@ -1,9 +1,10 @@
-package com.huto.hutosmod.gui.pages;
+/*package com.huto.hutosmod.depricated;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.gui.pages.GuiTomePage;
 import com.huto.hutosmod.items.ItemRegistry;
 
 import net.minecraft.client.Minecraft;
@@ -14,10 +15,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class GuiPageTome4 extends GuiTomePage {
+public class GuiPageTome0 extends GuiTomePage {
+ 
+    public GuiPageTome0(int pageNum, String title, String subtitle, ItemStack icon, String text) {
+		super(pageNum, title, subtitle, icon, text);
+		// TODO Auto-generated constructor stub
+	}
 
-    String title = getClass().getSimpleName().replace("Gui", "").replace("Tome", " ");
-    String subtitle = "The power of vital fluids";
+	String title = getClass().getSimpleName().replace("Gui", "").replace("Tome", " ");
+    String subtitle = "In the beginning";
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -42,18 +48,17 @@ public class GuiPageTome4 extends GuiTomePage {
             GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title), centerY + 10, 0);
             GlStateManager.scale(2, 2, 2);
             fontRenderer.drawString(title, 0, 0, 0x6028ff);
-            GlStateManager.scale(0.48, 0.48, 0.48);
+            GlStateManager.scale(0.5, 0.5, 0.5);
             fontRenderer.drawString(subtitle, 0, 15, 0x6028ff);
 
         }
         GlStateManager.popMatrix();
         //super.drawScreen(mouseX, mouseY, partialTicks);
-        button1.drawButton(mc, mouseX, mouseY, 111);
+        buttonclose.drawButton(mc, mouseX, mouseY, 111);
         arrowF.drawButton(mc, mouseX, mouseY, 111);
-        arrowB.drawButton(mc, mouseX, mouseY, 211);
 
         GlStateManager.translate(3, 0, 0);
-        ItemStack icon = new ItemStack(ItemRegistry.blood_ingot);
+        ItemStack icon = new ItemStack(ItemRegistry.channeling_ingot);
         GlStateManager.pushMatrix();
         {
             GlStateManager.translate(centerX, centerY, 0);
@@ -68,24 +73,20 @@ public class GuiPageTome4 extends GuiTomePage {
         drawTooltip(text, mouseX, mouseY, centerX, centerY, 16 * 2, 16 * 2);
     }
 
-    
-    
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
         switch (button.id) {
-            case BUTTON1:
+            case BUTTONCLOSE:
                 mc.displayGuiScreen(null);
                 break;
             case ARROWF:
-                mc.displayGuiScreen(new GuiPageTome0());
+                mc.displayGuiScreen(new GuiPageTome1());
                 break;
-            case ARROWB:
-                mc.displayGuiScreen(new GuiPageTome3());
-                break;
+         
         }
         updateButtons();
         super.actionPerformed(button);
     }
 
 
-}
+}*/

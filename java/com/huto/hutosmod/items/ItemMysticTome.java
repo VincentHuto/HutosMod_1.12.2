@@ -3,9 +3,9 @@ package com.huto.hutosmod.items;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.MainClass;
-import com.huto.hutosmod.gui.pages.GuiPageTome0;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.reference.RegistryHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +39,7 @@ public class ItemMysticTome extends Item {
 		if (worldIn.isRemote) {
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 		}else {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiPageTome0());
+			Minecraft.getMinecraft().displayGuiScreen(RegistryHandler.pageList.get(0));
 		}
 
 		return super.onItemRightClick(worldIn, player, hand);

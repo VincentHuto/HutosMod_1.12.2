@@ -13,7 +13,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
-import com.huto.hutosmod.font.TextFormating;
 import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 

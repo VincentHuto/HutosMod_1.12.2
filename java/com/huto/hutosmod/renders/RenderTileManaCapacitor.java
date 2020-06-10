@@ -6,12 +6,10 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
-import com.huto.hutosmod.models.ModelMagatama;
 import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
-import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -245,7 +243,7 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 
 		GlStateManager.scale(0.08, 0.08, 0.08);
 		FontRenderer fontRenderer = this.getFontRenderer();
-		FontRenderer akloRenderer = TextFormating.getAkloFont();
+		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
 		fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
 		GlStateManager.translate(0, -10, 0);
 		fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);

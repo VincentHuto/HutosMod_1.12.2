@@ -19,10 +19,10 @@ public class ContainerRuneStation extends Container {
 		chestInventory.openInventory(player);
 		// SLOTS
 		this.addSlotToContainer(new SlotContractRuneInput(chestInventory, 0, 8, 18));
-		this.addSlotToContainer(new SlotRuneInput(chestInventory, 1, 8, 18 + 1 * 18));
-		this.addSlotToContainer(new SlotRuneInput(chestInventory, 2, 8, 18 + 2 * 18));
-		this.addSlotToContainer(new SlotRuneInput(chestInventory, 3, 8, 18 + 3 * 18));
-
+		this.addSlotToContainer(new Slot(chestInventory, 1, 8, 18 + 1 * 18));
+		this.addSlotToContainer(new Slot(chestInventory, 2, 8, 18 + 2 * 18));
+		this.addSlotToContainer(new Slot(chestInventory, 3, 8, 18 + 3 * 18));
+		this.addSlotToContainer(new Slot(chestInventory, 4, 145, 44));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {

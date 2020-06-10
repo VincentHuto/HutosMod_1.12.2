@@ -22,19 +22,7 @@ public class SlotContractRuneInput extends Slot {
 
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack) {
-		if (stack.getItem() instanceof ItemRune || stack.getItem() instanceof ItemContractRuneBeast) {
-			return true;
-
-		} else if (stack.getItem() instanceof ItemRune || stack.getItem() instanceof ItemContractRuneMilkweed) {
-			return true;
-
-		} else if (stack.getItem() instanceof ItemRune || stack.getItem() instanceof ItemContractRuneCorrupt) {
-			return true;
-
-		} else if (stack.getItem() instanceof ItemRune || stack.getItem() instanceof ItemContractRuneRadiance) {
-			return true;
-
-		} else if (stack.getItem() instanceof ItemRune || stack.getItem() instanceof ItemContractRuneImpure) {
+		if (stack.getItem() instanceof ItemRune) {
 			return true;
 
 		} else {

@@ -4,13 +4,10 @@ import java.text.DecimalFormat;
 
 import javax.annotation.Nonnull;
 
-import com.huto.hutosmod.font.TextFormating;
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelMagatama;
 import com.huto.hutosmod.tileentity.TileEntityKarmicAltar;
-import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
-import com.huto.hutosmod.tileentity.TileEntityRuneStation;
-import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -86,7 +83,7 @@ public class RenderTileKarmicAltar extends TileEntitySpecialRenderer<TileEntityK
 		;
 		GlStateManager.scale(0.1, 0.1, 0.1);
 		FontRenderer fontRenderer = this.getFontRenderer();
-		FontRenderer akloRenderer = TextFormating.getAkloFont();
+		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
 		akloRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
 		GlStateManager.translate(0, -5.3, -0.5);
 		akloRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
