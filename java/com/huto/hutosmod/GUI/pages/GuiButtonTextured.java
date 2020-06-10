@@ -18,33 +18,40 @@ public class GuiButtonTextured extends GuiButton {
 	public GuiButtonTextured(ResourceLocation texIn, int idIn, int posXIn, int posYIn, int buttonWidthIn,
 			int buttonHeightIn, int uIn, int vIn) {
 		super(idIn, posXIn, posYIn, "");
+
 		this.texture = texIn;
 		this.id = idIn;
 		this.posX = posXIn;
 		this.posY = posYIn;
-		this.buttonWidth = buttonWidthIn;
-		this.buttonHeight = buttonHeightIn;
+		this.width = buttonWidthIn;
+		this.height = buttonHeightIn;
 		this.u = uIn;
 		this.v = vIn;
 		this.adjV = vIn + buttonHeightIn;
 		this.newV = vIn;
+
 	}
 
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		if (visible) {
 			mc.renderEngine.bindTexture(texture);
-			if (mouseX >= posX && mouseX <= posX + buttonWidth && mouseY >= posY && mouseY <= posY + buttonHeight) {
+			if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
 				hovered = true;
 			} else {
 				hovered = false;
 			}
 			if (hovered) {
-				newV = adjV;
+				v = newV;
 			} else if (!hovered) {
 				newV = v;
 			}
-			drawTexturedModalRect(posX, posY, u, newV, buttonWidth, buttonHeight);
+			if (hovered) {
+				drawTexturedModalRect(posX, posY, u, adjV, width, height);
+			} else {
+				drawTexturedModalRect(posX, posY, u, v, width, height);
+
+			}
 		}
 	}
 }

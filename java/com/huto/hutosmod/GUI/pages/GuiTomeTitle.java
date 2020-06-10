@@ -143,9 +143,8 @@ public class GuiTomeTitle extends GuiScreen {
 				greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc, verticalLoc + 54, 16, 16, 223, 32));
 		buttonList.add(
 				whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc, verticalLoc + 72, 16, 16, 239, 32));
+		
 		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 155, top + guiHeight - 227, 14, 14);
-		updateButtons();
-		super.initGui();
 
 	}
 
@@ -179,23 +178,18 @@ public class GuiTomeTitle extends GuiScreen {
 			break;
 		case BUTTONRED:
 			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(0));
-
 			break;
 		case BUTTONYELLOW:
 			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(1));
-
 			break;
 		case BUTTONBLUE:
 			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(2));
-
 			break;
 		case BUTTONGREEN:
 			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(3));
-
 			break;
 		case BUTTONWHITE:
 			mc.displayGuiScreen(RegistryHandler.IntroPageList.get(4));
-
 			break;
 
 		}
@@ -214,7 +208,6 @@ public class GuiTomeTitle extends GuiScreen {
 
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-
 		textBox.mouseClicked(mouseX, mouseY, mouseButton);
 		updateTextBoxes();
 		super.mouseClicked(mouseX, mouseY, mouseButton);
