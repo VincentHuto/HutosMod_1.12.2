@@ -91,8 +91,8 @@ public class TFSkyRenderer extends IRenderHandler {
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		RenderHelper.disableStandardItemLighting();
 	//	 TF - snip out sunrise/sunset since that doesn't happen here
-         * float[] afloat = ...
-         * if (afloat != null) ...
+       //  * float[] afloat = ...
+     //    * if (afloat != null) ...
          
 
 		GlStateManager.enableTexture2D();
@@ -102,9 +102,9 @@ public class TFSkyRenderer extends IRenderHandler {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, f16);
 		GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
-         TF - snip out sun/moon
-         * float f17 = 30.0F;
-         * ...
+       //  TF - snip out sun/moon
+         float f17 = 30.0F;
+     
           tessellator.draw();
          
 		GlStateManager.disableTexture2D();

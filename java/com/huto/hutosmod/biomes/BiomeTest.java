@@ -24,7 +24,7 @@ public class BiomeTest extends Biome {
 		super(new BiomeProperties("Test").setBaseHeight(0.1F).setTemperature(0.5f).setHeightVariation(2.9f)
 				.setWaterColor(77777));
 
-		this.decorator.treesPerChunk = 1000;
+		this.decorator.treesPerChunk = 0;
 		//topBlock = Blocks.GRASS.getDefaultState();
 		topBlock = BlockRegistry.Mystic_Earth.getDefaultState();
 
@@ -38,7 +38,7 @@ public class BiomeTest extends Biome {
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 100, 2, 10));
 	}
 
-	public void decorate(World worldIn, Random rand, BlockPos pos) {
+/*	public void decorate(World worldIn, Random rand, BlockPos pos) {
 
 		this.addMushrooms(worldIn, rand, pos);
 
@@ -83,5 +83,5 @@ public class BiomeTest extends Biome {
 		return MYSTIC_TREE;
 
 	}
-
+*/
 }

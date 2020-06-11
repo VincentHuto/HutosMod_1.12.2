@@ -2,6 +2,8 @@ package com.huto.hutosmod.entities;
 
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.reference.Reference;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -34,6 +36,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityElemental extends EntityMob {
+	public static final ResourceLocation LootTable = LootTableList
+			.register(new ResourceLocation(Reference.MODID, "elemental"));
 	/** Random offset used in floating behaviour */
 	private float heightOffset = 0.5F;
 	/** ticks until heightOffset is randomized */
@@ -163,8 +167,9 @@ public class EntityElemental extends EntityMob {
 	}
 
 	@Nullable
+	@Override
 	protected ResourceLocation getLootTable() {
-		return LootTableList.ENTITIES_BLAZE;
+		return LootTable;
 	}
 
 	public boolean isCharged() {

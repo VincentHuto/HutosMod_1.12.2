@@ -2,6 +2,8 @@ package com.huto.hutosmod.dimension.alagadda;
 
 import com.huto.hutosmod.dimension.DimensionRegistry;
 
+import net.minecraft.client.renderer.WorldVertexBufferUploader;
+import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,11 +20,26 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	private static final String SKYLIGHT_KEY = "HasSkylight";
 
-	private static volatile boolean skylightEnabled = true;
+	private static volatile boolean skylightEnabled = false;
+	private static SkyRenderAlagadaEnd rendererSky;
 
 	@Override
 	protected void init() {
 		this.biomeProvider = new BiomeProviderAlagada(this.world.getSeed());
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public IRenderHandler getSkyRenderer() {
+		return getModSkyRenderer();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static SkyRenderAlagadaEnd getModSkyRenderer() {
+		if (rendererSky == null) {
+			rendererSky = new SkyRenderAlagadaEnd();
+		}
+		return rendererSky;
 	}
 
 	@Override
@@ -69,7 +86,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
-		return new Vec3d(55/255d, 55/255d, 55/255d);
+		return new Vec3d(55 / 255d, 55 / 255d, 55 / 255d);
 	}
 
 	@Override
@@ -79,7 +96,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public float getCloudHeight() {
-		return 255.0f;
+		return 0.0f;
 	}
 
 	@Override
@@ -105,7 +122,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 	public void getLightmapColors(float partialTicks, float sunBrightness, float skyLight, float blockLight,
 			float[] colors) {
 //		EntityPlayer player = this.world.getPlayerEntityByName();
-		
+
 		final float r = 50f / 255f, g = 50f / 255f, b = 50f / 255f;
 		if (!hasSkyLight) {
 			colors[0] = r + blockLight * (102.0f - r);
@@ -114,8 +131,5 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 		}
 	}
-	
-/*3
- * */
 
 }

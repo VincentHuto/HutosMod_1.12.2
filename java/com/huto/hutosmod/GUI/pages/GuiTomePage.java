@@ -38,14 +38,16 @@ public class GuiTomePage extends GuiScreen {
 	String subtitle;
 	ItemStack icon;
 	String text;
+	EnumTomeCatagories catagory;
 
-	public GuiTomePage(int pageNumIn, String titleIn, String subtitleIn, ItemStack iconIn, String textIn) {
+	public GuiTomePage(int pageNumIn, EnumTomeCatagories catagoryIn, String titleIn, String subtitleIn,
+			ItemStack iconIn, String textIn) {
 		this.title = titleIn;
 		this.subtitle = subtitleIn;
 		this.icon = iconIn;
 		this.text = textIn;
 		this.pageNum = pageNumIn;
-
+		this.catagory = catagoryIn;
 	}
 
 	@Override
@@ -67,9 +69,9 @@ public class GuiTomePage extends GuiScreen {
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title), centerY + 10, 0);
+			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title)*1.3, centerY + 10, 0);
 			GlStateManager.scale(1, 1, 1);
-			fontRenderer.drawString("Pg." + String.valueOf(pageNum), 90, 0, 0000000);
+			fontRenderer.drawString("Pg." + String.valueOf(pageNum+1), 90, 0, 0000000);
 			fontRenderer.drawString(title, 0, 0, 8060954);
 			fontRenderer.drawString(subtitle, 0, 10, 8060954);
 
@@ -85,11 +87,41 @@ public class GuiTomePage extends GuiScreen {
 
 		}
 		GlStateManager.popMatrix();
-
-		// super.drawScreen(mouseX, mouseY, partialTicks);
 		buttonclose.drawButton(mc, mouseX, mouseY, 111);
-		if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-			arrowF.drawButton(mc, mouseX, mouseY, 111);
+		if (this.catagory == EnumTomeCatagories.INTRO) {
+			if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.EQUIPS) {
+			if (pageNum != (TomePageLib.ArmorPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.KARMA) {
+			if (pageNum != (TomePageLib.KarmaPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+			if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.MACHINES) {
+			if (pageNum != (TomePageLib.BlocksPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.RUNES) {
+			if (pageNum != (TomePageLib.RunesPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.WANDS) {
+			if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
 		}
 		if (pageNum != 0) {
 
@@ -133,12 +165,58 @@ public class GuiTomePage extends GuiScreen {
 		buttonList.clear();
 		buttonList.add(buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 135, top + guiHeight - 21, 100, 20,
 				"Close"));
-		if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-			buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+		if (this.catagory == EnumTomeCatagories.INTRO) {
+			if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
 		}
-		if (pageNum != 0) {
-			buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+
+		if (this.catagory == EnumTomeCatagories.EQUIPS) {
+			if (pageNum != (TomePageLib.ArmorPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
 		}
+
+		if (this.catagory == EnumTomeCatagories.KARMA) {
+			if (pageNum != (TomePageLib.KarmaPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
+		}
+
+		if (this.catagory == EnumTomeCatagories.MACHINES) {
+			if (pageNum != (TomePageLib.BlocksPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.WANDS) {
+			if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+			if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
+		}
+
 		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 157,
 				top + guiHeight - 209, 16, 16, 175, 64));
 
@@ -156,15 +234,65 @@ public class GuiTomePage extends GuiScreen {
 		if (!textBox.getText().isEmpty()) {
 			if (!textBox.isFocused()) {
 				int searchNum = Integer.parseInt(textBox.getText());
-				if (searchNum < RegistryHandler.IntroPageList.size()) {
-					mc.displayGuiScreen(RegistryHandler.IntroPageList.get(searchNum));
-				} else if (searchNum >= RegistryHandler.IntroPageList.size()) {
-					mc.displayGuiScreen(RegistryHandler.IntroPageList.get(RegistryHandler.IntroPageList.size() - 1));
+
+				if (this.catagory == EnumTomeCatagories.INTRO) {
+					if (searchNum < TomePageLib.IntroPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.IntroPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.IntroPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.IntroPageList.get(TomePageLib.IntroPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+					if (searchNum < TomePageLib.WorldGenPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.WorldGenPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.WorldGenPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.WorldGenPageList.get(TomePageLib.WorldGenPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.EQUIPS) {
+					if (searchNum < TomePageLib.ArmorPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.ArmorPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.ArmorPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.ArmorPageList.get(TomePageLib.ArmorPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.KARMA) {
+					if (searchNum < TomePageLib.KarmaPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.KarmaPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.KarmaPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.KarmaPageList.get(TomePageLib.KarmaPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.MACHINES) {
+					if (searchNum < TomePageLib.BlocksPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.BlocksPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.BlocksPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.BlocksPageList.get(TomePageLib.BlocksPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.WANDS) {
+					if (searchNum < TomePageLib.WandsPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.WandsPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.WandsPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.WandsPageList.get(TomePageLib.RunesPageList.size() - 1));
+					}
+				}
+
+				if (this.catagory == EnumTomeCatagories.RUNES) {
+					if (searchNum < TomePageLib.RunesPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.RunesPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.RunesPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.RunesPageList.get(TomePageLib.RunesPageList.size() - 1));
+					}
 				}
 
 			}
 		}
-
 		updateButtons();
 	}
 
@@ -175,23 +303,134 @@ public class GuiTomePage extends GuiScreen {
 			mc.displayGuiScreen(null);
 			break;
 		case ARROWF:
-			if (pageNum != (RegistryHandler.IntroPageList.size() - 1)) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum + 1)));
-				break;
-
-			} else if (pageNum == (RegistryHandler.IntroPageList.size() - 1)) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum)));
-				break;
+			if (this.catagory == EnumTomeCatagories.INTRO) {
+				if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum)));
+					break;
+				}
 			}
-
+			if (this.catagory == EnumTomeCatagories.EQUIPS) {
+				if (pageNum != (TomePageLib.ArmorPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.KARMA) {
+				if (pageNum != (TomePageLib.KarmaPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.MACHINES) {
+				if (pageNum != (TomePageLib.BlocksPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.WANDS) {
+				if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+				if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.RUNES) {
+				if (pageNum != (TomePageLib.RunesPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum)));
+					break;
+				}
+			}
 		case ARROWB:
-			if (pageNum != 0) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum - 1)));
-				break;
-			} else if (pageNum == 0) {
-				mc.displayGuiScreen(RegistryHandler.IntroPageList.get((pageNum)));
-				break;
+			if (this.catagory == EnumTomeCatagories.INTRO) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.IntroPageList.get((pageNum)));
+					break;
+				}
 			}
+			if (this.catagory == EnumTomeCatagories.EQUIPS) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.ArmorPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.KARMA) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.KarmaPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.MACHINES) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.WANDS) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.WorldGenPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.RUNES) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.RunesPageList.get((pageNum)));
+					break;
+				}
+			}
+
 		case TITLEBUTTON:
 			mc.displayGuiScreen(new GuiTomeTitle());
 			break;

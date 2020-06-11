@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
@@ -66,7 +67,7 @@ public class ItemLightningWand extends Item {
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target,
 			EnumHand hand) {
 		if (playerIn.world.isRemote) {
-			if (target instanceof EntityLiving) {
+			if (target instanceof EntityLiving && !(target instanceof EntityElemental)) {
 				Random rand = new Random();
 				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
 					target.world.spawnParticle(EnumParticleTypes.REDSTONE,
@@ -86,11 +87,12 @@ public class ItemLightningWand extends Item {
 						playerIn.posZ);
 				Vector3 vec = Vector3.fromEntityCenter(playerIn);
 				Vector3 trackingendVec = vec.fromEntity(mobTarget).add(0, 1, 0);
-				MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
-						Reference.black);
-				target.setHealth(target.getHealth() - 0.5F);
-				target.performHurtAnimation();
-
+				if (trackingendVec != null && mobTarget != null && vec !=null) {
+					MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
+							Reference.black);
+					target.setHealth(target.getHealth() - 0.5F);
+					target.performHurtAnimation();
+				}
 			}
 		}
 		return true;
@@ -102,20 +104,23 @@ public class ItemLightningWand extends Item {
 		RayTraceResult resu = playerIn.rayTrace(100, 10);
 		Vector3 hitVec = new Vector3(resu.getBlockPos().getX(), resu.getBlockPos().getY(), resu.getBlockPos().getZ());
 		Vector3 vec = Vector3.fromEntityCenter(playerIn);
-		//MainClass.proxy.lightningFX(vec, hitVec, 5F, System.nanoTime(), Reference.black, Reference.white);
+		// MainClass.proxy.lightningFX(vec, hitVec, 5F, System.nanoTime(),
+		// Reference.black, Reference.white);
 
-		//System.out.println(resu.toString());
+		// System.out.println(resu.toString());
 
 		if (!playerIn.world.isRemote) {
 			WorldServer ws = (WorldServer) playerIn.world;
-		/*	ws.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, playerIn.posX + playerIn.width / 2,
-					playerIn.posY + playerIn.height / 2, playerIn.posZ + playerIn.width / 2, 100, playerIn.width,
-					playerIn.height, playerIn.width, 0.05);*/
+			/*
+			 * ws.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, playerIn.posX +
+			 * playerIn.width / 2, playerIn.posY + playerIn.height / 2, playerIn.posZ +
+			 * playerIn.width / 2, 100, playerIn.width, playerIn.height, playerIn.width,
+			 * 0.05);
+			 */
 		}
 
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
 	}
-	
-	
+
 }

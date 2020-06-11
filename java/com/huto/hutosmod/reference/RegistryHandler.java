@@ -148,24 +148,10 @@ public class RegistryHandler {
 		DimensionRegistry.registerDimension();
 		PacketHandler.registerMessages(Reference.MODID);
 	}
-	
-	// This is the page array for the book, needed because i dont know how to add
-		// the pages to their own like sub class
-	public static List<GuiTomePage> IntroPageList = new ArrayList<GuiTomePage>();
+
 
 	public static void initRegistries() {
-
-		// LEXICON PAGES
-		IntroPageList.add(new GuiTomePage(0, "Page 0", "In the Begining", new ItemStack(ItemRegistry.channeling_ingot), I18n.format(TomePageLib.INTRO_PAGE_0)));
-		IntroPageList.add(new GuiTomePage(1, "Page 1", "A World of essence", new ItemStack(ItemRegistry.essence_drop),I18n.format(TomePageLib.INTRO_PAGE_1)));
-		IntroPageList.add(new GuiTomePage(2, "Page 2", "Channeling Basics", new ItemStack(ItemRegistry.channeling_rod),I18n.format(TomePageLib.INTRO_PAGE_2)));
-		IntroPageList.add(new GuiTomePage(3, "Page 3", "Nullification", new ItemStack(ItemRegistry.null_crystal),I18n.format(TomePageLib.INTRO_PAGE_3)));
-		IntroPageList.add(new GuiTomePage(4, "Page 4", "The power of vitals", new ItemStack(ItemRegistry.blood_ingot),I18n.format(TomePageLib.INTRO_PAGE_4)));
-		IntroPageList.add(new GuiTomePage(5, "Page 5", "The power of vitals 2", new ItemStack(ItemRegistry.rune_clawmark),I18n.format(TomePageLib.INTRO_PAGE_5)));
-		IntroPageList.add(new GuiTomePage(6, "Page 6", "The power of vitals 3", new ItemStack(ItemRegistry.blood_chestplate),I18n.format(TomePageLib.INTRO_PAGE_6)));
-		IntroPageList.add(new GuiTomePage(7, "Page 7", "The power of vitals 4", new ItemStack(ItemRegistry.wand_consume_mana),I18n.format(TomePageLib.INTRO_PAGE_7)));
-		IntroPageList.add(new GuiTomePage(8, "Page 8", "The power of vitals 5", new ItemStack(BlockRegistry.mana_capacitor),I18n.format(TomePageLib.INTRO_PAGE_8)));
-
+		TomePageLib.registerPages();
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());

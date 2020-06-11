@@ -33,11 +33,11 @@ public class ModTextFormatting {
 			if ((i + parShineLocation + Minecraft.getSystemTime() / 20) % 88 == 0) {
 				outputString = outputString + TextFormatting.WHITE + parString.substring(i, i + 1);
 			} else if ((i + parShineLocation + Minecraft.getSystemTime() / 20) % 88 == 1) {
-				outputString = outputString + TextFormatting.YELLOW + parString.substring(i, i + 1);
+				outputString = outputString + TextFormatting.AQUA + parString.substring(i, i + 1);
 			} else if ((i + parShineLocation + Minecraft.getSystemTime() / 20) % 88 == 87) {
-				outputString = outputString + TextFormatting.YELLOW + parString.substring(i, i + 1);
+				outputString = outputString + TextFormatting.DARK_AQUA + parString.substring(i, i + 1);
 			} else {
-				outputString = outputString + TextFormatting.GOLD + parString.substring(i, i + 1);
+				outputString = outputString + TextFormatting.BLACK + parString.substring(i, i + 1);
 			}
 		}
 		// return color to a common one after (most chat is white, but for other GUI
