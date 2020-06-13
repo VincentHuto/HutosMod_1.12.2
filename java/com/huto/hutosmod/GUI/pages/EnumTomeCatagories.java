@@ -2,6 +2,6 @@ package com.huto.hutosmod.gui.pages;
 
 public enum EnumTomeCatagories {
 	
-	INTRO,KARMA,WORLDGEN,EQUIPS,WANDS,RUNES,MACHINES
+	INTRO,KARMA,WORLDGEN,EQUIPS,WANDS,RUNES,MACHINES,ELDER
 
 }

@@ -1,20 +1,12 @@
 package com.huto.hutosmod.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.huto.hutosmod.gui.pages.GuiTomeTitleNew;
-import com.huto.hutosmod.mindrunes.container.ContainerPlayerExpanded;
-import com.huto.hutosmod.mindrunes.events.EventHandlerEntity;
-import com.huto.hutosmod.mindrunes.events.EventHandlerItem;
-import com.huto.hutosmod.reference.Reference;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class CommonProxy {
 

@@ -6,7 +6,7 @@ import com.huto.hutosmod.events.karmaViewHandler;
 import com.huto.hutosmod.events.manaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.ModTextFormatting;
-import com.huto.hutosmod.gui.pages.GuiTomeTitleNew;
+import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void openTomeBook() {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitleNew());
+		Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle());
 	}
 
 	@Override

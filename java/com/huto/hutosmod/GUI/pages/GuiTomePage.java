@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.reference.RegistryHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -70,9 +68,9 @@ public class GuiTomePage extends GuiScreen {
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.translate((width / 2)  -40, centerY + 10, 0);
+			GlStateManager.translate((width / 2) - 40, centerY + 10, 0);
 			GlStateManager.scale(1, 1, 1);
-			fontRenderer.drawString("Pg." + String.valueOf(pageNum+1), 90, 0, 0000000);
+			fontRenderer.drawString("Pg." + String.valueOf(pageNum + 1), 90, 0, 0000000);
 			fontRenderer.drawString(title, 0, 0, 8060954);
 			fontRenderer.drawString(subtitle, 0, 10, 8060954);
 
@@ -84,10 +82,10 @@ public class GuiTomePage extends GuiScreen {
 			GlStateManager.translate((width / 2) - 20, centerY + 10, 0);
 			GlStateManager.scale(0.9, 1, 1);
 			GlStateManager.translate(-65, 20, 0);
-			//This statment allows switching all text from english to alko
-			/*if(false) {
-			this.fontRenderer = ModTextFormatting.getAkloFont();
-			}*/
+			// This statment allows switching all text from english to alko
+			/*
+			 * if(false) { this.fontRenderer = ModTextFormatting.getAkloFont(); }
+			 */
 			fontRenderer.drawSplitString(text, 0, 0, 175, 0);
 
 		}
@@ -239,7 +237,7 @@ public class GuiTomePage extends GuiScreen {
 	public void updateTextBoxes() {
 		if (!textBox.getText().isEmpty()) {
 			if (!textBox.isFocused()) {
-				int searchNum = (Integer.parseInt(textBox.getText())-1);
+				int searchNum = (Integer.parseInt(textBox.getText()) - 1);
 
 				if (this.catagory == EnumTomeCatagories.INTRO) {
 					if (searchNum < TomePageLib.IntroPageList.size()) {
@@ -438,7 +436,7 @@ public class GuiTomePage extends GuiScreen {
 			}
 
 		case TITLEBUTTON:
-			mc.displayGuiScreen(new GuiTomeTitleNew());
+			mc.displayGuiScreen(new GuiTomeTitle());
 			break;
 		}
 
