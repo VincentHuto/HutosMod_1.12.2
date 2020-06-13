@@ -47,8 +47,9 @@ public class TomePageLib {
 	public static String WANDS_PAGE_1 = "mystictome.wands.page.1.text";
 	//Runes
 	public static String RUNES_PAGE_1 = "mystictome.runes.page.1.text";
+	//Karma
+	public static String KARMA_PAGE_1 = "mystictome.karma.page.1.text";
 
-	
 	
 	public static void registerPages() {
 		IntroPageList.clear();
@@ -85,13 +86,13 @@ public class TomePageLib {
 		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Karmic Altar", "Mana, at what cost?",
 				new ItemStack(BlockRegistry.karmic_altar), I18n.format(MACHINE_PAGE_2)));
 		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
-				new ItemStack(BlockRegistry.mana_capacitor), I18n.format(MACHINE_PAGE_3)));
+				new ItemStack(BlockRegistry.mana_belljar), I18n.format(MACHINE_PAGE_3)));
 		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
 				new ItemStack(BlockRegistry.mana_storagedrum), I18n.format(MACHINE_PAGE_4)));
 		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Essence Enhancer", "Infusing and Upgrading",
 				new ItemStack(BlockRegistry.essecence_enhancer), I18n.format(MACHINE_PAGE_5)));
 		BlocksPageList.add(
-				new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...and maybe that",
+				new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
 						new ItemStack(BlockRegistry.mana_fuser), I18n.format(MACHINE_PAGE_6)));
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
 				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
@@ -105,5 +106,8 @@ public class TomePageLib {
 		// Runes
 		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "Etching your mind",
 				new ItemStack(ItemRegistry.rune_blank), I18n.format(RUNES_PAGE_1)));
+		//Karma
+		KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
+				new ItemStack(ItemRegistry.karmic_drop), I18n.format(KARMA_PAGE_1)));
 	}
 }

@@ -45,7 +45,6 @@ public class ItemLightningWand extends Item {
 		maxStackSize = 1;
 
 	}
-
 	private EntityLiving getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
 		final double TARGETING_DISTANCE = 16;
 		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
@@ -67,7 +66,8 @@ public class ItemLightningWand extends Item {
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target,
 			EnumHand hand) {
 		if (playerIn.world.isRemote) {
-			if (target instanceof EntityLiving && !(target instanceof EntityElemental)) {
+			
+			if (target instanceof EntityLiving && target !=null) {
 				Random rand = new Random();
 				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
 					target.world.spawnParticle(EnumParticleTypes.REDSTONE,
@@ -86,7 +86,7 @@ public class ItemLightningWand extends Item {
 				EntityLiving mobTarget = getNearestTargetableMob(playerIn.world, playerIn.posX, playerIn.posY,
 						playerIn.posZ);
 				Vector3 vec = Vector3.fromEntityCenter(playerIn);
-				Vector3 trackingendVec = vec.fromEntity(mobTarget).add(0, 1, 0);
+				Vector3 trackingendVec = vec.fromEntityCenter(mobTarget);
 				if (trackingendVec != null && mobTarget != null && vec !=null) {
 					MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
 							Reference.black);

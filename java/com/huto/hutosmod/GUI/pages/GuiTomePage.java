@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
@@ -69,7 +70,7 @@ public class GuiTomePage extends GuiScreen {
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title)*1.3, centerY + 10, 0);
+			GlStateManager.translate((width / 2)  -40, centerY + 10, 0);
 			GlStateManager.scale(1, 1, 1);
 			fontRenderer.drawString("Pg." + String.valueOf(pageNum+1), 90, 0, 0000000);
 			fontRenderer.drawString(title, 0, 0, 8060954);
@@ -80,9 +81,13 @@ public class GuiTomePage extends GuiScreen {
 
 		GlStateManager.pushMatrix();
 		{
-			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title), centerY + 10, 0);
+			GlStateManager.translate((width / 2) - 20, centerY + 10, 0);
 			GlStateManager.scale(0.9, 1, 1);
-			GlStateManager.translate(-45, 20, 0);
+			GlStateManager.translate(-65, 20, 0);
+			//This statment allows switching all text from english to alko
+			/*if(false) {
+			this.fontRenderer = ModTextFormatting.getAkloFont();
+			}*/
 			fontRenderer.drawSplitString(text, 0, 0, 175, 0);
 
 		}
@@ -132,7 +137,8 @@ public class GuiTomePage extends GuiScreen {
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(centerX, centerY, 0);
-			GlStateManager.scale(2, 2, 2);
+			GlStateManager.translate(3, 3, 0);
+			GlStateManager.scale(1.9, 1.7, 1.9);
 			mc.getRenderItem().renderItemAndEffectIntoGUI(icon, 0, 0);
 		}
 		GlStateManager.popMatrix();
@@ -218,7 +224,7 @@ public class GuiTomePage extends GuiScreen {
 		}
 
 		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 157,
-				top + guiHeight - 209, 16, 16, 175, 64));
+				top + guiHeight - 209, 16, 16, 174, 64));
 
 		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 155, top + guiHeight - 227, 14, 14);
 		updateButtons();
@@ -233,7 +239,7 @@ public class GuiTomePage extends GuiScreen {
 	public void updateTextBoxes() {
 		if (!textBox.getText().isEmpty()) {
 			if (!textBox.isFocused()) {
-				int searchNum = Integer.parseInt(textBox.getText());
+				int searchNum = (Integer.parseInt(textBox.getText())-1);
 
 				if (this.catagory == EnumTomeCatagories.INTRO) {
 					if (searchNum < TomePageLib.IntroPageList.size()) {
@@ -432,7 +438,7 @@ public class GuiTomePage extends GuiScreen {
 			}
 
 		case TITLEBUTTON:
-			mc.displayGuiScreen(new GuiTomeTitle());
+			mc.displayGuiScreen(new GuiTomeTitleNew());
 			break;
 		}
 

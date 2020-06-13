@@ -1,9 +1,15 @@
-package com.huto.hutosmod.gui.pages;
+/*package com.huto.hutosmod.gui.pages;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
+import com.huto.hutosmod.blocks.BlockRegistry;
+import com.huto.hutosmod.entities.EntityColin;
+import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.reference.Reference;
@@ -15,20 +21,24 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.actors.threadpool.Arrays;
 
-@SideOnly(Side.CLIENT)
-public class GuiTomeTitle extends GuiScreen {
+public class GuiTomeTitleNew extends GuiScreen {
 
-	final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/book.png");
+	final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/newbook.png");
 
-	int guiWidth = 174;
-	int guiHeight = 228;
+	int guiWidth = 186;
+	int guiHeight = 240;
 	int left, top;
 	final int BUTTONCLOSE = 0;
 	final int BUTTONWHITE = 1;
@@ -68,13 +78,12 @@ public class GuiTomeTitle extends GuiScreen {
 		{
 			GlStateManager.translate((width / 2) - fontRenderer.getStringWidth(title) / 2, centerY + 10, 0);
 			GlStateManager.scale(1, 1, 1);
-			fontRenderer.drawString(ModTextFormatting.stringToGolden(title, 0, false), 0, 0, 8060954);
-			fontRenderer.drawString(ModTextFormatting.stringToGolden(subtitle, 5, false), 0, 10, 8060954);
+			fontRenderer.drawString(ModTextFormatting.stringToRedObf(title, 0, false), 0, 0, 8060954);
+			fontRenderer.drawString(ModTextFormatting.stringToRedObf(subtitle, 5, false), 0, 10, 8060954);
 
 		}
 		GlStateManager.popMatrix();
 
-		// super.drawScreen(mouseX, mouseY, partialTicks);
 		buttonclose.drawButton(mc, mouseX, mouseY, 16);
 		whiteButton.drawButton(mc, mouseX, mouseY, 16);
 		yellowButton.drawButton(mc, mouseX, mouseY, 16);
@@ -87,9 +96,38 @@ public class GuiTomeTitle extends GuiScreen {
 		GlStateManager.translate(3, 0, 0);
 		GlStateManager.pushMatrix();
 		{
+
 			GlStateManager.translate(centerX, centerY, 0);
 			GlStateManager.scale(2, 2, 2);
 			mc.getRenderItem().renderItemAndEffectIntoGUI(icon, 0, 0);
+			GlStateManager.scale(2, 2, 2);
+			GlStateManager.translate(18, 25, 0);
+			// Enables lighting so it doesnt look dark
+			RenderHelper.enableGUIStandardItemLighting();
+			mc.getRenderItem().renderItemIntoGUI(new ItemStack(BlockRegistry.Mystic_Sapling), 0, -4);
+			mc.getRenderItem().renderItemIntoGUI(new ItemStack(BlockRegistry.Mystic_Earth), 0, 8);
+			
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(3, -5, 0);
+			GlStateManager.scale(0.5, 0.5, 0.5);
+			mc.getRenderItem().renderItemIntoGUI(new ItemStack(Items.FIRE_CHARGE), 0, -9);
+			GlStateManager.popMatrix();
+			
+			GlStateManager.scale(15, 15, 15);
+			GlStateManager.translate(0.5, 1.2, 0);
+			GlStateManager.rotate(180, 100, 0, 360);
+			// This lightmap turns the brightness back up so the gui doesnt get dark at
+			// night
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
+			mc.getRenderManager().renderEntity(new EntityColin(mc.world), 1, 0, 0, 100, 0, true);
+			GlStateManager.rotate(-25, 0, 10, 40);
+			GlStateManager.translate(0, 1.5, 3);
+			GlStateManager.scale(0.5, 0.5, 0.5);
+			mc.getRenderManager().renderEntity(new EntityElemental(mc.world), 1, 0, 0, 40, 0, true);
+
+
+
+			
 		}
 		GlStateManager.popMatrix();
 		List<String> text = new ArrayList<String>();
@@ -101,37 +139,38 @@ public class GuiTomeTitle extends GuiScreen {
 		List<String> cat1 = new ArrayList<String>();
 		cat1.add(I18n.format("Introduction"));
 		cat1.add(I18n.format("Magic and its basis"));
-		drawTooltip(cat1, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174, 24, 16, false);
+		drawTooltip(cat1, mouseX, mouseY, left + guiWidth - (guiWidth - 176), top + guiHeight - 206, 24, 16, false);
 
 		List<String> cat2 = new ArrayList<String>();
 		cat2.add(I18n.format("The World"));
 		cat2.add(I18n.format("Mana All Around Us"));
-		drawTooltip(cat2, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 18, 24, 16, true);
+		drawTooltip(cat2, mouseX, mouseY, left + guiWidth - (guiWidth - 175), top + guiHeight - 181, 24, 16, false);
 
 		List<String> cat3 = new ArrayList<String>();
 		cat3.add(I18n.format("Equipables"));
 		cat3.add(I18n.format("Mystical Wearables"));
-		drawTooltip(cat3, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 36, 24, 16, true);
+		drawTooltip(cat3, mouseX, mouseY, left + guiWidth - (guiWidth - 175), top + guiHeight - 153, 24, 16, false);
 
 		List<String> cat4 = new ArrayList<String>();
 		cat4.add(I18n.format("Wands"));
 		cat4.add(I18n.format("Magical Conduction"));
-		drawTooltip(cat4, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 54, 24, 16, true);
+		drawTooltip(cat4, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 121, 24, 16, false);
 
 		List<String> cat5 = new ArrayList<String>();
 		cat5.add(I18n.format("Runes"));
 		cat5.add(I18n.format("Chiseling your own mind"));
-		drawTooltip(cat5, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 72, 24, 16, true);
-		
+		drawTooltip(cat5, mouseX, mouseY, left + guiWidth - (guiWidth - 180), top + guiHeight - 81, 24, 16, false);
+
 		List<String> cat6 = new ArrayList<String>();
 		cat6.add(I18n.format("Machines"));
 		cat6.add(I18n.format("Functional Aparatus"));
-		drawTooltip(cat6, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 90, 24, 16, true);
-		
+		drawTooltip(cat6, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 49, 24, 16, false);
+
 		List<String> cat7 = new ArrayList<String>();
 		cat7.add(I18n.format("Karma"));
-		cat7.add(I18n.format("Yes things have a cost"));
-		drawTooltip(cat7, mouseX, mouseY, left + guiWidth - 88 - 72, top + guiHeight - 174 + 108, 24, 16, false);
+		cat7.add(I18n.format("You wont get away with this"));
+		drawTooltip(cat7, mouseX, mouseY, left + guiWidth - (guiWidth - 176), top + guiHeight - 30, 24, 16, false);
+
 	}
 
 	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
@@ -217,26 +256,26 @@ public class GuiTomeTitle extends GuiScreen {
 	public void initGui() {
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
-		int sideLoc = left + guiWidth - 88 - 72;
-		int verticalLoc = top + guiHeight - 174;
+		int sideLoc = left + guiWidth;
+		int verticalLoc = top + guiHeight;
 
 		buttonList.clear();
-		buttonList.add(buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 135, top + guiHeight - 21, 100, 20,
-				"Close"));
-		buttonList.add(whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc, top + guiHeight - 174, 16, 16,
-				174, 32));
-		buttonList.add(yellowButton = new GuiButtonTextured(texture, BUTTONYELLOW, sideLoc, verticalLoc + 18, 16, 16,
-				190, 32));
 		buttonList.add(
-				blueButton = new GuiButtonTextured(texture, BUTTONBLUE, sideLoc, verticalLoc + 36, 16, 16, 206, 32));
-		buttonList.add(
-				greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc, verticalLoc + 54, 16, 16, 222, 32));
-		buttonList.add(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc, verticalLoc + 72, 16, 16, 238, 32));
-		buttonList.add(orangeButton = new GuiButtonTextured(texture, BUTTONORANGE, sideLoc, verticalLoc + 90, 16, 16,
-				190, 64));
-		buttonList.add(
-				cyanButton = new GuiButtonTextured(texture, BUTTONCYAN, sideLoc, verticalLoc + 108, 16, 16, 206, 64));
-	
+				buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 178, top + guiHeight - 40, 30, 20, "Close"));
+		buttonList.add(whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc - (guiWidth - 176),
+				verticalLoc - 206, 24, 16, 186, 0));
+		buttonList.add(yellowButton = new GuiButtonTextured(texture, BUTTONYELLOW, sideLoc - (guiWidth - 175),
+				verticalLoc - 181, 24, 16, 186, 32));
+		buttonList.add(blueButton = new GuiButtonTextured(texture, BUTTONBLUE, sideLoc - (guiWidth - 175),
+				verticalLoc - 153, 24, 16, 186, 64));
+		buttonList.add(greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc - (guiWidth - 177),
+				verticalLoc - 121, 24, 16, 186, 96));
+		buttonList.add(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc - (guiWidth - 180),
+				verticalLoc - 81, 24, 16, 186, 128));
+		buttonList.add(orangeButton = new GuiButtonTextured(texture, BUTTONORANGE, sideLoc - (guiWidth - 177),
+				verticalLoc - 49, 24, 16, 186, 160));
+		buttonList.add(cyanButton = new GuiButtonTextured(texture, BUTTONCYAN, sideLoc - (guiWidth - 176),
+				verticalLoc - 30, 24, 16, 186, 192));
 	}
 
 	public void updateButtons() {
@@ -264,7 +303,6 @@ public class GuiTomeTitle extends GuiScreen {
 			break;
 		case BUTTONRED:
 			mc.displayGuiScreen(TomePageLib.RunesPageList.get(0));
-
 			break;
 		case BUTTONORANGE:
 			mc.displayGuiScreen(TomePageLib.BlocksPageList.get(0));
@@ -285,4 +323,4 @@ public class GuiTomeTitle extends GuiScreen {
 		return false;
 	}
 
-}
+}*/

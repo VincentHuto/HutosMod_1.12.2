@@ -6,6 +6,7 @@ import com.huto.hutosmod.events.karmaViewHandler;
 import com.huto.hutosmod.events.manaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.gui.pages.GuiTomeTitleNew;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
@@ -39,8 +40,9 @@ public class ClientProxy extends CommonProxy {
 				vec3d1.z * blockReachDistance);
 		return worldIn.rayTraceBlocks(vec3d, vec3d2, false, false, true);
 	}
+
 	@Override
-	public Vec3d getPositionEyes(float partialTicks,EntityPlayer player) {
+	public Vec3d getPositionEyes(float partialTicks, EntityPlayer player) {
 		if (partialTicks == 1.0F) {
 			return new Vec3d(player.posX, player.posY + (double) player.getEyeHeight(), player.posZ);
 		} else {
@@ -52,15 +54,17 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
-	
-	
 	@Override
-	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed,
-			int colorOuter, int colorInner) {
+	public void openTomeBook() {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitleNew());
+	}
+
+	@Override
+	public void lightningFX(Vector3 vectorStart, Vector3 vectorEnd, float ticksPerMeter, long seed, int colorOuter,
+			int colorInner) {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new FXLightning(Minecraft.getMinecraft().world, vectorStart,
 				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
 	}
-
 
 	@Override
 	public void registerItemRenderer(Item item, int meta, String id) {

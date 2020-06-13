@@ -4,6 +4,8 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.gui.pages.GuiTomeTitle;
+import com.huto.hutosmod.gui.pages.GuiTomeTitleNew;
+import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.reference.RegistryHandler;
@@ -19,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.actors.threadpool.Arrays;
 
 public class ItemMysticTome extends Item {
 
@@ -33,17 +36,12 @@ public class ItemMysticTome extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
-		ItemStack stack = player.getHeldItem(hand);
-		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (worldIn.isRemote) {
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
-		} else {
-			Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle());
+			MainClass.proxy.openTomeBook();
 		}
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 
-		return super.onItemRightClick(worldIn, player, hand);
 	}
 
 	@Nonnull
