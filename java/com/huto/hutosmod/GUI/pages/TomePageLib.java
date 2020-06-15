@@ -9,6 +9,9 @@ import com.huto.hutosmod.reference.RegistryHandler;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 
 public class TomePageLib {
 
@@ -21,6 +24,7 @@ public class TomePageLib {
 	public static List<GuiTomePage> BlocksPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> WandsPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> RunesPageList = new ArrayList<GuiTomePage>();
+	public static List<GuiTomePage> ElderPageList = new ArrayList<GuiTomePage>();
 
 	//Text Locations
 	public static String INTRO_PAGE_1 = "mystictome.intro.page.1.text";
@@ -49,7 +53,8 @@ public class TomePageLib {
 	public static String RUNES_PAGE_1 = "mystictome.runes.page.1.text";
 	//Karma
 	public static String KARMA_PAGE_1 = "mystictome.karma.page.1.text";
-
+	//Elder
+	public static String ELDER_PAGE_1 = "mystictome.elder.page.1.text";
 	
 	public static void registerPages() {
 		IntroPageList.clear();
@@ -59,6 +64,7 @@ public class TomePageLib {
 		BlocksPageList.clear();
 		WandsPageList.clear();
 		RunesPageList.clear();
+		ElderPageList.clear();
 		// LEXICON PAGES
 		// Intro
 		IntroPageList.add(new GuiTomePage(0, EnumTomeCatagories.INTRO, "Page 1", "In the Begining",
@@ -109,5 +115,8 @@ public class TomePageLib {
 		//Karma
 		KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
 				new ItemStack(ItemRegistry.karmic_drop), I18n.format(KARMA_PAGE_1)));
+		//Elder
+		ElderPageList.add(new GuiTomePage(0, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
+				new ItemStack(ItemRegistry.rune_milkweed_c), I18n.format(ELDER_PAGE_1)));
 	}
 }

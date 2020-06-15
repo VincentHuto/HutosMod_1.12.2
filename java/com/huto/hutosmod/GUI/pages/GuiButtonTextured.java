@@ -10,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class GuiButtonTextured extends GuiButton {
 	final ResourceLocation texture;
 	int id, posX, posY, buttonWidth, buttonHeight, u, v, adjV, newV;

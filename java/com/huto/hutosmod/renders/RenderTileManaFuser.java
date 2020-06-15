@@ -1,4 +1,4 @@
-package com.huto.hutosmod.reference;
+package com.huto.hutosmod.renders;
 
 import java.text.DecimalFormat;
 
@@ -46,11 +46,11 @@ public class RenderTileManaFuser extends TileEntitySpecialRenderer<TileEntityMan
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		for(int i = 0; i < te.getSizeInventory(); i++) {
 			GlStateManager.pushMatrix();
-			GlStateManager.translate(0.5F, 1.45F, 0.5F);
+			GlStateManager.translate(0.5F, 1.5F, 0.5F);
 			GlStateManager.rotate(angles[i] + (float) time, 0F, 1F, 0F);
 			
 			//Edit True Radius
-			GlStateManager.translate(.2, -1.5F, 0.2F);
+			GlStateManager.translate(.1, -1.4F, 0.2F);
 			GlStateManager.rotate(90F, 0F, 1F, 0F);
 			//Edit Radius Movement
 			GlStateManager.translate(0D, 0.175D+0.25, 0F);

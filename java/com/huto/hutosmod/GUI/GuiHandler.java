@@ -2,6 +2,7 @@ package com.huto.hutosmod.gui;
 
 import com.huto.hutosmod.container.ContainerFusionFurnace;
 import com.huto.hutosmod.container.ContainerRuneStation;
+import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 import com.huto.hutosmod.mindrunes.container.ContainerPlayerExpanded;
 import com.huto.hutosmod.mindrunes.gui.GuiMindRunes;
 import com.huto.hutosmod.reference.Reference;
@@ -35,8 +36,13 @@ public class GuiHandler implements IGuiHandler {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == Reference.Gui_Tome) {
+			return new GuiTomeTitle(false);
+		}
+		if (ID == Reference.Gui_ElderTome) {
+			return new GuiTomeTitle(true);
+		}
 		if (ID == Reference.Gui_Fusion_Furnace) {
 			return new GuiFusionFurnace(player.inventory,
 					(TileEntityFusionFurnace) world.getTileEntity(new BlockPos(x, y, z)));

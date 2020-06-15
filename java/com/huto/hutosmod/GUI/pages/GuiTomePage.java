@@ -17,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class GuiTomePage extends GuiScreen {
 
 	final ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/book.png");
@@ -38,7 +37,8 @@ public class GuiTomePage extends GuiScreen {
 	ItemStack icon;
 	String text;
 	EnumTomeCatagories catagory;
-
+	
+	@SideOnly(Side.CLIENT)
 	public GuiTomePage(int pageNumIn, EnumTomeCatagories catagoryIn, String titleIn, String subtitleIn,
 			ItemStack iconIn, String textIn) {
 		this.title = titleIn;
@@ -50,6 +50,7 @@ public class GuiTomePage extends GuiScreen {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
@@ -123,6 +124,11 @@ public class GuiTomePage extends GuiScreen {
 		}
 		if (this.catagory == EnumTomeCatagories.WANDS) {
 			if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
+				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			}
+		}
+		if (this.catagory == EnumTomeCatagories.ELDER) {
+			if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
 				arrowF.drawButton(mc, mouseX, mouseY, 111);
 			}
 		}
@@ -219,6 +225,15 @@ public class GuiTomePage extends GuiScreen {
 			if (pageNum != 0) {
 				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
 			}
+			
+		}
+		if (this.catagory == EnumTomeCatagories.ELDER) {
+			if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
 		}
 
 		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 157,
@@ -292,6 +307,14 @@ public class GuiTomePage extends GuiScreen {
 						mc.displayGuiScreen(TomePageLib.RunesPageList.get(searchNum));
 					} else if (searchNum >= TomePageLib.RunesPageList.size()) {
 						mc.displayGuiScreen(TomePageLib.RunesPageList.get(TomePageLib.RunesPageList.size() - 1));
+					}
+				}
+				
+				if (this.catagory == EnumTomeCatagories.ELDER) {
+					if (searchNum < TomePageLib.ElderPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.ElderPageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.ElderPageList.size()) {
+						mc.displayGuiScreen(TomePageLib.ElderPageList.get(TomePageLib.ElderPageList.size() - 1));
 					}
 				}
 
@@ -370,6 +393,15 @@ public class GuiTomePage extends GuiScreen {
 					break;
 				}
 			}
+			if (this.catagory == EnumTomeCatagories.ELDER) {
+				if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum)));
+					break;
+				}
+			}
 		case ARROWB:
 			if (this.catagory == EnumTomeCatagories.INTRO) {
 				if (pageNum != 0) {
@@ -434,9 +466,25 @@ public class GuiTomePage extends GuiScreen {
 					break;
 				}
 			}
+			
+			if (this.catagory == EnumTomeCatagories.ELDER) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum)));
+					break;
+				}
+			}
+
 
 		case TITLEBUTTON:
-			mc.displayGuiScreen(new GuiTomeTitle());
+			if (this.catagory == EnumTomeCatagories.ELDER) {
+			mc.displayGuiScreen(new GuiTomeTitle(true));
+			}else {
+				mc.displayGuiScreen(new GuiTomeTitle(false));
+
+			}
 			break;
 		}
 

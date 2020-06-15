@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMysticTome extends Item {
+public class ItemElderTome extends Item {
 
-	public ItemMysticTome(String name) {
+	public ItemElderTome(String name) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MainClass.tabHutosMod);
@@ -30,10 +30,16 @@ public class ItemMysticTome extends Item {
 	@SideOnly(Side.CLIENT)
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if (worldIn.isRemote) {
-			playerIn.openGui(MainClass.instance, Reference.Gui_Tome, worldIn, 0,0,0);
+			playerIn.openGui(MainClass.instance, Reference.Gui_ElderTome, worldIn, 0, 0, 0);
 		}
+
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 
+	}
+
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return true;
 	}
 
 	@Nonnull

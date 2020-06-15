@@ -32,6 +32,7 @@ import com.huto.hutosmod.items.wands.ItemRendingWand;
 import com.huto.hutosmod.items.wands.ItemSacrificeWand;
 import com.huto.hutosmod.reference.Reference;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -81,6 +82,8 @@ public class ItemRegistry {
 	public static final Item mana_extractor = new ItemManaExtractor("mana_extractor");
 	public static final Item mana_debugtool = new ItemDebugTool("mana_debugtool");
 	public static final Item mystic_tome = new ItemMysticTome("mystic_tome");
+	public static final Item elder_tome = new ItemElderTome("elder_tome");
+
 	// Wands
 	public static final Item wand_consume_mana = new ItemConsumeWand("wand_consume_mana");
 	public static final Item wand_gain_mana = new ItemAbsorbWand("wand_gain_mana");

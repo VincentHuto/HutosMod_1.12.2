@@ -25,6 +25,8 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModEventHandler {
 
@@ -58,7 +60,7 @@ public class ModEventHandler {
 						resu.getBlockPos().getZ());
 				Vector3 vec = Vector3.fromEntityCenter(e.player).add(0, 1, 0);
 				MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.green);
-				//manaCap.consume(1);
+				// manaCap.consume(1);
 			}
 		}
 	}
@@ -101,16 +103,6 @@ public class ModEventHandler {
 				e.getEntity().dropItem(ItemRegistry.essence_drop, /* rand.nextInt(3) **/ 1);
 			}
 		}
-
-	}
-
-	public static LayerPlayerAura aura;
-
-	public void renderPlayer(RenderPlayerEvent.Pre e) {
-		Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default").addLayer(aura);
-		;
-		Minecraft.getMinecraft().getRenderManager().getSkinMap().get("slim").addLayer(aura);
-		;
 
 	}
 

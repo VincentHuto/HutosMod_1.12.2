@@ -10,14 +10,13 @@ import net.minecraft.world.World;
 
 public class CommonProxy {
 
+	public void registerEventHandlers() {
+	}
+
 	long getWorldElapsedTicks() {
 		return 0;
 	}
 
-	public void openTomeBook() {
-	}
-	
-	
 	public ListenableFuture<Object> addScheduledTaskClient(Runnable runnableToSchedule) {
 		throw new IllegalStateException("This should only be called from client side");
 	}
@@ -60,6 +59,13 @@ public class CommonProxy {
 
 	public Vec3d getPositionEyes(float partialTicks, EntityPlayer player) {
 		return null;
+	}
+
+	public void openTomeBook() {
+	}
+
+	public void openElderBook() {
+
 	}
 
 }

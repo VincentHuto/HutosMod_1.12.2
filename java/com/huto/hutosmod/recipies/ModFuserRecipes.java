@@ -20,6 +20,7 @@ public class ModFuserRecipes {
 	public static RecipeManaFuser recipeUpgradePeople;
 	public static RecipeManaFuser recipeUpgradeMob;
 	public static RecipeManaFuser recipeUpgradeAnimal;
+	public static RecipeManaFuser recipeElderTome;
 
 	public static void init() {
 		recipeGrandPurgingStone = registerRuneAltarRecipe(new ItemStack(ItemRegistry.grand_purging_stone, 1), 100,
@@ -37,8 +38,8 @@ public class ModFuserRecipes {
 				new ItemStack(ItemRegistry.upgrade_blank, 1), new ItemStack(Items.NETHER_STAR, 1));
 		recipeUpgradeMob = registerRuneAltarRecipe(new ItemStack(ItemRegistry.upgrade_mob, 1), 50,
 				new ItemStack(ItemRegistry.upgrade_blank, 1), new ItemStack(Items.EMERALD, 1));
-		recipeUpgradeAnimal = registerRuneAltarRecipe(new ItemStack(ItemRegistry.upgrade_animal, 1), 50,
-				new ItemStack(ItemRegistry.upgrade_blank, 1), new ItemStack(Items.FIRE_CHARGE, 1));
+		recipeElderTome = registerRuneAltarRecipe(new ItemStack(ItemRegistry.elder_tome, 1), 50,
+				new ItemStack(ItemRegistry.mystic_tome, 1), new ItemStack(ItemRegistry.karmic_bar, 1));
 
 	}
 

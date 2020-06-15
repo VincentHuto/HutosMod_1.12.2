@@ -22,6 +22,10 @@ public class Reference {
     public static final int Gui_Fusion_Furnace = 2;
     public static final int GUI_Rune_Station = 6;
     public static final int Gui_Hud_Overlay_Runic = 3;
+    public static final int Gui_Tome = 8;
+    public static final int Gui_ElderTome = 9;
+
+    
 	public static final Logger log = LogManager.getLogger(MODID.toUpperCase());
 
 	//Colors 

@@ -35,9 +35,9 @@ public class KarmaEventHandler {
 
 	@SubscribeEvent
 	public void onPlayerKillsEntity(LivingDeathEvent event) {
-	
+
 		if (event.getSource().getTrueSource() instanceof EntityPlayer) {
-			EntityPlayer p =  (EntityPlayer) event.getSource().getTrueSource();
+			EntityPlayer p = (EntityPlayer) event.getSource().getTrueSource();
 			IKarma karma = p.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
 			if (event.getEntity() instanceof EntityAnimal) {
 				karma.consume(1);
@@ -53,36 +53,37 @@ public class KarmaEventHandler {
 	public void applyKarmaBuffs(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
+		// messing with caabilites gets sorta sticky because they dont return back to
+		// normal... change later
 		if (karma.getKarma() >= 1.0F) {
-			player.capabilities.setPlayerWalkSpeed(0.1F);
+			// player.capabilities.setPlayerWalkSpeed(0.1F);
 
 		}
-		
+
 		if (karma.getKarma() >= 20.0F) {
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 1));
-			player.capabilities.setPlayerWalkSpeed(1F);
+			// player.capabilities.setPlayerWalkSpeed(1F);
 
 		}
 		if (karma.getKarma() >= 40.0F) {
 			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 2));
-			player.capabilities.setPlayerWalkSpeed(0.2F);
+			// player.capabilities.setPlayerWalkSpeed(0.2F);
 
 		}
 		if (karma.getKarma() >= 60.0F) {
-			player.capabilities.setPlayerWalkSpeed(0.3F);
-			
+			// player.capabilities.setPlayerWalkSpeed(0.3F);
+
 		}
 		if (karma.getKarma() >= 80.0F) {
 			player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 1));
-			
+
 		}
 		if (karma.getKarma() >= 100.0F) {
-			player.capabilities.isFlying= true;
+			// player.capabilities.isFlying= true;
 		}
-			
+
 	}
 
-	
 	@SubscribeEvent
 	public void applyKarmaDebuffs(PlayerTickEvent event) {
 		EntityPlayer player = event.player;

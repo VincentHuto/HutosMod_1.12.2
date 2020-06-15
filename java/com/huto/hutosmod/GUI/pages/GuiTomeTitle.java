@@ -29,6 +29,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import scala.actors.threadpool.Arrays;
@@ -53,12 +54,20 @@ public class GuiTomeTitle extends GuiScreen {
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
 
 	GuiButton buttonclose;
-	GuiButtonTextured whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,eyeButton;
+	GuiButtonTextured whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,
+			eyeButton;
 	String title = "Table of Contents";
 	String subtitle = "Hutos Mod";
 	ItemStack icon = new ItemStack(ItemRegistry.mana_crystal);
 
+	static boolean isElder;
+
+	public GuiTomeTitle(boolean elderIn) {
+		this.isElder = elderIn;
+	}
+
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
@@ -93,8 +102,9 @@ public class GuiTomeTitle extends GuiScreen {
 		redButton.drawButton(mc, mouseX, mouseY, 16);
 		orangeButton.drawButton(mc, mouseX, mouseY, 16);
 		cyanButton.drawButton(mc, mouseX, mouseY, 16);
-		eyeButton.drawButton(mc, mouseX, mouseY, 16);
-
+		if (isElder) {
+			eyeButton.drawButton(mc, mouseX, mouseY, 16);
+		}
 		GlStateManager.translate(3, 0, 0);
 		GlStateManager.pushMatrix();
 		{
@@ -169,7 +179,12 @@ public class GuiTomeTitle extends GuiScreen {
 		cat7.add(I18n.format("Karma"));
 		cat7.add(I18n.format("You wont get away with this"));
 		drawTooltip(cat7, mouseX, mouseY, left + guiWidth - (guiWidth - 176), top + guiHeight - 30, 24, 16, false);
-
+		if (isElder) {
+			List<String> cat8 = new ArrayList<String>();
+			cat8.add(I18n.format(TextFormatting.DARK_PURPLE + "The Elders"));
+			cat8.add(I18n.format(TextFormatting.DARK_PURPLE + "Some serious stuff"));
+			drawTooltip(cat8, mouseX, mouseY, left + guiWidth - (guiWidth - 155), top + guiHeight - 30, 16, 16, false);
+		}
 	}
 
 	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
@@ -275,8 +290,11 @@ public class GuiTomeTitle extends GuiScreen {
 				verticalLoc - 49, 24, 16, 186, 160));
 		buttonList.add(cyanButton = new GuiButtonTextured(texture, BUTTONCYAN, sideLoc - (guiWidth - 176),
 				verticalLoc - 30, 24, 16, 186, 192));
-		buttonList.add(eyeButton = new GuiButtonTextured(texture, BUTTONEYE, sideLoc - (guiWidth - 155),
-				verticalLoc - 30, 24, 16, 209, 0));
+		if (isElder) {
+
+			buttonList.add(eyeButton = new GuiButtonTextured(texture, BUTTONEYE, sideLoc - (guiWidth - 155),
+					verticalLoc - 30, 16, 16, 209, 0));
+		}
 	}
 
 	public void updateButtons() {
@@ -312,8 +330,10 @@ public class GuiTomeTitle extends GuiScreen {
 			mc.displayGuiScreen(TomePageLib.KarmaPageList.get(0));
 			break;
 		case BUTTONEYE:
-			mc.displayGuiScreen(null);
-			break;
+			if (isElder) {
+				mc.displayGuiScreen(TomePageLib.ElderPageList.get(0));
+				break;
+			}
 		}
 
 		updateButtons();

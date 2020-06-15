@@ -7,6 +7,7 @@ import com.huto.hutosmod.events.manaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiTomeTitle;
+import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
@@ -33,6 +34,13 @@ import net.minecraftforge.common.MinecraftForge;
 public class ClientProxy extends CommonProxy {
 
 	@Override
+	public void registerEventHandlers() {
+		super.registerEventHandlers();
+		MinecraftForge.EVENT_BUS.register(new GuiEvents());
+
+	}
+	
+	@Override
 	public RayTraceResult rayTrace(double blockReachDistance, float partialTicks, EntityPlayer player, World worldIn) {
 		Vec3d vec3d = player.getPositionEyes(partialTicks);
 		Vec3d vec3d1 = player.getLook(partialTicks);
@@ -55,8 +63,14 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
+
 	public void openTomeBook() {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle());
+		// Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle(false));
+	}
+
+	@Override
+	public void openElderBook() {
+		// Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle(true));
 	}
 
 	@Override
@@ -94,7 +108,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
-
+		TomePageLib.registerPages();
 		ModTextFormatting.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings,
 				new ResourceLocation(Reference.MODID, "textures/font/aklo.png"), Minecraft.getMinecraft().renderEngine,
 				true));
@@ -107,7 +121,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit() {
 		Minecraft mc = Minecraft.getMinecraft();
-		MinecraftForge.EVENT_BUS.register(new GuiEvents());
 		runicBarRendererIn = new runicHealthRenderer(mc);
 		MinecraftForge.EVENT_BUS.register(new MaskOverlayHandler(runicBarRendererIn));
 		manaViewerHudIn = new manaViewerHud(mc);

@@ -51,6 +51,7 @@ import com.huto.hutosmod.renders.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.renders.RenderTileKarmicAltar;
 import com.huto.hutosmod.renders.RenderTileKarmicExtractor;
 import com.huto.hutosmod.renders.RenderTileManaCapacitor;
+import com.huto.hutosmod.renders.RenderTileManaFuser;
 import com.huto.hutosmod.renders.RenderTileManaGatherer;
 import com.huto.hutosmod.renders.RenderTileStorageDrum;
 import com.huto.hutosmod.renders.RenderTileWandMaker;
@@ -151,8 +152,6 @@ public class RegistryHandler {
 
 
 	public static void initRegistries() {
-		TomePageLib.registerPages();
-		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerEntity());
@@ -178,6 +177,5 @@ public class RegistryHandler {
 
 	public static void postInitRegistries() {
 
-		MainClass.proxy.postInit();
 	}
 }

@@ -32,13 +32,12 @@ public class LayerColinAura implements LayerRenderer<EntityColin> {
 
 	public void doRenderLayer(EntityColin entitylivingbaseIn, float limbSwing, float limbSwingAmount,
 			float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		if (!entitylivingbaseIn.isArmored()) {
+		if (entitylivingbaseIn.isArmored()) {
 
 			Random rand = new Random();
 			GlStateManager.color(1F, 0F, 1F, 1F);
 
 			GlStateManager.depthMask(!entitylivingbaseIn.isInvisible());
-
 			this.colinRenderer.bindTexture(COLIN_ARMOR);
 			// GL11.glScaled(.25, .25, .25);
 			GlStateManager.matrixMode(5890);

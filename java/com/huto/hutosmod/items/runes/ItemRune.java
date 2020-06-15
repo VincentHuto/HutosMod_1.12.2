@@ -10,6 +10,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemRune extends Item {
@@ -35,7 +36,7 @@ public class ItemRune extends Item {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		FontRenderer LC = ModTextFormatting.getAkloFont();
-		tooltip.add("§5Form: " + level + "§r");
+		tooltip.add(TextFormatting.GOLD + "Form: " + level );
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
 	}
