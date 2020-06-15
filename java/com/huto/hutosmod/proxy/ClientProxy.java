@@ -33,44 +33,14 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
 
+	public static runicHealthRenderer runicBarRendererIn;
+	public static manaViewerHud manaViewerHudIn;
+	public static karmaViewHud karmaViewerHudIn;
+
 	@Override
 	public void registerEventHandlers() {
 		super.registerEventHandlers();
 		MinecraftForge.EVENT_BUS.register(new GuiEvents());
-
-	}
-	
-	@Override
-	public RayTraceResult rayTrace(double blockReachDistance, float partialTicks, EntityPlayer player, World worldIn) {
-		Vec3d vec3d = player.getPositionEyes(partialTicks);
-		Vec3d vec3d1 = player.getLook(partialTicks);
-		Vec3d vec3d2 = vec3d.addVector(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance,
-				vec3d1.z * blockReachDistance);
-		return worldIn.rayTraceBlocks(vec3d, vec3d2, false, false, true);
-	}
-
-	@Override
-	public Vec3d getPositionEyes(float partialTicks, EntityPlayer player) {
-		if (partialTicks == 1.0F) {
-			return new Vec3d(player.posX, player.posY + (double) player.getEyeHeight(), player.posZ);
-		} else {
-			double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
-			double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks
-					+ (double) player.getEyeHeight();
-			double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;
-			return new Vec3d(d0, d1, d2);
-		}
-	}
-
-	@Override
-
-	public void openTomeBook() {
-		// Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle(false));
-	}
-
-	@Override
-	public void openElderBook() {
-		// Minecraft.getMinecraft().displayGuiScreen(new GuiTomeTitle(true));
 	}
 
 	@Override
@@ -95,9 +65,10 @@ public class ClientProxy extends CommonProxy {
 		return Minecraft.getMinecraft().player;
 	}
 
-	public static runicHealthRenderer runicBarRendererIn;
-	public static manaViewerHud manaViewerHudIn;
-	public static karmaViewHud karmaViewerHudIn;
+	@Override
+	public long getWorldElapsedTicks() {
+		return ClientTickHandler.ticksInGame;
+	}
 
 	@Override
 	public void preInit() {
@@ -127,10 +98,5 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new manaViewerHandler(manaViewerHudIn));
 		karmaViewerHudIn = new karmaViewHud(mc);
 		MinecraftForge.EVENT_BUS.register(new karmaViewHandler(karmaViewerHudIn));
-	}
-
-	@Override
-	public long getWorldElapsedTicks() {
-		return ClientTickHandler.ticksInGame;
 	}
 }

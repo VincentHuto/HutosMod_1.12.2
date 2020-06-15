@@ -2,14 +2,11 @@ package com.huto.hutosmod;
 
 import com.huto.hutosmod.creativetabs.HutosTab;
 import com.huto.hutosmod.gui.GuiHandler;
-import com.huto.hutosmod.mindrunes.events.GuiEvents;
 import com.huto.hutosmod.proxy.CommonProxy;
-import com.huto.hutosmod.proxy.IProxy;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +21,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class MainClass {
-	public static IProxy iproxy;
 
 	@Instance(Reference.MODID)
 	public static MainClass instance;
@@ -32,8 +28,6 @@ public class MainClass {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
 	public static CommonProxy proxy;
 	public static SimpleNetworkWrapper network;
-
-	// Creative Tabs
 	public static final CreativeTabs tabHutosMod = new HutosTab("tabHutosMod");
 
 	static {

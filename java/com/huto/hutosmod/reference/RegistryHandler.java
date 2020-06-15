@@ -150,7 +150,6 @@ public class RegistryHandler {
 		PacketHandler.registerMessages(Reference.MODID);
 	}
 
-
 	public static void initRegistries() {
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
