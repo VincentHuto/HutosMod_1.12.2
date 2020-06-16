@@ -1,8 +1,5 @@
 package com.huto.hutosmod.reference;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.biomes.BiomeRegistry;
 import com.huto.hutosmod.blocks.BlockRegistry;
@@ -16,8 +13,6 @@ import com.huto.hutosmod.dimension.DimensionRegistry;
 import com.huto.hutosmod.entities.RegisterEntities;
 import com.huto.hutosmod.events.ModEventHandler;
 import com.huto.hutosmod.gui.GuiHandler;
-import com.huto.hutosmod.gui.pages.GuiTomePage;
-import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.Karma;
@@ -45,18 +40,20 @@ import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
 import com.huto.hutosmod.recipies.ModWandRecipies;
-import com.huto.hutosmod.renders.RenderHandler;
-import com.huto.hutosmod.renders.RenderTileBellJar;
-import com.huto.hutosmod.renders.RenderTileEssecenceEnhancer;
-import com.huto.hutosmod.renders.RenderTileKarmicAltar;
-import com.huto.hutosmod.renders.RenderTileKarmicExtractor;
-import com.huto.hutosmod.renders.RenderTileManaCapacitor;
-import com.huto.hutosmod.renders.RenderTileManaFuser;
-import com.huto.hutosmod.renders.RenderTileManaGatherer;
-import com.huto.hutosmod.renders.RenderTileStorageDrum;
-import com.huto.hutosmod.renders.RenderTileWandMaker;
-import com.huto.hutosmod.sounds.SoundsHandler;
+import com.huto.hutosmod.render.RenderHandler;
+import com.huto.hutosmod.render.tile.RenderTileBellJar;
+import com.huto.hutosmod.render.tile.RenderTileCelestialActuator;
+import com.huto.hutosmod.render.tile.RenderTileEssecenceEnhancer;
+import com.huto.hutosmod.render.tile.RenderTileKarmicAltar;
+import com.huto.hutosmod.render.tile.RenderTileKarmicExtractor;
+import com.huto.hutosmod.render.tile.RenderTileManaCapacitor;
+import com.huto.hutosmod.render.tile.RenderTileManaFuser;
+import com.huto.hutosmod.render.tile.RenderTileManaGatherer;
+import com.huto.hutosmod.render.tile.RenderTileStorageDrum;
+import com.huto.hutosmod.render.tile.RenderTileWandMaker;
+import com.huto.hutosmod.sound.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
+import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
 import com.huto.hutosmod.tileentity.TileEntityKarmicAltar;
@@ -70,16 +67,11 @@ import com.huto.hutosmod.worldgen.ModWorldGen;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -114,12 +106,14 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class,
-				new RenderTileEssecenceEnhancer());
+				new RenderTileEssecenceEnhancer());	
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaGatherer.class, new RenderTileManaGatherer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaCapacitor.class, new RenderTileManaCapacitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicAltar.class, new RenderTileKarmicAltar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaFuser.class, new RenderTileManaFuser());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicExtractor.class, new RenderTileKarmicExtractor());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCelestialActuator.class,
+				new RenderTileCelestialActuator());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
@@ -127,15 +121,6 @@ public class RegistryHandler {
 		for (Block block : BlockRegistry.BLOCKS) {
 			MainClass.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
 		}
-	}
-
-	public static void serverRegistries(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandDimensionTeleport());
-		event.registerServerCommand(new CommandClearMana());
-		event.registerServerCommand(new CommandSetMana());
-		event.registerServerCommand(new CommandClearKarma());
-		event.registerServerCommand(new CommandSetKarma());
-
 	}
 
 	public static void preInitRegistries(FMLPreInitializationEvent event) {
@@ -151,6 +136,7 @@ public class RegistryHandler {
 	}
 
 	public static void initRegistries() {
+		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
 		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerEntity());
@@ -175,6 +161,15 @@ public class RegistryHandler {
 	}
 
 	public static void postInitRegistries() {
+
+	}
+
+	public static void serverRegistries(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandDimensionTeleport());
+		event.registerServerCommand(new CommandClearMana());
+		event.registerServerCommand(new CommandSetMana());
+		event.registerServerCommand(new CommandClearKarma());
+		event.registerServerCommand(new CommandSetKarma());
 
 	}
 }

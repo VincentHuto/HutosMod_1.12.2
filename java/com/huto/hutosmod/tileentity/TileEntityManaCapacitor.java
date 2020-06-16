@@ -57,8 +57,6 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 		this.tankLevel = tankLevel;
 	}
 
-	
-	
 	public float getTankSize() {
 
 		if (tankLevel == 0) {
@@ -99,7 +97,7 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 	}
 
 	public boolean isNotFull() {
-		if (this.getManaValue() <= (this.getMaxMana()-0.5)) {
+		if (this.getManaValue() <= (this.getMaxMana() - 0.5)) {
 			return true;
 		} else {
 			this.manaValue = this.getMaxMana();
@@ -139,7 +137,7 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 			Random rand = new Random();
 			if (checkAllowPlayer()) {
 				// Centering Variables
-				double xpos = pos.getX() + 0.5, ypos = pos.getY()+1, zpos = pos.getZ() + 0.5;
+				double xpos = pos.getX() + 0.5, ypos = pos.getY() + 1, zpos = pos.getZ() + 0.5;
 				double velocityX = 0, velocityY = 0, velocityZ = 0;
 				EntityPlayer playerTarget = getNearestTargetableMob(world, xpos, ypos, zpos);
 				Vec3d manaDirection;
@@ -228,45 +226,49 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 				if (this.checkAllowBlock()) {
 					if (tile instanceof TileModMana && !(tile instanceof TileEntityManaCapacitor)) {
 						TileModMana manaStor = (TileModMana) tile;
-						if (this.manaValue >= 20 && this.manaValue > manaStor.getManaValue() && this.maxMana > manaStor.maxMana){
+						if (this.manaValue >= 20 && this.manaValue > manaStor.getManaValue()
+								&& this.maxMana > manaStor.maxMana) {
 							double commonMax = Math.min(this.maxMana, manaStor.maxMana);
-							if(commonMax >= this.maxMana) {
-								System.out.println(commonMax);
-							this.setManaValue(manaValue - 0.4f);
-							manaStor.addManaValue(0.4f);
+							if (commonMax <= this.maxMana) {
+								if (manaStor.getManaValue() <= manaStor.getMaxMana()) {
+									this.setManaValue(manaValue - 0.4f);
+									manaStor.addManaValue(0.4f);
+								}
 							}
 						}
-						
+
 					}
 					if (tile instanceof TileManaSimpleInventory && !(tile instanceof TileEntityManaCapacitor)) {
 						TileManaSimpleInventory wandMaker = (TileManaSimpleInventory) tile;
-						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <= wandMaker.maxMana) {
+						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue()
+								&& wandMaker.getManaValue() <= wandMaker.maxMana) {
 							double commonMax = Math.min(this.maxMana, wandMaker.maxMana);
-							if(commonMax <= this.maxMana) {
-							this.setManaValue(manaValue - 0.4f);
-							wandMaker.addManaValue(0.4f);
+							if (commonMax <= this.maxMana) {
+								if (wandMaker.getManaValue() <= wandMaker.getMaxMana()) {
+									this.setManaValue(manaValue - 0.4f);
+									wandMaker.addManaValue(0.4f);
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		
+
 		for (EnumFacing face : EnumFacing.values()) {
-		    BlockPos adj = getPos().offset(face);
-		    TileEntity tile = world.getTileEntity(adj);
-		    if(tile instanceof TileEntityManaGatherer) {
-		    	TileEntityManaGatherer manaG = (TileEntityManaGatherer) tile;
+			BlockPos adj = getPos().offset(face);
+			TileEntity tile = world.getTileEntity(adj);
+			if (tile instanceof TileEntityManaGatherer) {
+				TileEntityManaGatherer manaG = (TileEntityManaGatherer) tile;
 				if (manaG.getManaValue() > 0.1F && this.isNotFull()) {
 					this.addManaValue(0.1F);
 					manaG.setManaValue(manaG.getManaValue() - 0.1f);
 				}
-		    	
-		    }
-		    
+
+			}
+
 		}
 
-		
 	}
 
 	@SideOnly(Side.CLIENT)

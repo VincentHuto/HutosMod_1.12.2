@@ -18,7 +18,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 
 public class TileEntityRuneStation extends TileEntityLockableLoot implements ITickable 
 {
-	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(5, ItemStack.EMPTY);
 	public int numPlayersUsing, ticksSinceSync;
 	public float lidAngle, prevLidAngle;
 	

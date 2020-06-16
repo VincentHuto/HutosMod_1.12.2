@@ -1,7 +1,7 @@
 package com.huto.hutosmod.events;
 
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.renders.manaViewerHud;
+import com.huto.hutosmod.render.manaViewerHud;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class manaViewerHandler {
-	public manaViewerHandler(manaViewerHud i_HUDrenderer) {
+public class ManaViewerHandler {
+	public ManaViewerHandler(manaViewerHud i_HUDrenderer) {
 		manaViewerHud = i_HUDrenderer;
 	}
 

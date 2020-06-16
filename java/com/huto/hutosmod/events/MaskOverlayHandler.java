@@ -1,7 +1,7 @@
 package com.huto.hutosmod.events;
 
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.renders.runicHealthRenderer;
+import com.huto.hutosmod.render.runicHealthRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

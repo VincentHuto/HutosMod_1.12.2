@@ -9,6 +9,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,7 +21,8 @@ public class KarmaEventHandler {
 	public void onPlayerLogsIn(PlayerLoggedInEvent event) {
 		EntityPlayer player = event.player;
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		String message = String.format("Your current karma is §9%d§r  ", (int) karma.getKarma());
+		String message = String
+				.format(TextFormatting.RED + "Hello there, you have " + (int) karma.getKarma() + " karma left.");
 		player.sendMessage(new TextComponentString(message));
 
 	}

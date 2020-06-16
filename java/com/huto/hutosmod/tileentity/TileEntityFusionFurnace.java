@@ -1,6 +1,6 @@
 package com.huto.hutosmod.tileentity;
 
-import com.huto.hutosmod.blocks.FusionFurnaceBlock;
+import com.huto.hutosmod.blocks.BlockFusionFurnace;
 import com.huto.hutosmod.recipies.FusionFurnaceRecipes;
 
 import net.minecraft.block.Block;
@@ -111,7 +111,7 @@ public class TileEntityFusionFurnace extends TileEntity implements ITickable {
 		if(this.isBurning())
 		{
 			--this.burnTime;
-			FusionFurnaceBlock.setState(true, world, pos);
+			BlockFusionFurnace.setState(true, world, pos);
 		}
 		
 		ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};

@@ -11,7 +11,7 @@ import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.renders.layers.LayerPlayerAura;
+import com.huto.hutosmod.render.layer.LayerPlayerAura;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

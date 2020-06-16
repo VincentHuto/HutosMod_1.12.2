@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.sounds.SoundsHandler;
+import com.huto.hutosmod.sound.SoundsHandler;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

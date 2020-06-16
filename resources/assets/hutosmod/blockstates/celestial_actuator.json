@@ -1,0 +1,30 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:celestial_actuator" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:celestial_actuator" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:celestial_actuator" 
+        },
+        "facing=east": 
+        { 
+            "model": "hutosmod:celestial_actuator","y":270 
+        },
+        "facing=west": 
+        { 
+            "model": "hutosmod:celestial_actuator","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:celestial_actuator","y":180 
+        }
+    }
+}

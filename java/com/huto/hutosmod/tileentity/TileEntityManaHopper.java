@@ -7,7 +7,7 @@ import javax.swing.plaf.DesktopIconUI;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.huto.hutosmod.blocks.mana_hopperBlock;
+import com.huto.hutosmod.blocks.BlockManaHopper;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
 
 import it.unimi.dsi.fastutil.Stack;
@@ -449,7 +449,7 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 
 	protected boolean updateHopper() {
 		if (this.world != null && !this.world.isRemote) {
-			if (!this.isOnTransferCooldown() && mana_hopperBlock.isEnabled(this.getBlockMetadata())) {
+			if (!this.isOnTransferCooldown() && BlockManaHopper.isEnabled(this.getBlockMetadata())) {
 				boolean flag = false;
 				boolean flag1 = false;
 
@@ -510,7 +510,7 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 		if (iinventory == null) {
 			return false;
 		} else {
-			EnumFacing enumfacing = mana_hopperBlock.getFacing(this.getBlockMetadata()).getOpposite();
+			EnumFacing enumfacing = BlockManaHopper.getFacing(this.getBlockMetadata()).getOpposite();
 
 			if (this.isInventoryFull(iinventory, enumfacing)) {
 				return false;
@@ -735,7 +735,7 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 	 * Returns the IInventory that this hopper is pointing into
 	 */
 	private TileManaSimpleInventory getInventoryForHopperTransfer() {
-		EnumFacing enumfacing = mana_hopperBlock.getFacing(this.getBlockMetadata());
+		EnumFacing enumfacing = BlockManaHopper.getFacing(this.getBlockMetadata());
 		return getInventoryAtPosition(this.getWorld(), this.getXPos() + (double) enumfacing.getFrontOffsetX(),
 				this.getYPos() + (double) enumfacing.getFrontOffsetY(),
 				this.getZPos() + (double) enumfacing.getFrontOffsetZ());

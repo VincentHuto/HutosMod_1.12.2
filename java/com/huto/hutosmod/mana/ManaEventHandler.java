@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -31,7 +32,8 @@ public class ManaEventHandler {
 		// is gonna be a load screen anyways; look into a fix later...
 
 		// Potentially oly place that check when a mana adding item is dropped on death
-		// or when an item/achievment is added etc because those are the only times it would change anyways
+		// or when an item/achievment is added etc because those are the only times it
+		// would change anyways
 		PacketHandler.INSTANCE.sendToServer(
 				new PacketGetManaLimit(manaLimit, "com.huto.hutosmod.mana.ManaEventHandler", "manaLimit"));
 		IMana mana = event.player.getCapability(ManaProvider.MANA_CAP, null);
@@ -86,13 +88,12 @@ public class ManaEventHandler {
 			}
 
 		case (1):
-		/*	if (mana.getMana() > 400) {
-				if (mana.manaLimit() <= 300) {
-					mana.setLimit(400);
-
-					System.out.println("Set to 400");
-				}
-			}*/
+			/*
+			 * if (mana.getMana() > 400) { if (mana.manaLimit() <= 300) {
+			 * mana.setLimit(400);
+			 * 
+			 * System.out.println("Set to 400"); } }
+			 */
 		case (2):
 			if (mana.getMana() > 500) {
 				// mana.setLimit(500);
@@ -122,7 +123,9 @@ public class ManaEventHandler {
 		EntityPlayer player = event.player;
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 
-		String message = String.format("Hello there, you have §9%d§r mana left.", (int) mana.getMana());
+		String message = String
+				.format(TextFormatting.BLUE + "Hello there, you have " + (int) mana.getMana() + " mana left.");
+
 		player.sendMessage(new TextComponentString(message));
 
 	}

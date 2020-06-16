@@ -34,7 +34,6 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 		int mod = 3 + rand.nextInt(10);
 		if (count % mod == 0) {
 			this.addManaValue(0.1F);
-			System.out.println(manaValue);
 		}
 		if (world.getBiome(this.getPos()) == BiomeRegistry.TEST_BIOME || checkStructure()) {
 			this.addManaValue(0.3F);

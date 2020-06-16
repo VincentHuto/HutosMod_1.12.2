@@ -1,0 +1,170 @@
+{
+    "credit": "Made with Blockbench",
+    "parent": "block/block",
+	"textures": {
+		"0": "hutosmod:blocks/dark_oak",
+		"1": "hutosmod:blocks/runed_obsidian",
+		"2": "hutosmod:blocks/activated_obsidian",
+		"4": "hutosmod:blocks/wandmakercolumn",
+		"5": "hutosmod:blocks/enchanted_stone_smooth",
+		"6": "hutosmod:blocks/altarsurface",
+		"7": "hutosmod:blocks/wandmakerplatform",
+		"particle": "hutosmod:blocks/dark_oak"
+	},
+	"elements": [
+		{
+			"name": "Base3",
+			"from": [6, 2, 6],
+			"to": [10, 3, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 10, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#7"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "Base2",
+			"from": [5, 1, 5],
+			"to": [11, 2, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 9, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "DialBase",
+			"from": [5, 9, 5],
+			"to": [11, 10, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 17, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"name": "RimN",
+			"from": [5, 10, 4],
+			"to": [11, 11, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 18, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "RimS",
+			"from": [5, 10, 11],
+			"to": [11, 11, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 18, 21]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "RimW",
+			"from": [4, 10, 5],
+			"to": [5, 11, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 18, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "RimE",
+			"from": [7.5, 10, 5],
+			"to": [8.5, 11, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.5, 8.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Hand1",
+			"from": [7.5, 10, 5],
+			"to": [8.5, 11, 10],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 10.5, 5.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Hand 2",
+			"from": [11, 10, 5],
+			"to": [12, 11, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [20, 18, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#4"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"name": "Base1",
+			"from": [4, 0, 4],
+			"to": [12, 1, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
+			}
+		},
+		{
+			"name": "Column",
+			"from": [7, 3, 7],
+			"to": [9, 9, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 19, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}

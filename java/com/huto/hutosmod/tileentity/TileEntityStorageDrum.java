@@ -257,9 +257,11 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 						if (this.manaValue >= 50 && this.manaValue > manaStor.getManaValue()
 								&& this.maxMana > manaStor.maxMana) {
 							double commonMax = Math.min(this.maxMana, manaStor.maxMana);
-							if (commonMax >= this.maxMana) {
+							if (commonMax <= this.maxMana) {
+								if (manaStor.getManaValue() <= manaStor.getMaxMana()) {
 								this.setManaValue(manaValue - 0.1f);
 								manaStor.addManaValue(0.1f);
+								}
 							}
 						}
 
@@ -270,8 +272,10 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 								&& wandMaker.getManaValue() <= wandMaker.maxMana) {
 							double commonMax = Math.min(this.maxMana, wandMaker.maxMana);
 							if (commonMax <= this.maxMana) {
+								if (wandMaker.getManaValue() <= wandMaker.getMaxMana()) {
 								this.setManaValue(manaValue - 0.1f);
 								wandMaker.addManaValue(0.1f);
+								}
 							}
 						}
 					}

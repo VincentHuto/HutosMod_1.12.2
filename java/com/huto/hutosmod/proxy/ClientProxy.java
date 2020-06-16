@@ -2,8 +2,8 @@ package com.huto.hutosmod.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.huto.hutosmod.events.MaskOverlayHandler;
-import com.huto.hutosmod.events.karmaViewHandler;
-import com.huto.hutosmod.events.manaViewerHandler;
+import com.huto.hutosmod.events.KarmaViewHandler;
+import com.huto.hutosmod.events.ManaViewerHandler;
 import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiTomeTitle;
@@ -15,9 +15,9 @@ import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.particles.FXLightning;
 import com.huto.hutosmod.particles.ParticleTextureStitcher;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.renders.karmaViewHud;
-import com.huto.hutosmod.renders.manaViewerHud;
-import com.huto.hutosmod.renders.runicHealthRenderer;
+import com.huto.hutosmod.render.karmaViewHud;
+import com.huto.hutosmod.render.manaViewerHud;
+import com.huto.hutosmod.render.runicHealthRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -95,8 +95,8 @@ public class ClientProxy extends CommonProxy {
 		runicBarRendererIn = new runicHealthRenderer(mc);
 		MinecraftForge.EVENT_BUS.register(new MaskOverlayHandler(runicBarRendererIn));
 		manaViewerHudIn = new manaViewerHud(mc);
-		MinecraftForge.EVENT_BUS.register(new manaViewerHandler(manaViewerHudIn));
+		MinecraftForge.EVENT_BUS.register(new ManaViewerHandler(manaViewerHudIn));
 		karmaViewerHudIn = new karmaViewHud(mc);
-		MinecraftForge.EVENT_BUS.register(new karmaViewHandler(karmaViewerHudIn));
+		MinecraftForge.EVENT_BUS.register(new KarmaViewHandler(karmaViewerHudIn));
 	}
 }

@@ -1,6 +1,6 @@
 package com.huto.hutosmod.tileentity;
 
-import com.huto.hutosmod.blocks.mana_belljarBlock;
+import com.huto.hutosmod.blocks.BlockManaBelljar;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

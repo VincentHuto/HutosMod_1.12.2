@@ -1,7 +1,6 @@
 {
-	"credit": "Made with Blockbench",
-	   "parent": "block/block",
-	
+    "credit": "Made with Blockbench",
+    "parent": "block/block",
 	"textures": {
 		"0": "hutosmod:blocks/activated_obsidian",
 		"1": "hutosmod:blocks/wandmakerplatform",

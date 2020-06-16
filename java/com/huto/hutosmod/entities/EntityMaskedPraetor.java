@@ -2,7 +2,7 @@ package com.huto.hutosmod.entities;
 
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.sounds.SoundsHandler;
+import com.huto.hutosmod.sound.SoundsHandler;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
