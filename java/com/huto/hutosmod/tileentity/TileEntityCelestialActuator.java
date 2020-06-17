@@ -42,6 +42,7 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 
 	@Override
 	public void update() {
+
 		if (cooldown > 0) {
 			cooldown--;
 			System.out.println(cooldown);
@@ -52,11 +53,18 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 	public void onWanded(EntityPlayer player, ItemStack wand) {
 		if (world.isRemote)
 			return;
-		if (!checkCooldown()) {
-			if (this.manaValue >= 40) {
-				this.setManaValue(manaValue - 40);
-				cooldown = 60;
+		System.out.println("WANDED: " + this.getClass().getSimpleName());
+
+		
+		if (checkCooldown()) {
+			if (this.manaValue >= 1) {
+				if((world.isDaytime()|| !world.isDaytime())) {
+				this.setManaValue(manaValue - 1);
+				cooldown = 5;
 				System.out.println("WANDED: " + this.getClass().getSimpleName());
+				world.setWorldTime(world.getWorldTime()+1000);
+				this.sendUpdates();
+				}
 			}
 		}
 	}
@@ -93,7 +101,9 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 
 	// return the smoothed position of the needle, based on the power level
 	public double getSmoothedNeedlePosition() {
-		double targetNeedlePosition = manaValue / maxMana;
+		//System.out.println(world.getCelestialAngle(1.0F));
+		
+		double targetNeedlePosition = world.getCelestialAngle(1.0F) / 1;
 		smoothNeedleMovement.setTargetNeedlePosition(targetNeedlePosition, false);
 
 		return smoothNeedleMovement.getSmoothedNeedlePosition();

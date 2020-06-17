@@ -34,9 +34,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockManaCapacitor extends BlockBase {
-	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75D, .8125D);
+	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.8125D, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75,
+	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.8125D,
 			.8125D);
 
 	// Facing

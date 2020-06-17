@@ -26,9 +26,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCelestialActuator extends BlockBase implements IActivatable {
-	public static final AxisAlignedBB ACTUATOR = new AxisAlignedBB(0, 0, 0, 1, 0.9375, 1);
+	public static final AxisAlignedBB ACTUATOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75, .8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB ACTUATOR_WE = new AxisAlignedBB(0, 0, 0, 1, 0.9375, 1);
+	public static final AxisAlignedBB ACTUATOR_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.75, .8125D);
 	// Facing
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	{
@@ -97,7 +97,7 @@ public class BlockCelestialActuator extends BlockBase implements IActivatable {
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 		if (player.isSneaking()) {
-			if (mana.getMana() > 30 && te.getManaValue() <= te.getMaxMana()-30) {
+			if (mana.getMana() > 30 && te.getManaValue() <= te.getMaxMana() - 30) {
 				te.addManaValue(30);
 				mana.consume(30);
 			}
