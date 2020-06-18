@@ -51,7 +51,6 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 		final double MAX_ANGLE = -360;
 		float needleAngle = (float) interpolate(powerLevel, 0, 1, MAX_ANGLE, ZERO_ANGLE);
 		double speedMult = 0.1;
-		System.out.println(needleAngle);
 		double ticks = ClientTickHandler.ticksInGame + ClientTickHandler.partialTicks;
 		double xMod = (float) Math.sin(ticks * speedMult) / 2F;
 		double zMod = (float) Math.cos(ticks * speedMult) / 2F;
@@ -64,7 +63,16 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 		GlStateManager.translate(x + 0.5, y + .7, z + 0.5);
 		GlStateManager.scale(0.5, 1, 0.8);
 		GlStateManager.rotate(180, 1, 0, 0);
-		GlStateManager.rotate(needleAngle, 0, 1, 0);
+		// if rotateDir is 1 then move clockwise else counterclockwise(backwards mode)
+
+		int rotateDir = 0;
+		if (te.state == false) {
+			rotateDir = 1;
+		} else {
+			rotateDir = -1;
+			rotateDir = -rotateDir;
+		}
+		GlStateManager.rotate(needleAngle, 0, rotateDir, 0);
 		dialModel.renderThis();
 		GlStateManager.popMatrix();
 

@@ -112,9 +112,14 @@ public class BlockManaFuser extends BlockBase implements IActivatable {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return true;
 
+		} else if (player.getHeldItemMainhand().getItem() == ItemRegistry.maker_activator
+				|| player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
 		}
 
-		if (!player.isSneaking() && !stack.isEmpty()) {
+		if (!player.isSneaking() && !stack.isEmpty()
+				&& player.getHeldItemMainhand().getItem() != ItemRegistry.mana_debugtool) {
 			boolean result = te.addItem(player, stack, hand);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return result;

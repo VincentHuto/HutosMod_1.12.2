@@ -34,7 +34,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockManaCapacitor extends BlockBase {
-	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.8125D, .8125D);
+	public static final AxisAlignedBB MANA_CAPACITOR = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.8125D,
+			.8125D);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB MANA_CAPACITOR_WE = new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, .8125D, 0.8125D,
 			.8125D);
@@ -131,13 +132,11 @@ public class BlockManaCapacitor extends BlockBase {
 		ItemStack stack = player.getHeldItem(hand);
 		Item stackItem = stack.getItem();
 
-		// If NOT sneaking and your hand IS empty
-		if (!player.isSneaking() && stack.isEmpty()) {
-			String message = String.format("Capacitor contains §9" + capac.getManaValue() + "§r mana ");
+		if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+			String message = String.format("Tile contains §9%d§r mana ", (int) capac.getManaValue());
 			player.sendMessage(new TextComponentString(message));
 
 		}
-
 		// If player IS sneaking and isnt holding an extractor
 		if (!player.isSneaking() && stackItem == ItemRegistry.upgrade_wrench) {
 			ModInventoryHelper.withdrawFromInventory(capac, player);

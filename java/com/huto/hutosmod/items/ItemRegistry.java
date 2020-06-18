@@ -53,7 +53,6 @@ public class ItemRegistry {
 	// Damage Source
 	public static final DamageSource BloodSwordDamageSource = new DamageSource("bloody").setDamageBypassesArmor();
 	// Items
-	public static final Item ruby = new ItemBase("ruby");
 	public static final Item blood_ingot = new ItemBase("blood_ingot");
 	public static final Item grey_ingot = new ItemBase("grey_ingot");
 	public static final Item grey_powder = new ItemBase("grey_powder");

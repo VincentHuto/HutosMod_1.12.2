@@ -2,9 +2,12 @@ package com.huto.hutosmod.blocks;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.KarmaProvider;
-import com.huto.hutosmod.tileentity.TileEntityBellJar;
+import com.huto.hutosmod.mana.IMana;
+import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.tileentity.TileEntityKarmicExtractor;
 
 import net.minecraft.block.SoundType;
@@ -22,11 +25,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Blockkarmic_extractor extends BlockBase {
+public class Blockkarmic_extractor extends BlockBase implements IActivatable {
 	public static final AxisAlignedBB EXTRACTOR = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB EXTRACTOR_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
@@ -43,9 +45,10 @@ public class Blockkarmic_extractor extends BlockBase {
 		setHardness(5.0F);
 		setResistance(15.0F);
 		setHarvestLevel("pickaxe", 2);
-	//	setLightLevel(1.0F);
+		// setLightLevel(1.0F);
 		setLightOpacity(1);
 	}
+
 	// Facing
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
@@ -68,8 +71,6 @@ public class Blockkarmic_extractor extends BlockBase {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
-	
-	
 
 	// Facing
 	@Override
@@ -117,7 +118,6 @@ public class Blockkarmic_extractor extends BlockBase {
 		return false;
 	}
 
-
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float par7, float par8, float par9) {
@@ -125,16 +125,22 @@ public class Blockkarmic_extractor extends BlockBase {
 			return true;
 		ItemStack stack = player.getHeldItem(hand);
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		
-		if(!player.isSneaking()){
-			String message = String.format("You have §9%d§r mana ", (int)karma.getKarma());
-			player.sendMessage(new TextComponentString(message));
-			
+		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+
+		TileEntityKarmicExtractor drum = (TileEntityKarmicExtractor) world.getTileEntity(pos);
+
+		// If player NOT is sneaking and has an extractor
+		if (!player.isSneaking() && stack.getItem() == ItemRegistry.mana_extractor) {
+			if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
+				mana.fill(30);
+				drum.setManaValue(drum.getManaValue() - 30);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+
+			}
 		}
-		
-		return true;
+		return false;
 	}
-	
+
 	// Facing(kinda) more to do with facing of bounding boxes
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -155,5 +161,11 @@ public class Blockkarmic_extractor extends BlockBase {
 	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 
 		super.breakBlock(world, pos, state);
+	}
+
+	@Override
+	public boolean onUsedByActivator(EntityPlayer player, ItemStack stack, World world, BlockPos pos, EnumFacing side) {
+		((TileEntityKarmicExtractor) world.getTileEntity(pos)).onWanded(player, stack);
+		return false;
 	}
 }

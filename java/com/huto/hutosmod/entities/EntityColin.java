@@ -216,7 +216,7 @@ public class EntityColin extends EntityMob implements IRangedAttackMob {
 						this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
 				Vector3 vec = Vector3.fromEntityCenter(this).add(0, -2, 0);
 				Vector3 endVec = vec.add(0, 3.5, 0);
-				MainClass.proxy.lightningFX(endVec, vec, 5F, System.nanoTime(), Reference.white, Reference.oxblood);
+			//	MainClass.proxy.lightningFX(endVec, vec, 5F, System.nanoTime(), Reference.white, Reference.oxblood);
 				// this.world.createExplosion(this, posX, posY, posZ, 2, true);
 
 			}

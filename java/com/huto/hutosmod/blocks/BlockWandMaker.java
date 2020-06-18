@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockWandMaker extends BlockBase implements IActivatable{
+public class BlockWandMaker extends BlockBase implements IActivatable {
 	public static final AxisAlignedBB WAND_MAKER = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB WAND_MAKER_WE = new AxisAlignedBB(0, 0, 0, 1, 1, 1);
@@ -103,17 +103,21 @@ public class BlockWandMaker extends BlockBase implements IActivatable{
 		TileEntityWandMaker te = (TileEntityWandMaker) world.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		if (player.isSneaking() && player.getHeldItemMainhand().getItem() != ItemRegistry.maker_activator) {
-			if (true) {
-				if(mana.getMana()>30) {
+		if (player.isSneaking()) {
+			if (mana.getMana() > 30) {
 				te.addManaValue(30);
 				mana.consume(30);
-				}
-				ModInventoryHelper.withdrawFromInventory(te, player);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-				return true;
 			}
-		} else if (te.isEmpty() && stack.isEmpty()) {
+			ModInventoryHelper.withdrawFromInventory(te, player);
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+			return true;
+		} else if (player.getHeldItemMainhand().getItem() == ItemRegistry.maker_activator
+				|| player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
+		} else if (te.isEmpty() && stack.isEmpty())
+
+		{
 			// This is so if your making things in bulk it tell your inventory to insert the
 			// stuff from the last recipe
 			// altar.trySetLastRecipe(player);

@@ -104,6 +104,8 @@ public class BlockCelestialActuator extends BlockBase implements IActivatable {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return true;
 
+		}else if  (!player.isSneaking() && stack.isEmpty()){
+			te.changeState();
 		}
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 

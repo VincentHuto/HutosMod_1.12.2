@@ -1,11 +1,14 @@
 package com.huto.hutosmod.tileentity;
 
+import com.huto.hutosmod.karma.IKarma;
+import com.huto.hutosmod.karma.KarmaProvider;
 import com.huto.hutosmod.particles.ManaParticle;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,7 +43,7 @@ public class TileEntityKarmicExtractor extends TileModMana implements ITickable 
 	@Override
 	public void update() {
 		ManaParticle part1 = new ManaParticle(world, this.getPos().getX() + .5, this.getPos().getY() + .8,
-				this.getPos().getZ() + .5, 0, 0.2, 0, 0, 0, 0, 20, 3);
+				this.getPos().getZ() + .5, 0, -0.1, 0, 0, 0, 0, 6, 10);
 		Minecraft.getMinecraft().effectRenderer.addEffect(part1);
 	}
 
@@ -57,5 +60,23 @@ public class TileEntityKarmicExtractor extends TileModMana implements ITickable 
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
 		markDirty();
+	}
+
+	public void onWanded(EntityPlayer player, ItemStack stack) {
+		if (world.isRemote)
+			return;
+
+		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
+		if (player.isSneaking()) {
+			if (karma.getKarma() >= 1) {
+				karma.consume(1);
+				addManaValue(20);
+			}
+			if (karma.getKarma() < 0) {
+				karma.add(1);
+				addManaValue(10);
+			}
+			this.sendUpdates();
+		}
 	}
 }

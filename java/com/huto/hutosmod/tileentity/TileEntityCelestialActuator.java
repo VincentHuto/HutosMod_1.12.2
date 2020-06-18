@@ -1,5 +1,9 @@
 package com.huto.hutosmod.tileentity;
 
+import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.proxy.Vector3;
+import com.huto.hutosmod.reference.Reference;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,6 +15,9 @@ import net.minecraft.util.math.BlockPos;
 public class TileEntityCelestialActuator extends TileModMana implements ITickable {
 	public static int cooldown = 0;
 	public static final String TAG_MANA = "mana";
+	public static final String TAG_STATE = "state";
+	public static boolean state = false;
+
 	@Override
 	public void onLoad() {
 		super.onLoad();
@@ -31,17 +38,20 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 	@Override
 	public void readPacketNBT(NBTTagCompound tag) {
 		manaValue = tag.getFloat(TAG_MANA);
+		state = tag.getBoolean(TAG_STATE);
 
 	}
 
 	@Override
 	public void writePacketNBT(NBTTagCompound tag) {
 		tag.setFloat(TAG_MANA, manaValue);
+		tag.setBoolean(TAG_STATE, state);
 
 	}
 
 	@Override
 	public void update() {
+		// System.out.println(state);
 
 		if (cooldown > 0) {
 			cooldown--;
@@ -50,21 +60,36 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 
 	}
 
+	public void changeState() {
+		if (state == false) {
+			state = true;
+		} else {
+			state = false;
+		}
+	}
+
 	public void onWanded(EntityPlayer player, ItemStack wand) {
 		if (world.isRemote)
 			return;
-		System.out.println("WANDED: " + this.getClass().getSimpleName());
 
-		
 		if (checkCooldown()) {
 			if (this.manaValue >= 1) {
-				if((world.isDaytime()|| !world.isDaytime())) {
-				this.setManaValue(manaValue - 1);
-				cooldown = 5;
+				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.1, 0);
+				Vector3 endVec = vec.add(0, 0.5, 0);
+				this.setManaValue(manaValue - 10);
+				cooldown = 10;
 				System.out.println("WANDED: " + this.getClass().getSimpleName());
-				world.setWorldTime(world.getWorldTime()+1000);
-				this.sendUpdates();
+				if (state == false) {
+					world.setWorldTime(world.getWorldTime() + 1000);
+					MainClass.proxy.lightningFX(vec, endVec, 1F, System.nanoTime(), Reference.orange, Reference.yellow);
+
+				} else {
+					world.setWorldTime(world.getWorldTime() - 1000);
+					MainClass.proxy.lightningFX(vec, endVec, 1F, System.nanoTime(), Reference.purple,
+							Reference.oxblood);
+
 				}
+				this.sendUpdates();
 			}
 		}
 	}
@@ -101,8 +126,8 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 
 	// return the smoothed position of the needle, based on the power level
 	public double getSmoothedNeedlePosition() {
-		//System.out.println(world.getCelestialAngle(1.0F));
-		
+		// System.out.println(world.getCelestialAngle(1.0F));
+
 		double targetNeedlePosition = world.getCelestialAngle(1.0F) / 1;
 		smoothNeedleMovement.setTargetNeedlePosition(targetNeedlePosition, false);
 

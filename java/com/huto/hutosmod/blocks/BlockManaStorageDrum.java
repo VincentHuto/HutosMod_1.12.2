@@ -163,9 +163,20 @@ public class BlockManaStorageDrum extends BlockBase {
 			ItemStack stack = player.getHeldItem(hand);
 			Item stackItem = stack.getItem();
 
+			// If player is sneaking and hand is empty
+			if (player.isSneaking() && stack.isEmpty()) {
+				if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
+					drum.addManaValue(30);
+					mana.consume(30);
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+					return true;
+
+				}
+			}
+
 			// If NOT sneaking and your hand IS empty
-			if (!player.isSneaking() && stack.isEmpty()) {
-				String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
+			if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+				String message = String.format("Tile contains Â§9%dÂ§r mana ", (int) drum.getManaValue());
 				player.sendMessage(new TextComponentString(message));
 
 			}
@@ -182,21 +193,13 @@ public class BlockManaStorageDrum extends BlockBase {
 				drum.addItem(player, stack, hand);
 				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
-
-			// If player is sneaking and hand is empty
-			if (player.isSneaking() && stack.isEmpty()) {
-				if (mana.getMana() > 30 && drum.getManaValue() <= drum.getTankSize() - 30) {
-					drum.addManaValue(30);
-					mana.consume(30);
-					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-				}
-			}
 			// If player NOT is sneaking and has an extractor
 			if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
 				if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
 					mana.fill(30);
 					drum.setManaValue(drum.getManaValue() - 30);
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
+
 				}
 			}
 			// Upgrade clause
@@ -210,7 +213,7 @@ public class BlockManaStorageDrum extends BlockBase {
 			}
 			// Says the tank is full
 			if (drum.getManaValue() >= drum.getTankSize()) {
-				String message = String.format("§4Drum is full §r");
+				String message = String.format("ï¿½4Drum is full ï¿½r");
 				player.sendMessage(new TextComponentString(message));
 			}
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
@@ -236,7 +239,7 @@ public class BlockManaStorageDrum extends BlockBase {
 
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add("§3Magical Storage! §r");
+		tooltip.add("ï¿½3Magical Storage! ï¿½r");
 		super.addInformation(stack, player, tooltip, advanced);
 
 	}

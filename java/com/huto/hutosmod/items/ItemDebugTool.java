@@ -3,11 +3,9 @@ package com.huto.hutosmod.items;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
-import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
+import com.huto.hutosmod.tileentity.TileModMana;
 
-import net.minecraft.block.state.IBlockState;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,7 +32,6 @@ public class ItemDebugTool extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-
 		if (worldIn.isRemote)
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 
@@ -46,22 +43,22 @@ public class ItemDebugTool extends Item {
 
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
-/*
+
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		TileEntityStorageDrum drum = (TileEntityStorageDrum) worldIn.getTileEntity(pos);
+		TileModMana drum = (TileModMana) worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 
-		if (!player.isSneaking()) {
-			String message = String.format("Drum contains §9%d§r mana ", (int) drum.getManaValue());
+		if (!player.isSneaking() && drum instanceof TileModMana || !player.isSneaking() && drum instanceof TileManaSimpleInventory ) {
+			String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
 			player.sendMessage(new TextComponentString(message));
 
 		}
 
 		return EnumActionResult.SUCCESS;
 	}
-*/
+
 }

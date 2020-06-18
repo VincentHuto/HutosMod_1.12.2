@@ -39,7 +39,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockEssenceEnhancer extends BlockBase implements IActivatable{
+public class BlockEssenceEnhancer extends BlockBase implements IActivatable {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 	public static final AxisAlignedBB ESSECENCE_ENHANCER = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
@@ -75,22 +75,20 @@ public class BlockEssenceEnhancer extends BlockBase implements IActivatable{
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 
-		if (player.isSneaking() && player.getHeldItemMainhand().getItem() != ItemRegistry.maker_activator) {
-			if (true) {
-				if(mana.getMana()>30) {
+		if (player.isSneaking()) {
+			if (mana.getMana() > 30) {
 				te.addManaValue(30);
 				mana.consume(30);
-				}
-				ModInventoryHelper.withdrawFromInventory(te, player);
-				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-				return true;
 			}
-		}
-		if (player.isSneaking()) {
 			ModInventoryHelper.withdrawFromInventory(te, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return true;
+		} else if (player.getHeldItemMainhand().getItem() == ItemRegistry.maker_activator
+				|| player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
 		} else if (!stack.isEmpty()) {
+
 			boolean result = te.addItem(player, stack, hand);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return result;
@@ -98,7 +96,6 @@ public class BlockEssenceEnhancer extends BlockBase implements IActivatable{
 		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 		return false;
 	}
-
 
 	@Override
 	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {

@@ -124,7 +124,7 @@ public class Blockkarmic_altar extends BlockBase {
 		if (!world.isRemote) {
 			TileEntityKarmicAltar drum = (TileEntityKarmicAltar) world.getTileEntity(pos);
 			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-			//System.out.println(mana.getMana());
+			// System.out.println(mana.getMana());
 			ItemStack stack = player.getHeldItem(hand);
 			Item stackItem = stack.getItem();
 
@@ -136,6 +136,11 @@ public class Blockkarmic_altar extends BlockBase {
 					drum.sendUpdates();
 					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 				}
+			} // If NOT sneaking and your hand IS empty
+			if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
+				String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(message));
+
 			}
 		}
 		return true;
