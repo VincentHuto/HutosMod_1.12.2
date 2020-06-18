@@ -11,13 +11,13 @@ import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.render.layer.LayerPlayerAura;
+import com.huto.hutosmod.tileentity.TileModMana;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -25,8 +25,6 @@ import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModEventHandler {
 
@@ -44,6 +42,22 @@ public class ModEventHandler {
 	@SubscribeEvent
 	public void onPlayerPickupXP(PlayerPickupXpEvent e) {
 	}
+	
+	//Replaced with InRender Hover function
+/*
+	@SubscribeEvent
+	public void playerHoverWithDebug(PlayerTickEvent e) {
+		RayTraceResult result = e.player.rayTrace(5, 10);
+		BlockPos pos = result.getBlockPos();
+		TileModMana te = (TileModMana) e.player.getEntityWorld().getTileEntity(pos);
+		ItemStack stack = e.player.getHeldItemMainhand();
+
+		if (te instanceof TileModMana && te != null) {
+			if (stack.getItem() == ItemRegistry.mana_debugtool) {
+			//	System.out.println(te.getManaValue());
+			}
+		}
+	}*/
 
 	@SubscribeEvent
 	public void onPlayerUseWand(PlayerTickEvent e) {

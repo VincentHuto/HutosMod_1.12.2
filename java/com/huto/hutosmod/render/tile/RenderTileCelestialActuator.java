@@ -8,12 +8,15 @@ import javax.annotation.Nonnull;
 
 import org.lwjgl.opengl.GL11;
 
+import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelEnhancerCubeCW;
 import com.huto.hutosmod.models.ModelFloatingDial;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
+import com.huto.hutosmod.tileentity.TileModMana;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -22,9 +25,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -88,7 +96,10 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 		GlStateManager.scale(0.1, 0.1, 0.1);
 		FontRenderer fontRenderer = this.getFontRenderer();
 		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-		akloRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		if (isPlayerHoverWithDebug(te.getWorld())) {
+
+			akloRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		}
 		GlStateManager.popMatrix();
 	}
 
@@ -108,6 +119,23 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 			return y2;
 		double xFraction = (x - x1) / (x2 - x1);
 		return y1 + xFraction * (y2 - y1);
+	}
+
+	public static boolean isPlayerHoverWithDebug(World world) {
+		if (world.isRemote) {
+			EntityPlayer player = MainClass.proxy.getClientPlayer();
+			RayTraceResult result = player.rayTrace(5, 10);
+			BlockPos pos = result.getBlockPos();
+			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
+			ItemStack stack = player.getHeldItemMainhand();
+			if (te instanceof TileModMana && te != null) {
+
+				if (stack.getItem() == ItemRegistry.mana_debugtool) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

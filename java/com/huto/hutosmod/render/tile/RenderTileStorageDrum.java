@@ -6,10 +6,13 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileModMana;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -21,9 +24,13 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -245,13 +252,16 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		GlStateManager.scale(0.08, 0.08, 0.08);
 		FontRenderer fontRenderer = this.getFontRenderer();
 		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-		fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -10, 0);
-		fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -11, 0);
-		fontRenderer.drawString(text2, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -12, 0);
-		fontRenderer.drawString(text3, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		if (isPlayerHoverWithDebug(te.getWorld())) {
+
+			fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -10, 0);
+			fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -11, 0);
+			fontRenderer.drawString(text2, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -12, 0);
+			fontRenderer.drawString(text3, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		}
 		GlStateManager.popMatrix();
 
 		GlStateManager.disableAlpha();
@@ -305,6 +315,23 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		this.buffer.put(p_147525_1_).put(p_147525_2_).put(p_147525_3_).put(p_147525_4_);
 		this.buffer.flip();
 		return this.buffer;
+	}
+
+	public static boolean isPlayerHoverWithDebug(World world) {
+		if (world.isRemote) {
+			EntityPlayer player = MainClass.proxy.getClientPlayer();
+			RayTraceResult result = player.rayTrace(5, 10);
+			BlockPos pos = result.getBlockPos();
+			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
+			ItemStack stack = player.getHeldItemMainhand();
+			if (te instanceof TileModMana && te != null) {
+
+				if (stack.getItem() == ItemRegistry.mana_debugtool) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

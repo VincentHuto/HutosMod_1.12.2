@@ -6,10 +6,13 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
 import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
+import com.huto.hutosmod.tileentity.TileModMana;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -21,9 +24,13 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,20 +60,20 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 		double heightModifier = 0;
 		// Check System that increments the mana based on amount and color
 		if (mana > 0 && mana <= 50)
-			heightModifier = mana / 50 *0.75;
+			heightModifier = mana / 50 * 0.75;
 		if (mana > 50 && mana <= 100)
-			heightModifier = ((mana -50) / 100) *1.6;
+			heightModifier = ((mana - 50) / 100) * 1.6;
 		if (mana > 100 && mana <= 150) {
-			heightModifier = ((mana -90) /150)*1.9;
+			heightModifier = ((mana - 90) / 150) * 1.9;
 		} else if (mana > 150) {
-			heightModifier = ((mana -140) / 200) *2.5;
+			heightModifier = ((mana - 140) / 200) * 2.5;
 
 		}
 
 		double manaRatioColor = mana / 50;
 
-	// Prevents Overflow
-	if (heightModifier > 0.75)
+		// Prevents Overflow
+		if (heightModifier > 0.75)
 			heightModifier = 0.75;
 		int i = this.getPasses(d0);
 		float f = this.getOffset();
@@ -134,45 +141,65 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 			float f5 = (RANDOM.nextFloat() * 0.5F + 0.5F) * f1;
 
 			if (te.shouldRenderFace(EnumFacing.SOUTH)) {
-				bufferbuilder.pos(x + .125D+0.1875, y + 0.0625D, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 001
-				bufferbuilder.pos(x + .875-0.1875, y + 0.0625D, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 101
-				bufferbuilder.pos(x + .875-0.1875, y + heightModifier, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 111
-				bufferbuilder.pos(x + .125D+0.1875, y + heightModifier, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 011
+				bufferbuilder.pos(x + .125D + 0.1875, y + 0.0625D, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 001
+				bufferbuilder.pos(x + .875 - 0.1875, y + 0.0625D, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 101
+				bufferbuilder.pos(x + .875 - 0.1875, y + heightModifier, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 111
+				bufferbuilder.pos(x + .125D + 0.1875, y + heightModifier, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 011
 			}
 
 			if (te.shouldRenderFace(EnumFacing.NORTH)) {
-				bufferbuilder.pos(x + .125D+0.1875, y + heightModifier, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex(); // 010
-				bufferbuilder.pos(x + 0.875-0.1875, y + heightModifier, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 101
-				bufferbuilder.pos(x + 0.875-0.1875, y + 0.0625D, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 100
-				bufferbuilder.pos(x + .125D+0.1875, y + 0.0625D, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 000
+				bufferbuilder.pos(x + .125D + 0.1875, y + heightModifier, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex(); // 010
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + heightModifier, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 101
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + 0.0625D, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 100
+				bufferbuilder.pos(x + .125D + 0.1875, y + 0.0625D, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 000
 			}
 
 			if (te.shouldRenderFace(EnumFacing.EAST)) {
-				bufferbuilder.pos(x + 0.875-0.1875, y + heightModifier, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 110
-				bufferbuilder.pos(x + 0.875-0.1875, y + heightModifier, z + 0.9375D-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 111
-				bufferbuilder.pos(x + 0.875-0.1875, y + 0.0625D, z + 0.9375D-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 101
-				bufferbuilder.pos(x + 0.875-0.1875, y + 0.0625D, z + 0.125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 100
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + heightModifier, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 110
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + heightModifier, z + 0.9375D - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 111
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + 0.0625D, z + 0.9375D - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 101
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + 0.0625D, z + 0.125D + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 100
 			}
 
 			if (te.shouldRenderFace(EnumFacing.WEST)) {
-				bufferbuilder.pos(x + .125D+0.1875, y + 0.0625D, z + 0.125+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 000
-				bufferbuilder.pos(x + .125D+0.1875, y + 0.0625D, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 001
-				bufferbuilder.pos(x + .125D+0.1875, y + heightModifier, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();// 011
-				bufferbuilder.pos(x + .125D+0.1875, y + heightModifier, z + 0.125+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 010
+				bufferbuilder.pos(x + .125D + 0.1875, y + 0.0625D, z + 0.125 + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 000
+				bufferbuilder.pos(x + .125D + 0.1875, y + 0.0625D, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 001
+				bufferbuilder.pos(x + .125D + 0.1875, y + heightModifier, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 011
+				bufferbuilder.pos(x + .125D + 0.1875, y + heightModifier, z + 0.125 + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();// 010
 			}
 
 			if (te.shouldRenderFace(EnumFacing.DOWN)) {
-				bufferbuilder.pos(x + .125D+0.1875, y, z + .125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 000
-				bufferbuilder.pos(x + 0.875D-0.1875, y, z + .125D+0.1875).color(f3, f4, f5, 1.0F).endVertex();// 100
-				bufferbuilder.pos(x + 0.875D-0.1875, y + 0.0625D, z + 0.75D).color(f3, f4, f5, 1.0F).endVertex();// 101
-				bufferbuilder.pos(x + .125D+0.1875, y + 0.0625D, z + 0.75D).color(f3, f4, f5, 1.0F).endVertex();// 001
+				bufferbuilder.pos(x + .125D + 0.1875, y, z + .125D + 0.1875).color(f3, f4, f5, 1.0F).endVertex();// 000
+				bufferbuilder.pos(x + 0.875D - 0.1875, y, z + .125D + 0.1875).color(f3, f4, f5, 1.0F).endVertex();// 100
+				bufferbuilder.pos(x + 0.875D - 0.1875, y + 0.0625D, z + 0.75D).color(f3, f4, f5, 1.0F).endVertex();// 101
+				bufferbuilder.pos(x + .125D + 0.1875, y + 0.0625D, z + 0.75D).color(f3, f4, f5, 1.0F).endVertex();// 001
 			}
 
 			if (te.shouldRenderFace(EnumFacing.UP)) {
-				bufferbuilder.pos(x + 0.125+0.1875, y + heightModifier, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x + 0.875-0.1875, y + heightModifier, z + 0.875-0.1875).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x + 0.875-0.1875, y + heightModifier, z + 0.125+0.1875).color(f3, f4, f5, 1.0F).endVertex();
-				bufferbuilder.pos(x + 0.125+0.1875, y + heightModifier, z + 0.125+0.1875).color(f3, f4, f5, 1.0F).endVertex();
+				bufferbuilder.pos(x + 0.125 + 0.1875, y + heightModifier, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + heightModifier, z + 0.875 - 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();
+				bufferbuilder.pos(x + 0.875 - 0.1875, y + heightModifier, z + 0.125 + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();
+				bufferbuilder.pos(x + 0.125 + 0.1875, y + heightModifier, z + 0.125 + 0.1875).color(f3, f4, f5, 1.0F)
+						.endVertex();
 			}
 
 			tessellator.draw();
@@ -244,13 +271,16 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.scale(0.08, 0.08, 0.08);
 		FontRenderer fontRenderer = this.getFontRenderer();
 		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-		fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -10, 0);
-		fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -11, 0);
-		fontRenderer.drawString(text2, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
-		GlStateManager.translate(0, -12, 0);
-		fontRenderer.drawString(text3, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		if (isPlayerHoverWithDebug(te.getWorld())) {
+
+			fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -10, 0);
+			fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -11, 0);
+			fontRenderer.drawString(text2, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+			GlStateManager.translate(0, -12, 0);
+			fontRenderer.drawString(text3, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		}
 		GlStateManager.popMatrix();
 
 		GlStateManager.disableAlpha();
@@ -304,6 +334,23 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 		this.buffer.put(p_147525_1_).put(p_147525_2_).put(p_147525_3_).put(p_147525_4_);
 		this.buffer.flip();
 		return this.buffer;
+	}
+
+	public static boolean isPlayerHoverWithDebug(World world) {
+		if (world.isRemote) {
+			EntityPlayer player = MainClass.proxy.getClientPlayer();
+			RayTraceResult result = player.rayTrace(5, 10);
+			BlockPos pos = result.getBlockPos();
+			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
+			ItemStack stack = player.getHeldItemMainhand();
+			if (te instanceof TileModMana && te != null) {
+
+				if (stack.getItem() == ItemRegistry.mana_debugtool) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

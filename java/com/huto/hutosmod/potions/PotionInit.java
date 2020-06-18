@@ -40,7 +40,7 @@ public class PotionInit {
 
 	public static void registerPotionMixes() {
 		// Extends the length
-		PotionHelper.addMix(PotionTypes.AWKWARD, ItemRegistry.ruby, runicProtection);
+		PotionHelper.addMix(PotionTypes.AWKWARD, ItemRegistry.essence_drop, runicProtection);
 		PotionHelper.addMix(runicProtection, Items.REDSTONE, LONG_runicProtection);
 
 		PotionHelper.addMix(PotionTypes.AWKWARD, ItemRegistry.nullifying_powder, manaBurn);
