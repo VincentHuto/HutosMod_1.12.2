@@ -17,7 +17,7 @@ import com.huto.hutosmod.items.runes.ItemRuneMorph;
 import com.huto.hutosmod.items.runes.ItemRuneOedon;
 import com.huto.hutosmod.items.runes.ItemRuneRapture;
 import com.huto.hutosmod.items.tools.ToolAxe;
-import com.huto.hutosmod.items.tools.ToolBloodSword;
+import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.items.tools.ToolHoe;
 import com.huto.hutosmod.items.tools.ToolPickaxe;
 import com.huto.hutosmod.items.tools.ToolShovel;
@@ -51,19 +51,19 @@ public class ItemRegistry {
 	// Lists
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	// Damage Source
-	public static final DamageSource BloodSwordDamageSource = new DamageSource("bloody").setDamageBypassesArmor();
+	public static final DamageSource NullSwordDamageSource = new DamageSource("null").setDamageBypassesArmor();
 	// Items
-	public static final Item blood_ingot = new ItemBase("blood_ingot");
 	public static final Item grey_ingot = new ItemBase("grey_ingot");
 	public static final Item grey_powder = new ItemBase("grey_powder");
 	public static final Item grey_crystal = new ItemBase("grey_crystal");
+	public static final Item null_ingot = new ItemBase("null_ingot");
 	public static final Item nullifying_powder = new ItemBase("nullifying_powder");
 	public static final Item null_crystal = new ItemBase("null_crystal");
 	public static final Item null_rod = new ItemBase("null_rod");
+	public static final Item channeling_ingot = new ItemBase("channeling_ingot");
 	public static final Item mana_powder = new ItemBase("mana_powder");
 	public static final Item mana_crystal = new ItemBase("mana_crystal");
 	public static final Item channeling_rod = new ItemBase("channeling_rod");
-	public static final Item channeling_ingot = new ItemBase("channeling_ingot");
 	public static final Item essence_drop = new ItemBase("essence_drop");
 	public static final Item karmic_drop = new ItemBase("karmic_drop");
 	public static final Item karmic_bar = new ItemBase("karmic_bar");
@@ -95,29 +95,29 @@ public class ItemRegistry {
 	public static final Item wand_lightning = new ItemLightningWand("wand_lightning");
 
 	// Adding a toolMaterial
-	public static final ToolMaterial MATERIAL_BLOOD = EnumHelper.addToolMaterial("material_blood", 3, 256, 8.0F, 3.0F,
+	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 256, 8.0F, 3.0F,
 			200);
 	// Tools
-	public static final ItemSword blood_sword = new ToolBloodSword("blood_sword", MATERIAL_BLOOD);
-	public static final ItemPickaxe blood_pickaxe = new ToolPickaxe("blood_pickaxe", MATERIAL_BLOOD);
-	public static final ItemAxe blood_axe = new ToolAxe("blood_axe", MATERIAL_BLOOD);
-	public static final ItemSpade blood_shovel = new ToolShovel("blood_shovel", MATERIAL_BLOOD);
-	public static final ItemHoe blood_hoe = new ToolHoe("blood_hoe", MATERIAL_BLOOD);
+	public static final ItemSword null_sword = new ToolNullSword("null_sword", MATERIAL_NULL);
+	public static final ItemPickaxe null_pickaxe = new ToolPickaxe("null_pickaxe", MATERIAL_NULL);
+	public static final ItemAxe null_axe = new ToolAxe("null_axe", MATERIAL_NULL);
+	public static final ItemSpade null_shovel = new ToolShovel("null_shovel", MATERIAL_NULL);
+	public static final ItemHoe null_hoe = new ToolHoe("null_hoe", MATERIAL_NULL);
 
 	// Adding an armor Material
-	public static final ArmorMaterial armor_blood = EnumHelper.addArmorMaterial("armor_blood",
-			Reference.MODID + ":blood", 33, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_GLASS_BREAK, 3.0F);
+	public static final ArmorMaterial armor_null = EnumHelper.addArmorMaterial("armor_null",
+			Reference.MODID + ":null", 33, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_GLASS_BREAK, 3.0F);
 	public static final ArmorMaterial armor_mysterious_mask = EnumHelper.addArmorMaterial("armor_mysterious_mask",
 			Reference.MODID + ":mysterious_mask", 0, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_ANVIL_BREAK, 3.0F);
 	public static final ArmorMaterial armor_mana_viewer = EnumHelper.addArmorMaterial("armor_mana_viewer",
 			Reference.MODID + ":mana_viewer", 0, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_ANVIL_BREAK, 3.0F);
 	// Armor
-	public static final Item blood_helmet = new ArmourBase("blood_helmet", armor_blood, 1, EntityEquipmentSlot.HEAD);
-	public static final Item blood_chestplate = new ArmourBase("blood_chestplate", armor_blood, 1,
+	public static final Item null_helmet = new ArmourBase("null_helmet", armor_null, 1, EntityEquipmentSlot.HEAD);
+	public static final Item null_chestplate = new ArmourBase("null_chestplate", armor_null, 1,
 			EntityEquipmentSlot.CHEST);
-	public static final Item blood_leggings = new ArmourBase("blood_leggings", armor_blood, 2,
+	public static final Item null_leggings = new ArmourBase("null_leggings", armor_null, 2,
 			EntityEquipmentSlot.LEGS);
-	public static final Item blood_boots = new ArmourBase("blood_boots", armor_blood, 1, EntityEquipmentSlot.FEET);
+	public static final Item null_boots = new ArmourBase("null_boots", armor_null, 1, EntityEquipmentSlot.FEET);
 
 	public static final Item mysterious_mask = new ArmorMysteriousMask("mysterious_mask", armor_mysterious_mask, 1,
 			EntityEquipmentSlot.HEAD);

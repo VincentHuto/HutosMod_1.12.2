@@ -16,6 +16,6 @@ public class HutosTab extends CreativeTabs
 	@Override
 	public ItemStack getTabIconItem() 
 	{
-		return new ItemStack(ItemRegistry.blood_ingot);
+		return new ItemStack(ItemRegistry.null_ingot);
 	}
 }

@@ -316,22 +316,28 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		this.buffer.flip();
 		return this.buffer;
 	}
-
 	public static boolean isPlayerHoverWithDebug(World world) {
 		if (world.isRemote) {
+
 			EntityPlayer player = MainClass.proxy.getClientPlayer();
 			RayTraceResult result = player.rayTrace(5, 10);
 			BlockPos pos = result.getBlockPos();
 			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
 			ItemStack stack = player.getHeldItemMainhand();
-			if (te instanceof TileModMana && te != null) {
 
-				if (stack.getItem() == ItemRegistry.mana_debugtool) {
-					return true;
+			boolean foundOnHead = false;
+				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
+				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
+					foundOnHead = true;
+				}
+
+				if (te instanceof TileModMana && te != null) {
+					if (stack.getItem() == ItemRegistry.mana_debugtool || foundOnHead) {
+						return true;
+					}
 				}
 			}
-		}
+		
 		return false;
 	}
-
 }

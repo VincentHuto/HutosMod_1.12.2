@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Preconditions;
+import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.items.ItemRegistry;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -27,6 +29,10 @@ public class ModEnhancerRecipies {
 	public static RecipeEnhancer recipeManaGem;
 	public static RecipeEnhancer recipeChannelingRod;
 	public static RecipeEnhancer recipeManaDust;
+	public static RecipeEnhancer recipeEnchantedEarth;
+	public static RecipeEnhancer recipeEnchantedStone;
+	public static RecipeEnhancer recipeEnchantedMedia;
+	public static RecipeEnhancer recipeEnchantedSapling;
 
 	public static void init() {
 		recipeEnhancedMagatama = registerEnhancerRecipe(new ItemStack(ItemRegistry.enhancedmagatama, 1), 30,
@@ -37,25 +43,33 @@ public class ModEnhancerRecipies {
 				EnumEssecenceType.KARMIC, new ItemStack(ItemRegistry.mana_crystal, 1));
 		recipeNullPowder = registerEnhancerRecipe(new ItemStack(ItemRegistry.nullifying_powder, 1), 50,
 				EnumEssecenceType.KARMIC, new ItemStack(ItemRegistry.mana_powder, 1));
-		recipeEnhancedPick = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_pickaxe, 1), 100,
+		recipeEnhancedPick = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_pickaxe, 1), 100,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_PICKAXE, 1));
-		recipeEnhancedSword = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_sword, 1), 100,
+		recipeEnhancedSword = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_sword, 1), 100,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_SWORD, 1));
-		recipeEnhancedShovel = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_shovel, 1), 100,
+		recipeEnhancedShovel = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_shovel, 1), 100,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_SHOVEL, 1));
-		recipeEnhancedAxe = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_axe, 1), 100,
+		recipeEnhancedAxe = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_axe, 1), 100,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_AXE, 1));
 		recipeManaGem = registerEnhancerRecipe(new ItemStack(ItemRegistry.mana_crystal, 1), 15, EnumEssecenceType.MANA,
 				new ItemStack(ItemRegistry.grey_crystal, 1));
 		recipeManaDust = registerEnhancerRecipe(new ItemStack(ItemRegistry.mana_powder, 1), 10, EnumEssecenceType.MANA,
 				new ItemStack(ItemRegistry.grey_powder, 1));
-		recipeEnhancedHelm = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_helmet, 1), 200,
+		recipeEnchantedStone = registerEnhancerRecipe(new ItemStack(BlockRegistry.enchanted_stone, 1), 10,
+				EnumEssecenceType.MANA, new ItemStack(Blocks.STONE, 1));
+		recipeEnchantedEarth = registerEnhancerRecipe(new ItemStack(BlockRegistry.Mystic_Earth, 1), 10,
+				EnumEssecenceType.MANA, new ItemStack(Blocks.GRASS, 1));
+		recipeEnchantedMedia = registerEnhancerRecipe(new ItemStack(BlockRegistry.Mystic_Media, 1), 10,
+				EnumEssecenceType.MANA, new ItemStack(Blocks.COBBLESTONE, 1));
+		recipeEnchantedSapling = registerEnhancerRecipe(new ItemStack(BlockRegistry.Mystic_Sapling, 1), 10,
+				EnumEssecenceType.MANA, new ItemStack(Blocks.SAPLING, 1));
+		recipeEnhancedHelm = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_helmet, 1), 200,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_HELMET, 1));
-		recipeEnhancedChestplate = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_chestplate, 1), 200,
+		recipeEnhancedChestplate = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_chestplate, 1), 200,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_CHESTPLATE, 1));
-		recipeEnhancedPants = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_leggings, 1), 200,
+		recipeEnhancedPants = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_leggings, 1), 200,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_LEGGINGS, 1));
-		recipeEnhancedBoots = registerEnhancerRecipe(new ItemStack(ItemRegistry.blood_boots, 1), 200,
+		recipeEnhancedBoots = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_boots, 1), 200,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_BOOTS, 1));
 
 	}

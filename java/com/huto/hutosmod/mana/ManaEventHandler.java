@@ -60,17 +60,17 @@ public class ManaEventHandler {
 
 			fullArmor = 1;
 		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.blood_chestplate) {
+		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate) {
 
 			fullArmor = 2;
 		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.blood_chestplate
-				|| stack.getItem() == ItemRegistry.blood_leggings) {
+		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate
+				|| stack.getItem() == ItemRegistry.null_leggings) {
 
 			fullArmor = 3;
 		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.blood_chestplate
-				|| stack.getItem() == ItemRegistry.blood_leggings || stack.getItem() == ItemRegistry.blood_boots) {
+		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate
+				|| stack.getItem() == ItemRegistry.null_leggings || stack.getItem() == ItemRegistry.null_boots) {
 
 			fullArmor = 4;
 		}

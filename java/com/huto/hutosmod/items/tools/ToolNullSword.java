@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-public class ToolBloodSword extends ItemSword {
+public class ToolNullSword extends ItemSword {
 
-	public ToolBloodSword(String name, ToolMaterial material) {
+	public ToolNullSword(String name, ToolMaterial material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -26,8 +26,8 @@ public class ToolBloodSword extends ItemSword {
 	public boolean hitEntity(ItemStack itemstack, EntityLivingBase attackedEntity, EntityLivingBase attacker)
 
 	{
-		attackedEntity.attackEntityFrom(ItemRegistry.BloodSwordDamageSource, 10F);
-		System.out.println("HIT WITH BLOOD SWORD");
+		attackedEntity.attackEntityFrom(ItemRegistry.NullSwordDamageSource, 10F);
+		System.out.println("HIT WITH Null SWORD");
 		// attackedEntity.dropItem(ModRegistry.Ruby, 5);
 
 		return super.hitEntity(itemstack, attackedEntity, attacker);
@@ -36,7 +36,7 @@ public class ToolBloodSword extends ItemSword {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("§4 +5 Blood Damage §r");
+		tooltip.add("§4 +5 Soul Damage §r");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

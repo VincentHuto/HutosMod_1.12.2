@@ -40,7 +40,7 @@ public class RenderTileBellJar extends TileEntitySpecialRenderer<TileEntityBellJ
 		sync %= 10;
 		if (sync == 0)
 			PacketHandler.INSTANCE
-					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.renders.RenderTileBellJar", "mana"));
+					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.render.tile.RenderTileBellJar", "mana"));
 		GlStateManager.disableLighting();
 		RANDOM.setSeed(31100L);
 		GlStateManager.getFloat(2982, MODELVIEW);

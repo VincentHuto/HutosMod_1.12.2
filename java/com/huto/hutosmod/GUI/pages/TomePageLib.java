@@ -76,14 +76,14 @@ public class TomePageLib {
 		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 4", "Nullification",
 				new ItemStack(ItemRegistry.null_crystal), I18n.format(INTRO_PAGE_4)));
 		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 5", "The power of vitals",
-				new ItemStack(ItemRegistry.blood_ingot), I18n.format(INTRO_PAGE_5)));
+				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_5)));
 
 		//World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_1)));
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
-				new ItemStack(ItemRegistry.blood_chestplate), I18n.format(EQUIP_PAGE_1)));
+				new ItemStack(ItemRegistry.null_chestplate), I18n.format(EQUIP_PAGE_1)));
 
 		// Machines
 

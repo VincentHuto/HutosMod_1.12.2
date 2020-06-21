@@ -1,6 +1,6 @@
 itemGroup.tabHutosMod=Hutos Mod
 item.ruby.name=Ruby
-item.blood_ingot.name=Bloody Ingot
+item.null_ingot.name=Nullified Ingot
 item.channeling_ingot.name=Conductive Ingot
 item.grey_ingot.name=Grey Ingot
 item.channeling_rod.name=Conductive stick
@@ -34,16 +34,16 @@ item.purging_stone.name=Purging Stone
 item.grand_purging_stone.name=Grand Purging Stone
 
 
-item.blood_sword.name=Bloody Sword
-item.blood_pickaxe.name=Bloody Pickaxe
-item.blood_shovel.name=Bloody Shovel
-item.blood_axe.name=Bloody Axe
-item.blood_hoe.name=Bloody Harvester
+item.null_sword.name=Nullified Sword
+item.null_pickaxe.name=Nullified Pickaxe
+item.null_shovel.name=Nullified Shovel
+item.null_axe.name=Nullified Axe
+item.null_hoe.name=Nullified Harvester
 
-item.blood_helmet.name=Bloody Helm
-item.blood_chestplate.name=Bloody Curiass
-item.blood_leggings.name=Bloody Grieves
-item.blood_boots.name=Bloody Boots
+item.null_helmet.name=Nullified Helm
+item.null_chestplate.name=Nullified Curiass
+item.null_leggings.name=Nullified Grieves
+item.null_boots.name=Nullified Boots
 
 item.mana_viewer.name=Mana Viewer
 item.mysterious_mask.name=Mysterious Mask

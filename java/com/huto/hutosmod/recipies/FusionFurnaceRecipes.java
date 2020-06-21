@@ -26,14 +26,9 @@ public class FusionFurnaceRecipes {
 	{
 		addFusionRecipe(new ItemStack(Blocks.ACACIA_FENCE), new ItemStack(Blocks.ACACIA_FENCE_GATE), new ItemStack(ItemRegistry.blood_sword), 5.0F);
 		// This works because they are from the same mod
-		addFusionRecipe(new ItemStack(ItemRegistry.ruby), new ItemStack(ItemRegistry.blood_helmet),
-				new ItemStack(ItemRegistry.mysterious_mask), 50.0F);
-		// This works because they are from the same mod
 		addFusionRecipe(new ItemStack(Items.IRON_CHESTPLATE), new ItemStack(Items.REDSTONE),
 				new ItemStack(ItemRegistry.blood_chestplate), 10.0F);
-		// This shouldnt work because its from 2 seperate placws
-		addFusionRecipe(new ItemStack(ItemRegistry.ruby), new ItemStack(Items.IRON_INGOT),
-				new ItemStack(ItemRegistry.blood_ingot, 2), 1.0F);
+
 		
 	}
 

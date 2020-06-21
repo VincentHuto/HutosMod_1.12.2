@@ -4,19 +4,16 @@ import java.util.Random;
 
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.items.tools.ToolBloodSword;
+import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.tileentity.TileModMana;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -111,8 +108,8 @@ public class ModEventHandler {
 	public void onKillWithBloodySword(LivingDeathEvent e) {
 		if (e.getSource().getTrueSource() instanceof EntityPlayer) {
 			EntityPlayer p = (EntityPlayer) e.getSource().getTrueSource();
-			if (p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() instanceof ToolBloodSword) {
-				System.out.println("Killed with Bloodsword");
+			if (p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() instanceof ToolNullSword) {
+				System.out.println("Killed with null sword");
 				Random rand = new Random();
 				e.getEntity().dropItem(ItemRegistry.essence_drop, /* rand.nextInt(3) **/ 1);
 			}

@@ -26,7 +26,7 @@ public class ModFuserRecipes {
 		recipeGrandPurgingStone = registerRuneAltarRecipe(new ItemStack(ItemRegistry.grand_purging_stone, 1), 100,
 				new ItemStack(ItemRegistry.purging_stone, 1), new ItemStack(ItemRegistry.karmic_drop, 1));
 		recipeGreyBar = registerRuneAltarRecipe(new ItemStack(ItemRegistry.grey_ingot, 1), 10,
-				new ItemStack(ItemRegistry.channeling_ingot, 1), new ItemStack(ItemRegistry.blood_ingot, 1));
+				new ItemStack(ItemRegistry.channeling_ingot, 1), new ItemStack(ItemRegistry.null_ingot, 1));
 		recipeKarmicBar = registerRuneAltarRecipe(new ItemStack(ItemRegistry.karmic_bar, 1), 10,
 				new ItemStack(ItemRegistry.karmic_drop, 1), new ItemStack(ItemRegistry.grey_ingot, 1));
 		recipePhantasmalPane = registerRuneAltarRecipe(new ItemStack(ItemRegistry.phantasmal_pane, 1), 10,

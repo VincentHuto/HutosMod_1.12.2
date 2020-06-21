@@ -75,8 +75,8 @@ public class ArmorMysteriousMask extends ItemArmor{
 					50, 90, 0, 1, 1, 0.3, .50);
 			TestParticle newEffect2 = new TestParticle(world, player.posX, player.posY + 2, player.posZ, 0, 0.01, 0, 50,
 					30, 90, 1, 1, 1, 0.2, .50);
-			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
-			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+	//		Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+	//		Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
 
 		}
 

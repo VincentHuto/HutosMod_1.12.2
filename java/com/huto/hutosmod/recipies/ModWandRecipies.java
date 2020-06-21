@@ -39,7 +39,7 @@ public class ModWandRecipies {
 		recipeSacrifice = registerRuneAltarRecipe(new ItemStack(ItemRegistry.wand_sacrifice, 1),220,
 				new ItemStack(ItemRegistry.channeling_ingot, 1),new ItemStack(ItemRegistry.channeling_ingot, 1), new ItemStack(ItemRegistry.null_crystal, 1), new ItemStack(ItemRegistry.mind_spike, 1));
 		recipeRending = registerRuneAltarRecipe(new ItemStack(ItemRegistry.wand_rending, 1),220,
-				new ItemStack(ItemRegistry.channeling_ingot, 1),new ItemStack(ItemRegistry.channeling_rod, 1), new ItemStack(ItemRegistry.null_crystal, 1), new ItemStack(ItemRegistry.blood_sword, 1));
+				new ItemStack(ItemRegistry.channeling_ingot, 1),new ItemStack(ItemRegistry.channeling_rod, 1), new ItemStack(ItemRegistry.null_crystal, 1), new ItemStack(ItemRegistry.null_sword, 1));
 		
 		recipeHealSelf = registerRuneAltarRecipe(new ItemStack(ItemRegistry.wand_healself, 1),250,
 				new ItemStack(ItemRegistry.channeling_ingot, 1),new ItemStack(ItemRegistry.channeling_rod, 1), new ItemStack(ItemRegistry.mana_crystal, 1), new ItemStack(Items.GOLDEN_APPLE, 1));
