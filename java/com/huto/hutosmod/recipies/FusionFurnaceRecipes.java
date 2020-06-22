@@ -24,10 +24,10 @@ public class FusionFurnaceRecipes {
 	
 	private FusionFurnaceRecipes() 
 	{
-		addFusionRecipe(new ItemStack(Blocks.ACACIA_FENCE), new ItemStack(Blocks.ACACIA_FENCE_GATE), new ItemStack(ItemRegistry.blood_sword), 5.0F);
+		addFusionRecipe(new ItemStack(Blocks.ACACIA_FENCE), new ItemStack(Blocks.ACACIA_FENCE_GATE), new ItemStack(ItemRegistry.null_sword), 5.0F);
 		// This works because they are from the same mod
 		addFusionRecipe(new ItemStack(Items.IRON_CHESTPLATE), new ItemStack(Items.REDSTONE),
-				new ItemStack(ItemRegistry.blood_chestplate), 10.0F);
+				new ItemStack(ItemRegistry.null_chestplate), 10.0F);
 
 		
 	}

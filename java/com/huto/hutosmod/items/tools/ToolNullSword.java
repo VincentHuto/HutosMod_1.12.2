@@ -27,7 +27,7 @@ public class ToolNullSword extends ItemSword {
 
 	{
 		attackedEntity.attackEntityFrom(ItemRegistry.NullSwordDamageSource, 10F);
-		System.out.println("HIT WITH Null SWORD");
+	//	System.out.println("HIT WITH Null SWORD");
 		// attackedEntity.dropItem(ModRegistry.Ruby, 5);
 
 		return super.hitEntity(itemstack, attackedEntity, attacker);

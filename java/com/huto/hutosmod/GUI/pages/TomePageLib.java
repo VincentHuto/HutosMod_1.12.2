@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
 public class TomePageLib {
 
 	// This is the page array for the book, needed because i dont know how to add
@@ -26,19 +25,21 @@ public class TomePageLib {
 	public static List<GuiTomePage> RunesPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> ElderPageList = new ArrayList<GuiTomePage>();
 
-	//Text Locations
+	// Text Locations
 	public static String INTRO_PAGE_1 = "mystictome.intro.page.1.text";
 	public static String INTRO_PAGE_2 = "mystictome.intro.page.2.text";
 	public static String INTRO_PAGE_3 = "mystictome.intro.page.3.text";
 	public static String INTRO_PAGE_4 = "mystictome.intro.page.4.text";
 	public static String INTRO_PAGE_5 = "mystictome.intro.page.5.text";
-	
-	//World
+	public static String INTRO_PAGE_6 = "mystictome.intro.page.6.text";
+	public static String INTRO_PAGE_7 = "mystictome.intro.page.7.text";
+
+	// World
 	public static String WORLD_PAGE_1 = "mystictome.world.page.1.text";
-	
-	//Equips
+
+	// Equips
 	public static String EQUIP_PAGE_1 = "mystictome.equip.page.1.text";
-	//Machines
+	// Machines
 	public static String MACHINE_PAGE_1 = "mystictome.blocks.page.1.text";
 	public static String MACHINE_PAGE_2 = "mystictome.blocks.page.2.text";
 	public static String MACHINE_PAGE_3 = "mystictome.blocks.page.3.text";
@@ -47,15 +48,15 @@ public class TomePageLib {
 	public static String MACHINE_PAGE_6 = "mystictome.blocks.page.6.text";
 	public static String MACHINE_PAGE_7 = "mystictome.blocks.page.7.text";
 	public static String MACHINE_PAGE_8 = "mystictome.blocks.page.8.text";
-	//Wands
+	// Wands
 	public static String WANDS_PAGE_1 = "mystictome.wands.page.1.text";
-	//Runes
+	// Runes
 	public static String RUNES_PAGE_1 = "mystictome.runes.page.1.text";
-	//Karma
+	// Karma
 	public static String KARMA_PAGE_1 = "mystictome.karma.page.1.text";
-	//Elder
+	// Elder
 	public static String ELDER_PAGE_1 = "mystictome.elder.page.1.text";
-	
+
 	public static void registerPages() {
 		IntroPageList.clear();
 		KarmaPageList.clear();
@@ -66,19 +67,24 @@ public class TomePageLib {
 		RunesPageList.clear();
 		ElderPageList.clear();
 		// LEXICON PAGES
+
 		// Intro
 		IntroPageList.add(new GuiTomePage(0, EnumTomeCatagories.INTRO, "Page 1", "In the Begining",
 				new ItemStack(ItemRegistry.channeling_ingot), I18n.format(INTRO_PAGE_1)));
-		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "Page 2", "A World of essence",
-				new ItemStack(ItemRegistry.essence_drop), I18n.format(INTRO_PAGE_2)));
-		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Page 3", "Channeling Basics",
-				new ItemStack(ItemRegistry.channeling_rod), I18n.format(INTRO_PAGE_3)));
-		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 4", "Nullification",
-				new ItemStack(ItemRegistry.null_crystal), I18n.format(INTRO_PAGE_4)));
-		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 5", "The power of vitals",
-				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_5)));
+		IntroPageList.add(new GuiTomePage(1, EnumTomeCatagories.INTRO, "Page 2", "Duality of Nature",
+				new ItemStack(ItemRegistry.magatamabead), I18n.format(INTRO_PAGE_2)));
+		IntroPageList.add(new GuiTomePage(2, EnumTomeCatagories.INTRO, "Page 3", "Cosmic Vibrations",
+				new ItemStack(ItemRegistry.energy_focus), I18n.format(INTRO_PAGE_3)));
+		IntroPageList.add(new GuiTomePage(3, EnumTomeCatagories.INTRO, "Page 4", "A World of essence",
+				new ItemStack(ItemRegistry.essence_drop), I18n.format(INTRO_PAGE_4)));
+		IntroPageList.add(new GuiTomePage(4, EnumTomeCatagories.INTRO, "Page 5", "Channeling Basics",
+				new ItemStack(ItemRegistry.channeling_rod), I18n.format(INTRO_PAGE_5)));
+		IntroPageList.add(new GuiTomePage(5, EnumTomeCatagories.INTRO, "Page 6", "Nullification",
+				new ItemStack(ItemRegistry.null_crystal), I18n.format(INTRO_PAGE_6)));
+		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 7", "The power of vitals",
+				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_7)));
 
-		//World Gen
+		// World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_1)));
 		// Weapons and Armor
@@ -97,9 +103,8 @@ public class TomePageLib {
 				new ItemStack(BlockRegistry.mana_storagedrum), I18n.format(MACHINE_PAGE_4)));
 		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Essence Enhancer", "Infusing and Upgrading",
 				new ItemStack(BlockRegistry.essecence_enhancer), I18n.format(MACHINE_PAGE_5)));
-		BlocksPageList.add(
-				new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
-						new ItemStack(BlockRegistry.mana_fuser), I18n.format(MACHINE_PAGE_6)));
+		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
+				new ItemStack(BlockRegistry.mana_fuser), I18n.format(MACHINE_PAGE_6)));
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
 				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
 		BlocksPageList.add(new GuiTomePage(7, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
@@ -112,10 +117,10 @@ public class TomePageLib {
 		// Runes
 		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "Etching your mind",
 				new ItemStack(ItemRegistry.rune_blank), I18n.format(RUNES_PAGE_1)));
-		//Karma
+		// Karma
 		KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
 				new ItemStack(ItemRegistry.karmic_drop), I18n.format(KARMA_PAGE_1)));
-		//Elder
+		// Elder
 		ElderPageList.add(new GuiTomePage(0, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
 				new ItemStack(ItemRegistry.rune_milkweed_c), I18n.format(ELDER_PAGE_1)));
 	}

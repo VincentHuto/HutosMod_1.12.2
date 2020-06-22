@@ -23,12 +23,13 @@ public class GuiTomePage extends GuiScreen {
 	int guiWidth = 175;
 	int guiHeight = 228;
 	int left, top;
-	final int BUTTONCLOSE = 0, ARROWF = 1, ARROWB = 2, TITLEBUTTON = 3;
+	final int ARROWF = 0, ARROWB = 1, TITLEBUTTON = 2, CLOSEBUTTON = 3;
 
-	GuiButton buttonclose;
 	GuiButtonArrowForward arrowF;
 	GuiButtonArrowBackward arrowB;
 	GuiButtonTextured buttonTitle;
+	GuiButtonTextured buttonCloseTab;
+
 	GuiTextField textBox;
 
 	int pageNum;
@@ -37,7 +38,7 @@ public class GuiTomePage extends GuiScreen {
 	ItemStack icon;
 	String text;
 	EnumTomeCatagories catagory;
-	
+
 	@SideOnly(Side.CLIENT)
 	public GuiTomePage(int pageNumIn, EnumTomeCatagories catagoryIn, String titleIn, String subtitleIn,
 			ItemStack iconIn, String textIn) {
@@ -83,60 +84,62 @@ public class GuiTomePage extends GuiScreen {
 			GlStateManager.translate((width / 2) - 20, centerY + 10, 0);
 			GlStateManager.scale(0.9, 1, 1);
 			GlStateManager.translate(-65, 20, 0);
-			// This statment allows switching all text from english to alko
-			/*
-			 * if(false) { this.fontRenderer = ModTextFormatting.getAkloFont(); }
-			 */
 			fontRenderer.drawSplitString(text, 0, 0, 175, 0);
 
 		}
 		GlStateManager.popMatrix();
-		buttonclose.drawButton(mc, mouseX, mouseY, 111);
-		if (this.catagory == EnumTomeCatagories.INTRO) {
-			if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+		GlStateManager.pushMatrix();
+		{
+			GlStateManager.color(1, 1, 1, 1);
+			if (this.catagory == EnumTomeCatagories.INTRO) {
+				if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.EQUIPS) {
-			if (pageNum != (TomePageLib.ArmorPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.EQUIPS) {
+				if (pageNum != (TomePageLib.ArmorPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.KARMA) {
-			if (pageNum != (TomePageLib.KarmaPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.KARMA) {
+				if (pageNum != (TomePageLib.KarmaPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.WORLDGEN) {
-			if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.WORLDGEN) {
+				if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.MACHINES) {
-			if (pageNum != (TomePageLib.BlocksPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.MACHINES) {
+				if (pageNum != (TomePageLib.BlocksPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.RUNES) {
-			if (pageNum != (TomePageLib.RunesPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.RUNES) {
+				if (pageNum != (TomePageLib.RunesPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.WANDS) {
-			if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.WANDS) {
+				if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (this.catagory == EnumTomeCatagories.ELDER) {
-			if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
-				arrowF.drawButton(mc, mouseX, mouseY, 111);
+			if (this.catagory == EnumTomeCatagories.ELDER) {
+				if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 			}
-		}
-		if (pageNum != 0) {
+			if (pageNum != 0) {
 
-			arrowB.drawButton(mc, mouseX, mouseY, 211);
+				arrowB.drawButton(mc, mouseX, mouseY, 211);
+			}
+			buttonTitle.drawButton(mc, mouseX, mouseY, 311);
+			buttonCloseTab.drawButton(mc, mouseX, mouseY, 411);
+
+			GlStateManager.popMatrix();
 		}
-		buttonTitle.drawButton(mc, mouseX, mouseY, 311);
 		GlStateManager.translate(3, 0, 0);
 		GlStateManager.pushMatrix();
 		{
@@ -156,7 +159,11 @@ public class GuiTomePage extends GuiScreen {
 		List<String> titlePage = new ArrayList<String>();
 		titlePage.add(I18n.format("Title"));
 		titlePage.add(I18n.format("Return to Catagories"));
-		drawTooltip(titlePage, mouseX, mouseY, left - guiWidth + 157, top + guiHeight - 209, 16, 16);
+		drawTooltip(titlePage, mouseX, mouseY, left - guiWidth + 149, top + guiHeight - 209, 24, 16);
+
+		List<String> ClosePage = new ArrayList<String>();
+		ClosePage.add(I18n.format("Close Book"));
+		drawTooltip(ClosePage, mouseX, mouseY, left - guiWidth + 149, top + guiHeight - 193, 24, 16);
 	}
 
 	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height) {
@@ -173,8 +180,7 @@ public class GuiTomePage extends GuiScreen {
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
 		buttonList.clear();
-		buttonList.add(buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 135, top + guiHeight - 21, 100, 20,
-				"Close"));
+
 		if (this.catagory == EnumTomeCatagories.INTRO) {
 			if (pageNum != (TomePageLib.IntroPageList.size() - 1)) {
 				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
@@ -225,7 +231,7 @@ public class GuiTomePage extends GuiScreen {
 			if (pageNum != 0) {
 				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
 			}
-			
+
 		}
 		if (this.catagory == EnumTomeCatagories.ELDER) {
 			if (pageNum != (TomePageLib.ElderPageList.size() - 1)) {
@@ -236,8 +242,11 @@ public class GuiTomePage extends GuiScreen {
 			}
 		}
 
-		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 157,
-				top + guiHeight - 209, 16, 16, 174, 64));
+		buttonList.add(buttonTitle = new GuiButtonTextured(texture, TITLEBUTTON, left - guiWidth + 150,
+				top + guiHeight - 209, 24, 16, 174, 32));
+
+		buttonList.add(buttonCloseTab = new GuiButtonTextured(texture, CLOSEBUTTON, left - guiWidth + 150,
+				top + guiHeight - 193, 24, 16, 174, 64));
 
 		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 155, top + guiHeight - 227, 14, 14);
 		updateButtons();
@@ -246,7 +255,8 @@ public class GuiTomePage extends GuiScreen {
 	}
 
 	public void updateButtons() {
-		buttonclose.enabled = true;
+		buttonCloseTab.enabled = true;
+
 	}
 
 	public void updateTextBoxes() {
@@ -309,7 +319,7 @@ public class GuiTomePage extends GuiScreen {
 						mc.displayGuiScreen(TomePageLib.RunesPageList.get(TomePageLib.RunesPageList.size() - 1));
 					}
 				}
-				
+
 				if (this.catagory == EnumTomeCatagories.ELDER) {
 					if (searchNum < TomePageLib.ElderPageList.size()) {
 						mc.displayGuiScreen(TomePageLib.ElderPageList.get(searchNum));
@@ -326,7 +336,7 @@ public class GuiTomePage extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		switch (button.id) {
-		case BUTTONCLOSE:
+		case CLOSEBUTTON:
 			mc.displayGuiScreen(null);
 			break;
 		case ARROWF:
@@ -466,7 +476,7 @@ public class GuiTomePage extends GuiScreen {
 					break;
 				}
 			}
-			
+
 			if (this.catagory == EnumTomeCatagories.ELDER) {
 				if (pageNum != 0) {
 					mc.displayGuiScreen(TomePageLib.ElderPageList.get((pageNum - 1)));
@@ -477,11 +487,10 @@ public class GuiTomePage extends GuiScreen {
 				}
 			}
 
-
 		case TITLEBUTTON:
 			if (this.catagory == EnumTomeCatagories.ELDER) {
-			mc.displayGuiScreen(new GuiTomeTitle(true));
-			}else {
+				mc.displayGuiScreen(new GuiTomeTitle(true));
+			} else {
 				mc.displayGuiScreen(new GuiTomeTitle(false));
 
 			}

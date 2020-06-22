@@ -14,6 +14,7 @@ import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemEnderEye;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -39,22 +40,19 @@ public class ModEventHandler {
 	@SubscribeEvent
 	public void onPlayerPickupXP(PlayerPickupXpEvent e) {
 	}
-	
-	//Replaced with InRender Hover function
-/*
-	@SubscribeEvent
-	public void playerHoverWithDebug(PlayerTickEvent e) {
-		RayTraceResult result = e.player.rayTrace(5, 10);
-		BlockPos pos = result.getBlockPos();
-		TileModMana te = (TileModMana) e.player.getEntityWorld().getTileEntity(pos);
-		ItemStack stack = e.player.getHeldItemMainhand();
 
-		if (te instanceof TileModMana && te != null) {
-			if (stack.getItem() == ItemRegistry.mana_debugtool) {
-			//	System.out.println(te.getManaValue());
-			}
-		}
-	}*/
+	// Replaced with InRender Hover function
+	/*
+	 * @SubscribeEvent public void playerHoverWithDebug(PlayerTickEvent e) {
+	 * RayTraceResult result = e.player.rayTrace(5, 10); BlockPos pos =
+	 * result.getBlockPos(); TileModMana te = (TileModMana)
+	 * e.player.getEntityWorld().getTileEntity(pos); ItemStack stack =
+	 * e.player.getHeldItemMainhand();
+	 * 
+	 * if (te instanceof TileModMana && te != null) { if (stack.getItem() ==
+	 * ItemRegistry.mana_debugtool) { // System.out.println(te.getManaValue()); } }
+	 * }
+	 */
 
 	@SubscribeEvent
 	public void onPlayerUseWand(PlayerTickEvent e) {
@@ -106,15 +104,11 @@ public class ModEventHandler {
 
 	@SubscribeEvent
 	public void onKillWithBloodySword(LivingDeathEvent e) {
-		if (e.getSource().getTrueSource() instanceof EntityPlayer) {
-			EntityPlayer p = (EntityPlayer) e.getSource().getTrueSource();
-			if (p.getHeldItemMainhand() != null && p.getHeldItemMainhand().getItem() instanceof ToolNullSword) {
-				System.out.println("Killed with null sword");
-				Random rand = new Random();
-				e.getEntity().dropItem(ItemRegistry.essence_drop, /* rand.nextInt(3) **/ 1);
-			}
+		if (e.getSource() == ItemRegistry.NullSwordDamageSource) {
+			System.out.println("Killed with null Damage");
+			Random rand = new Random();
+			e.getEntity().dropItem(ItemRegistry.essence_drop,  rand.nextInt(7));
 		}
-
 	}
 
 }

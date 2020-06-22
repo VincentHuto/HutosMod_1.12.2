@@ -95,7 +95,7 @@ public class ItemRegistry {
 	public static final Item wand_lightning = new ItemLightningWand("wand_lightning");
 
 	// Adding a toolMaterial
-	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 256, 8.0F, 3.0F,
+	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 256, 8.0F, 0.3F,
 			200);
 	// Tools
 	public static final ItemSword null_sword = new ToolNullSword("null_sword", MATERIAL_NULL);

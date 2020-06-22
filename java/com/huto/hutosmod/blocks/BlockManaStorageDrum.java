@@ -204,7 +204,7 @@ public class BlockManaStorageDrum extends BlockBase {
 			}
 			// Upgrade clause
 			if (stackItem == ItemRegistry.magatamabead
-					&& player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot && drum.getTankLevel() < 9
+					&& player.getHeldItemOffhand().getItem() == ItemRegistry.null_ingot && drum.getTankLevel() < 9
 					|| stackItem == ItemRegistry.enhancedmagatama && drum.getTankLevel() < 9) {
 				drum.addTankLevel(1);
 				player.getHeldItemMainhand().shrink(1);

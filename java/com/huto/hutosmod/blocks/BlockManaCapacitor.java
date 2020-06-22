@@ -167,7 +167,7 @@ public class BlockManaCapacitor extends BlockBase {
 			}
 		}
 		// Upgrade clause
-		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.blood_ingot
+		if (stackItem == ItemRegistry.magatamabead && player.getHeldItemOffhand().getItem() == ItemRegistry.null_ingot
 				&& capac.getTankLevel() < 3 || stackItem == ItemRegistry.enhancedmagatama && capac.getTankLevel() < 4) {
 			capac.addTankLevel(1);
 			player.getHeldItemMainhand().shrink(1);
