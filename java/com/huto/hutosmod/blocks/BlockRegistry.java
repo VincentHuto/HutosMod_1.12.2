@@ -32,7 +32,7 @@ public class BlockRegistry {
 	public static final Block activated_obsidian = new BlockActivatedObsidian("activated_obsidian", Material.IRON);
 	public static final Block nether_block = new BlockNetherBlock("nether_block", Material.ROCK).setHardness(5F)
 			.setResistance(15F);
-	public static final Block Fusion_Furnace = new BlockFusionFurnace("fusion_furnace");
+	public static final Block display_pedestal = new BlockDisplayPedestal("display_pedestal", Material.ROCK);
 	public static final Block wand_maker = new BlockWandMaker("wand_maker", Material.ROCK);
 	public static final Block mana_belljar = new BlockManaBelljar("mana_belljar", Material.GLASS);
 	public static final Block mana_capacitor = new BlockManaCapacitor("mana_capacitor", Material.GLASS);

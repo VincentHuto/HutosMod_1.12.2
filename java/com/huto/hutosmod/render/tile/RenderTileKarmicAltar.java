@@ -100,16 +100,19 @@ public class RenderTileKarmicAltar extends TileEntitySpecialRenderer<TileEntityK
 
 	}
 
+
 	public static boolean isPlayerHoverWithDebug(World world) {
 		if (world.isRemote) {
 
 			EntityPlayer player = MainClass.proxy.getClientPlayer();
 			RayTraceResult result = player.rayTrace(5, 10);
 			BlockPos pos = result.getBlockPos();
-			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
-			ItemStack stack = player.getHeldItemMainhand();
+			if (player.getEntityWorld().getTileEntity(pos) instanceof TileModMana) {
 
-			boolean foundOnHead = false;
+				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
+				ItemStack stack = player.getHeldItemMainhand();
+
+				boolean foundOnHead = false;
 				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
 				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
 					foundOnHead = true;
@@ -121,7 +124,7 @@ public class RenderTileKarmicAltar extends TileEntitySpecialRenderer<TileEntityK
 					}
 				}
 			}
-		
+		}
 		return false;
 	}
 }

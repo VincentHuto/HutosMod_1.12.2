@@ -55,22 +55,24 @@ public class RenderTileKarmicExtractor extends TileEntitySpecialRenderer<TileEnt
 			EntityPlayer player = MainClass.proxy.getClientPlayer();
 			RayTraceResult result = player.rayTrace(5, 10);
 			BlockPos pos = result.getBlockPos();
-			TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
-			ItemStack stack = player.getHeldItemMainhand();
+			if (player.getEntityWorld().getTileEntity(pos) instanceof TileModMana) {
 
-			boolean foundOnHead = false;
-			ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
-			if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
-				foundOnHead = true;
-			}
+				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
+				ItemStack stack = player.getHeldItemMainhand();
 
-			if (te instanceof TileModMana && te != null) {
-				if (stack.getItem() == ItemRegistry.mana_debugtool || foundOnHead) {
-					return true;
+				boolean foundOnHead = false;
+				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
+				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
+					foundOnHead = true;
+				}
+
+				if (te instanceof TileModMana && te != null) {
+					if (stack.getItem() == ItemRegistry.mana_debugtool || foundOnHead) {
+						return true;
+					}
 				}
 			}
 		}
-
 		return false;
 	}
 }

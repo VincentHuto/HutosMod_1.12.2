@@ -30,8 +30,8 @@ public class ModFuserRecipes {
 		recipeKarmicBar = registerRuneAltarRecipe(new ItemStack(ItemRegistry.karmic_bar, 1), 10,
 				new ItemStack(ItemRegistry.karmic_drop, 1), new ItemStack(ItemRegistry.grey_ingot, 1));
 		recipePhantasmalPane = registerRuneAltarRecipe(new ItemStack(ItemRegistry.phantasmal_pane, 1), 10,
-				new ItemStack(ItemRegistry.karmic_drop, 1), new ItemStack(ItemRegistry.readied_pane, 1));
-
+				new ItemStack(ItemRegistry.essence_drop, 1), new ItemStack(ItemRegistry.readied_pane, 1),
+				new ItemStack(ItemRegistry.anti_tear, 1));
 		recipeUpgradeBlock = registerRuneAltarRecipe(new ItemStack(ItemRegistry.upgrade_block, 1), 50,
 				new ItemStack(ItemRegistry.upgrade_blank, 1), new ItemStack(ItemRegistry.mana_crystal, 1));
 		recipeUpgradePeople = registerRuneAltarRecipe(new ItemStack(ItemRegistry.upgrade_player, 1), 50,

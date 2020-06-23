@@ -1,4 +1,5 @@
 itemGroup.tabHutosMod=Hutos Mod
+
 item.ruby.name=Ruby
 item.null_ingot.name=Nullified Ingot
 item.channeling_ingot.name=Conductive Ingot
@@ -15,6 +16,7 @@ item.maker_activator.name=Wand Fabricator Conduit
 item.mana_extractor.name=Mana Extractor
 item.essence_drop.name=Essence Drop
 item.karmic_drop.name=Karmic Drop
+item.anti_tear.name=Anti Tear
 item.mana_debugtool.name=Mana Debug Tool
 item.mind_spike.name=Mind Spike
 item.magatamabead.name=Magatama bead
@@ -57,7 +59,7 @@ item.wand_sacrifice.name=Wand Of Sacrifice
 item.wand_rending.name=Wand Of Rending
 item.wand_healself.name=Wand Of Healing
 item.wand_healother.name=Wand Of Generosity
-
+item.wand_lightning.name=Wand of Shocking
 item.rune_metamorphosis.name=Metamorphosis Rune
 item.rune_lake.name=Arcane Lake Rune
 item.rune_clawmark.name=Clawmark Rune
@@ -97,6 +99,7 @@ tile.mana_fuser.name=Mana Conglomerator
 tile.karmic_extractor.name=Karmic Extractor
 tile.celestial_actuator.name=Celestial Actuator
 tile.enchanted_stone_Smooth.name=Smooth Enchanted Stone
+tile.display_pedestal.name=Display Pedestal
 
 
 gui.tooltip68=What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.
@@ -125,7 +128,8 @@ mystictome.intro.page.2.text=   The reverberations previously mentioned are in a
 mystictome.intro.page.3.text=   One of the quirks of the antimatter/matter duality is that the vibrations of these particles are opposite and equal as well. These vibrations follow the same principle that all other forms of vibration be it sound/light/electricity etc, in that they amplify when met with similar waves and cancel when met with opposing waves. Building on the concentration effect of these vibrations, the idea of karma can even be traced back as the balance of these vibrations within your body, and mana is just the net force of the anti and positive waves manifesting as a physical and invisible force.
 mystictome.intro.page.4.text=   Matter and antimatter can become "vibratory" in some rare examples simply by happenstance when enough of a single frequency of resonating matter comes into close proximity and will somewhat meld together. When they coalesce they are called "drops" or "tears" for vibrations and antivibration respectively with "essence" being the overarching term for both forms of concentrated vibrational matter. Essence can be found in all forms of life with a very low concentration but can be coerced out of them upon death with specialized tools discussed later.
 mystictome.intro.page.5.text=   The process of inducing vibrations is known as "Channeling", mystical sounding in nature, but the elders can be blamed for this. This can be done in a variety of ways all modeled off of trying to artificially induce the natural essence production, by essentially taking a chunk of vibratory or “conductive” matter and allowing it to collect more and more matter that begins to resonate with it, which is an exponential process. The beauty of this process is that once an original drop or tear of matter is created, it will naturally start to produce more of itself with little aide.If only there was a way to contain this growth...
-mystictome.intro.page.6.text=Pellentesque ultrices, purus pretium faucibus vulputate, velit felis fermentum nunc, quis fermentum nulla urna vitae diam. Vestibulum bibendum commodo massa, sit amet dignissim ex. Morbi libero elit, ornare vel sapien eget, volutpat bibendum lacus. Aenean tempor, nisi eget tincidunt mollis, est ipsum accumsan erat, ac euismod augue magna in mauris. Curabitur a ligula at neque sodales hendrerit id nec lacus. Cras vel risus eu est tempor placerat. Etiam molestie ante sed dapibus molestie. Duis at convallis turpis. Cras eu purus facilisis, iaculis
+mystictome.intro.page.6.text=   As mentioned prior, these vibrations behave the same way that any other wave does, and as such can be stopped or dampened with an opposite waveform. Producing this waveform can be tricky but with a little bit of experimenting, discovering that the more your around concentrated matter, the more sensitive you become to it, beginning to be able to sense slight differences in direction and amplitude each drop. By using matter of specific frequency you can change the characteristics of other matter by forcing contact between resonating matter and the target. The process of canceling vibrations intentionally is called "Nullification" and is incredibly useful.  
+
 mystictome.intro.page.7.text=Pellentesque ultrices, purus pretium faucibus vulputate, velit felis fermentum nunc, quis fermentum nulla urna vitae diam. Vestibulum bibendum commodo massa, sit amet dignissim ex. Morbi libero elit, ornare vel sapien eget, volutpat bibendum lacus. Aenean tempor, nisi eget tincidunt mollis, est ipsum accumsan erat, ac euismod augue magna in mauris. Curabitur a ligula at neque sodales hendrerit id nec lacus. Cras vel risus eu est tempor placerat. Etiam molestie ante sed dapibus molestie. Duis at convallis turpis. Cras eu purus facilisis, iaculis
 
 mystictome.world.page.1.text=Nullam semper convallis feugiat. Etiam non orci turpis. Sed enim quam, ultrices non convallis vel, dignissim quis erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi interdum eros ac odio tempus gravida quis at justo. In hac habitasse platea dictumst. Pellentesque condimentum diam a augue accumsan ullamcorper. In luctus eget massa porta suscipit. Donec egestas eleifend pharetra. Donec scelerisque pretium augue sit amet euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames.

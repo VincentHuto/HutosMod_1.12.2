@@ -239,7 +239,7 @@ public class BlockManaStorageDrum extends BlockBase {
 
 	@Override
 	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add("�3Magical Storage! �r");
+		tooltip.add("§3Mana Storage! §r");
 		super.addInformation(stack, player, tooltip, advanced);
 
 	}

@@ -5,7 +5,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class TileEntityHandler {
 
 	public static void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityFusionFurnace.class, "fusion_furnace");
 		GameRegistry.registerTileEntity(TileEntityWandMaker.class, "wand_maker");
 		GameRegistry.registerTileEntity(TileEntityBellJar.class, "mana_belljar");
 		GameRegistry.registerTileEntity(TileEntityStorageDrum.class, "mana_storagedrum");
@@ -18,6 +17,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityManaFuser.class, "mana_fuser");
 		GameRegistry.registerTileEntity(TileEntityKarmicExtractor.class, "karmic_extractor");
 		GameRegistry.registerTileEntity(TileEntityCelestialActuator.class, "celestial_actuator");
+		GameRegistry.registerTileEntity(TileEntityDisplayPedestal.class, "display_pedestal");
 
 	}
 }

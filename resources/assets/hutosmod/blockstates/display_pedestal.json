@@ -1,0 +1,30 @@
+{
+    "variants": 
+    {
+        "facing=up": 
+        { 
+            "model": "hutosmod:display_pedestal" 
+        },
+         "facing=down": 
+        { 
+            "model": "hutosmod:display_pedestal" 
+        },
+        "facing=south": 
+        { 
+            "model": "hutosmod:display_pedestal" 
+        },
+        "facing=east": 
+        { 
+            "model": "hutosmod:display_pedestal","y":270 
+        },
+        "facing=west": 
+        { 
+            "model": "hutosmod:display_pedestal","y":90 
+        },
+    
+        "facing=north": 
+        { 
+            "model": "hutosmod:display_pedestal","y":180 
+        }
+    }
+}

@@ -39,7 +39,7 @@ public class ItemMysticTome extends Item {
 	@Nonnull
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
-		return EnumRarity.EPIC;
+		return EnumRarity.UNCOMMON;
 	}
 
 }

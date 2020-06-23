@@ -10,6 +10,7 @@
  */
 package com.huto.hutosmod.recipies;
 
+import com.huto.hutosmod.tileentity.TileEntitySimpleInventory;
 import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.state.IBlockState;
@@ -61,8 +62,35 @@ public class ModInventoryHelper {
 			world.updateComparatorOutputLevel(pos, state.getBlock());
 		}
 	}
+	
+	public static void dropInventory(TileEntitySimpleInventory inv, World world, IBlockState state, BlockPos pos) {
+		if(inv != null) {
+			for(int j1 = 0; j1 < inv.getSizeInventory(); ++j1) {
+				ItemStack itemstack = inv.getItemHandler().getStackInSlot(j1);
+
+				if(!itemstack.isEmpty()) {
+					net.minecraft.inventory.InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemstack);
+				}
+			}
+
+			world.updateComparatorOutputLevel(pos, state.getBlock());
+		}
+	}
 
 	public static void withdrawFromInventory(TileManaSimpleInventory inv, EntityPlayer player) {
+		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
+			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
+			if(!stackAt.isEmpty()) {
+				ItemStack copy = stackAt.copy();
+				ItemHandlerHelper.giveItemToPlayer(player, copy);
+				inv.getItemHandler().setStackInSlot(i, ItemStack.EMPTY);
+				player.world.updateComparatorOutputLevel(inv.getPos(), null);
+				break;
+			}
+		}
+	}
+	
+	public static void withdrawFromInventory(TileEntitySimpleInventory inv, EntityPlayer player) {
 		for(int i = inv.getSizeInventory() - 1; i >= 0; i--) {
 			ItemStack stackAt = inv.getItemHandler().getStackInSlot(i);
 			if(!stackAt.isEmpty()) {

@@ -52,9 +52,7 @@ public class GuiTomeTitle extends GuiScreen {
 	final int BUTTONEYE = 8;
 
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-
-	GuiButton buttonclose;
-	GuiButtonTextured whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,
+	GuiButtonTextured buttonclose,whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,
 			eyeButton;
 	String title = "Table of Contents";
 	String subtitle = "Hutos Mod";
@@ -185,6 +183,10 @@ public class GuiTomeTitle extends GuiScreen {
 			cat8.add(I18n.format(TextFormatting.DARK_PURPLE + "Some serious stuff"));
 			drawTooltip(cat8, mouseX, mouseY, left + guiWidth - (guiWidth - 155), top + guiHeight - 30, 16, 16, false);
 		}
+		
+		List<String> cat9 = new ArrayList<String>();
+		cat9.add(I18n.format("Close Book"));
+		drawTooltip(cat9, mouseX, mouseY, left + guiWidth - (guiWidth - 10), top + guiHeight - 50, 32, 32, false);
 	}
 
 	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
@@ -274,14 +276,14 @@ public class GuiTomeTitle extends GuiScreen {
 		int verticalLoc = top + guiHeight;
 
 		buttonList.clear();
-		buttonList.add(
-				buttonclose = new GuiButton(BUTTONCLOSE, left + guiWidth - 178, top + guiHeight - 40, 30, 20, "Close"));
+		buttonList.add(buttonclose = new GuiButtonTextured(texture, BUTTONCLOSE, sideLoc - (guiWidth -10),
+				verticalLoc - 50, 32, 32, 209, 32));
 		buttonList.add(whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc - (guiWidth - 176),
-				verticalLoc - 206, 24, 16, 186, 0));
+				verticalLoc - 206, 23, 16, 186, 0));
 		buttonList.add(yellowButton = new GuiButtonTextured(texture, BUTTONYELLOW, sideLoc - (guiWidth - 175),
-				verticalLoc - 181, 24, 16, 186, 32));
+				verticalLoc - 181, 23, 16, 186, 32));
 		buttonList.add(blueButton = new GuiButtonTextured(texture, BUTTONBLUE, sideLoc - (guiWidth - 175),
-				verticalLoc - 153, 24, 16, 186, 64));
+				verticalLoc - 153, 23, 16, 186, 64));
 		buttonList.add(greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc - (guiWidth - 177),
 				verticalLoc - 121, 24, 16, 186, 96));
 		buttonList.add(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc - (guiWidth - 180),

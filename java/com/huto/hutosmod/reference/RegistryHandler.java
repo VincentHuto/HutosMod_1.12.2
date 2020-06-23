@@ -43,6 +43,7 @@ import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.render.RenderHandler;
 import com.huto.hutosmod.render.tile.RenderTileBellJar;
 import com.huto.hutosmod.render.tile.RenderTileCelestialActuator;
+import com.huto.hutosmod.render.tile.RenderTileDisplayPedestal;
 import com.huto.hutosmod.render.tile.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.render.tile.RenderTileKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderTileKarmicExtractor;
@@ -54,6 +55,7 @@ import com.huto.hutosmod.render.tile.RenderTileWandMaker;
 import com.huto.hutosmod.sound.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
+import com.huto.hutosmod.tileentity.TileEntityDisplayPedestal;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
 import com.huto.hutosmod.tileentity.TileEntityKarmicAltar;
@@ -106,7 +108,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class,
-				new RenderTileEssecenceEnhancer());	
+				new RenderTileEssecenceEnhancer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaGatherer.class, new RenderTileManaGatherer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaCapacitor.class, new RenderTileManaCapacitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicAltar.class, new RenderTileKarmicAltar());
@@ -114,7 +116,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicExtractor.class, new RenderTileKarmicExtractor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCelestialActuator.class,
 				new RenderTileCelestialActuator());
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayPedestal.class, new RenderTileDisplayPedestal());
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
 		}
