@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeMushroomIsland;
 import net.minecraft.world.biome.BiomePlains;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -22,7 +23,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
 {
 	private final WorldGenerator MYSTIC = new WorldGenMysticTree();
 	private final WorldGenerator MYSTIC_SMALL = new WorldGenSmallMysticTree();
-
+	private final  WorldGenerator MOREL = new WorldGenMorelMushroom();
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) 
 	{
@@ -35,7 +36,8 @@ public class WorldGenCustomTrees implements IWorldGenerator
 		case 0:
 			
 			runGenerator(MYSTIC_SMALL, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
-			
+			//runGenerator(MOREL, world, random, chunkX, chunkZ, 5, Blocks.MYCELIUM, BiomeMushroomIsland.class);
+
 			break;
 			
 		case -1:
