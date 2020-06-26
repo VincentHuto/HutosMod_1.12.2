@@ -78,8 +78,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks) {
-		// TODO Auto-generated method stub
-//		return 01.0f;
+
 		return 1f;
 
 	}
@@ -123,11 +122,11 @@ public class DimensionAlagada extends WorldProviderSurface {
 			float[] colors) {
 //		EntityPlayer player = this.world.getPlayerEntityByName();
 
-		final float r = 50f / 255f, g = 50f / 255f, b = 50f / 255f;
+		final float r = 255 / 255f, g = 1 / 255f, b = 21 / 255f;
 		if (!hasSkyLight) {
-			colors[0] = r + blockLight * (102.0f - r);
+			colors[0] = r + blockLight * (1.0f - r);
 			colors[1] = g + blockLight * (1.0f - g);
-			colors[2] = b + blockLight * (111.4f - b);
+			colors[2] = b + blockLight * (1.4f - b);
 
 		}
 	}

@@ -22,7 +22,7 @@ public class WorldGenSmallMysticTree extends WorldGenAbstractTree
 
     public WorldGenSmallMysticTree()
     {
-        super(false);
+        super(true);
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position)

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.items.ItemRegistry;
-import com.huto.hutosmod.worldgen.WorldGenMorelMushroom;
+import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;
@@ -90,7 +90,7 @@ public class BlockMorelMushroom extends BlockBush implements IGrowable {
 		if (pos.getY() >= 0 && pos.getY() < 256) {
 			IBlockState iblockstate = worldIn.getBlockState(pos.down());
 
-			if (iblockstate.getBlock() == Blocks.MYCELIUM) {
+			if (iblockstate.getBlock() == Blocks.MYCELIUM || iblockstate.getBlock() == BlockRegistry.Mystic_Earth || iblockstate.getBlock() == Blocks.GRASS) {
 				return true;
 			} else if (iblockstate.getBlock() == Blocks.DIRT
 					&& iblockstate.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.PODZOL) {
@@ -109,7 +109,7 @@ public class BlockMorelMushroom extends BlockBush implements IGrowable {
 		WorldGenerator worldgenerator = null;
 
 		if (this == BlockRegistry.morel_mushroom) {
-			worldgenerator = new WorldGenMorelMushroom(BlockRegistry.morel_mushroom);
+			worldgenerator = new WorldGenHugeMorelMushroom(BlockRegistry.morel_mushroom);
 			if (worldgenerator != null && worldgenerator.generate(worldIn, rand, pos)) {
 				return true;
 			}

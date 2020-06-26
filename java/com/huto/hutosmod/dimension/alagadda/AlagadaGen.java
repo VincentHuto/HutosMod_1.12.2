@@ -143,11 +143,7 @@ public class AlagadaGen implements IChunkGenerator
 					net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
 
 			}
-		if (this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
-			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false,
-					net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA)) {
-			}
-		//biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
+		biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 		if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false,
 				net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
 			WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);

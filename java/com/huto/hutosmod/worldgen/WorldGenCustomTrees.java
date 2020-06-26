@@ -23,7 +23,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
 {
 	private final WorldGenerator MYSTIC = new WorldGenMysticTree();
 	private final WorldGenerator MYSTIC_SMALL = new WorldGenSmallMysticTree();
-	private final  WorldGenerator MOREL = new WorldGenMorelMushroom();
+	private final  WorldGenerator MOREL = new WorldGenHugeMorelMushroom();
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) 
 	{
@@ -54,8 +54,8 @@ public class WorldGenCustomTrees implements IWorldGenerator
 	{
 		ArrayList<Class<?>> classesList = new ArrayList<Class<?>>(Arrays.asList(classes));
 		
-		int x = (chunkX * 16) + random.nextInt(15);
-		int z = (chunkZ * 16) + random.nextInt(15);
+		int x = (chunkX * 16 +10 + random.nextInt(15));
+		int z = (chunkZ * 16 +10 + random.nextInt(15));
 		int y = calculateGenerationHeight(world, x, z, topBlock);
 		BlockPos pos = new BlockPos(x,y,z);
 		

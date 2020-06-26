@@ -6,6 +6,7 @@ import java.util.List;
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;

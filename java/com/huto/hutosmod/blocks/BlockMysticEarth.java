@@ -25,10 +25,14 @@ public class BlockMysticEarth extends BlockBase implements IGrowable {
 	public BlockMysticEarth(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.GROUND);
+		//setHardness(0.3f);
+		setHardness(1.0F);
+		setResistance(1.0F);
+		setHarvestLevel("shovel", 1);
 
 	}
 
-	@Override
+	/*@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote) {
 			if (!worldIn.isAreaLoaded(pos, 2))
@@ -55,7 +59,7 @@ public class BlockMysticEarth extends BlockBase implements IGrowable {
 				}
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Whether this IGrowable can grow

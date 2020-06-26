@@ -66,7 +66,9 @@ import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.worldgen.ModWorldGen;
+import com.huto.hutosmod.worldgen.WorldGenCustomMushroom;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
+import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -130,6 +132,7 @@ public class RegistryHandler {
 		BiomeRegistry.registerBiomes();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomTrees(), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenCustomMushroom(), 10);
 		RegisterEntities.registerEntites();
 		PotionInit.registerPotions();
 		RunesPacketHandler.init();
