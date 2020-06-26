@@ -31,8 +31,7 @@ public class AlagadaGen implements IChunkGenerator
 	protected static final IBlockState STONE = BlockRegistry.Mystic_Media.getDefaultState();
 	protected static final IBlockState GRAVEL = BlockRegistry.Mystic_Earth.getDefaultState();
 	protected static final IBlockState CLAY = Blocks.CLAY.getDefaultState();
-	protected static final IBlockState WATER = Blocks.WATER.getDefaultState();
-
+	protected static final IBlockState WATER = BlockRegistry.primal_ooze_fluid.getDefaultState();
 	protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 	private final Random rand;
@@ -58,6 +57,7 @@ public class AlagadaGen implements IChunkGenerator
 	private double stoneNoise[];
 	private MapGenBase caveGenerator;
 	// private MapGenBaseMeta bigCaveGenerator;
+    private double[] buffer;
 
 	public AlagadaGen(World worldIn, long seed) {
 
@@ -103,6 +103,8 @@ public class AlagadaGen implements IChunkGenerator
 	public Chunk generateChunk(int x, int z) {
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
+        this.prepareHeights(x, z, chunkprimer);
+
 		this.setBlocksInChunk(x, z, chunkprimer);
 
 		// addIceForestTop(x, z, chunkprimer);
@@ -124,6 +126,135 @@ public class AlagadaGen implements IChunkGenerator
 		chunk.generateSkylightMap();
 		return chunk;
 	}
+	private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_, int p_185938_5_, int p_185938_6_, int p_185938_7_)
+    {
+        if (p_185938_1_ == null)
+        {
+            p_185938_1_ = new double[p_185938_5_ * p_185938_6_ * p_185938_7_];
+        }
+
+        net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField event = new net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField(this, p_185938_1_, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+        if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return event.getNoisefield();
+
+        double d0 = 684.412D;
+        double d1 = 2053.236D;
+        double[] adouble = new double[p_185938_6_];
+
+        for (int j = 0; j < p_185938_6_; ++j)
+        {
+            adouble[j] = Math.cos((double)j * Math.PI * 6.0D / (double)p_185938_6_) * 2.0D;
+            double d2 = (double)j;
+
+            if (j > p_185938_6_ / 2)
+            {
+                d2 = (double)(p_185938_6_ - 1 - j);
+            }
+
+            if (d2 < 4.0D)
+            {
+                d2 = 4.0D - d2;
+                adouble[j] -= d2 * d2 * d2 * 10.0D;
+            }
+        }
+
+        for (int l = 0; l < p_185938_5_; ++l)
+        {
+            for (int i1 = 0; i1 < p_185938_7_; ++i1)
+            {
+                double d3 = 0.0D;
+
+                for (int k = 0; k < p_185938_6_; ++k)
+                {
+                    double d4 = adouble[k];
+                  
+
+
+                    if ((double)k < 0.0D)
+                    {
+                        double d10 = (0.0D - (double)k) / 4.0D;
+                        d10 = MathHelper.clamp(d10, 0.0D, 1.0D);
+                    }
+
+               
+                }
+            }
+        }
+
+        return p_185938_1_;
+    }
+
+	  public void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer)
+	    {
+	        int i = 4;
+	        int j = 20;
+	        int k = 5;
+	        int l = 17;
+	        int i1 = 5;
+	        this.buffer = this.getHeights(this.buffer, p_185936_1_ * 4, 0, p_185936_2_ * 4, 5, 17, 5);
+
+	        for (int j1 = 0; j1 < 4; ++j1)
+	        {
+	            for (int k1 = 0; k1 < 4; ++k1)
+	            {
+	                for (int l1 = 0; l1 < 16; ++l1)
+	                {
+	                    double d0 = 0.125D;
+	                    double d1 = this.buffer[((j1 + 0) * 5 + k1 + 0) * 17 + l1 + 0];
+	                    double d2 = this.buffer[((j1 + 0) * 5 + k1 + 1) * 17 + l1 + 0];
+	                    double d3 = this.buffer[((j1 + 1) * 5 + k1 + 0) * 17 + l1 + 0];
+	                    double d4 = this.buffer[((j1 + 1) * 5 + k1 + 1) * 17 + l1 + 0];
+	                    double d5 = (this.buffer[((j1 + 0) * 5 + k1 + 0) * 17 + l1 + 1] - d1) * 0.125D;
+	                    double d6 = (this.buffer[((j1 + 0) * 5 + k1 + 1) * 17 + l1 + 1] - d2) * 0.125D;
+	                    double d7 = (this.buffer[((j1 + 1) * 5 + k1 + 0) * 17 + l1 + 1] - d3) * 0.125D;
+	                    double d8 = (this.buffer[((j1 + 1) * 5 + k1 + 1) * 17 + l1 + 1] - d4) * 0.125D;
+
+	                    for (int i2 = 0; i2 < 8; ++i2)
+	                    {
+	                        double d9 = 0.25D;
+	                        double d10 = d1;
+	                        double d11 = d2;
+	                        double d12 = (d3 - d1) * 0.25D;
+	                        double d13 = (d4 - d2) * 0.25D;
+
+	                        for (int j2 = 0; j2 < 4; ++j2)
+	                        {
+	                            double d14 = 0.25D;
+	                            double d15 = d10;
+	                            double d16 = (d11 - d10) * 0.25D;
+
+	                            for (int k2 = 0; k2 < 4; ++k2)
+	                            {
+	                                IBlockState iblockstate = null;
+
+	                                if (l1 * 8 + i2 < j)
+	                                {
+	                                    iblockstate = WATER;
+	                                }
+
+	                       
+
+	                                int l2 = j2 + j1 * 4;
+	                                int i3 = i2 + l1 * 8;
+	                                int j3 = k2 + k1 * 4;
+	                                primer.setBlockState(l2, i3, j3, iblockstate);
+	                                d15 += d16;
+	                            }
+
+	                            d10 += d12;
+	                            d11 += d13;
+	                        }
+
+	                        d1 += d5;
+	                        d2 += d6;
+	                        d3 += d7;
+	                        d4 += d8;
+	                    }
+	                }
+	            }
+	        }
+	    }
+	
 
 	@Override
 	public void populate(int x, int z) {
@@ -240,7 +371,7 @@ public class AlagadaGen implements IChunkGenerator
 									} else if ((i2 * 8 + j2 +heightVar) < this.settings.seaLevel+10) {
 										//Change the x int to influnce spacing between cubes
 										// change the y to influence height  
-											//primer.setBlockState(i * 4 + l2, i * 8 + l2, i* 4 + l2, WATER);
+									//		primer.setBlockState(i * 4 + l2, i * 8 + l2, i* 4 + l2, WATER);
 
 										primer.setBlockState(i * 4 + k2, i2 *7 + j2+(40), l * 4 + l2, CLAY);
 										primer.setBlockState(i * 4 + k2, i2 *7 + j2+ 140, l * 4 + l2,CLAY);

@@ -140,10 +140,10 @@ public class ManaEventHandler {
 		// teleports to dreamscape if wearing viewer
 		boolean foundOnHead = false;
 		ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
-		if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
+		if (slotItemStack.getItem() == ItemRegistry.mysterious_mask) {
 			foundOnHead = true;
 		}
-		if (foundOnHead) {
+		if (foundOnHead && player.dimension == 0) {
 			Teleport.teleportToDimention(player, -403, player.getPosition().getX(), 65, player.getPosition().getZ());
 		}
 	}
