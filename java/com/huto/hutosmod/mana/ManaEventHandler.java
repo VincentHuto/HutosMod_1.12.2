@@ -1,5 +1,6 @@
 package com.huto.hutosmod.mana;
 
+import com.huto.hutosmod.commands.Teleport;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
@@ -136,17 +137,14 @@ public class ManaEventHandler {
 
 		if (player.world.isRemote)
 			return;
-		if (!player.world.isDaytime()) {
-			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-
-			mana.fill(10);
-
-			String message = String.format(
-					"You refreshed yourself in the bed. You received 10 mana, you have §7%d§r mana left.",
-					(int) mana.getMana());
-			// System.out.println(String.valueOf(mana.getMana()));
-
-			player.sendMessage(new TextComponentString(message));
+		// teleports to dreamscape if wearing viewer
+		boolean foundOnHead = false;
+		ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
+		if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
+			foundOnHead = true;
+		}
+		if (foundOnHead) {
+			Teleport.teleportToDimention(player, -403, player.getPosition().getX(), 65, player.getPosition().getZ());
 		}
 	}
 
