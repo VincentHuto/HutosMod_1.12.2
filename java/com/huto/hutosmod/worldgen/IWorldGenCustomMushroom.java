@@ -16,7 +16,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class WorldGenCustomMushroom implements IWorldGenerator {
+public class IWorldGenCustomMushroom implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
@@ -26,16 +26,17 @@ public class WorldGenCustomMushroom implements IWorldGenerator {
 		// generate differently based on dimension
 		switch (world.provider.getDimension()) {
 		case -1:
-			generateNether(world, random, blockX, blockZ);
+		//	generateNether(world, random, blockX, blockZ);
 			break;
 		case 0:
 	//		generateOverworld(world, random, blockX, blockZ);
 			break;
 		case 1:
-			generateEnd(world, random, blockX, blockZ);
+		//	generateEnd(world, random, blockX, blockZ);
 			break;
 		case -403:
-			generateOverworld(world, random, blockX, blockZ);
+			generateMushs(world, random, blockX, blockZ,BlockRegistry.morel_mushroom);
+			generateMushs(world, random, blockX, blockZ,BlockRegistry.singeri_mushroom);
 			break;
 		}
 		
@@ -46,12 +47,13 @@ public class WorldGenCustomMushroom implements IWorldGenerator {
 		// leaving blank for now
 	}
 
-	private void generateOverworld(World world, Random rand, int blockX, int blockZ) {
+	private void generateMushs(World world, Random rand, int blockX, int blockZ,Block mushType) {
 		int randX = blockX + 8+ rand.nextInt(16);
 		int randZ = blockZ + 8+ rand.nextInt(16);
 		/** COOKIE BUSH GEN **/
 		// make a world generator to use
-		WorldGenerator genCookieBushes = new WorldGenMorelMushroom();
+		WorldGenerator genMorels = new WorldGenCustomMushrooms(mushType);
+
 		// get the biome. I used 64 for Y, but you can use anything between 0 and 255
 		Biome biome = world.getBiomeForCoordsBody(new BlockPos(blockX, 64, blockZ));
 		// check that it's a Plains biome
@@ -59,8 +61,8 @@ public class WorldGenCustomMushroom implements IWorldGenerator {
 		if (biome == Biomes.PLAINS || biome == BiomeRegistry.TEST_BIOME) {
 			// how many we want to make per chunk
 			// let's make it random between MIN and MAX
-			int MIN = 1;
-			int MAX = 4;
+			int MIN = 5;
+			int MAX = 12;
 			int numBushes = MIN + rand.nextInt(MAX - MIN);
 			// now let's generate the bushes
 			for (int i = 0; i < numBushes; i++) {
@@ -69,7 +71,7 @@ public class WorldGenCustomMushroom implements IWorldGenerator {
 				
 				// the y-value we pass here will be used as minimum spawn height (in our
 				// generator, anyway)
-				genCookieBushes.generate(world, rand, new BlockPos(randX, 10, randZ));
+				genMorels.generate(world, rand, new BlockPos(randX, 10, randZ));
 
 			}
 
@@ -78,6 +80,7 @@ public class WorldGenCustomMushroom implements IWorldGenerator {
 		/** END COOKIE BUSH GEN **/
 	}
 
+	
 	private void generateEnd(World world, Random rand, int blockX, int blockZ) {
 		// leaving blank for now
 	}

@@ -5,21 +5,13 @@ import java.util.Random;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
-import com.huto.hutosmod.worldgen.WorldGenMorelMushroom;
 import com.huto.hutosmod.worldgen.WorldGenMysticTree;
 import com.huto.hutosmod.worldgen.WorldGenSmallMysticTree;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeForest;
-import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraft.world.gen.feature.WorldGenBush;
-import net.minecraft.world.gen.feature.WorldGenCanopyTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeTest extends Biome {
 
@@ -33,7 +25,6 @@ public class BiomeTest extends Biome {
 		this.decorator.treesPerChunk = 999;
 		// topBlock = Blocks.GRASS.getDefaultState();
 		topBlock = BlockRegistry.Mystic_Earth.getDefaultState();
-
 		fillerBlock = BlockRegistry.enchanted_stone.getDefaultState();
 		getModdedBiomeGrassColor(8777934);
 		this.spawnableCaveCreatureList.clear();
