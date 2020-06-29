@@ -35,7 +35,6 @@ item.upgrade_wrench.name=Upgrade Wrench
 item.purging_stone.name=Purging Stone
 item.grand_purging_stone.name=Grand Purging Stone
 
-
 item.null_sword.name=Nullified Sword
 item.null_pickaxe.name=Nullified Pickaxe
 item.null_shovel.name=Nullified Shovel
@@ -96,6 +95,7 @@ tile.morel_cap.name=Morel Cap
 tile.morel_stem.name=Morel Stem
 tile.morel_mushroom.name=Morel Mushroom
 tile.singeri_mushroom.name=Singeri Mushroom
+tile.passion_flower.name=Passion Flower
 tile.runed_obsidian.name=Runed Obsidian
 tile.mana_hopper.name=Mana Hopper
 tile.karmic_altar.name=Karmic Altar

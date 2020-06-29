@@ -2,11 +2,13 @@ package com.huto.hutosmod.render;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.entities.EntityColin;
+import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.entities.EntityMaskedPraetor;
 import com.huto.hutosmod.entities.EntityTestMob;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.render.entity.RenderColin;
+import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderElemental;
 import com.huto.hutosmod.render.entity.RenderMaskedPraetor;
 import com.huto.hutosmod.render.entity.RenderTestMob;
@@ -101,6 +103,11 @@ public class RenderHandler {
 				return new RenderElemental(manager);
 			}
 		});
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreamWalker.class, new IRenderFactory<EntityDreamWalker>() {
+			@Override
+			public Render<? super EntityDreamWalker> createRenderFor(RenderManager manager) {
+				return new RenderDreamWalker(manager);
+			}
+		});
 	}
 }

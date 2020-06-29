@@ -95,7 +95,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public float getCloudHeight() {
-		return 0.0f;
+		return 400.0f;
 	}
 
 	@Override

@@ -21,18 +21,17 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class BlockSingeriMushroom extends BlockBush implements IGrowable {
+public class BlockPassionFlower extends BlockBush implements IGrowable {
 	protected static final AxisAlignedBB MUSHROOM_AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D,
 			0.30000001192092896D, 0.699999988079071D, 0.4000000059604645D, 0.699999988079071D);
 
-	public BlockSingeriMushroom(String name, Material material) {
+	public BlockPassionFlower(String name, Material material) {
 		super(material);
 		this.setTickRandomly(true);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setSoundType(SoundType.PLANT);
 		setLightOpacity(1);
-		setLightLevel(0.2F);
 		setCreativeTab(MainClass.tabHutosMod);
 		BlockRegistry.BLOCKS.add(this);
 		ItemRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
@@ -105,21 +104,6 @@ public class BlockSingeriMushroom extends BlockBush implements IGrowable {
 		}
 	}
 
-	public boolean generateBigMushroom(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		worldIn.setBlockToAir(pos);
-		WorldGenerator worldgenerator = null;
-
-		if (this == BlockRegistry.singeri_mushroom) {
-			worldgenerator = new WorldGenHugeMorelMushroom(BlockRegistry.morel_mushroom);
-			if (worldgenerator != null && worldgenerator.generate(worldIn, rand, pos)) {
-				return true;
-			}
-		} else {
-			worldIn.setBlockState(pos, state, 3);
-			return false;
-		}
-		return false;
-	}
 
 	/**
 	 * Whether this IGrowable can grow
@@ -133,6 +117,5 @@ public class BlockSingeriMushroom extends BlockBush implements IGrowable {
 	}
 
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		this.generateBigMushroom(worldIn, pos, state, rand);
 	}
 }

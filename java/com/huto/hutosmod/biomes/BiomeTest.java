@@ -3,6 +3,7 @@ package com.huto.hutosmod.biomes;
 import java.util.Random;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
+import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
 import com.huto.hutosmod.worldgen.WorldGenMysticTree;
@@ -31,19 +32,19 @@ public class BiomeTest extends Biome {
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 100, 2, 10));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 300, 3, 15));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 100, 1, 3));
+
 	}
 
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
 		this.addMushrooms(worldIn, rand, pos);
 	}
-	
-	
 
 	public void addMushrooms(World worldIn, Random randIn, BlockPos blockPosIn) {
 		for (int i = 0; i < 4; ++i) {
 			for (int j = 0; j < 4; ++j) {
-				//NEVER FORGET THE +8 OFFSET
+				// NEVER FORGET THE +8 OFFSET
 				int k = i * 4 + 1 + 8 + randIn.nextInt(3);
 				int l = j * 4 + 1 + 8 + randIn.nextInt(3);
 				BlockPos blockpos = worldIn.getHeight(blockPosIn.add(k, 0, l));
@@ -55,25 +56,22 @@ public class BiomeTest extends Biome {
 				} else if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, randIn,
 						new net.minecraft.util.math.ChunkPos(blockPosIn), blockpos,
 						net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE)) {
-					WorldGenAbstractTree worldgenabstracttree = this.getRandomTreeFeature(randIn);
+					//if (blockpos.getY() < 40) {}
+						WorldGenAbstractTree worldgenabstracttree = this.getRandomTreeFeature(randIn);
+						worldgenabstracttree.setDecorationDefaults();
+						if (worldgenabstracttree.generate(worldIn, randIn, blockpos)) {
+							worldgenabstracttree.generateSaplings(worldIn, randIn, blockpos);
+						
 
-					worldgenabstracttree.setDecorationDefaults();
-
-					if (worldgenabstracttree.generate(worldIn, randIn, blockpos)) {
-						worldgenabstracttree.generateSaplings(worldIn, randIn, blockpos);
 					}
-				
-				}
+				} 
 			}
 		}
 	}
 
+	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
 		return MYSTIC_TREE;
-
-	}
-	public WorldGenAbstractTree getRandomTreeFeature2(Random rand) {
-		return MYSTIC_TREE_Small;
 
 	}
 

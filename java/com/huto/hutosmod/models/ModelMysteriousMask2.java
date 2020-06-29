@@ -84,5 +84,11 @@ public class ModelMysteriousMask2 extends ModelBiped
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
   }
-
+	public void renderMask(float par1, Entity entity){
+	//	setRotationAngles(par1, par1, par1, par1, par1, par1, entity);
+		LeftBand.render(par1);
+		RightBand.render(par1);
+		BackBand.render(par1);
+		Mask.render(par1);
+	}
 }

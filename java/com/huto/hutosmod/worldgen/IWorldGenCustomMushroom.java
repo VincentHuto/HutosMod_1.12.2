@@ -17,6 +17,10 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class IWorldGenCustomMushroom implements IWorldGenerator {
+	
+	private final WorldGenerator MYSTIC_SMALL = new WorldGenSmallMysticTree();
+
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
@@ -25,64 +29,44 @@ public class IWorldGenCustomMushroom implements IWorldGenerator {
 		int blockZ = chunkZ * 16;
 		// generate differently based on dimension
 		switch (world.provider.getDimension()) {
-		case -1:
-		//	generateNether(world, random, blockX, blockZ);
-			break;
 		case 0:
-	//		generateOverworld(world, random, blockX, blockZ);
-			break;
-		case 1:
-		//	generateEnd(world, random, blockX, blockZ);
+			// generateOverworld(world, random, blockX, blockZ);
 			break;
 		case -403:
-			generateMushs(world, random, blockX, blockZ,BlockRegistry.morel_mushroom);
-			generateMushs(world, random, blockX, blockZ,BlockRegistry.singeri_mushroom);
+			generateMushs(world, random, blockX, blockZ, BlockRegistry.morel_mushroom);
+			generateMushs(world, random, blockX, blockZ, BlockRegistry.singeri_mushroom);
+			generateMushs(world, random, blockX, blockZ, BlockRegistry.passion_flower);
 			break;
 		}
-		
 
 	}
 
-	private void generateNether(World world, Random rand, int blockX, int blockZ) {
-		// leaving blank for now
-	}
-
-	private void generateMushs(World world, Random rand, int blockX, int blockZ,Block mushType) {
-		int randX = blockX + 8+ rand.nextInt(16);
-		int randZ = blockZ + 8+ rand.nextInt(16);
-		/** COOKIE BUSH GEN **/
+	private void generateMushs(World world, Random rand, int blockX, int blockZ, Block mushType) {
+		int randX = blockX + 8 + rand.nextInt(16);
+		int randZ = blockZ + 8 + rand.nextInt(16);
 		// make a world generator to use
-		WorldGenerator genMorels = new WorldGenCustomMushrooms(mushType);
+		WorldGenerator genMush = new WorldGenCustomMushrooms(mushType);
 
 		// get the biome. I used 64 for Y, but you can use anything between 0 and 255
 		Biome biome = world.getBiomeForCoordsBody(new BlockPos(blockX, 64, blockZ));
-		// check that it's a Plains biome
 		// we could also use: if(biome instanceof BiomeGenPlains)
-		if (biome == Biomes.PLAINS || biome == BiomeRegistry.TEST_BIOME) {
+		if (biome == BiomeRegistry.TEST_BIOME) {
 			// how many we want to make per chunk
 			// let's make it random between MIN and MAX
-			int MIN = 5;
-			int MAX = 12;
+			int MIN = 9;
+			int MAX = 16;
 			int numBushes = MIN + rand.nextInt(MAX - MIN);
 			// now let's generate the bushes
 			for (int i = 0; i < numBushes; i++) {
 				// get a random position in the chunk
-				//A:WAUS REMEMEBER THE 8 BLOCK OFFSET OR YOU WILL GET MASSIVE RUNAWAY WORLD GEN
-				
+				// ALWAYS REMEMEBER THE 8 BLOCK OFFSET OR YOU WILL GET RUNAWAY WORLD GEN
 				// the y-value we pass here will be used as minimum spawn height (in our
 				// generator, anyway)
-				genMorels.generate(world, rand, new BlockPos(randX, 10, randZ));
+				genMush.generate(world, rand, new BlockPos(randX, 10, randZ));
 
 			}
 
 		}
-		
-		/** END COOKIE BUSH GEN **/
-	}
-
-	
-	private void generateEnd(World world, Random rand, int blockX, int blockZ) {
-		// leaving blank for now
 	}
 
 	/** HELPER METHODS **/

@@ -118,7 +118,6 @@ public class BlockMysticEarth extends BlockBase implements IGrowable {
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
 			IPlantable plantable) {
-		// TODO Auto-generated method stub
 			return true;
 	}
 

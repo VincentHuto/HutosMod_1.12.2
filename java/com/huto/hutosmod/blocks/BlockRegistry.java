@@ -37,6 +37,7 @@ public class BlockRegistry {
 	public static final Block morel_stem = new BlockBase("morel_stem", Material.CACTUS);
 	public static final Block morel_mushroom = new BlockMorelMushroom("morel_mushroom", Material.CACTUS);
 	public static final Block singeri_mushroom = new BlockSingeriMushroom("singeri_mushroom", Material.CACTUS);
+	public static final Block passion_flower = new BlockPassionFlower("passion_flower", Material.CACTUS);
 	public static final Block display_pedestal = new BlockDisplayPedestal("display_pedestal", Material.ROCK);
 	public static final Block wand_maker = new BlockWandMaker("wand_maker", Material.ROCK);
 	public static final Block mana_belljar = new BlockManaBelljar("mana_belljar", Material.GLASS);
