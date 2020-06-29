@@ -17,18 +17,28 @@ public class ModWorldGen implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
-		if (world.provider.getDimension() == 0) {
-			generateOverworld(random,chunkX,chunkZ,world,chunkGenerator,chunkProvider);
+		
+		switch(world.provider.getDimension()) {
+			case(0):
+				generateOverworld(random,chunkX,chunkZ,world,chunkGenerator,chunkProvider);
+				break;
+			case(-403):
+				generateDreamScape(random,chunkX,chunkZ,world,chunkGenerator,chunkProvider);
+				break;
 		}
 
 	}
 
 	private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,IChunkProvider chunkProvider) {
 
-		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 0, 32,random.nextInt(3) + 4, 5);
+		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16+8, chunkZ * 16+8, 0, 32,random.nextInt(3) + 4, 5);
 
 	}
+	private void generateDreamScape(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,IChunkProvider chunkProvider) {
 
+		generateDreamScapeOre(BlockRegistry.enchanted_ore_mystic.getDefaultState(), world, random, chunkX * 16 +8, chunkZ * 16+8, 0, 100,random.nextInt(3) + 4, 20);
+
+	}
 	private void generateOre(IBlockState ore, World world, Random random, int x, int z, int minY, int maxY,int size, int chances) {
 
 		int deltaY = maxY - minY;
@@ -40,5 +50,18 @@ public class ModWorldGen implements IWorldGenerator {
 		}
 
 	}
+	
+	private void generateDreamScapeOre(IBlockState ore, World world, Random random, int x, int z, int minY, int maxY,int size, int chances) {
+
+		int deltaY = maxY - minY;
+		for (int i = 0; i < chances; i++) {
+			BlockPos pos = new BlockPos(x + random.nextInt(16), minY + random.nextInt(deltaY), z + random.nextInt(16));
+
+			WorldGenDreamScapeMinable generator = new WorldGenDreamScapeMinable(ore, size);
+			generator.generate(world, random, pos);
+		}
+
+	}
+	
 
 }

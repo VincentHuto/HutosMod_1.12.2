@@ -9,6 +9,7 @@ import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
 import com.huto.hutosmod.worldgen.WorldGenMysticTree;
 import com.huto.hutosmod.worldgen.WorldGenSmallMysticTree;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -22,8 +23,7 @@ public class BiomeTest extends Biome {
 	public BiomeTest() {
 		super(new BiomeProperties("Test").setBaseHeight(0.1F).setTemperature(0.5f).setHeightVariation(2.9f)
 				.setWaterColor(77777));
-
-		this.decorator.treesPerChunk = 999;
+		this.decorator.treesPerChunk = 10;
 		// topBlock = Blocks.GRASS.getDefaultState();
 		topBlock = BlockRegistry.Mystic_Earth.getDefaultState();
 		fillerBlock = BlockRegistry.enchanted_stone.getDefaultState();
@@ -34,9 +34,10 @@ public class BiomeTest extends Biome {
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 300, 3, 15));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 100, 1, 3));
+		this.decorator.grassPerChunk = 5;
 
 	}
-
+	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
 		this.addMushrooms(worldIn, rand, pos);
 	}
@@ -56,15 +57,13 @@ public class BiomeTest extends Biome {
 				} else if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, randIn,
 						new net.minecraft.util.math.ChunkPos(blockPosIn), blockpos,
 						net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.TREE)) {
-					//if (blockpos.getY() < 40) {}
-						WorldGenAbstractTree worldgenabstracttree = this.getRandomTreeFeature(randIn);
-						worldgenabstracttree.setDecorationDefaults();
-						if (worldgenabstracttree.generate(worldIn, randIn, blockpos)) {
-							worldgenabstracttree.generateSaplings(worldIn, randIn, blockpos);
-						
+					WorldGenAbstractTree worldgenabstracttree = this.getRandomTreeFeature(randIn);
+					worldgenabstracttree.setDecorationDefaults();
+					if (worldgenabstracttree.generate(worldIn, randIn, blockpos)) {
+						worldgenabstracttree.generateSaplings(worldIn, randIn, blockpos);
 
 					}
-				} 
+				}
 			}
 		}
 	}

@@ -75,6 +75,7 @@ name.RUNE=Caryl Rune
 tile.display_glass.name=Display Glass
 tile.enchanted_stone.name=Enchanted Stone
 tile.enchanted_ore.name=Enchanted Ore
+tile.enchanted_ore_mystic.name=Mystic Enchanted Ore
 tile.fusion_furnace.name=Fusion Furnace
 tile.wand_maker.name=Wand Fabricator
 tile.mana_belljar.name=Mana Belljar

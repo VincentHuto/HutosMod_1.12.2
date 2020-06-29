@@ -19,6 +19,8 @@ public class BlockRegistry {
 	public static final Block enchanted_stone = new BlockEnchantedStone("enchanted_stone", Material.IRON);
 	public static final Block enchanted_stone_smooth = new BlockBase("enchanted_stone_smooth", Material.IRON);
 	public static final Block enchanted_ore = new BlockEnchantedOre("enchanted_ore", Material.ROCK);
+	public static final Block enchanted_ore_mystic = new BlockEnchantedOre("enchanted_ore_mystic", Material.ROCK);
+
 	public static final Block Display_Glass = new BlockDisplayGlass("display_glass", Material.GLASS);
 	public static final Block Mystic_Earth = new BlockMysticEarth("mystic_earth", Material.GROUND);
 	public static final Block Mystic_Media = new BlockBase("mystic_media", Material.ROCK).setHardness(5F)
