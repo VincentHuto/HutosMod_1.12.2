@@ -30,7 +30,7 @@ public class AlagadaGen implements IChunkGenerator
 {
 	protected static final IBlockState STONE = BlockRegistry.Mystic_Media.getDefaultState();
 	protected static final IBlockState GRAVEL = BlockRegistry.Mystic_Earth.getDefaultState();
-	protected static final IBlockState CLAY = Blocks.CLAY.getDefaultState();
+	protected static final IBlockState CLAY = BlockRegistry.mindfog.getDefaultState();
 	protected static final IBlockState WATER = BlockRegistry.primal_ooze_fluid.getDefaultState();
 	protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();

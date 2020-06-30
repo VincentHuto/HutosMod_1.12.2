@@ -31,12 +31,12 @@ public class ModWorldGen implements IWorldGenerator {
 
 	private void generateOverworld(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,IChunkProvider chunkProvider) {
 
-		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16+8, chunkZ * 16+8, 0, 32,random.nextInt(3) + 4, 5);
+		generateOre(BlockRegistry.enchanted_ore.getDefaultState(), world, random, chunkX * 16, chunkZ * 16, 0, 32,random.nextInt(3) + 4, 5);
 
 	}
 	private void generateDreamScape(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,IChunkProvider chunkProvider) {
 
-		generateDreamScapeOre(BlockRegistry.enchanted_ore_mystic.getDefaultState(), world, random, chunkX * 16 +8, chunkZ * 16+8, 0, 100,random.nextInt(3) + 4, 20);
+		generateDreamScapeOre(BlockRegistry.enchanted_ore_mystic.getDefaultState(), world, random, chunkX * 16 , chunkZ * 16, 0, 100,random.nextInt(3) + 4,20);
 
 	}
 	private void generateOre(IBlockState ore, World world, Random random, int x, int z, int minY, int maxY,int size, int chances) {
@@ -44,7 +44,6 @@ public class ModWorldGen implements IWorldGenerator {
 		int deltaY = maxY - minY;
 		for (int i = 0; i < chances; i++) {
 			BlockPos pos = new BlockPos(x + random.nextInt(16), minY + random.nextInt(deltaY), z + random.nextInt(16));
-
 			WorldGenMinable generator = new WorldGenMinable(ore, size);
 			generator.generate(world, random, pos);
 		}
@@ -56,7 +55,6 @@ public class ModWorldGen implements IWorldGenerator {
 		int deltaY = maxY - minY;
 		for (int i = 0; i < chances; i++) {
 			BlockPos pos = new BlockPos(x + random.nextInt(16), minY + random.nextInt(deltaY), z + random.nextInt(16));
-
 			WorldGenDreamScapeMinable generator = new WorldGenDreamScapeMinable(ore, size);
 			generator.generate(world, random, pos);
 		}

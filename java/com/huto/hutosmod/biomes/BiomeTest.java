@@ -5,6 +5,7 @@ import java.util.Random;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityElemental;
+import com.huto.hutosmod.entities.EntityMemoryFlicker;
 import com.huto.hutosmod.worldgen.WorldGenHugeMorelMushroom;
 import com.huto.hutosmod.worldgen.WorldGenMysticTree;
 import com.huto.hutosmod.worldgen.WorldGenSmallMysticTree;
@@ -33,8 +34,9 @@ public class BiomeTest extends Biome {
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 300, 3, 15));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 100, 1, 3));
-		this.decorator.grassPerChunk = 5;
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 100, 1, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityMemoryFlicker.class, 100, 3, 5));
+
 
 	}
 	@Override

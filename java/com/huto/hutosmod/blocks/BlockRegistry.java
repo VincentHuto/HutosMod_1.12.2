@@ -31,6 +31,7 @@ public class BlockRegistry {
 	public static final Block Mystic_Log = new BlockLogBase("mystic_log");
 	public static final Block Mystic_Leaves = new BlockLeafBase("mystic_leaves");
 	public static final Block Mystic_Vine = new BlockMysticVine("mystic_vine");
+	public static final Block mindfog = new BlockMindFog("mindfog", Material.CLOTH);
 	public static final Block runed_obsidian = new BlockRunedObsidian("runed_obsidian", Material.ROCK);
 	public static final Block activated_obsidian = new BlockActivatedObsidian("activated_obsidian", Material.IRON);
 	public static final Block nether_block = new BlockNetherBlock("nether_block", Material.ROCK).setHardness(5F)

@@ -11,12 +11,10 @@ public class RegisterEntities {
 
 	// Register Entity
 	public static void registerEntites() {
-		registerEntity("Test Mob", EntityTestMob.class, Reference.Entity_TestMob, 50, 11437146, 00000000);
 		registerEntity("Colin", EntityColin.class, Reference.Entity_Colin, 69, 7733503, 16746829);
-		registerEntity("MaskedPraetor", EntityMaskedPraetor.class, Reference.EntityMasked_Praetor, 69, 1733503,
-				16746829);
 		registerEntity("Elemental", EntityElemental.class, Reference.EntityElemental, 69, 3145708, 14417900);
 		registerEntity("Dream Walker", EntityDreamWalker.class, Reference.EntityDreamWalker, 69, 16777215, 16777215);
+		registerEntity("Memory Flicker", EntityMemoryFlicker.class, Reference.EntityMemoryFlicker, 69, 16777215, 16777215);
 
 	}
 

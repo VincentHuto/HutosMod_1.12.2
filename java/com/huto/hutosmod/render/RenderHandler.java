@@ -4,14 +4,12 @@ import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.entities.EntityColin;
 import com.huto.hutosmod.entities.EntityDreamWalker;
 import com.huto.hutosmod.entities.EntityElemental;
-import com.huto.hutosmod.entities.EntityMaskedPraetor;
-import com.huto.hutosmod.entities.EntityTestMob;
+import com.huto.hutosmod.entities.EntityMemoryFlicker;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.render.entity.RenderColin;
 import com.huto.hutosmod.render.entity.RenderDreamWalker;
 import com.huto.hutosmod.render.entity.RenderElemental;
-import com.huto.hutosmod.render.entity.RenderMaskedPraetor;
-import com.huto.hutosmod.render.entity.RenderTestMob;
+import com.huto.hutosmod.render.entity.RenderMemoryFlicker;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -29,59 +27,40 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderHandler {
-	
-	
-	public static void registerCustomMeshesAndStates()
-	{
-		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(BlockRegistry.WHITE_WATER_FLUID), new ItemMeshDefinition() 
-		{	
+
+	public static void registerCustomMeshesAndStates() {
+		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(BlockRegistry.WHITE_WATER_FLUID),
+				new ItemMeshDefinition() {
+					@Override
+					public ModelResourceLocation getModelLocation(ItemStack stack) {
+						return new ModelResourceLocation(Reference.MODID + ":white_water", "fluid");
+					}
+				});
+
+		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(BlockRegistry.primal_ooze_fluid),
+				new ItemMeshDefinition() {
+					@Override
+					public ModelResourceLocation getModelLocation(ItemStack stack) {
+						return new ModelResourceLocation(Reference.MODID + ":primal_ooze", "fluid");
+					}
+				});
+
+		ModelLoader.setCustomStateMapper(BlockRegistry.WHITE_WATER_FLUID, new StateMapperBase() {
 			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) 
-			{
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				return new ModelResourceLocation(Reference.MODID + ":white_water", "fluid");
 			}
 		});
-		
-		
-		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(BlockRegistry.primal_ooze_fluid), new ItemMeshDefinition() 
-		{	
+
+		ModelLoader.setCustomStateMapper(BlockRegistry.primal_ooze_fluid, new StateMapperBase() {
 			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) 
-			{
-				return new ModelResourceLocation(Reference.MODID + ":primal_ooze", "fluid");
-			}
-		});
-		
-		
-		ModelLoader.setCustomStateMapper(BlockRegistry.WHITE_WATER_FLUID, new StateMapperBase() 
-		{
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) 
-			{
-				return new ModelResourceLocation(Reference.MODID + ":white_water", "fluid");
-			}
-		});
-		
-		
-		ModelLoader.setCustomStateMapper(BlockRegistry.primal_ooze_fluid, new StateMapperBase() 
-		{
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) 
-			{
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				return new ModelResourceLocation(Reference.MODID + ":primal_ooze", "fluid");
 			}
 		});
 	}
 
-	
-	
 	public static void registerEntityRenders() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityTestMob.class, new IRenderFactory<EntityTestMob>() {
-			@Override
-			public Render<? super EntityTestMob> createRenderFor(RenderManager manager) {
-				return new RenderTestMob(manager);
-			}
-		});
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityColin.class, new IRenderFactory<EntityColin>() {
 			@Override
@@ -90,24 +69,25 @@ public class RenderHandler {
 			}
 		});
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityMaskedPraetor.class, new IRenderFactory<EntityMaskedPraetor>() {
-			@Override
-			public Render<? super EntityMaskedPraetor> createRenderFor(RenderManager manager) {
-				return new RenderMaskedPraetor(manager);
-			}
-		});
-		
 		RenderingRegistry.registerEntityRenderingHandler(EntityElemental.class, new IRenderFactory<EntityElemental>() {
 			@Override
 			public Render<? super EntityElemental> createRenderFor(RenderManager manager) {
 				return new RenderElemental(manager);
 			}
 		});
-		RenderingRegistry.registerEntityRenderingHandler(EntityDreamWalker.class, new IRenderFactory<EntityDreamWalker>() {
-			@Override
-			public Render<? super EntityDreamWalker> createRenderFor(RenderManager manager) {
-				return new RenderDreamWalker(manager);
-			}
-		});
+		RenderingRegistry.registerEntityRenderingHandler(EntityDreamWalker.class,
+				new IRenderFactory<EntityDreamWalker>() {
+					@Override
+					public Render<? super EntityDreamWalker> createRenderFor(RenderManager manager) {
+						return new RenderDreamWalker(manager);
+					}
+				});
+		RenderingRegistry.registerEntityRenderingHandler(EntityMemoryFlicker.class,
+				new IRenderFactory<EntityMemoryFlicker>() {
+					@Override
+					public Render<? super EntityMemoryFlicker> createRenderFor(RenderManager manager) {
+						return new RenderMemoryFlicker(manager);
+					}
+				});
 	}
 }

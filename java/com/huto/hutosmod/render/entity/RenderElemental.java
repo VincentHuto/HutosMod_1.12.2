@@ -1,11 +1,8 @@
 package com.huto.hutosmod.render.entity;
 
 import com.huto.hutosmod.entities.EntityElemental;
-import com.huto.hutosmod.entities.EntityMaskedPraetor;
 import com.huto.hutosmod.models.ModelElemental;
-import com.huto.hutosmod.models.ModelMaskedPraetor;
 import com.huto.hutosmod.reference.Reference;
-import com.huto.hutosmod.render.layer.LayerColinAura;
 import com.huto.hutosmod.render.layer.LayerElemental;
 
 import net.minecraft.client.renderer.entity.RenderLiving;

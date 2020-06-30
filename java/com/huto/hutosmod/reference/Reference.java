@@ -12,11 +12,10 @@ public class Reference {
 	public static final String CLIENT_PROXY_CLASS = "com.huto.hutosmod.proxy.ClientProxy";
 	public static final String COMMON_PROXY_CLASS = "com.huto.hutosmod.proxy.CommonProxy";
 
-	public static final int Entity_TestMob = 120;
 	public static final int Entity_Colin = 42069;
-	public static final int EntityMasked_Praetor = 42070;
 	public static final int EntityElemental = 42071;
 	public static final int EntityDreamWalker = 42072;
+	public static final int EntityMemoryFlicker = 42073;
 
 	public static final int GUI_MIND_RUNES = 0;
 	public static final int Gui_Hud_Overlay_Runic = 3;

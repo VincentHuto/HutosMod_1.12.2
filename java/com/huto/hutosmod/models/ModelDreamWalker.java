@@ -1,10 +1,10 @@
 package com.huto.hutosmod.models;
 
-import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelDreamWalker extends ModelBiped
+public class ModelDreamWalker extends ModelBase
 {
   //fields
     ModelRenderer head;
