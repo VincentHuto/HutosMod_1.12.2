@@ -14,7 +14,7 @@ public class RegisterEntities {
 		registerEntity("Colin", EntityColin.class, Reference.Entity_Colin, 69, 7733503, 16746829);
 		registerEntity("Elemental", EntityElemental.class, Reference.EntityElemental, 69, 3145708, 14417900);
 		registerEntity("Dream Walker", EntityDreamWalker.class, Reference.EntityDreamWalker, 69, 16777215, 16777215);
-		registerEntity("Memory Flicker", EntityMemoryFlicker.class, Reference.EntityMemoryFlicker, 69, 16777215, 16777215);
+		registerEntity("Memory Flicker", EntityMemoryFlicker.class, Reference.EntityMemoryFlicker, 69, 3093088, 16777215);
 
 	}
 

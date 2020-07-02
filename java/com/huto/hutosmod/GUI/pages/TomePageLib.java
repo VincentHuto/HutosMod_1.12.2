@@ -83,16 +83,13 @@ public class TomePageLib {
 				new ItemStack(ItemRegistry.null_crystal), I18n.format(INTRO_PAGE_6)));
 		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 7", "The power of vitals",
 				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_7)));
-
 		// World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_1)));
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
 				new ItemStack(ItemRegistry.null_chestplate), I18n.format(EQUIP_PAGE_1)));
-
 		// Machines
-
 		BlocksPageList.add(new GuiTomePage(0, EnumTomeCatagories.MACHINES, "Mana Gathering", "It comes from the air",
 				new ItemStack(BlockRegistry.mana_gatherer), I18n.format(MACHINE_PAGE_1)));
 		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Karmic Altar", "Mana, at what cost?",
@@ -109,11 +106,9 @@ public class TomePageLib {
 				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
 		BlocksPageList.add(new GuiTomePage(7, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
 				new ItemStack(BlockRegistry.wand_maker), I18n.format(MACHINE_PAGE_8)));
-
 		// Wands & Magic Gloves
 		WandsPageList.add(new GuiTomePage(0, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemRegistry.wand_consume_mana), I18n.format(WANDS_PAGE_1)));
-
 		// Runes
 		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "Etching your mind",
 				new ItemStack(ItemRegistry.rune_blank), I18n.format(RUNES_PAGE_1)));

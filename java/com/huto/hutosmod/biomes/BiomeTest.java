@@ -33,9 +33,9 @@ public class BiomeTest extends Biome {
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 300, 3, 15));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 100, 1, 1));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityMemoryFlicker.class, 100, 3, 5));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityElemental.class, 1000, 3, 15));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityDreamWalker.class, 10000, 1, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityMemoryFlicker.class, 20000, 3, 5));
 
 
 	}

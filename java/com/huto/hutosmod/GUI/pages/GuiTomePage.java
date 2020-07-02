@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.client.Minecraft;
@@ -14,6 +16,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -502,7 +505,7 @@ public class GuiTomePage extends GuiScreen {
 			}
 
 		case TITLEBUTTON:
-			if (this.catagory == EnumTomeCatagories.ELDER) {
+			if (MainClass.proxy.getClientPlayer().getHeldItemMainhand().getItem() == ItemRegistry.elder_tome) {
 				mc.displayGuiScreen(new GuiTomeTitle(true));
 			} else {
 				mc.displayGuiScreen(new GuiTomeTitle(false));

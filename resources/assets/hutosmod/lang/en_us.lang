@@ -103,9 +103,14 @@ tile.karmic_altar.name=Karmic Altar
 tile.mana_fuser.name=Mana Conglomerator
 tile.karmic_extractor.name=Karmic Extractor
 tile.celestial_actuator.name=Celestial Actuator
-tile.enchanted_stone_Smooth.name=Smooth Enchanted Stone
 tile.display_pedestal.name=Display Pedestal
+tile.enchanted_stone_smooth.name=Enchanted Stone
+tile.mindfog.name=Mind Fog
 
+fluid.white_water=White Water
+fluid.primal_ooze=Primal Ooze
+tile.white_water.name=White Water
+tile.primal_ooze.name=Primal Ooze
 
 gui.tooltip68=What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.
 gui.tooltip69=This is a test for tooltips
@@ -127,12 +132,11 @@ splash_potion.effect.mana_burn=Splash Potion of Mana Burn
 lingering_potion.effect.mana_burn=Elixer of Mana Burn
 tipped_arrow.effect.mana_burn=Arrow of Mana Burn
 
-
 mystictome.intro.page.1.text=   The big bang created the universe, making existence out of nothing, pushing everything out from a central point with incredible momentum. With this massive amount of force, came an equal production of both antimatter and standard matter. From the start, everything had it's opposite. This fact can be claimed to be one of the few principles in existence that always holds true, be it science or magic. The forging of the universe is not a relic of ages past, literal reverberations from the explosion can still be felt and interacted with.
 mystictome.intro.page.2.text=   The reverberations previously mentioned are in a sense, cosmic whiplash on a universal scale. As the singularity expanded, every particle was thrown around in every which way. While at first, this was cause for chaos, the wheels of time have marched on and calmed things down as they do rendering the vibrations very minute, but minute is not zero. Minute for one atom can be magnified exponentially when concentrated enough, resonating with one another allowing for the force of the big bang to be felt once more.
 mystictome.intro.page.3.text=   One of the quirks of the antimatter/matter duality is that the vibrations of these particles are opposite and equal as well. These vibrations follow the same principle that all other forms of vibration be it sound/light/electricity etc, in that they amplify when met with similar waves and cancel when met with opposing waves. Building on the concentration effect of these vibrations, the idea of karma can even be traced back as the balance of these vibrations within your body, and mana is just the net force of the anti and positive waves manifesting as a physical and invisible force.
 mystictome.intro.page.4.text=   Matter and antimatter can become "vibratory" in some rare examples simply by happenstance when enough of a single frequency of resonating matter comes into close proximity and will somewhat meld together. When they coalesce they are called "drops" or "tears" for vibrations and antivibration respectively with "essence" being the overarching term for both forms of concentrated vibrational matter. Essence can be found in all forms of life with a very low concentration but can be coerced out of them upon death with specialized tools discussed later.
-mystictome.intro.page.5.text=   The process of inducing vibrations is known as "Channeling", mystical sounding in nature, but the elders can be blamed for this. This can be done in a variety of ways all modeled off of trying to artificially induce the natural essence production, by essentially taking a chunk of vibratory or “conductive” matter and allowing it to collect more and more matter that begins to resonate with it, which is an exponential process. The beauty of this process is that once an original drop or tear of matter is created, it will naturally start to produce more of itself with little aide.If only there was a way to contain this growth...
+mystictome.intro.page.5.text=   The process of inducing vibrations is known as "Channeling", mystical sounding in nature, but the elders can be blamed for this. This can be done in a variety of ways all modeled off of trying to artificially induce the natural essence production, by essentially taking a chunk of vibratory or "conductive" matter and allowing it to collect more and more matter that begins to resonate with it, which is an exponential process. The beauty of this process is that once an original drop or tear of matter is created, it will naturally start to produce more of itself with little aide.If only there was a way to contain this growth...
 mystictome.intro.page.6.text=   As mentioned prior, these vibrations behave the same way that any other wave does, and as such can be stopped or dampened with an opposite waveform. Producing this waveform can be tricky but with a little bit of experimenting, discovering that the more your around concentrated matter, the more sensitive you become to it, beginning to be able to sense slight differences in direction and amplitude each drop. By using matter of specific frequency you can change the characteristics of other matter by forcing contact with the target. The process of canceling vibrations intentionally is called "Nullification" and is incredibly useful.  
 mystictome.intro.page.7.text=   Due to the nature of life itself, being inherently organized, living beings are naturally enriched with essence, almost completely filled with positive vibrations in fact. This is not to say that ALL creatures are positive, there are some exceptions that have net negative vibrations(withers and end creatures), and some that have non at all(skeletons and other inorganic life)! Because of this, the essence can be farmed quite readily through the process of death, with the correct tools, of course, ones that nullified vibrations maybe?
 
@@ -157,7 +161,6 @@ mystictome.karma.page.1.text=Cras nunc lorem, vehicula sed diam nec, fringilla s
 
 mystictome.elder.page.1.text=Maecenas sit amet mi magna. Vivamus a mauris vitae dolor vehicula aliquet at eu ipsum. Integer a ligula mollis, fermentum erat ornare, fringilla nisi. Vestibulum pharetra feugiat velit, a porta leo imperdiet quis. Cras rutrum sed urna sit amet egestas. Suspendisse faucibus eget erat et venenatis. Nam interdum sollicitudin erat, quis sodales ligula mattis ac. Phasellus rhoncus ultrices libero eget tempus. Nullam mattis lectus neque, at ultricies sapien interdum eget. Pellentesque eget consequat magna, sit amet vulputate neque. Ut lacus.
 
-container.fusion_furnace=Fusion Furnace
 
 button.runes=Mind Runes
 button.inventory=Inv
@@ -166,7 +169,3 @@ hutosmod.jei.essenceenhancer=Enhancer Recipies
 hutosmod.jei.manafuser=Mana Fuser
 hutosmod.jei.wandmaker=Wand Maker
 
-fluid.white_water=White Water
-fluid.primal_ooze=Primal Ooze
-tile.white_water.name=White Water
-tile.primal_ooze.name=Primal Ooze

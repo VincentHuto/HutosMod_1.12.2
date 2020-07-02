@@ -373,8 +373,8 @@ public class AlagadaGen implements IChunkGenerator
 										// change the y to influence height  
 									//		primer.setBlockState(i * 4 + l2, i * 8 + l2, i* 4 + l2, WATER);
 
-										primer.setBlockState(i * 4 + k2, i2 *7 + j2+(80), l * 4 + l2, CLAY);
-										primer.setBlockState(i * 4 + k2, i2 *7 + j2+ 180, l * 4 + l2,CLAY);
+									primer.setBlockState(i * 4 + k2, i2 *7 + j2+(80), l * 4 + l2, CLAY);
+								//		primer.setBlockState(i * 4 + k2, i2 *7 + j2+ 180, l * 4 + l2,CLAY);
 
 									}
 								}

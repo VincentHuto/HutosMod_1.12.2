@@ -130,7 +130,6 @@ public class ManaEventHandler {
 		player.sendMessage(new TextComponentString(message));
 
 	}
-
 	@SubscribeEvent
 	public void onPlayerSleep(PlayerSleepInBedEvent event) {
 		EntityPlayer player = event.getEntityPlayer();

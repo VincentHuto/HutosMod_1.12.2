@@ -62,7 +62,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public boolean isSurfaceWorld() {
-		return true;
+		return false;
 	}
 
 	@Override
