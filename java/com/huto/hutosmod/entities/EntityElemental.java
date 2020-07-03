@@ -36,8 +36,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityElemental extends EntityMob {
+
 	public static final ResourceLocation LootTable = LootTableList
 			.register(new ResourceLocation(Reference.MODID, "elemental"));
+
 	/** Random offset used in floating behaviour */
 	private float heightOffset = 0.5F;
 	/** ticks until heightOffset is randomized */
@@ -51,6 +53,7 @@ public class EntityElemental extends EntityMob {
 		this.setPathPriority(PathNodeType.LAVA, 8.0F);
 		this.setPathPriority(PathNodeType.DANGER_FIRE, 0.0F);
 		this.setPathPriority(PathNodeType.DAMAGE_FIRE, 0.0F);
+		this.isImmuneToFire = true;
 		this.experienceValue = 10;
 	}
 
@@ -117,15 +120,15 @@ public class EntityElemental extends EntityMob {
 		if (this.world.isRemote) {
 			if (this.rand.nextInt(24) == 0 && !this.isSilent()) {
 				this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D,
-						SoundEvents.BLOCK_NOTE_BELL, this.getSoundCategory(), 1.0F + this.rand.nextFloat(),
+						SoundEvents.ENTITY_BLAZE_BURN, this.getSoundCategory(), 1.0F + this.rand.nextFloat(),
 						this.rand.nextFloat() * 0.7F + 0.3F, false);
 			}
 
 			for (int i = 0; i < 2; ++i) {
-				// this.world.spawnParticle(EnumParticleTypes.SPELL, this.posX +
-				// (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY +
-				// this.rand.nextDouble() * (double)this.height, this.posZ +
-				// (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+				this.world.spawnParticle(EnumParticleTypes.PORTAL,
+						this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width,
+						this.posY + this.rand.nextDouble() * (double) this.height,
+						this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -261,7 +264,7 @@ public class EntityElemental extends EntityMob {
 					} else {
 						this.attackTime = 100;
 						this.attackStep = 0;
-						this.blaze.setOnFire(false);
+						//this.blaze.setOnFire(false);
 					}
 
 					if (this.attackStep > 1) {
@@ -270,11 +273,11 @@ public class EntityElemental extends EntityMob {
 								new BlockPos((int) this.blaze.posX, (int) this.blaze.posY, (int) this.blaze.posZ), 0);
 
 						for (int i = 0; i < 1; ++i) {
-//							EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.world,
-//									this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2,
-//									d3 + this.blaze.getRNG().nextGaussian() * (double) f);
-//							entitysmallfireball.posY = this.blaze.posY + (double) (this.blaze.height / 2.0F) + 0.5D;
-//							this.blaze.world.spawnEntity(entitysmallfireball);
+							EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.world,
+									this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double) f, d2,
+									d3 + this.blaze.getRNG().nextGaussian() * (double) f);
+							entitysmallfireball.posY = this.blaze.posY + (double) (this.blaze.height / 2.0F) + 0.5D;
+							this.blaze.world.spawnEntity(entitysmallfireball);
 						}
 					}
 				}

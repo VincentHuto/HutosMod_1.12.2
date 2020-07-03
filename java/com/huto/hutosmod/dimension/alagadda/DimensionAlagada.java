@@ -67,7 +67,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public boolean canRespawnHere() {
-		return true;
+		return false;
 	}
 
 	// Toggles fog

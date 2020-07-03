@@ -13,10 +13,9 @@ public class BlockMindFog extends BlockBase {
 		super(name, material);
 		setSoundType(SoundType.SNOW);
 //		setLightLevel(1.0F);
-		setLightOpacity(15);
 	}
 
-	@SideOnly(Side.CLIENT)
+/*	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
@@ -31,6 +30,6 @@ public class BlockMindFog extends BlockBase {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
-	}
+	}*/
 
 }
