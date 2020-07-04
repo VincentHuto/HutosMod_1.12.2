@@ -1,32 +1,26 @@
 {
-    "variants": 
-    {
-        "facing=up": 
-        { 
-            "model": "hutosmod:rune_station" 
+    "forge_marker": 1,
+    "defaults": { "model": "hutosmod:rune_station" },
+    "variants": {
+         "facing=up": {
+            "y":0
         },
-         "facing=down": 
-        { 
-            "model": "hutosmod:rune_station" 
+        "facing=north": {
+            "y":180
         },
-        "facing=south": 
-        { 
-            "model": "hutosmod:rune_station" 
+        "facing=east": {
+            "y": 270
         },
-    
-        "facing=east": 
-        { 
-            "model": "hutosmod:rune_station","y":270 
+        "facing=south": {
+            "y": 0
         },
-    
-        "facing=west": 
-        { 
-            "model": "hutosmod:rune_station","y":90 
+        "facing=west": {
+            "y": 90
         },
-    
-        "facing=north": 
-        { 
-            "model": "hutosmod:rune_station","y":180 
+
+        "inventory": {
+            "model": "hutosmod:rune_station",
+            "transform": "forge:default-block"
         }
     }
 }

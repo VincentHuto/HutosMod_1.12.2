@@ -26,9 +26,9 @@ import net.minecraft.world.World;
 
 public class BlockRunicChiselStation extends BlockBase {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
-	public static final AxisAlignedBB RUNE_STATION = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
+	public static final AxisAlignedBB RUNE_STATION = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
-	public static final AxisAlignedBB RUNE_STATION_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
+	public static final AxisAlignedBB RUNE_STATION_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
 	public BlockRunicChiselStation(String name, Material material) {
 		super(name, material);

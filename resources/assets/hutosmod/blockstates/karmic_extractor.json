@@ -1,32 +1,23 @@
 {
-    "variants": 
-    {
-        "facing=up": 
-        { 
-            "model": "hutosmod:karmic_extractor" 
+    "forge_marker": 1,
+    "defaults": { "model": "hutosmod:karmic_extractor" },
+    "variants": {
+        "facing=north": {
+            "y":180
         },
-         "facing=down": 
-        { 
-            "model": "hutosmod:karmic_extractor" 
+        "facing=east": {
+            "y": 270
         },
-        "facing=south": 
-        { 
-            "model": "hutosmod:karmic_extractor" 
+        "facing=south": {
+            "y": 0
         },
-    
-        "facing=east": 
-        { 
-            "model": "hutosmod:karmic_extractor","y":270 
+        "facing=west": {
+            "y": 90
         },
-    
-        "facing=west": 
-        { 
-            "model": "hutosmod:karmic_extractor","y":90 
-        },
-    
-        "facing=north": 
-        { 
-            "model": "hutosmod:karmic_extractor","y":180 
+
+        "inventory": {
+            "model": "hutosmod:karmic_extractor",
+            "transform": "forge:default-block"
         }
     }
 }

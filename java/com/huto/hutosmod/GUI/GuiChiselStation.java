@@ -7,11 +7,6 @@ import java.util.List;
 import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
-import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
-import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
-import com.huto.hutosmod.items.runes.ItemContractRuneImpure;
-import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
-import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 
@@ -35,10 +30,11 @@ public class GuiChiselStation extends GuiContainer {
 	int left, top;
 	int guiWidth = 176;
 	int guiHeight = 186;
-	final int BUTTONTEST = 0;
-
+	public GuiButtonTextured[][] runeButtonArray = new GuiButtonTextured[8][8];
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-
+	int CLEARBUTTONID = 100;
+	GuiButtonTextured clearButton;
+	public List<Integer> activatedRuneList = new ArrayList<Integer>();
 	public GuiChiselStation(InventoryPlayer playerInv, TileEntityChiselStation chestInv, EntityPlayer player) {
 		super(new ContainerChiselStation(playerInv, chestInv, player));
 		this.playerInv = playerInv;
@@ -49,6 +45,14 @@ public class GuiChiselStation extends GuiContainer {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		
+/*
+		List<String> cat9 = new ArrayList<String>();
+		cat9.add(I18n.format("Clear Runes"));
+		 drawTooltip(cat9, mouseX, mouseY,  left + guiWidth - (guiWidth - 120),top + guiHeight - (170), 16, 16, false);
+		this.renderHoveredToolTip(mouseX, mouseY);
+	*/
+		
 		this.allowUserInput = true;
 		Minecraft.getMinecraft().renderEngine.bindTexture(GUI_Chisel);
 		int centerX = (width / 2) - guiWidth / 2;
@@ -59,21 +63,19 @@ public class GuiChiselStation extends GuiContainer {
 			GlStateManager.enableBlend();
 			GlStateManager.color(1, 1, 1, 1);
 			Minecraft.getMinecraft().renderEngine.bindTexture(GUI_Chisel);
+		
 		}
 		GlStateManager.popMatrix();
 		for (int i = 0; i < buttonList.size(); i++) {
 			buttonList.get(i).drawButton(mc, mouseX, mouseY, 10);
 		}
 
-		List<String> cat9 = new ArrayList<String>();
-		cat9.add(I18n.format("Close Book"));
-	//	drawTooltip(cat9, mouseX, mouseY, left + guiWidth - (guiWidth - 70), top + guiHeight - 130, 16, 16, false);
+
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(mouseX, mouseY);
 
 	}
 
-	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
+	/*public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
 			boolean obscu) {
 		if (mouseX >= posX && mouseX <= posX + width && mouseY >= posY && mouseY <= posY + height) {
 			if (obscu) {
@@ -150,7 +152,7 @@ public class GuiChiselStation extends GuiContainer {
 			RenderHelper.enableStandardItemLighting();
 			GlStateManager.enableRescaleNormal();
 		}
-	}
+	}*/
 
 	@Override
 	public void initGui() {
@@ -159,15 +161,20 @@ public class GuiChiselStation extends GuiContainer {
 		top = height / 2 - guiHeight / 2;
 		int sideLoc = left + guiWidth;
 		int verticalLoc = top + guiHeight;
-
 		buttonList.clear();
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-
-				buttonList.add(new GuiButtonTextured(GUI_Chisel, BUTTONTEST,
-						left + guiWidth - (guiWidth - 50 - (i * 8)), top + guiHeight - (160 - (j * 8)), 8, 8, 176, 0));
+		// This was changed from a list to an array because it doesnt need to be changed
+		// and i wanted each button to have a unique value
+		int inc = 0;
+		for (int i = 0; i < runeButtonArray.length; i++) {
+			for (int j = 0; j < runeButtonArray.length; j++) {
+				buttonList.add(runeButtonArray[i][j] = new GuiButtonTextured(GUI_Chisel, inc,
+						left + guiWidth - (guiWidth - 50 - (i * 8)), top + guiHeight - (160 - (j * 8)), 8, 8, 176, 0,
+						false));
+				inc++;
 			}
 		}
+		buttonList.add(clearButton = new GuiButtonTextured(GUI_Chisel, CLEARBUTTONID, left + guiWidth - (guiWidth - 120),
+				top + guiHeight - (170), 16, 16, 176, 16));
 
 	}
 
@@ -175,9 +182,15 @@ public class GuiChiselStation extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 
 		GlStateManager.color(1.0f, 1.0f, 1.0f);
+		
 		this.drawDefaultBackground();
+		
 		this.mc.getTextureManager().bindTexture(GUI_Chisel);
+		
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+	
+	
+	
 	}
 
 	@Override
@@ -187,24 +200,9 @@ public class GuiChiselStation extends GuiContainer {
 
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			int color;
-			if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneBeast) {
-
-				color = 55555555;
-			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneImpure) {
-
-				color = 55555555;
-
-			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneCorrupt) {
-
-				color = 55555555;
-			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneMilkweed) {
-
-				color = 55555555;
-			} else if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneRadiance) {
-
+			if (this.te.getStackInSlot(i).getItem().getClass().getName().contains("Contract")) {
 				color = 55555555;
 			} else {
-
 				color = 10000000;
 			}
 
@@ -219,13 +217,34 @@ public class GuiChiselStation extends GuiContainer {
 
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		switch (button.id) {
-		case BUTTONTEST:
-			mc.displayGuiScreen(null);
-			break;
+
+		if (button.id <= 64) {
+			System.out.println(buttonList.get(button.id).id);
+			if (buttonList.get(button.id) instanceof GuiButtonTextured) {
+				GuiButtonTextured test = (GuiButtonTextured) buttonList.get(button.id);
+				if (test.getState() == false) {
+					test.setState(true);
+					activatedRuneList.add(test.getId());
+					System.out.println(activatedRuneList.toString());
+				} else {
+					test.setState(false);
+					activatedRuneList.remove(Integer.valueOf(test.getId()));
+					System.out.println(activatedRuneList.toString());
+
+
+				}
+				System.out.println();
+			}
+		}
+		if (button.id == CLEARBUTTONID) {
+			for (int i = 0; i < 64; i++) {
+				if (buttonList.get(i) instanceof GuiButtonTextured) {
+					GuiButtonTextured test = (GuiButtonTextured) buttonList.get(i);
+					test.setState(false);
+				}
+			}
 		}
 		super.actionPerformed(button);
 
 	}
-
 }

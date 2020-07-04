@@ -11,6 +11,7 @@ import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
 import com.huto.hutosmod.items.runes.ItemContractRuneImpure;
 import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
 import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
+import com.huto.hutosmod.items.runes.ItemRune;
 import com.huto.hutosmod.items.runes.ItemRuneClaw;
 import com.huto.hutosmod.items.runes.ItemRuneLake;
 import com.huto.hutosmod.items.runes.ItemRuneMorph;
@@ -139,7 +140,7 @@ public class ItemRegistry {
 	public static final Item rune_milkweed_c = new ItemContractRuneMilkweed("rune_milkweed_c");
 	public static final Item rune_radiance_c = new ItemContractRuneRadiance("rune_radiance_c");
 	// Base Runes
-	public static final Item rune_blank = new ItemBase("rune_blank");
+	public static final Item rune_blank = new ItemRune("rune_blank").setMaxStackSize(64);
 	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
 	public static final Item rune_lake = new ItemRuneLake("rune_lake");
 	public static final Item rune_clawmark = new ItemRuneClaw("rune_clawmark");

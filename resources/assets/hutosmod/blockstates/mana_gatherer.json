@@ -1,32 +1,23 @@
 {
-    "variants": 
-    {
-        "facing=up": 
-        { 
-            "model": "hutosmod:mana_gatherer" 
+    "forge_marker": 1,
+    "defaults": { "model": "hutosmod:mana_gatherer" },
+    "variants": {
+        "facing=north": {
+            "y":180
         },
-         "facing=down": 
-        { 
-            "model": "hutosmod:mana_gatherer" 
+        "facing=east": {
+            "y": 270
         },
-        "facing=south": 
-        { 
-            "model": "hutosmod:mana_gatherer" 
+        "facing=south": {
+            "y": 0
         },
-    
-        "facing=east": 
-        { 
-            "model": "hutosmod:mana_gatherer","y":270 
+        "facing=west": {
+            "y": 90
         },
-    
-        "facing=west": 
-        { 
-            "model": "hutosmod:mana_gatherer","y":90 
-        },
-    
-        "facing=north": 
-        { 
-            "model": "hutosmod:mana_gatherer","y":180 
+
+        "inventory": {
+            "model": "hutosmod:mana_gatherer",
+            "transform": "forge:default-block"
         }
     }
 }

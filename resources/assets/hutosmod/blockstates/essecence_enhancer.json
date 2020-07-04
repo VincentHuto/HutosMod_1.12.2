@@ -1,30 +1,26 @@
 {
-    "variants": 
-    {
-        "facing=up": 
-        { 
-            "model": "hutosmod:essecence_enhancer" 
+    "forge_marker": 1,
+    "defaults": { "model": "hutosmod:essecence_enhancer" },
+    "variants": {
+          "facing=up": {
+            "y":0
         },
-         "facing=down": 
-        { 
-            "model": "hutosmod:essecence_enhancer" 
+        "facing=north": {
+            "y":180
         },
-        "facing=south": 
-        { 
-            "model": "hutosmod:essecence_enhancer" 
+        "facing=east": {
+            "y": 270
         },
-        "facing=east": 
-        { 
-            "model": "hutosmod:essecence_enhancer","y":270 
+        "facing=south": {
+            "y": 0
         },
-        "facing=west": 
-        { 
-            "model": "hutosmod:essecence_enhancer","y":90 
+        "facing=west": {
+            "y": 90
         },
-    
-        "facing=north": 
-        { 
-            "model": "hutosmod:essecence_enhancer","y":180 
+
+        "inventory": {
+            "model": "hutosmod:essecence_enhancer",
+            "transform": "forge:default-block"
         }
     }
 }

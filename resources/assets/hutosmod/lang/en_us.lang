@@ -59,6 +59,7 @@ item.wand_rending.name=Wand Of Rending
 item.wand_healself.name=Wand Of Healing
 item.wand_healother.name=Wand Of Generosity
 item.wand_lightning.name=Wand of Shocking
+item.rune_blank.name=Blank Rune
 item.rune_metamorphosis.name=Metamorphosis Rune
 item.rune_lake.name=Arcane Lake Rune
 item.rune_clawmark.name=Clawmark Rune
@@ -106,6 +107,7 @@ tile.celestial_actuator.name=Celestial Actuator
 tile.display_pedestal.name=Display Pedestal
 tile.enchanted_stone_smooth.name=Enchanted Stone
 tile.mindfog.name=Mind Fog
+tile.runic_chiselstation.name=Rune Chisel Station
 
 fluid.white_water=White Water
 fluid.primal_ooze=Primal Ooze
