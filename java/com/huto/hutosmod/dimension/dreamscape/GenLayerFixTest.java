@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;

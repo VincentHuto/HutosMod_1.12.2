@@ -1,10 +1,12 @@
 package com.huto.hutosmod.gui;
 
+import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.container.ContainerRuneStation;
 import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 import com.huto.hutosmod.mindrunes.container.ContainerPlayerExpanded;
 import com.huto.hutosmod.mindrunes.gui.GuiMindRunes;
 import com.huto.hutosmod.reference.Reference;
+import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,34 +18,38 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		
-
-		if (ID == Reference.GUI_Rune_Station) {
+		switch (ID) {
+		case (Reference.GUI_Rune_Station):
 			return new ContainerRuneStation(player.inventory,
 					(TileEntityRuneStation) world.getTileEntity(new BlockPos(x, y, z)), player);
-		}
-		if (ID == Reference.GUI_MIND_RUNES) {
+		case (Reference.GUI_Runic_ChiselStation):
+			return new ContainerChiselStation(player.inventory,
+					(TileEntityChiselStation) world.getTileEntity(new BlockPos(x, y, z)), player);
+		case (Reference.GUI_MIND_RUNES):
 			return new ContainerPlayerExpanded(player.inventory, !world.isRemote, player);
+		default:
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		if (ID == Reference.Gui_Tome) {
-			return new GuiTomeTitle(false);
-		}
-		if (ID == Reference.Gui_ElderTome) {
-			return new GuiTomeTitle(true);
-		}
 
-		if (ID == Reference.GUI_Rune_Station) {
+		switch (ID) {
+		case (Reference.Gui_Tome):
+			return new GuiTomeTitle(false);
+		case (Reference.Gui_ElderTome):
+			return new GuiTomeTitle(true);
+		case (Reference.GUI_Rune_Station):
 			return new GuiRuneStation(player.inventory,
 					(TileEntityRuneStation) world.getTileEntity(new BlockPos(x, y, z)), player);
-		}
-		if (ID == Reference.GUI_MIND_RUNES) {
+		case (Reference.GUI_Runic_ChiselStation):
+			return new GuiChiselStation(player.inventory,
+					(TileEntityChiselStation) world.getTileEntity(new BlockPos(x, y, z)), player);
+		case (Reference.GUI_MIND_RUNES):
 			return new GuiMindRunes(player);
+		default:
+			return null;
 		}
-		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.huto.hutosmod.container;
 
+import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 
@@ -9,11 +10,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerRuneStation extends Container {
+public class ContainerChiselStation extends Container {
 	private final int numRows;
-	private final TileEntityRuneStation chestInventory;
+	private final TileEntityChiselStation chestInventory;
 
-	public ContainerRuneStation(InventoryPlayer playerInv, TileEntityRuneStation chestInventory, EntityPlayer player) {
+	public ContainerChiselStation(InventoryPlayer playerInv, TileEntityChiselStation chestInventory, EntityPlayer player) {
 		this.chestInventory = chestInventory;
 		this.numRows = 4;
 		chestInventory.openInventory(player);
@@ -69,7 +70,7 @@ public class ContainerRuneStation extends Container {
 		return stack;
 	}
 
-	public TileEntityRuneStation getChestInventory() {
+	public TileEntityChiselStation getChestInventory() {
 		return this.chestInventory;
 	}
 }

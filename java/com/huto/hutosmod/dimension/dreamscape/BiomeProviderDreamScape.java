@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import java.util.List;
 import java.util.Random;
@@ -14,18 +14,18 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class BiomeProviderAlagada extends BiomeProvider
+public class BiomeProviderDreamScape extends BiomeProvider
 {
 	private GenLayer genBiomes;
 	private GenLayer biomeIndexLayer;
 	private BiomeCache biomeCache;
 	
-	public BiomeProviderAlagada() 
+	public BiomeProviderDreamScape() 
 	{
 		this.biomeCache = new BiomeCache(this);
 	}
 	
-	public BiomeProviderAlagada(long seed)
+	public BiomeProviderDreamScape(long seed)
 	{
 		this();
 		GenLayer[] aGenLayer = GenLayerFixTest.createWorld(seed);
@@ -33,7 +33,7 @@ public class BiomeProviderAlagada extends BiomeProvider
 		this.biomeIndexLayer = aGenLayer[1];
 	}
 	
-	public BiomeProviderAlagada(World world)
+	public BiomeProviderDreamScape(World world)
 	{
 		this(world.getSeed());
 	}

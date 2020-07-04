@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import java.util.List;
 import java.util.Random;
@@ -26,7 +26,7 @@ import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-public class AlagadaGen implements IChunkGenerator
+public class DreamScapeGen implements IChunkGenerator
 {
 	protected static final IBlockState STONE = BlockRegistry.Mystic_Media.getDefaultState();
 	protected static final IBlockState GRAVEL = BlockRegistry.Mystic_Earth.getDefaultState();
@@ -59,7 +59,7 @@ public class AlagadaGen implements IChunkGenerator
 	// private MapGenBaseMeta bigCaveGenerator;
     private double[] buffer;
 
-	public AlagadaGen(World worldIn, long seed) {
+	public DreamScapeGen(World worldIn, long seed) {
 
 		this.world = worldIn;
 		this.terrainType = worldIn.getWorldInfo().getTerrainType();

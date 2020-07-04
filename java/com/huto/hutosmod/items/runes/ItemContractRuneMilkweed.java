@@ -54,7 +54,7 @@ public class ItemContractRuneMilkweed extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 ==0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 250, 0, true, true));
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 250, 0, false, true));
 		}
 	}
 

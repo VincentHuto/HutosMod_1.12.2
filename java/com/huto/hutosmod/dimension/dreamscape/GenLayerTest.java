@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import com.huto.hutosmod.biomes.BiomeRegistry;
 

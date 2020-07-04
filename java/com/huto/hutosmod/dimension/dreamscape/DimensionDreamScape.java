@@ -1,11 +1,8 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import com.huto.hutosmod.dimension.DimensionRegistry;
 
-import net.minecraft.client.renderer.WorldVertexBufferUploader;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -15,17 +12,17 @@ import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-public class DimensionAlagada extends WorldProviderSurface {
+import com.huto.hutosmod.dimension.dreamscape.SkyRenderDreamScape;
+public class DimensionDreamScape extends WorldProviderSurface {
 
 	private static final String SKYLIGHT_KEY = "HasSkylight";
 
 	private static volatile boolean skylightEnabled = false;
-	private static SkyRenderAlagadaEnd rendererSky;
+	private static SkyRenderDreamScape rendererSky;
 
 	@Override
 	protected void init() {
-		this.biomeProvider = new BiomeProviderAlagada(this.world.getSeed());
+		this.biomeProvider = new BiomeProviderDreamScape(this.world.getSeed());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -35,9 +32,9 @@ public class DimensionAlagada extends WorldProviderSurface {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static SkyRenderAlagadaEnd getModSkyRenderer() {
+	public static SkyRenderDreamScape getModSkyRenderer() {
 		if (rendererSky == null) {
-			rendererSky = new SkyRenderAlagadaEnd();
+			rendererSky = new SkyRenderDreamScape();
 		}
 		return rendererSky;
 	}
@@ -57,7 +54,7 @@ public class DimensionAlagada extends WorldProviderSurface {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new AlagadaGen(this.world, this.world.getSeed());
+		return new DreamScapeGen(this.world, this.world.getSeed());
 	}
 
 	@Override

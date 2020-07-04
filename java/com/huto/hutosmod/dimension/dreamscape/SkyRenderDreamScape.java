@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.alagadda;
+package com.huto.hutosmod.dimension.dreamscape;
 
 import java.util.Random;
 
@@ -19,7 +19,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
 
-public class SkyRenderAlagadaEnd extends IRenderHandler {
+public class SkyRenderDreamScape extends IRenderHandler {
 	private TextureManager renderEngine;
 	private static final ResourceLocation END_SKY_TEXTURES = new ResourceLocation(
 			Reference.MODID + ":textures/blocks/sky_texture.png");

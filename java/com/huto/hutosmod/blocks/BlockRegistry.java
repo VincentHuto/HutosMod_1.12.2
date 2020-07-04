@@ -54,6 +54,7 @@ public class BlockRegistry {
 	public static final Block mana_fuser = new BlockManaFuser("mana_fuser", Material.ROCK);
 	public static final Block karmic_extractor = new Blockkarmic_extractor("karmic_extractor", Material.ROCK);
 	public static final Block celestial_actuator = new BlockCelestialActuator("celestial_actuator", Material.ROCK);
+	public static final Block runic_chiselstation = new BlockRunicChiselStation("runic_chiselstation", Material.ROCK);
 
 	// Fluids
 	public static final Block WHITE_WATER_FLUID = new BlockWhiteWaterFluid("white_water", FluidInit.WHITE_WATER_FLUID,

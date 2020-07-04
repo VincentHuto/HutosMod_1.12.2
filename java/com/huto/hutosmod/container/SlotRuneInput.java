@@ -2,6 +2,11 @@ package com.huto.hutosmod.container;
 
 import javax.annotation.Nonnull;
 
+import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
+import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
+import com.huto.hutosmod.items.runes.ItemContractRuneImpure;
+import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
+import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
 import com.huto.hutosmod.items.runes.ItemRune;
 import com.huto.hutosmod.mindrunes.cap.IRune;
 
@@ -17,10 +22,11 @@ public class SlotRuneInput extends Slot {
 
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack) {
-		if (stack.getItem() instanceof ItemRune ||stack.getItem() instanceof IRune) {
+		if (stack.getItem() instanceof ItemRune) {
 			return true;
+
 		} else {
-			
+
 			return false;
 		}
 	}

@@ -8,7 +8,9 @@ import com.huto.hutosmod.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -55,65 +57,20 @@ public class ManaEventHandler {
 	public static void checkArmor(ItemStack stack, EntityPlayer player) {
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 
-		int fullArmor = 0;
-
-		if (stack.getItem() == ItemRegistry.mana_viewer) {
-
-			fullArmor = 1;
+		boolean foundOnHead = false;
+		ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
+		if (slotItemStack.getItem() == ItemRegistry.mysterious_mask) {
+			foundOnHead = true;
 		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate) {
+		if (player.dimension == -403) {
+			if (!foundOnHead) {
+				if (!player.world.isRemote) {
+					Teleport.teleportToDimention(player, 0, player.getPosition().getX(), 255,
+							player.getPosition().getZ());
+					player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 250,250, true, true));
 
-			fullArmor = 2;
-		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate
-				|| stack.getItem() == ItemRegistry.null_leggings) {
-
-			fullArmor = 3;
-		}
-		if (stack.getItem() == ItemRegistry.mana_viewer || stack.getItem() == ItemRegistry.null_chestplate
-				|| stack.getItem() == ItemRegistry.null_leggings || stack.getItem() == ItemRegistry.null_boots) {
-
-			fullArmor = 4;
-		}
-
-		switch (fullArmor) {
-
-		case (0):
-			if (mana.getMana() > 300) {
-				if (mana.manaLimit() <= 300) {
-					mana.setLimit(300);
-
-					System.out.println("Set to 300");
 				}
-
 			}
-
-		case (1):
-			/*
-			 * if (mana.getMana() > 400) { if (mana.manaLimit() <= 300) {
-			 * mana.setLimit(400);
-			 * 
-			 * System.out.println("Set to 400"); } }
-			 */
-		case (2):
-			if (mana.getMana() > 500) {
-				// mana.setLimit(500);
-
-				// System.out.println("Set to 500");
-			}
-		case (3):
-			if (mana.getMana() > 600) {
-				// mana.setLimit(600);
-
-				// System.out.println("Set to 600");
-			}
-		case (4):
-			if (mana.getMana() > 900) {
-				// mana.setLimit(900);
-
-				// System.out.println("Set to 900");
-			}
-
 		}
 
 	}
@@ -130,6 +87,7 @@ public class ManaEventHandler {
 		player.sendMessage(new TextComponentString(message));
 
 	}
+
 	@SubscribeEvent
 	public void onPlayerSleep(PlayerSleepInBedEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
@@ -143,11 +101,13 @@ public class ManaEventHandler {
 			foundOnHead = true;
 		}
 		if (foundOnHead && player.dimension == 0) {
-			Teleport.teleportToDimention(player, -403, player.getPosition().getX(), 65, player.getPosition().getZ());
+			Teleport.teleportToDimention(player, -403, player.getPosition().getX(), 255, player.getPosition().getZ());
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 250,250, true, true));
+
 		}
 	}
 
-	@SubscribeEvent
+/*	@SubscribeEvent
 	public void onPlayerFalls(LivingFallEvent event) {
 		Entity entity = event.getEntity();
 
@@ -170,7 +130,7 @@ public class ManaEventHandler {
 
 			event.setCanceled(true);
 		}
-	}
+	}*/
 
 	/**
 	 * Copy data from dead player to the new player
