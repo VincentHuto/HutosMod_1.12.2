@@ -7,6 +7,8 @@ import java.util.List;
 import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
+import com.huto.hutosmod.network.PacketGetChiselData;
+import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 
@@ -15,8 +17,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -35,14 +35,29 @@ public class GuiChiselStation extends GuiContainer {
 	int CLEARBUTTONID = 100;
 	GuiButtonTextured clearButton;
 	public List<Integer> activatedRuneList = new ArrayList<Integer>();
+	
+	
 	public GuiChiselStation(InventoryPlayer playerInv, TileEntityChiselStation chestInv, EntityPlayer player) {
 		super(new ContainerChiselStation(playerInv, chestInv, player));
 		this.playerInv = playerInv;
 		this.te = chestInv;
 		this.xSize = 176;
 		this.ySize = 186;
+		sendData(playerInv, chestInv, player);
 	}
+	
+	public void sendData(InventoryPlayer playerInv, TileEntityChiselStation te, EntityPlayer player) {
+		int x = te.getPos().getX();
+		int y = te.getPos().getY();
+		int z = te.getPos().getZ();
+		List<Integer> runesOut=this.getActivatedRuneList();
+		}
+	
 
+	public List<Integer> getActivatedRuneList() {
+		return activatedRuneList;
+	}
+	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		
@@ -219,28 +234,33 @@ public class GuiChiselStation extends GuiContainer {
 	protected void actionPerformed(GuiButton button) throws IOException {
 
 		if (button.id <= 64) {
-			System.out.println(buttonList.get(button.id).id);
+			//System.out.println(buttonList.get(button.id).id);
 			if (buttonList.get(button.id) instanceof GuiButtonTextured) {
 				GuiButtonTextured test = (GuiButtonTextured) buttonList.get(button.id);
 				if (test.getState() == false) {
 					test.setState(true);
 					activatedRuneList.add(test.getId());
 					System.out.println(activatedRuneList.toString());
+					PacketHandler.INSTANCE.sendToServer(new PacketGetChiselData(activatedRuneList, "com.huto.hutosmod.gui.GuiChiselStation","runesOut"));	
+
 				} else {
 					test.setState(false);
 					activatedRuneList.remove(Integer.valueOf(test.getId()));
 					System.out.println(activatedRuneList.toString());
 
+					PacketHandler.INSTANCE.sendToServer(new PacketGetChiselData(activatedRuneList, "com.huto.hutosmod.gui.GuiChiselStation","runesOut"));	
 
 				}
-				System.out.println();
+
 			}
+
 		}
 		if (button.id == CLEARBUTTONID) {
 			for (int i = 0; i < 64; i++) {
 				if (buttonList.get(i) instanceof GuiButtonTextured) {
 					GuiButtonTextured test = (GuiButtonTextured) buttonList.get(i);
 					test.setState(false);
+					activatedRuneList.clear();
 				}
 			}
 		}

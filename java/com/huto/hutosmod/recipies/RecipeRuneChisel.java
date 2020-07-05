@@ -13,7 +13,7 @@ public class RecipeRuneChisel {
 
 	private final ItemStack output;
 	private final ImmutableList<Object> inputs;
-	int[] activatedRunes;
+	public int[] activatedRunes;
 	GuiChiselStation station;
 
 	public RecipeRuneChisel(ItemStack output,int[] runesIn,Object... inputs) {

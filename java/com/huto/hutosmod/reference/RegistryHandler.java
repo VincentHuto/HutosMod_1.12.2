@@ -36,6 +36,7 @@ import com.huto.hutosmod.mindrunes.network.RunesPacketHandler;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.potions.PotionEventHandler;
 import com.huto.hutosmod.potions.PotionInit;
+import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
@@ -160,6 +161,7 @@ public class RegistryHandler {
 		ModWandRecipies.init();
 		ModFuserRecipes.init();
 		ModEnhancerRecipies.init();
+		ModChiselRecipies.init();
 		SoundsHandler.registerSounds();
 
 	}

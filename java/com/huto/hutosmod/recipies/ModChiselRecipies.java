@@ -16,12 +16,11 @@ public class ModChiselRecipies {
 	public static RecipeRuneChisel recipeTestRune;
 
 	public static void init() {
-		recipeTestRune = registerRuneAltarRecipe(new ItemStack(ItemRegistry.rune_beast_c, 1),new ItemStack(ItemRegistry.rune_blank, 1));
-		
+		recipeTestRune = registerRuneAltarRecipe(new ItemStack(ItemRegistry.rune_beast_c, 1),new int[]{1,2,3},new ItemStack(ItemRegistry.rune_blank, 1));
 	}
-	public static RecipeRuneChisel registerRuneAltarRecipe(ItemStack output, Object... inputs) {
+	public static RecipeRuneChisel registerRuneAltarRecipe(ItemStack output,int[] runesIn, Object... inputs) {
 		Preconditions.checkArgument(inputs.length <= 2);
-		RecipeRuneChisel recipe = new RecipeRuneChisel(output, inputs);
+		RecipeRuneChisel recipe = new RecipeRuneChisel(output, runesIn, inputs);
 		runeRecipies.add(recipe);
 		return recipe;
 	}

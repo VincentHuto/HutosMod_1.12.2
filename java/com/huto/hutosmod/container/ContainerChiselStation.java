@@ -1,5 +1,6 @@
 package com.huto.hutosmod.container;
 
+import com.huto.hutosmod.gui.GuiChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
@@ -13,7 +14,12 @@ import net.minecraft.item.ItemStack;
 public class ContainerChiselStation extends Container {
 	private final int numRows;
 	private final TileEntityChiselStation chestInventory;
+	public int[] activatedRunes;
+	GuiChiselStation station;
+	
+	
 
+	
 	public ContainerChiselStation(InventoryPlayer playerInv, TileEntityChiselStation chestInventory, EntityPlayer player) {
 		this.chestInventory = chestInventory;
 		this.numRows = 4;
@@ -32,6 +38,8 @@ public class ContainerChiselStation extends Container {
 		for (int x = 0; x < 9; x++) {
 			this.addSlotToContainer(new Slot(playerInv, x, 8 + x * 18, 162));
 		}
+		
+		
 	}
 
 	@Override
