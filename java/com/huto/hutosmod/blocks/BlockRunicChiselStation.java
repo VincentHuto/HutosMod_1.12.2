@@ -88,6 +88,8 @@ public class BlockRunicChiselStation extends BlockBase {
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		playerIn.openGui(MainClass.instance, Reference.GUI_Runic_ChiselStation, worldIn, pos.getX(), pos.getY(),
 				pos.getZ());
+			TileEntityChiselStation te = (TileEntityChiselStation) worldIn.getTileEntity(pos);
+			te.cleartRuneList();
 		return true;
 	}
 

@@ -2,13 +2,17 @@ package com.huto.hutosmod.tileentity;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.huto.hutosmod.container.ContainerChiselStation;
-import com.huto.hutosmod.container.ContainerRuneStation;
-import com.huto.hutosmod.network.PacketGetChiselData;
-import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.network.PacketReturnChiselGui;
+import com.huto.hutosmod.recipies.ModChiselRecipies;
+import com.huto.hutosmod.recipies.ModWandRecipies;
+import com.huto.hutosmod.recipies.RecipeRuneChisel;
+import com.huto.hutosmod.recipies.RecipeWandMaker;
 import com.huto.hutosmod.reference.Reference;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -16,30 +20,59 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityChiselStation extends TileEntityLockableLoot implements ITickable {
 	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	public int numPlayersUsing, ticksSinceSync;
 	public float lidAngle, prevLidAngle;
-	public  List<Integer> runesList;
+	public static final String TAG_RUNELIST = "RUNELIST";
+	public List<Integer> runesList;
+	RecipeRuneChisel currentRecipe;
+	private int blockMetadata = -1;
 
-	
-	
 	public List<Integer> getRuneList() {
+		this.sendUpdates();
 		return runesList;
+	}
+
+	public void cleartRuneList() {
+		this.sendUpdates();
+		if (runesList != null) {
+			runesList.clear();
+		}
 	}
 
 	public void setRuneList(List<Integer> runesIn) {
 		this.runesList = runesIn;
+		NBTTagCompound comp = new NBTTagCompound();
+		NBTTagList tagList = new NBTTagList();
+		for (int i = 0; i < runesList.size(); i++) {
+			Integer s = runesList.get(i);
+			if (s != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setInteger("MyInt" + i, s);
+				tagList.appendTag(tag);
+			}
+		}
+
+		comp.setTag(TAG_RUNELIST, tagList);
+
+		writeToNBT(comp);
 	}
 
 	@Override
@@ -68,28 +101,26 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-		this.chestContents = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
-		if (!this.checkLootAndRead(compound)) {
-			ItemStackHelper.loadAllItems(compound, chestContents);
-		}
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		ItemStackHelper.saveAllItems(compound, chestContents);
 
-		if (compound.hasKey("CustomName", 8)) {
-			this.customName = compound.getString("CustomName");
-		}
+		return compound;
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		super.writeToNBT(compound);
-		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, chestContents);
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		this.chestContents = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
+		ItemStackHelper.loadAllItems(compound, this.chestContents);
+
+		NBTTagList tagList = compound.getTagList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < tagList.tagCount(); i++) {
+			NBTTagCompound tag = tagList.getCompoundTagAt(i);
+			Integer s = tag.getInteger("Index:" + i + " ");
+			runesList.add(i, s);
 		}
-		if (compound.hasKey("CustomName", 8)) {
-			compound.setString("CustomName", this.customName);
-		}
-		return compound;
+
 	}
 
 	@Override
@@ -102,68 +133,98 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		return Reference.MODID + ":rune_station";
 	}
 
-	@SuppressWarnings("unused")
-	@Override
-	public void update() {
-	//	PacketHandler.INSTANCE.getPacketFrom(new PacketGetChiselData(runesList, "com.huto.hutosmod.tileentity.TileEntityChiselStation", "runesList"));
-		//System.out.println(runesList);
-		
-		if (!this.world.isRemote && this.numPlayersUsing != 0
-				&& (this.ticksSinceSync + pos.getX() + pos.getY() + pos.getZ()) % 200 == 0) {
-			this.numPlayersUsing = 0;
-			float f = 5.0F;
+	
 
-			for (EntityPlayer entityplayer : this.world.getEntitiesWithinAABB(EntityPlayer.class,
-					new AxisAlignedBB((double) ((float) pos.getX() - 5.0F), (double) ((float) pos.getY() - 5.0F),
-							(double) ((float) pos.getZ() - 5.0F), (double) ((float) (pos.getX() + 1) + 5.0F),
-							(double) ((float) (pos.getY() + 1) + 5.0F), (double) ((float) (pos.getZ() + 1) + 5.0F)))) {
-				if (entityplayer.openContainer instanceof ContainerChiselStation) {
-					if (((ContainerChiselStation) entityplayer.openContainer).getChestInventory() == this) {
-						++this.numPlayersUsing;
-					}
-				}
+	public void markDirty() {
+		if (this.world != null) {
+			IBlockState iblockstate = this.world.getBlockState(this.pos);
+			this.blockMetadata = iblockstate.getBlock().getMetaFromState(iblockstate);
+			this.world.markChunkDirty(this.pos, this);
+
+			if (this.getBlockType() != Blocks.AIR) {
+				this.world.updateComparatorOutputLevel(this.pos, this.getBlockType());
 			}
 		}
-
-		this.prevLidAngle = this.lidAngle;
-		float f1 = 0.1F;
-
-		if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
-			double d1 = (double) pos.getX() + 0.5D;
-			double d2 = (double) pos.getZ() + 0.5D;
-			this.world.playSound((EntityPlayer) null, d1, (double) pos.getY() + 0.5D, d2,
-					SoundEvents.BLOCK_ENDERCHEST_OPEN, SoundCategory.BLOCKS, 0.5F,
-					this.world.rand.nextFloat() * 0.1F + 0.9F);
-		}
-
-		
 	}
-	
-	
-/*	
+	private ItemStackHandler inventory = new ItemStackHandler(this.getItems());
 
-	 *//**
-     * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
-     *//*
-    public void smeltItem()
-    {
-      
-            ItemStack runeInput = this.chestContents.get(0);
-            ItemStack secondaryInput = FurnaceRecipes.instance().getSmeltingResult(itemstack);
-            ItemStack outputStack = this.chestContents.get(2);
-            
-            
-            else if (itemstack2.getItem() == itemstack1.getItem())
-            {
-                itemstack2.grow(itemstack1.getCount());
-            }
+	public RecipeRuneChisel getCurrentRecipe() {
+		for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
+			ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
+			ItemStack input2 = this.chestContents.get(0);
+			// System.out.println(input1);
+			// System.out.println(input2);
+			if (input1.getItem() == input2.getItem()) {
+				System.out.println("MATCH");
+				currentRecipe = recipe_;
+			}
+		}
+		return currentRecipe;
+	}
+	@Override
+	public void update() {
+		if (world.isRemote)
+			return;
+		RecipeRuneChisel recipe = null;
+		if (currentRecipe != null)
+			recipe = currentRecipe;
+		else
+			for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
+				ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
+				ItemStack input2 = this.chestContents.get(0);
+				if (input1.getItem() == input2.getItem()) {
+					recipe = recipe_;
+					break;
+				}
+			}
+		if (recipe != null) {
+			ItemStack output = recipe.getOutput().copy();
 
+			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
+			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+		//	world.spawnEntity(outputItem);
+			chestContents.set(0, output);
+			currentRecipe = null;
+			for (int i = 0; i < getSizeInventory(); i++) {
+				ItemStack stack = chestContents.get(i);
+				if (!stack.isEmpty()) {
+				}
+				this.sendUpdates();
+				chestContents.set(i, ItemStack.EMPTY);
+				chestContents.set(2,output);
 
-            itemstack.shrink(1);
-        
-    }*/
+			}
+		}
+		
+			// Slot 0 = output
+			// slot 1 = main input
+			// slot 2 = secondary input
+
+		}
 	
+
+	/*	
 	
+		 *//**
+			 * Turn one item from the furnace source stack into the appropriate smelted item
+			 * in the furnace result stack
+			 *//*
+				 * public void smeltItem() {
+				 * 
+				 * ItemStack runeInput = this.chestContents.get(0); ItemStack secondaryInput =
+				 * FurnaceRecipes.instance().getSmeltingResult(itemstack); ItemStack outputStack
+				 * = this.chestContents.get(2);
+				 * 
+				 * 
+				 * else if (itemstack2.getItem() == itemstack1.getItem()) {
+				 * itemstack2.grow(itemstack1.getCount()); }
+				 * 
+				 * 
+				 * itemstack.shrink(1);
+				 * 
+				 * }
+				 */
+
 	@Override
 	protected NonNullList<ItemStack> getItems() {
 		return this.chestContents;
@@ -182,4 +243,16 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		this.world.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
 	}
+
+	public IBlockState getState() {
+		return world.getBlockState(pos);
+	}
+
+	public void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, pos);
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
+		markDirty();
+	}
+
 }

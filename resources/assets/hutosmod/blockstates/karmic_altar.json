@@ -5,6 +5,9 @@
          "facing=up": {
             "y":0
         },
+         "facing=down": {
+            "y":0
+        },
         "facing=north": {
             "y":180
         },

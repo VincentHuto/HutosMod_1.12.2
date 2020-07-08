@@ -44,6 +44,7 @@ import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.render.RenderHandler;
 import com.huto.hutosmod.render.tile.RenderTileBellJar;
 import com.huto.hutosmod.render.tile.RenderTileCelestialActuator;
+import com.huto.hutosmod.render.tile.RenderTileChiselStation;
 import com.huto.hutosmod.render.tile.RenderTileDisplayPedestal;
 import com.huto.hutosmod.render.tile.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.render.tile.RenderTileKarmicAltar;
@@ -56,6 +57,7 @@ import com.huto.hutosmod.render.tile.RenderTileWandMaker;
 import com.huto.hutosmod.sound.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
+import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityDisplayPedestal;
 import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
@@ -119,6 +121,8 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCelestialActuator.class,
 				new RenderTileCelestialActuator());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayPedestal.class, new RenderTileDisplayPedestal());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChiselStation.class, new RenderTileChiselStation());
+
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
 		}
