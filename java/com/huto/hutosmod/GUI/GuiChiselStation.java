@@ -221,14 +221,15 @@ public class GuiChiselStation extends GuiContainer {
 					test.setState(true);
 					activatedRuneList.add(test.getId());
 					System.out.println("Activated list in GUi" + activatedRuneList.toString());
-
+					te.setRuneList(activatedRuneList);
+					te.sendUpdates();
 				} else {
 					test.setState(false);
 					activatedRuneList.remove(Integer.valueOf(test.getId()));
+					te.setRuneList(activatedRuneList);
+					te.sendUpdates();
 				}
-
 			}
-
 		}
 		if (button.id == CLEARBUTTONID) {
 			for (int i = 0; i < 64; i++) {

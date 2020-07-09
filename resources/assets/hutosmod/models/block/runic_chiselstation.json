@@ -51,9 +51,9 @@
 		},
 		{
 			"name": "handle2",
-			"from": [10, 7, 9],
-			"to": [11, 8, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [17, 15, 19]},
+			"from": [11, 7, 10],
+			"to": [12, 8, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [18, 15, 19]},
 			"faces": {
 				"east": {"uv": [0, 0, 16, 16], "texture": "#3"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#3"},
@@ -63,9 +63,9 @@
 		},
 		{
 			"name": "handle3",
-			"from": [8, 7, 10],
-			"to": [9, 8, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [15, 15, 19]},
+			"from": [3, 7, 10],
+			"to": [4, 8, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 15, 19]},
 			"faces": {
 				"east": {"uv": [0, 0, 16, 16], "texture": "#3"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#3"},
@@ -87,9 +87,9 @@
 		},
 		{
 			"name": "collar2",
-			"from": [10, 7, 8],
-			"to": [11, 8, 9],
-			"rotation": {"angle": 0, "axis": "y", "origin": [17, 15, 18]},
+			"from": [11, 7, 9],
+			"to": [12, 8, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [18, 15, 19]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
 				"east": {"uv": [0, 0, 16, 16], "texture": "#2"},
@@ -99,9 +99,9 @@
 		},
 		{
 			"name": "collar3",
-			"from": [8, 7, 9],
-			"to": [9, 8, 10],
-			"rotation": {"angle": 0, "axis": "y", "origin": [15, 15, 19]},
+			"from": [3, 7, 9],
+			"to": [4, 8, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 15, 19]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#2"},
 				"east": {"uv": [0, 0, 16, 16], "texture": "#2"},

@@ -86,11 +86,14 @@ public class BlockRunicChiselStation extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityChiselStation te = (TileEntityChiselStation) worldIn.getTileEntity(pos);
+
+		if(te.numPlayersUsing<1) {
 		playerIn.openGui(MainClass.instance, Reference.GUI_Runic_ChiselStation, worldIn, pos.getX(), pos.getY(),
 				pos.getZ());
-			TileEntityChiselStation te = (TileEntityChiselStation) worldIn.getTileEntity(pos);
 			te.cleartRuneList();
-		return true;
+
+		}return true;
 	}
 
 	@Override
