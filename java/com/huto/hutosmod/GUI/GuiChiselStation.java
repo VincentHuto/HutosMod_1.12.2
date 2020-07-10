@@ -8,6 +8,8 @@ import java.util.List;
 import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.PacketUpdateChiselRunes;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 
@@ -183,7 +185,9 @@ public class GuiChiselStation extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		this.fontRenderer.drawString(this.te.getDisplayName().getUnformattedText(), 8, 6, 65444444);
 		this.fontRenderer.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 000000);
-
+		if (this.te.getUpdatePacket().getNbtCompound().getTag(te.TAG_RUNELIST) != null) {
+			this.fontRenderer.drawString(this.te.runesList.toString(), 8, this.ySize - 170, 000000);
+		}
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			int color;
 			if (this.te.getStackInSlot(i).getItem().getClass().getName().contains("Contract")) {
@@ -200,34 +204,33 @@ public class GuiChiselStation extends GuiContainer {
 		}
 
 	}
-	public static int[] convertIntegers(List<Integer> integers)
-	{
-	    int[] ret = new int[integers.size()];
-	    Iterator<Integer> iterator = integers.iterator();
-	    for (int i = 0; i < ret.length; i++)
-	    {
-	        ret[i] = iterator.next().intValue();
-	    }
-	    return ret;
+
+	public static int[] convertIntegers(List<Integer> integers) {
+		int[] ret = new int[integers.size()];
+		Iterator<Integer> iterator = integers.iterator();
+		for (int i = 0; i < ret.length; i++) {
+			ret[i] = iterator.next().intValue();
+		}
+		return ret;
 	}
+
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 
 		if (button.id <= 64) {
-			// System.out.println(buttonList.get(button.id).id);
 			if (buttonList.get(button.id) instanceof GuiButtonTextured) {
 				GuiButtonTextured test = (GuiButtonTextured) buttonList.get(button.id);
 				if (test.getState() == false) {
 					test.setState(true);
 					activatedRuneList.add(test.getId());
+					System.out.println(activatedRuneList.toString());
 					System.out.println("Activated list in GUi" + activatedRuneList.toString());
-					te.setRuneList(activatedRuneList);
-					te.sendUpdates();
+					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
 				} else {
 					test.setState(false);
 					activatedRuneList.remove(Integer.valueOf(test.getId()));
-					te.setRuneList(activatedRuneList);
-					te.sendUpdates();
+					System.out.println(activatedRuneList.toString());
+					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
 				}
 			}
 		}
@@ -237,6 +240,9 @@ public class GuiChiselStation extends GuiContainer {
 					GuiButtonTextured test = (GuiButtonTextured) buttonList.get(i);
 					test.setState(false);
 					activatedRuneList.clear();
+					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+					System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
+
 				}
 			}
 		}

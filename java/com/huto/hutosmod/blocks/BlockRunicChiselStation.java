@@ -91,7 +91,7 @@ public class BlockRunicChiselStation extends BlockBase {
 		if(te.numPlayersUsing<1) {
 		playerIn.openGui(MainClass.instance, Reference.GUI_Runic_ChiselStation, worldIn, pos.getX(), pos.getY(),
 				pos.getZ());
-			te.cleartRuneList();
+			//te.cleartRuneList();
 
 		}return true;
 	}

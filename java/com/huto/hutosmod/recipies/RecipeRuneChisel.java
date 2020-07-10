@@ -13,10 +13,10 @@ public class RecipeRuneChisel {
 
 	private final ItemStack output;
 	private final ImmutableList<Object> inputs;
-	public int[] activatedRunes;
+	public ArrayList<Integer>  activatedRunes;
 	GuiChiselStation station;
 
-	public RecipeRuneChisel(ItemStack output,int[] runesIn,Object... inputs) {
+	public RecipeRuneChisel(ItemStack output,ArrayList<Integer>  runesIn,Object... inputs) {
 		this.output = output;
 		ImmutableList.Builder<Object> inputsToSet = ImmutableList.builder();
 		activatedRunes=runesIn;
@@ -80,8 +80,13 @@ public class RecipeRuneChisel {
 		return inputs;
 	}
 
+	
 	public ItemStack getOutput() {
 		return output;
+	}
+
+	public ArrayList<Integer> getActivatedRunes() {
+		return activatedRunes;
 	}
 
 }
