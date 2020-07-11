@@ -10,12 +10,12 @@ import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.RecipeRuneChisel;
 import com.huto.hutosmod.reference.Reference;
 
+import mezz.jei.api.IGuiHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -46,12 +46,27 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 	}
 
 	@Override
-	public void update() {
-	
-		//System.out.println(this.getUpdatePacket().getNbtCompound().getTag(TAG_RUNELIST));
-		//System.out.println(this.runesList);
+	public void openInventory(EntityPlayer player) {
+		++this.numPlayersUsing;
+		this.world.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
+		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
 
-		// this.runesList =this.getUpdatePacket().getNbtCompound().getTag(TAG_RUNELIST);
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		this.cleartRuneList();
+		--this.numPlayersUsing;
+		this.world.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
+		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
+	}
+
+	@Override
+	public void update() {
+		if (runesList != null) {
+			System.out.println(runesList.toString());
+		}
+
 		RecipeRuneChisel recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
@@ -59,31 +74,33 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
 				ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
 				ItemStack input2 = this.chestContents.get(0);
-				List<Integer> list1 = recipe_.getActivatedRunes();
-				 List<Integer> list2= this.getRuneList();
-				 
+
 				if (input1.getItem() == input2.getItem()) {
-					System.out.println(list1);
-					System.out.println(list2);
 
 					recipe = recipe_;
 
 					break;
 				}
 			}
-		if (recipe != null && chestContents.get(2).isEmpty()) {
 
-			ItemStack output = recipe.getOutput().copy();
-			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
-			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
-			chestContents.set(0, output);
-			currentRecipe = null;
-			for (int i = 0; i < getSizeInventory(); i++) {
-				ItemStack stack = chestContents.get(i);
-				if (!stack.isEmpty()) {
+		if (recipe != null && chestContents.get(2).isEmpty()) {
+			List<Integer> list1 = recipe.getActivatedRunes();
+			List<Integer> list2 = this.getRuneList();
+			if (list1.equals(list2)) {
+				ItemStack output = recipe.getOutput().copy();
+				EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
+						output);
+				world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+				chestContents.set(0, output);
+				currentRecipe = null;
+				for (int i = 0; i < getSizeInventory(); i++) {
+					ItemStack stack = chestContents.get(i);
+					if (!stack.isEmpty()) {
+					}
+					chestContents.set(i, ItemStack.EMPTY);
+					chestContents.set(2, output);
+					runesList.clear();
 				}
-				chestContents.set(i, ItemStack.EMPTY);
-				chestContents.set(2, output);
 			}
 		}
 
@@ -102,6 +119,7 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 
 	public void setRuneList(List<Integer> runesIn) {
 		runesList = runesIn;
+		this.sendUpdates();
 
 	}
 
@@ -131,47 +149,82 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		ItemStackHelper.saveAllItems(compound, chestContents);
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		super.getUpdatePacket();
 		NBTTagList tagList = new NBTTagList();
-		for (int i = 0; i < runesList.size(); i++) {
-			Integer s = runesList.get(i);
-			if (s != null) {
-				NBTTagInt tag = new NBTTagInt(s);
-				tagList.appendTag(tag);
+		NBTTagCompound tag = new NBTTagCompound();
+		tagList.appendTag(tag);
+		if (runesList != null) {
+			for (int i = 0; i < runesList.size(); i++) {
+				Integer s = runesList.get(i);
+				if (s != null) {
+					tagList.appendTag(tag);
+				}
 			}
+			writeToNBT(tag);
 		}
-		compound.setTag(TAG_RUNELIST, tagList);
+		return new SPacketUpdateTileEntity(pos, 0, tag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		super.onDataPacket(net, pkt);
+
+		NBTTagList tag = pkt.getNbtCompound().getTagList(TAG_RUNELIST, Constants.NBT.TAG_INT);
+		List<Integer> test = new ArrayList<Integer>();
+		for (int i = 0; i < tag.tagCount(); i++) {
+			test.add(tag.getIntAt(i));
+			test.set(i, tag.getIntAt(i));
+		}
+		System.out.println("ON DATA PACKET FINSIEDH");
+		this.runesList = test;
+
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		if (!this.checkLootAndWrite(compound)) {
+			ItemStackHelper.saveAllItems(compound, chestContents);
+		}
+		if (compound.hasKey("CustomName", 8)) {
+			compound.setString("CustomName", this.customName);
+		}
+		NBTTagList tagList = new NBTTagList();
+		if (runesList != null) {
+			for (int i = 0; i < runesList.size(); i++) {
+				Integer s = runesList.get(i);
+				if (s != null) {
+					NBTTagInt tag = new NBTTagInt(s);
+					tagList.appendTag(tag);
+				}
+			}
+
+			compound.setTag(TAG_RUNELIST, tagList);
+		}
 		return compound;
 
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
 		this.chestContents = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(compound, this.chestContents);
+		if (!this.checkLootAndRead(compound)) {
+			ItemStackHelper.loadAllItems(compound, chestContents);
+		}
+
+		if (compound.hasKey("CustomName", 8)) {
+			this.customName = compound.getString("CustomName");
+		}
 		NBTTagList tagList = compound.getTagList(TAG_RUNELIST, Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < tagList.tagCount(); i++) {
 			NBTTagCompound tag = tagList.getCompoundTagAt(i);
 			int s = tag.getInteger("ListPos " + i);
 			System.out.println("Current Runelist is: " + getRuneList());
 			runesList.add(i, s);
+			runesList.set(i, s);
 		}
-		System.out.println(runesList.toString());
-
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tagCompound = new NBTTagCompound();
-		this.writeToNBT(tagCompound);
-		SPacketUpdateTileEntity pack = new SPacketUpdateTileEntity(this.pos, 0, tagCompound);
-		return pack;
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.getNbtCompound());
 	}
 
 	@Override

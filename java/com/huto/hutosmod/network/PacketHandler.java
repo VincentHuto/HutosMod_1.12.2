@@ -37,6 +37,7 @@ public class PacketHandler {
 		INSTANCE.registerMessage(PacketReturnMana.Handler.class, PacketReturnMana.class, nextID(), Side.CLIENT);
 		INSTANCE.registerMessage(PacketReturnKarma.Handler.class, PacketReturnKarma.class, nextID(), Side.CLIENT);
 		INSTANCE.registerMessage(PacketReturnManaLimit.Handler.class, PacketReturnManaLimit.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.CLIENT);
 
 		// Server packets
 		INSTANCE.registerMessage(PacketGetMana.Handler.class, PacketGetMana.class, nextID(), Side.SERVER);

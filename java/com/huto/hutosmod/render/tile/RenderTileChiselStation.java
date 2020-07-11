@@ -75,6 +75,7 @@ public class RenderTileChiselStation extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.translate(0, 4, 0.5);
 		GlStateManager.rotate(180, 1, 0, 1);
 		GlStateManager.scale(0.1, 0.1, 0.1);
+		if(te.getRuneList() != null){
 		String text1 = te.getRuneList().toString();
 		FontRenderer fontRenderer = this.getFontRenderer();
 		// fontRenderer.drawString(text, 0, (int) (fontRenderer.FONT_HEIGHT),
@@ -82,6 +83,7 @@ public class RenderTileChiselStation extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.translate(0, -10, 0);
 		//System.out.println(text1);
 		fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		}
 		GlStateManager.popMatrix();
 
 		GlStateManager.popMatrix();

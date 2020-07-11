@@ -185,7 +185,7 @@ public class GuiChiselStation extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		this.fontRenderer.drawString(this.te.getDisplayName().getUnformattedText(), 8, 6, 65444444);
 		this.fontRenderer.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 000000);
-		if (this.te.getUpdatePacket().getNbtCompound().getTag(te.TAG_RUNELIST) != null) {
+		if (this.te.getRuneList() !=null) {
 			this.fontRenderer.drawString(this.te.runesList.toString(), 8, this.ySize - 170, 000000);
 		}
 		for (int i = 0; i < te.getSizeInventory(); i++) {
