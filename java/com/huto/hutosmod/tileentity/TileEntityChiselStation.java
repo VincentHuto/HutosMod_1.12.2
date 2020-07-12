@@ -3,6 +3,7 @@ package com.huto.hutosmod.tileentity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 
@@ -74,6 +75,10 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 
 	@Override
 	public void update() {
+
+	}
+
+	public void craftEvent() {
 		RecipeRuneChisel recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
@@ -81,45 +86,68 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
 				ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
 				ItemStack input2 = this.chestContents.get(0);
+
 				if (input1.getItem() == input2.getItem()) {
 
 					recipe = recipe_;
 
 					break;
 				}
+
 			}
 
+		List<ItemStack> chestStuff = new ArrayList<ItemStack>();
+		chestStuff.add(chestContents.get(0));
+		chestStuff.add(chestContents.get(1));
+
 		if (recipe != null && chestContents.get(2).isEmpty()) {
+
+			List<Object> recipieInObj = recipe.getInputs();
+			List<ItemStack> recipieInputs = (List<ItemStack>) (Object) recipieInObj;
+
 			List<Integer> list1 = recipe.getActivatedRunes();
 			List<Integer> list2 = this.getRuneList();
 			// These two make sure that even if you click the buttons in the wrong order
 			// they still work.
 			Collections.sort(list1);
 			Collections.sort(list2);
+			// Checks if the two inventories have the exact same values
+			boolean matcher = false;
+			if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem() && recipieInputs.size() == 1) {
 
-			if (list1.equals(list2)) {
-				ItemStack output = recipe.getOutput().copy();
-				EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
-						output);
-				world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
-				chestContents.set(0, output);
-				currentRecipe = null;
-				for (int i = 0; i < getSizeInventory(); i++) {
-					ItemStack stack = chestContents.get(i);
-					if (!stack.isEmpty()) {
+				matcher = true;
+			}
+
+			else if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem()
+					&& chestStuff.get(1).getItem() == recipieInputs.get(1).getItem() && recipieInputs.size() > 1) {
+
+				matcher = true;
+			}
+
+			if (list1.equals(list2) && matcher) {
+				{
+
+					ItemStack output = recipe.getOutput().copy();
+					EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
+							output);
+					world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+					chestContents.set(0, output);
+					currentRecipe = null;
+					for (int i = 0; i < getSizeInventory(); i++) {
+						ItemStack stack = chestContents.get(i);
+						if (!stack.isEmpty()) {
+						}
+						chestContents.set(i, ItemStack.EMPTY);
+						chestContents.set(2, output);
+
+						runesList.clear();
+						this.sendUpdates();
+						VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
 					}
-					chestContents.set(i, ItemStack.EMPTY);
-
-					chestContents.set(2, output);
-
-					runesList.clear();
-					this.sendUpdates();
-					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-
 				}
 			}
 		}
-
 	}
 
 	public List<Integer> getRuneList() {

@@ -44,6 +44,7 @@ public class PacketHandler {
 		INSTANCE.registerMessage(PacketGetKarma.Handler.class, PacketGetKarma.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketGetManaLimit.Handler.class, PacketGetManaLimit.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.SERVER);
+		INSTANCE.registerMessage(PacketChiselCraftingEvent.Handler.class, PacketChiselCraftingEvent.class, nextID(), Side.SERVER);
 
 	}
 

@@ -25,9 +25,9 @@ public class ContainerChiselStation extends Container {
 		this.numRows = 4;
 		chestInventory.openInventory(player);
 		// SLOTS
-		this.addSlotToContainer(new SlotRuneInput(chestInventory, 0, 8, 18));
-		this.addSlotToContainer(new Slot(chestInventory, 1, 8, 18 + 1 * 18));
-		this.addSlotToContainer(new Slot(chestInventory, 2, 145, 44));
+		this.addSlotToContainer(new SlotRuneInput(chestInventory, 0, 8, 18 + 1 * 18));
+		this.addSlotToContainer(new Slot(chestInventory, 1, 8, 22 + 2 * 18));
+		this.addSlotToContainer(new SlotRuneOutput(chestInventory, 2, 145, 44));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {

@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 import com.huto.hutosmod.items.ItemRegistry;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
@@ -24,8 +25,15 @@ public class ModChiselRecipies {
 						add(3);
 					}
 				}, new ItemStack(ItemRegistry.rune_blank, 1));
+		
 		recipeBeastContract = registerRuneAltarRecipe(new ItemStack(ItemRegistry.rune_beast_c, 1),
-				new ArrayList<Integer>() {{	add(4);add(5);add(6);}}, new ItemStack(ItemRegistry.rune_clawmark, 1));
+				new ArrayList<Integer>() {
+					{
+						add(4);
+						add(5);
+						add(6);
+					}
+				}, new ItemStack(ItemRegistry.rune_clawmark, 1), new ItemStack(Items.DIAMOND, 1));
 
 	}
 

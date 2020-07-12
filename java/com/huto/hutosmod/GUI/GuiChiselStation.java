@@ -8,6 +8,7 @@ import java.util.List;
 import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
+import com.huto.hutosmod.network.PacketChiselCraftingEvent;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.PacketUpdateChiselRunes;
 import com.huto.hutosmod.reference.Reference;
@@ -18,6 +19,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -36,6 +39,9 @@ public class GuiChiselStation extends GuiContainer {
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
 	int CLEARBUTTONID = 100;
 	GuiButtonTextured clearButton;
+	int CHISELBUTTONID = 101;
+	GuiButtonTextured chiselButton;
+
 	public List<Integer> activatedRuneList = new ArrayList<Integer>();
 
 	public GuiChiselStation(InventoryPlayer playerInv, TileEntityChiselStation chestInv, EntityPlayer player) {
@@ -45,14 +51,6 @@ public class GuiChiselStation extends GuiContainer {
 		this.xSize = 176;
 		this.ySize = 186;
 		this.player = player;
-		// sendData(playerInv, chestInv, player);
-	}
-
-	public void sendData(InventoryPlayer playerInv, TileEntityChiselStation te, EntityPlayer player) {
-		int x = te.getPos().getX();
-		int y = te.getPos().getY();
-		int z = te.getPos().getZ();
-		List<Integer> runesOut = this.getActivatedRuneList();
 	}
 
 	public List<Integer> getActivatedRuneList() {
@@ -61,18 +59,11 @@ public class GuiChiselStation extends GuiContainer {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
-		/*
-		 * List<String> cat9 = new ArrayList<String>();
-		 * cat9.add(I18n.format("Clear Runes")); drawTooltip(cat9, mouseX, mouseY, left
-		 * + guiWidth - (guiWidth - 120),top + guiHeight - (170), 16, 16, false);
-		 * this.renderHoveredToolTip(mouseX, mouseY);
-		 */
-
 		this.allowUserInput = true;
 		Minecraft.getMinecraft().renderEngine.bindTexture(GUI_Chisel);
 		int centerX = (width / 2) - guiWidth / 2;
 		int centerY = (height / 2) - guiHeight / 2;
+		
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.enableAlpha();
@@ -87,62 +78,101 @@ public class GuiChiselStation extends GuiContainer {
 		}
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
 
+		GlStateManager.pushMatrix();
+		{
+			
+			List<String> cat1 = new ArrayList<String>();
+			cat1.add(I18n.format("Clear Runes"));
+			drawTooltip(cat1, mouseX, mouseY, left + guiWidth - (guiWidth - 120), top + guiHeight - (170), 16, 16,
+					false);
+			
+			List<String> cat9 = new ArrayList<String>();
+			cat9.add(I18n.format("Chisel Rune"));
+			drawTooltip(cat9, mouseX, mouseY, left + guiWidth - (guiWidth - 120), top + guiHeight - (150), 16, 16,
+					false);
+		}
+		GlStateManager.popMatrix();
 	}
 
-	/*
-	 * public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX,
-	 * int posY, int width, int height, boolean obscu) { if (mouseX >= posX &&
-	 * mouseX <= posX + width && mouseY >= posY && mouseY <= posY + height) { if
-	 * (obscu) { drawAlkoHoveringText(lines, mouseX, mouseY, akloRenderer); } else {
-	 * drawHoveringText(lines, mouseX, mouseY, fontRenderer); } } }
-	 * 
-	 * protected void drawAlkoHoveringText(List<String> textLines, int x, int y,
-	 * FontRenderer font) {
-	 * net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(textLines, x,
-	 * y, width, height, -1, font); if (!textLines.isEmpty()) {
-	 * GlStateManager.disableRescaleNormal();
-	 * RenderHelper.disableStandardItemLighting(); GlStateManager.disableLighting();
-	 * GlStateManager.disableDepth(); int i = 0;
-	 * 
-	 * for (String s : textLines) { int j = font.getStringWidth(s);
-	 * 
-	 * if (j > i) { i = j; } }
-	 * 
-	 * int l1 = x + 12; int i2 = y - 12; int k = 8;
-	 * 
-	 * if (textLines.size() > 1) { k += 2 + (textLines.size() - 1) * 10; }
-	 * 
-	 * if (l1 + i > this.width) { l1 -= 28 + i; }
-	 * 
-	 * if (i2 + k + 6 > this.height) { i2 = this.height - k - 6; }
-	 * 
-	 * this.zLevel = 300.0F; this.itemRender.zLevel = 300.0F; int l = -267386864;
-	 * this.drawGradientRect(l1 - 3, i2 - 4, l1 + i + 3, i2 - 3, -267386864,
-	 * -267386864); this.drawGradientRect(l1 - 3, i2 + k + 3, l1 + i + 3, i2 + k +
-	 * 4, -267386864, -267386864); this.drawGradientRect(l1 - 3, i2 - 3, l1 + i + 3,
-	 * i2 + k + 3, -267386864, -267386864); this.drawGradientRect(l1 - 4, i2 - 3, l1
-	 * - 3, i2 + k + 3, -267386864, -267386864); this.drawGradientRect(l1 + i + 3,
-	 * i2 - 3, l1 + i + 4, i2 + k + 3, -267386864, -267386864); int i1 = 1347420415;
-	 * int j1 = 1344798847; this.drawGradientRect(l1 - 3, i2 - 3 + 1, l1 - 3 + 1, i2
-	 * + k + 3 - 1, 1347420415, 1344798847); this.drawGradientRect(l1 + i + 2, i2 -
-	 * 3 + 1, l1 + i + 3, i2 + k + 3 - 1, 1347420415, 1344798847);
-	 * this.drawGradientRect(l1 - 3, i2 - 3, l1 + i + 3, i2 - 3 + 1, 1347420415,
-	 * 1347420415); this.drawGradientRect(l1 - 3, i2 + k + 2, l1 + i + 3, i2 + k +
-	 * 3, 1344798847, 1344798847);
-	 * 
-	 * for (int k1 = 0; k1 < textLines.size(); ++k1) { String s1 =
-	 * textLines.get(k1); font.drawStringWithShadow(s1, (float) l1, (float) i2, -1);
-	 * 
-	 * if (k1 == 0) { i2 += 2; }
-	 * 
-	 * i2 += 10; }
-	 * 
-	 * this.zLevel = 0.0F; this.itemRender.zLevel = 0.0F;
-	 * GlStateManager.enableLighting(); GlStateManager.enableDepth();
-	 * RenderHelper.enableStandardItemLighting();
-	 * GlStateManager.enableRescaleNormal(); } }
-	 */
+	public void drawTooltip(List<String> lines, int mouseX, int mouseY, int posX, int posY, int width, int height,
+			boolean obscu) {
+		if (mouseX >= posX && mouseX <= posX + width && mouseY >= posY && mouseY <= posY + height) {
+			if (obscu) {
+				drawAlkoHoveringText(lines, mouseX, mouseY, akloRenderer);
+			} else {
+				drawHoveringText(lines, mouseX, mouseY, fontRenderer);
+			}
+		}
+	}
+
+	protected void drawAlkoHoveringText(List<String> textLines, int x, int y, FontRenderer font) {
+		net.minecraftforge.fml.client.config.GuiUtils.drawHoveringText(textLines, x, y, width, height, -1, font);
+		if (!textLines.isEmpty()) {
+			GlStateManager.disableRescaleNormal();
+			RenderHelper.disableStandardItemLighting();
+			GlStateManager.disableLighting();
+			GlStateManager.disableDepth();
+			int i = 0;
+
+			for (String s : textLines) {
+				int j = font.getStringWidth(s);
+
+				if (j > i) {
+					i = j;
+				}
+			}
+
+			int l1 = x + 12;
+			int i2 = y - 12;
+			int k = 8;
+
+			if (textLines.size() > 1) {
+				k += 2 + (textLines.size() - 1) * 10;
+			}
+
+			if (l1 + i > this.width) {
+				l1 -= 28 + i;
+			}
+
+			if (i2 + k + 6 > this.height) {
+				i2 = this.height - k - 6;
+			}
+
+			this.zLevel = 300.0F;
+			this.itemRender.zLevel = 300.0F;
+			int l = -267386864;
+			this.drawGradientRect(l1 - 3, i2 - 4, l1 + i + 3, i2 - 3, -267386864, -267386864);
+			this.drawGradientRect(l1 - 3, i2 + k + 3, l1 + i + 3, i2 + k + 4, -267386864, -267386864);
+			this.drawGradientRect(l1 - 3, i2 - 3, l1 + i + 3, i2 + k + 3, -267386864, -267386864);
+			this.drawGradientRect(l1 - 4, i2 - 3, l1 - 3, i2 + k + 3, -267386864, -267386864);
+			this.drawGradientRect(l1 + i + 3, i2 - 3, l1 + i + 4, i2 + k + 3, -267386864, -267386864);
+			int i1 = 1347420415;
+			int j1 = 1344798847;
+			this.drawGradientRect(l1 - 3, i2 - 3 + 1, l1 - 3 + 1, i2 + k + 3 - 1, 1347420415, 1344798847);
+			this.drawGradientRect(l1 + i + 2, i2 - 3 + 1, l1 + i + 3, i2 + k + 3 - 1, 1347420415, 1344798847);
+			this.drawGradientRect(l1 - 3, i2 - 3, l1 + i + 3, i2 - 3 + 1, 1347420415, 1347420415);
+			this.drawGradientRect(l1 - 3, i2 + k + 2, l1 + i + 3, i2 + k + 3, 1344798847, 1344798847);
+
+			for (int k1 = 0; k1 < textLines.size(); ++k1) {
+				String s1 = textLines.get(k1);
+				font.drawStringWithShadow(s1, (float) l1, (float) i2, -1);
+
+				if (k1 == 0) {
+					i2 += 2;
+				}
+
+				i2 += 10;
+			}
+			this.zLevel = 0.0F;
+			this.itemRender.zLevel = 0.0F;
+			GlStateManager.enableLighting();
+			GlStateManager.enableDepth();
+			RenderHelper.enableStandardItemLighting();
+			GlStateManager.enableRescaleNormal();
+		}
+	}
 
 	@Override
 	public void initGui() {
@@ -165,7 +195,8 @@ public class GuiChiselStation extends GuiContainer {
 		}
 		buttonList.add(clearButton = new GuiButtonTextured(GUI_Chisel, CLEARBUTTONID,
 				left + guiWidth - (guiWidth - 120), top + guiHeight - (170), 16, 16, 176, 16));
-
+		buttonList.add(chiselButton = new GuiButtonTextured(GUI_Chisel, CHISELBUTTONID,
+				left + guiWidth - (guiWidth - 120), top + guiHeight - (150), 16, 16, 176, 48));
 	}
 
 	@Override
@@ -188,7 +219,7 @@ public class GuiChiselStation extends GuiContainer {
 		if (this.te.getRuneList() != null) {
 			this.fontRenderer.drawString(this.te.runesList.toString(), 8, this.ySize - 170, 000000);
 		}
-		for (int i = 0; i < te.getSizeInventory(); i++) {
+		/*for (int i = 0; i < te.getSizeInventory(); i++) {
 			int color;
 			if (this.te.getStackInSlot(i).getItem().getClass().getName().contains("Contract")) {
 				color = 55555555;
@@ -201,7 +232,7 @@ public class GuiChiselStation extends GuiContainer {
 						this.ySize - (186 - (18 * i) - 18), color);
 
 			}
-		}
+		}*/
 
 	}
 
@@ -257,6 +288,24 @@ public class GuiChiselStation extends GuiContainer {
 				}
 			}
 		}
+
+		if (button.id == CHISELBUTTONID) {
+			System.out.println("CRAFTING");
+			PacketHandler.INSTANCE.sendToServer(new PacketChiselCraftingEvent());
+			for (int i = 0; i < 64; i++) {
+				if (buttonList.get(i) instanceof GuiButtonTextured) {
+					GuiButtonTextured test = (GuiButtonTextured) buttonList.get(i);
+					if (test.getState() == true) {
+						test.setState(false);
+						activatedRuneList.clear();
+						PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+						System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
+					}
+
+				}
+			}
+		}
+
 		super.actionPerformed(button);
 
 	}
