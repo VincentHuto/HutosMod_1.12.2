@@ -1,6 +1,7 @@
 package com.huto.hutosmod.blocks;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 
@@ -88,12 +89,15 @@ public class BlockRunicChiselStation extends BlockBase {
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityChiselStation te = (TileEntityChiselStation) worldIn.getTileEntity(pos);
 
-		if(te.numPlayersUsing<1) {
-		playerIn.openGui(MainClass.instance, Reference.GUI_Runic_ChiselStation, worldIn, pos.getX(), pos.getY(),
-				pos.getZ());
-			//te.cleartRuneList();
+		if (te.numPlayersUsing < 1) {
+			playerIn.openGui(MainClass.instance, Reference.GUI_Runic_ChiselStation, worldIn, pos.getX(), pos.getY(),
+					pos.getZ());
+			// te.cleartRuneList();
 
-		}return true;
+		}
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
+		return true;
 	}
 
 	@Override

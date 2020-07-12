@@ -25,13 +25,7 @@ public class ModChiselRecipies {
 					}
 				}, new ItemStack(ItemRegistry.rune_blank, 1));
 		recipeBeastContract = registerRuneAltarRecipe(new ItemStack(ItemRegistry.rune_beast_c, 1),
-				new ArrayList<Integer>() {
-					{
-						add(4);
-						add(5);
-						add(6);
-					}
-				}, new ItemStack(ItemRegistry.rune_clawmark, 1));
+				new ArrayList<Integer>() {{	add(4);add(5);add(6);}}, new ItemStack(ItemRegistry.rune_clawmark, 1));
 
 	}
 

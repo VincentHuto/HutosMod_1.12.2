@@ -1,11 +1,13 @@
 package com.huto.hutosmod.tileentity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.container.ContainerChiselStation;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.RecipeRuneChisel;
 import com.huto.hutosmod.reference.Reference;
@@ -16,6 +18,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -25,10 +28,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityChiselStation extends TileEntityLockableLoot implements ITickable {
 	public NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
@@ -43,6 +50,8 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 	@Override
 	public void onLoad() {
 		this.runesList = new ArrayList<Integer>();
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
 	}
 
 	@Override
@@ -50,7 +59,7 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		++this.numPlayersUsing;
 		this.world.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
-
+		this.sendUpdates();
 	}
 
 	@Override
@@ -59,14 +68,12 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		--this.numPlayersUsing;
 		this.world.addBlockEvent(pos, this.getBlockType(), 1, this.numPlayersUsing);
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
+		this.sendUpdates();
+
 	}
 
 	@Override
 	public void update() {
-		if (runesList != null) {
-			System.out.println(runesList.toString());
-		}
-
 		RecipeRuneChisel recipe = null;
 		if (currentRecipe != null)
 			recipe = currentRecipe;
@@ -74,7 +81,6 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
 				ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
 				ItemStack input2 = this.chestContents.get(0);
-
 				if (input1.getItem() == input2.getItem()) {
 
 					recipe = recipe_;
@@ -86,6 +92,11 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		if (recipe != null && chestContents.get(2).isEmpty()) {
 			List<Integer> list1 = recipe.getActivatedRunes();
 			List<Integer> list2 = this.getRuneList();
+			// These two make sure that even if you click the buttons in the wrong order
+			// they still work.
+			Collections.sort(list1);
+			Collections.sort(list2);
+
 			if (list1.equals(list2)) {
 				ItemStack output = recipe.getOutput().copy();
 				EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -98,8 +109,13 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 					if (!stack.isEmpty()) {
 					}
 					chestContents.set(i, ItemStack.EMPTY);
+
 					chestContents.set(2, output);
+
 					runesList.clear();
+					this.sendUpdates();
+					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
 				}
 			}
 		}
@@ -263,6 +279,11 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
 		markDirty();
+	}
+
+	@Override
+	public boolean receiveClientEvent(int id, int param) {
+		return super.receiveClientEvent(id, param);
 	}
 
 }

@@ -185,7 +185,7 @@ public class GuiChiselStation extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		this.fontRenderer.drawString(this.te.getDisplayName().getUnformattedText(), 8, 6, 65444444);
 		this.fontRenderer.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 000000);
-		if (this.te.getRuneList() !=null) {
+		if (this.te.getRuneList() != null) {
 			this.fontRenderer.drawString(this.te.runesList.toString(), 8, this.ySize - 170, 000000);
 		}
 		for (int i = 0; i < te.getSizeInventory(); i++) {
@@ -232,16 +232,27 @@ public class GuiChiselStation extends GuiContainer {
 					System.out.println(activatedRuneList.toString());
 					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
 				}
+
+				for (int i = 0; i < te.getRuneList().size(); i++) {
+					if (test.getId() == te.getRuneList().get(i)) {
+						test.setState(false);
+					} else {
+						test.setState(true);
+					}
+				}
+
 			}
 		}
 		if (button.id == CLEARBUTTONID) {
 			for (int i = 0; i < 64; i++) {
 				if (buttonList.get(i) instanceof GuiButtonTextured) {
 					GuiButtonTextured test = (GuiButtonTextured) buttonList.get(i);
-					test.setState(false);
-					activatedRuneList.clear();
-					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
-					System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
+					if (test.getState() == true) {
+						test.setState(false);
+						activatedRuneList.clear();
+						PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
+						System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
+					}
 
 				}
 			}
