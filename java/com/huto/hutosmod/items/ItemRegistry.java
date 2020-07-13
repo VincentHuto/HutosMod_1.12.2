@@ -8,18 +8,26 @@ import com.huto.hutosmod.items.armor.ArmorMysteriousMask;
 import com.huto.hutosmod.items.armor.ArmourBase;
 import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
 import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
+import com.huto.hutosmod.items.runes.ItemContractRuneHunter;
 import com.huto.hutosmod.items.runes.ItemContractRuneImpure;
 import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
 import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
 import com.huto.hutosmod.items.runes.ItemRune;
+import com.huto.hutosmod.items.runes.ItemRuneBeast;
 import com.huto.hutosmod.items.runes.ItemRuneClaw;
+import com.huto.hutosmod.items.runes.ItemRuneCommunion;
+import com.huto.hutosmod.items.runes.ItemRuneEye;
+import com.huto.hutosmod.items.runes.ItemRuneGuidance;
+import com.huto.hutosmod.items.runes.ItemRuneHeir;
 import com.huto.hutosmod.items.runes.ItemRuneLake;
+import com.huto.hutosmod.items.runes.ItemRuneMoon;
 import com.huto.hutosmod.items.runes.ItemRuneMorph;
+import com.huto.hutosmod.items.runes.ItemRuneMorphCW;
 import com.huto.hutosmod.items.runes.ItemRuneOedon;
 import com.huto.hutosmod.items.runes.ItemRuneRapture;
 import com.huto.hutosmod.items.tools.ToolAxe;
-import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.items.tools.ToolHoe;
+import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.items.tools.ToolPickaxe;
 import com.huto.hutosmod.items.tools.ToolShovel;
 import com.huto.hutosmod.items.wands.ItemAbsorbWand;
@@ -33,7 +41,6 @@ import com.huto.hutosmod.items.wands.ItemRendingWand;
 import com.huto.hutosmod.items.wands.ItemSacrificeWand;
 import com.huto.hutosmod.reference.Reference;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -139,12 +146,21 @@ public class ItemRegistry {
 	public static final Item rune_impurity_c = new ItemContractRuneImpure("rune_impurity_c");
 	public static final Item rune_milkweed_c = new ItemContractRuneMilkweed("rune_milkweed_c");
 	public static final Item rune_radiance_c = new ItemContractRuneRadiance("rune_radiance_c");
+	public static final Item rune_hunter_c = new ItemContractRuneHunter("rune_hunter_c");
+
 	// Base Runes
 	public static final Item rune_blank = new ItemRune("rune_blank").setMaxStackSize(64);
 	public static final Item rune_metamorphosis = new ItemRuneMorph("rune_metamorphosis");
+	public static final Item rune_metamorphosis_cw = new ItemRuneMorphCW("rune_metamorphosis_cw");
 	public static final Item rune_lake = new ItemRuneLake("rune_lake");
 	public static final Item rune_clawmark = new ItemRuneClaw("rune_clawmark");
 	public static final Item rune_rapture = new ItemRuneRapture("rune_rapture");
 	public static final Item rune_oedon = new ItemRuneOedon("rune_oedon");
+	public static final Item rune_eye = new ItemRuneEye("rune_eye");
+	public static final Item rune_moon = new ItemRuneMoon("rune_moon");
+	public static final Item rune_beast = new ItemRuneBeast("rune_beast");
+	public static final Item rune_heir = new ItemRuneHeir("rune_heir");
+	public static final Item rune_guidance = new ItemRuneGuidance("rune_guidance");
+	public static final Item rune_communion = new ItemRuneCommunion("rune_communion");
 
 }

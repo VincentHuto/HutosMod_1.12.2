@@ -60,17 +60,26 @@ item.wand_healself.name=Wand Of Healing
 item.wand_healother.name=Wand Of Generosity
 item.wand_lightning.name=Wand of Shocking
 item.rune_blank.name=Blank Rune
-item.rune_metamorphosis.name=Metamorphosis Rune
+item.rune_metamorphosis.name=Anti Metamorphosis Rune
 item.rune_lake.name=Arcane Lake Rune
 item.rune_clawmark.name=Clawmark Rune
 item.rune_rapture.name=Blood Rapture Rune
 item.rune_oedon.name=Oedon Rune
+item.rune_communion.name=Communion Rune
+item.rune_heir.name=Heir Rune
+item.rune_metamorphosis_cw.name=Metamorphosis Rune
+item.rune_moon.name=Moon Rune
+item.rune_eye.name=Eye Rune
+item.rune_beast.name=Beast Rune
+item.rune_guidance.name=Guidance Rune
 
 item.rune_beast_c.name=Beasts Embrace Contract Rune
 item.rune_corruption_c.name=Corruption Contract Rune
 item.rune_impurity_c.name=Impurity Contract Rune
 item.rune_milkweed_c.name=Milkweed Contract Rune
 item.rune_radiance_c.name=Radiance Contract Rune
+item.rune_hunter_c.name=Hunter Contract Rune
+
 name.CONTRACT=Contract Rune
 name.RUNE=Caryl Rune
 tile.display_glass.name=Display Glass
@@ -170,4 +179,5 @@ button.inventory=Inv
 hutosmod.jei.essenceenhancer=Enhancer Recipies
 hutosmod.jei.manafuser=Mana Fuser
 hutosmod.jei.wandmaker=Wand Maker
+hutosmod.jei.chisel_station=Chisel Station
 

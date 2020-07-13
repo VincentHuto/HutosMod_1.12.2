@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
-import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.jei.wrappers.FuserRecipeWrapper;
 import com.huto.hutosmod.reference.Reference;
 

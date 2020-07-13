@@ -1,16 +1,20 @@
 package com.huto.hutosmod.jei;
 
+import com.huto.hutosmod.jei.catagories.ChiselStationRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.EssenceEnhancerRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.FuserRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.WandMakerRecipeCatagory;
+import com.huto.hutosmod.jei.wrappers.ChiselStationRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.EnhancerRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.FuserRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.WandMakerRecipeWrapper;
+import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.recipies.RecipeManaFuser;
+import com.huto.hutosmod.recipies.RecipeRuneChisel;
 import com.huto.hutosmod.recipies.RecipeWandMaker;
 
 import mezz.jei.api.IModPlugin;
@@ -32,6 +36,10 @@ public class JeiPlugin implements IModPlugin {
 
 		registry.handleRecipes(RecipeWandMaker.class, WandMakerRecipeWrapper::new, WandMakerRecipeCatagory.UID);
 		registry.addRecipes(ModWandRecipies.wandMakerRecipies, WandMakerRecipeCatagory.UID);
+		
+		registry.handleRecipes(RecipeRuneChisel.class,ChiselStationRecipeWrapper::new, ChiselStationRecipeCatagory.UID);
+		registry.addRecipes(ModChiselRecipies.runeRecipies, ChiselStationRecipeCatagory.UID);
+		
 	}
 
 	@Override
@@ -39,6 +47,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCategories(new EssenceEnhancerRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new FuserRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new WandMakerRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new ChiselStationRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
 }
