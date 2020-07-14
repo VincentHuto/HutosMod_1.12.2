@@ -254,13 +254,10 @@ public class GuiChiselStation extends GuiContainer {
 				if (test.getState() == false) {
 					test.setState(true);
 					activatedRuneList.add(test.getId());
-					System.out.println(activatedRuneList.toString());
-					System.out.println("Activated list in GUi" + activatedRuneList.toString());
 					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
 				} else {
 					test.setState(false);
 					activatedRuneList.remove(Integer.valueOf(test.getId()));
-					System.out.println(activatedRuneList.toString());
 					PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
 				}
 
@@ -282,7 +279,6 @@ public class GuiChiselStation extends GuiContainer {
 						test.setState(false);
 						activatedRuneList.clear();
 						PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
-						System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
 					}
 
 				}
@@ -299,7 +295,6 @@ public class GuiChiselStation extends GuiContainer {
 						test.setState(false);
 						activatedRuneList.clear();
 						PacketHandler.INSTANCE.sendToServer(new PacketUpdateChiselRunes(activatedRuneList));
-						System.out.println("CLEAR ACTIVATED LIST" + activatedRuneList.toString());
 					}
 
 				}

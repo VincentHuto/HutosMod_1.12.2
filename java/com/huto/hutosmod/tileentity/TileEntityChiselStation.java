@@ -19,9 +19,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
@@ -79,26 +81,33 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 	}
 
 	public void craftEvent() {
+		List<ItemStack> chestStuff = new ArrayList<ItemStack>();
+		chestStuff.add(chestContents.get(0));
+		chestStuff.add(chestContents.get(1));
+
 		RecipeRuneChisel recipe = null;
+
 		if (currentRecipe != null)
 			recipe = currentRecipe;
 		else
 			for (RecipeRuneChisel recipe_ : ModChiselRecipies.runeRecipies) {
-				ItemStack input1 = (ItemStack) recipe_.getInputs().get(0);
+
+				List<Object> recipieInObjFirst = recipe_.getInputs();
+				List<ItemStack> recipieInputsFirst = (List<ItemStack>) (Object) recipieInObjFirst;
 				ItemStack input2 = this.chestContents.get(0);
-
-				if (input1.getItem() == input2.getItem()) {
-
+				if (chestStuff.get(0).getItem() == recipieInputsFirst.get(0).getItem()
+						&& recipieInputsFirst.size() == 1) {
 					recipe = recipe_;
 
 					break;
+				} else if (chestStuff.get(0).getItem() == recipieInputsFirst.get(0).getItem()
+						&& chestStuff.get(1).getItem() == recipieInputsFirst.get(1).getItem()
+						&& recipieInputsFirst.size() == 2) {
+					recipe = recipe_;
+					break;
+
 				}
-
 			}
-
-		List<ItemStack> chestStuff = new ArrayList<ItemStack>();
-		chestStuff.add(chestContents.get(0));
-		chestStuff.add(chestContents.get(1));
 
 		if (recipe != null && chestContents.get(2).isEmpty()) {
 
@@ -114,18 +123,23 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			// Checks if the two inventories have the exact same values
 			boolean matcher = false;
 			if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem() && recipieInputs.size() == 1) {
+				System.out.println("1");
 
 				matcher = true;
 			}
 
 			else if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem()
-					&& chestStuff.get(1).getItem() == recipieInputs.get(1).getItem() && recipieInputs.size() > 1) {
+					&& chestStuff.get(1).getItem() == recipieInputs.get(1).getItem() && recipieInputs.size() == 2) {
+				System.out.println("2");
 
 				matcher = true;
 			}
+			System.out.println(matcher);
+			System.out.println(recipe.getOutput());
 
 			if (list1.equals(list2) && matcher) {
 				{
+					System.out.println("CRAFTING");
 
 					ItemStack output = recipe.getOutput().copy();
 					EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
@@ -148,6 +162,7 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 				}
 			}
 		}
+
 	}
 
 	public List<Integer> getRuneList() {
@@ -220,7 +235,6 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			test.add(tag.getIntAt(i));
 			test.set(i, tag.getIntAt(i));
 		}
-		System.out.println("ON DATA PACKET FINSIEDH");
 		this.runesList = test;
 
 	}
@@ -265,7 +279,6 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 		for (int i = 0; i < tagList.tagCount(); i++) {
 			NBTTagCompound tag = tagList.getCompoundTagAt(i);
 			int s = tag.getInteger("ListPos " + i);
-			System.out.println("Current Runelist is: " + getRuneList());
 			runesList.add(i, s);
 			runesList.set(i, s);
 		}

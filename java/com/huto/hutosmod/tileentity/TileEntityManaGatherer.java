@@ -41,10 +41,11 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 		if (world.isRemote) {
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.3, 0);
 			Vector3 endVec = vec.add(0, 0.5, 0);
-			if (count % 3 == 0) {
+			if (count % 10 == 0) {
 				MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
+				Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+
 			}
-			Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
 		}
 		this.sendUpdates();
