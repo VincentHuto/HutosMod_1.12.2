@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -156,6 +157,7 @@ public class GuiTomePage extends GuiScreen {
 			GlStateManager.translate(centerX, centerY, 0);
 			GlStateManager.translate(3, 3, 0);
 			GlStateManager.scale(1.9, 1.7, 1.9);
+			RenderHelper.enableGUIStandardItemLighting();
 			mc.getRenderItem().renderItemAndEffectIntoGUI(icon, 0, 0);
 		}
 		GlStateManager.popMatrix();

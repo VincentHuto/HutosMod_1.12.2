@@ -36,6 +36,8 @@ public class TomePageLib {
 
 	// World
 	public static String WORLD_PAGE_1 = "mystictome.world.page.1.text";
+	public static String WORLD_PAGE_2 = "mystictome.world.page.2.text";
+	public static String WORLD_PAGE_3 = "mystictome.world.page.3.text";
 
 	// Equips
 	public static String EQUIP_PAGE_1 = "mystictome.equip.page.1.text";
@@ -85,7 +87,11 @@ public class TomePageLib {
 				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_7)));
 		// World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
-				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_1)));
+				new ItemStack(BlockRegistry.Mystic_Earth), I18n.format(WORLD_PAGE_1)));
+		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
+				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_2)));
+		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
+				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_3)));
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
 				new ItemStack(ItemRegistry.null_chestplate), I18n.format(EQUIP_PAGE_1)));
