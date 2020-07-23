@@ -29,6 +29,7 @@ public class BlockRegistry {
 	// BlockConnectedTexture("connected_cube", Material.ROCK);
 	public static final Block Mystic_Sapling = new BlockSaplingBase("mystic_sapling");
 	public static final Block Mystic_Log = new BlockLogBase("mystic_log");
+	public static final Block mystic_planks = new BlockBase("mystic_planks", Material.WOOD);
 	public static final Block Mystic_Leaves = new BlockLeafBase("mystic_leaves");
 	public static final Block Mystic_Vine = new BlockMysticVine("mystic_vine");
 	public static final Block mindfog = new BlockMindFog("mindfog", Material.CLOTH);

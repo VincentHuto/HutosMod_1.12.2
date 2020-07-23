@@ -32,7 +32,7 @@ public class BlockSingeriMushroom extends BlockBush implements IGrowable {
 		setRegistryName(name);
 		setSoundType(SoundType.PLANT);
 		setLightOpacity(1);
-		setLightLevel(0.2F);
+		setLightLevel(0.4F);
 		setCreativeTab(MainClass.tabHutosMod);
 		BlockRegistry.BLOCKS.add(this);
 		ItemRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

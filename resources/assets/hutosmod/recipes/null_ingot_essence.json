@@ -2,13 +2,13 @@
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
         {
-            "item": "hutosmod:essence_drop"
+            "item": "hutosmod:anti_tear"
         },
         {
-            "item": "hutosmod:essence_drop"
+            "item": "hutosmod:anti_tear"
         },
         {
-            "item": "hutosmod:essence_drop"
+            "item": "hutosmod:anti_tear"
         },
         {
             "item": "minecraft:iron_ingot"

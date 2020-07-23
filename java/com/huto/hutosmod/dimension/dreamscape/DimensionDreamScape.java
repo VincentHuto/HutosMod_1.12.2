@@ -119,7 +119,7 @@ public class DimensionDreamScape extends WorldProviderSurface {
 			float[] colors) {
 //		EntityPlayer player = this.world.getPlayerEntityByName();
 
-		final float r = 255 / 255f, g = 1 / 255f, b = 21 / 255f;
+		final float r = 21 / 255f, g = 1 / 255f, b = 21 / 255f;
 		if (!hasSkyLight) {
 			colors[0] = r + blockLight * (1.0f - r);
 			colors[1] = g + blockLight * (1.0f - g);

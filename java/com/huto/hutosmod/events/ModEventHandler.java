@@ -56,7 +56,7 @@ public class ModEventHandler {
 
 	@SubscribeEvent
 	public void onPlayerUseWand(PlayerTickEvent e) {
-		IMana manaCap = e.player.getCapability(ManaProvider.MANA_CAP, null);
+/*		IMana manaCap = e.player.getCapability(ManaProvider.MANA_CAP, null);
 
 		if (manaCap != null) {
 			Item heldItem = e.player.getHeldItemMainhand().getItem();
@@ -71,7 +71,7 @@ public class ModEventHandler {
 				MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.green);
 				// manaCap.consume(1);
 			}
-		}
+		}*/
 	}
 
 	@SubscribeEvent

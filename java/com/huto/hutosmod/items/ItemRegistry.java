@@ -85,6 +85,11 @@ public class ItemRegistry {
 	public static final Item purging_stone = new ItemPurgingStone("purging_stone");
 	public static final Item grand_purging_stone = new ItemGrandPurgingStone("grand_purging_stone");
 
+	//Food
+	public static final Item singeri_soup= new ItemSingeriSoup("singeri_soup",3);
+	public static final Item raw_morel_on_a_stick= new ItemBase("raw_morel_on_a_stick");
+	public static final Item cooked_morel_on_a_stick= new ItemCookedMorelStick("cooked_morel_on_a_stick",3, false);
+	
 	// Activator
 	public static final Item maker_activator = new ItemMakerActivator("maker_activator");
 	public static final Item mana_extractor = new ItemManaExtractor("mana_extractor");

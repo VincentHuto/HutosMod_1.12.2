@@ -88,9 +88,9 @@ public class TomePageLib {
 		// World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockRegistry.Mystic_Earth), I18n.format(WORLD_PAGE_1)));
-		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
+		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_2)));
-		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
+		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_3)));
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",

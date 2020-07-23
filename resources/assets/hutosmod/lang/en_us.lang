@@ -32,6 +32,12 @@ item.upgrade_mob.name=Drum Upgrade:Mobs
 item.upgrade_animal.name=Drum Upgrade:Animal
 item.upgrade_wrench.name=Upgrade Wrench
 
+item.raw_morel_on_a_stick.name=Raw Morel On a Stick
+item.cooked_morel_on_a_stick.name=Cooked Morel On a Stick
+item.singeri_soup.name=Singeri Soup
+
+
+
 item.purging_stone.name=Purging Stone
 item.grand_purging_stone.name=Grand Purging Stone
 
@@ -117,6 +123,7 @@ tile.display_pedestal.name=Display Pedestal
 tile.enchanted_stone_smooth.name=Enchanted Stone
 tile.mindfog.name=Mind Fog
 tile.runic_chiselstation.name=Rune Chisel Station
+tile.mystic_planks.name=Mystic Plank
 
 fluid.white_water=White Water
 fluid.primal_ooze=Primal Ooze
@@ -153,7 +160,7 @@ mystictome.intro.page.7.text=   Due to the nature of life itself, being inherent
 
 mystictome.world.page.1.text=   With all this talk of how important vibrations are, it should be no surprise that the world around you has been influenced if not entirely formed around these waves. Everything from where and the way plants grow, to the migration of animals, the weather patterns, and even the oceans currents all follow these principals. The scary part is that, even though you are not aware of it, even your own consciousness is influenced by these tiny events, affecting what you do and how you behave depending on where you may be. Many mental ailments in fact can be chalked up to vibrational imbalances.
 mystictome.world.page.2.text=   The plants around us have very little way of communicating with us, so they can’t necessarily tell us what the vibrations do to influence them, but do to the research of scholars prior we have realized by forcing vibrations of all kinds into plants what effect they have on them. While they did exist prior albeit very solemnly, there is a type of tree that is especially good at vibrationally channeling and as such have even turned blue! Their existence now however has been spread even farther as a result of an experiment run loss and allowing a genetically altered species of this tree to appear even more commonly, albeit quite skinnier.
-mystictome.world.page.3.text= 
+mystictome.world.page.3.text=   Quisque laoreet, velit quis dapibus rutrum, justo orci laoreet velit, at sollicitudin justo augue ac purus. Mauris leo risus, pellentesque a dui eu, faucibus molestie ante. Suspendisse vulputate tincidunt mauris, congue efficitur nibh. Nam luctus quis turpis quis pretium. Aliquam erat volutpat. Maecenas bibendum eros non nulla semper ornare. Cras tempus sapien sed magna consectetur, vel lacinia diam hendrerit. Suspendisse eget dapibus turpis. Sed egestas ut est nec consequat. Praesent non purus blandit, fringilla turpis vel, imperdiet est. Nulla facilisi.
 
 mystictome.equip.page.1.text=Duis congue fermentum lobortis. Donec volutpat, nisi ac semper accumsan, odio turpis vulputate diam, a dictum ex dui nec eros. Maecenas venenatis faucibus neque, id pharetra diam lobortis quis. Ut lacinia, ex eget viverra commodo, dui mi eleifend tellus, bibendum sagittis nulla ligula ut justo. Vivamus feugiat eros vel maximus euismod. Ut fermentum nisi ut nulla lobortis, at congue elit lacinia. Vestibulum ornare mauris et purus vestibulum semper. Ut dignissim sem vel tellus maximus, at congue justo convallis. Cras tristique.
 
