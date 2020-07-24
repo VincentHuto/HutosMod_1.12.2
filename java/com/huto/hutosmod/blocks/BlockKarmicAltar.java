@@ -42,13 +42,13 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Blockkarmic_altar extends BlockBase {
+public class BlockKarmicAltar extends BlockBase {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 	public static final AxisAlignedBB ALTAR = new AxisAlignedBB(0, 0, 0, 1, 0.8125, 1);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB ALTAR_WE = new AxisAlignedBB(0, 0, 0, 1, 0.8125, 1);
 
-	public Blockkarmic_altar(String name, Material material) {
+	public BlockKarmicAltar(String name, Material material) {
 		super(name, material);
 		setCreativeTab(MainClass.tabHutosMod);
 		setHardness(8.0f);

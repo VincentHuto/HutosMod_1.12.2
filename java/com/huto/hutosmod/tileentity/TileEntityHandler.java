@@ -19,6 +19,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityCelestialActuator.class, "celestial_actuator");
 		GameRegistry.registerTileEntity(TileEntityDisplayPedestal.class, "display_pedestal");
 		GameRegistry.registerTileEntity(TileEntityChiselStation.class, "runic_chiselstation");
+		GameRegistry.registerTileEntity(TileEntityManaResonator.class, "mana_resonator");
 
 	}
 }

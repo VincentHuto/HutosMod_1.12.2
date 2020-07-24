@@ -4,17 +4,21 @@ import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.jei.catagories.ChiselStationRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.EssenceEnhancerRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.FuserRecipeCatagory;
+import com.huto.hutosmod.jei.catagories.ManaResonatorRecipeCatagory;
 import com.huto.hutosmod.jei.catagories.WandMakerRecipeCatagory;
 import com.huto.hutosmod.jei.wrappers.ChiselStationRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.EnhancerRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.FuserRecipeWrapper;
+import com.huto.hutosmod.jei.wrappers.ManaResonatorRecipeWrapper;
 import com.huto.hutosmod.jei.wrappers.WandMakerRecipeWrapper;
 import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
+import com.huto.hutosmod.recipies.ModResonatorRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.recipies.RecipeManaFuser;
+import com.huto.hutosmod.recipies.RecipeResonator;
 import com.huto.hutosmod.recipies.RecipeRuneChisel;
 import com.huto.hutosmod.recipies.RecipeWandMaker;
 
@@ -45,6 +49,10 @@ public class JeiPlugin implements IModPlugin {
 		registry.handleRecipes(RecipeRuneChisel.class,ChiselStationRecipeWrapper::new, ChiselStationRecipeCatagory.UID);
 		registry.addRecipes(ModChiselRecipies.runeRecipies, ChiselStationRecipeCatagory.UID);
 		registry.addRecipeCatalyst(new ItemStack(BlockRegistry.runic_chiselstation), ChiselStationRecipeCatagory.UID);
+	
+		registry.handleRecipes(RecipeResonator.class,ManaResonatorRecipeWrapper::new, ManaResonatorRecipeCatagory.UID);
+		registry.addRecipes(ModResonatorRecipies.resonatorRecipies, ManaResonatorRecipeCatagory.UID);
+		registry.addRecipeCatalyst(new ItemStack(BlockRegistry.mana_resonator), ManaResonatorRecipeCatagory.UID);
 	}
 
 	@Override
@@ -53,6 +61,7 @@ public class JeiPlugin implements IModPlugin {
 		registry.addRecipeCategories(new FuserRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new WandMakerRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 		registry.addRecipeCategories(new ChiselStationRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
+		registry.addRecipeCategories(new ManaResonatorRecipeCatagory(registry.getJeiHelpers().getGuiHelper()));
 
 	}
 }

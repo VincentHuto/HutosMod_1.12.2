@@ -1,16 +1,4 @@
-/**
- * This class was created by <Vazkii>. It's distributed as
- * part of the ThaumicTinkerer Mod.
- *
- * ThaumicTinkerer is Open Source and distributed under a
- * Botania License: http://botaniamod.net/license.php
- *
- * ThaumicTinkerer is a Derivative Work on Thaumcraft 4.
- * Thaumcraft 4 (c) Azanor 2012
- * (http://www.minecraftforum.net/topic/1585216-)
- *
- * File Created @ [8 Sep 2013, 19:36:25 (GMT)]
- */
+
 package com.huto.hutosmod.recipies;
 
 import net.minecraft.item.ItemStack;

@@ -40,6 +40,7 @@ import com.huto.hutosmod.recipies.ModChiselRecipies;
 import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
+import com.huto.hutosmod.recipies.ModResonatorRecipies;
 import com.huto.hutosmod.recipies.ModWandRecipies;
 import com.huto.hutosmod.render.RenderHandler;
 import com.huto.hutosmod.render.tile.RenderTileBellJar;
@@ -52,6 +53,7 @@ import com.huto.hutosmod.render.tile.RenderTileKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderTileManaCapacitor;
 import com.huto.hutosmod.render.tile.RenderTileManaFuser;
 import com.huto.hutosmod.render.tile.RenderTileManaGatherer;
+import com.huto.hutosmod.render.tile.RenderTileManaResonator;
 import com.huto.hutosmod.render.tile.RenderTileStorageDrum;
 import com.huto.hutosmod.render.tile.RenderTileWandMaker;
 import com.huto.hutosmod.sound.SoundsHandler;
@@ -66,6 +68,7 @@ import com.huto.hutosmod.tileentity.TileEntityKarmicExtractor;
 import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
 import com.huto.hutosmod.tileentity.TileEntityManaFuser;
 import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
+import com.huto.hutosmod.tileentity.TileEntityManaResonator;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.worldgen.IWorldGenCustomMushroom;
@@ -122,6 +125,8 @@ public class RegistryHandler {
 				new RenderTileCelestialActuator());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayPedestal.class, new RenderTileDisplayPedestal());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChiselStation.class, new RenderTileChiselStation());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaResonator.class, new RenderTileManaResonator());
+
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");
@@ -166,6 +171,7 @@ public class RegistryHandler {
 		ModFuserRecipes.init();
 		ModEnhancerRecipies.init();
 		ModChiselRecipies.init();
+		ModResonatorRecipies.init();
 		SoundsHandler.registerSounds();
 
 	}

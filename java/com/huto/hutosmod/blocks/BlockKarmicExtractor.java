@@ -28,7 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Blockkarmic_extractor extends BlockBase implements IActivatable {
+public class BlockKarmicExtractor extends BlockBase implements IActivatable {
 	public static final AxisAlignedBB EXTRACTOR = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
 	// Facing(kinda) more to do with facing of bounding boxes
 	public static final AxisAlignedBB EXTRACTOR_WE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0625D, 1.0D);
@@ -39,7 +39,7 @@ public class Blockkarmic_extractor extends BlockBase implements IActivatable {
 		this.setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
-	public Blockkarmic_extractor(String name, Material material) {
+	public BlockKarmicExtractor(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.STONE);
 		setHardness(5.0F);

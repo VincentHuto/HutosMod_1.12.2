@@ -1,15 +1,18 @@
 package com.huto.hutosmod.tileentity;
 
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.karma.IKarma;
 import com.huto.hutosmod.karma.KarmaProvider;
 import com.huto.hutosmod.particles.ManaParticle;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -67,16 +70,19 @@ public class TileEntityKarmicExtractor extends TileModMana implements ITickable 
 			return;
 
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		if (player.isSneaking()) {
+		EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, new ItemStack(ItemRegistry.karmic_drop));
 			if (karma.getKarma() >= 1) {
 				karma.consume(1);
 				addManaValue(20);
+				world.spawnEntity(outputItem);
+
 			}
 			if (karma.getKarma() < 0) {
 				karma.add(1);
 				addManaValue(10);
+				world.spawnEntity(outputItem);
+
 			}
 			this.sendUpdates();
-		}
 	}
 }

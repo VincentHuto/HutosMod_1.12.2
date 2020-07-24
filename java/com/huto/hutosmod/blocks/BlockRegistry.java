@@ -51,9 +51,10 @@ public class BlockRegistry {
 	public static final Block essecence_enhancer = new BlockEssenceEnhancer("essecence_enhancer", Material.ROCK);
 	public static final Block mana_gatherer = new BlockManaGatherer("mana_gatherer", Material.ROCK);
 	public static final Block mana_hopper = new BlockManaHopper("mana_hopper", Material.ROCK);
-	public static final Block karmic_altar = new Blockkarmic_altar("karmic_altar", Material.ROCK);
+	public static final Block karmic_altar = new BlockKarmicAltar("karmic_altar", Material.ROCK);
 	public static final Block mana_fuser = new BlockManaFuser("mana_fuser", Material.ROCK);
-	public static final Block karmic_extractor = new Blockkarmic_extractor("karmic_extractor", Material.ROCK);
+	public static final Block mana_resonator = new BlockManaResonator("mana_resonator", Material.ROCK);
+	public static final Block karmic_extractor = new BlockKarmicExtractor("karmic_extractor", Material.ROCK);
 	public static final Block celestial_actuator = new BlockCelestialActuator("celestial_actuator", Material.ROCK);
 	public static final Block runic_chiselstation = new BlockRunicChiselStation("runic_chiselstation", Material.ROCK);
 
