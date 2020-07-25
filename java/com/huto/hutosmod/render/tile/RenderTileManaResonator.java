@@ -9,7 +9,8 @@ import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
-import com.huto.hutosmod.models.ModelMagatama;
+import com.huto.hutosmod.models.ModelRedTuningFork;
+import com.huto.hutosmod.models.ModelBlueTuningFork;
 import com.huto.hutosmod.tileentity.TileEntityManaResonator;
 import com.huto.hutosmod.tileentity.TileModMana;
 
@@ -23,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,6 +33,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntityManaResonator> {
 
 	final ModelDrumMagatamas magatamas = new ModelDrumMagatamas();
+	final ModelBlueTuningFork blueForks = new ModelBlueTuningFork();
+	final ModelRedTuningFork redForks = new ModelRedTuningFork();
 
 	@Override
 	public void render(@Nonnull TileEntityManaResonator te, double x, double y, double z, float partticks,
@@ -75,27 +79,58 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 			}
 			GlStateManager.popMatrix();
 		}
+		int repeat = 3;
+	//	int repeat = (int) te.getManaValue() / 9;
 
 		GlStateManager.disableAlpha();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0.5F, 1.25F, 0.5F);
+		GlStateManager.translate(0.5F, 1.5F, 0.5F);
 		GlStateManager.rotate(180F, 1F, 0F, 1F);
-		GlStateManager.scale(0.25F, 0.25F, 0.25F);
-
-		int repeat = (int) te.getManaValue() / 9;
-
-		magatamas.renderMagatamas(4, repeat, repeat);
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		GlStateManager.translate(-0.5F, -0.4F, -0.5F);
+		redForks.renderForks(1, repeat,repeat);
+		GlStateManager.enableAlpha();
+		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
 
+		GlStateManager.disableAlpha();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.5F, 1.5F, 0.5F);
+		GlStateManager.rotate(180F, 1F, 0F, 1F);
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		GlStateManager.translate(0.5F, -0.4F, 0.5F);
+		blueForks.renderForks(1, repeat,repeat);
+		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
+		GlStateManager.enableAlpha();
 
+		
+		GlStateManager.disableAlpha();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 1.5F,0.5F);
+		GlStateManager.rotate(180F, 1F, 0F, 1F);
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		GlStateManager.translate(0.5F, -0.4F, 0.5F);
+		redForks.renderForks(1, repeat,repeat);
+		GlStateManager.enableAlpha();
+		GlStateManager.popMatrix();
+		GlStateManager.enableAlpha();
+
+		GlStateManager.disableAlpha();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.5F, 1.5F, 0.5F);
+		GlStateManager.rotate(180F, 1F, 0F, 1F);
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		GlStateManager.translate(-.5F, -0.4F, 0.5F);
+		blueForks.renderForks(1, repeat,repeat);
+		GlStateManager.enableAlpha();
+		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
 
 		DecimalFormat df = new DecimalFormat("0.00");
 		String text = df.format(te.getManaValue());
 		GlStateManager.translate(0, 1.75, -0.5);
 		GlStateManager.rotate(180, 1, 0, 1);
-
 		GlStateManager.scale(0.1, 0.1, 0.1);
 		FontRenderer fontRenderer = this.getFontRenderer();
 		FontRenderer akloRenderer = ModTextFormatting.getAkloFont();

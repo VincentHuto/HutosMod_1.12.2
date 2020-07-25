@@ -9,11 +9,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
-
-/**
- * ModelMagatama - huto
- * Created using Tabula 7.1.0
- */
 public class ModelDrumMagatamas extends ModelBase {
     public ModelRenderer shape1;
     public ModelRenderer shape2;

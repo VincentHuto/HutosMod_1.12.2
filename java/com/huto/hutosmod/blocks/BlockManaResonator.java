@@ -114,13 +114,14 @@ public class BlockManaResonator extends BlockBase implements IActivatable {
 			return true;
 
 		} else if (player.getHeldItemMainhand().getItem() == ItemRegistry.maker_activator
-				|| player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool ) {
+				|| player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 
 		}
 
 		if (!player.isSneaking() && !stack.isEmpty()
-				&& player.getHeldItemMainhand().getItem() != ItemRegistry.mana_debugtool || player.getHeldItemMainhand().getItem() != ItemRegistry.mana_extractor) {
+				&& player.getHeldItemMainhand().getItem() != ItemRegistry.mana_debugtool
+				|| player.getHeldItemMainhand().getItem() != ItemRegistry.mana_extractor) {
 			boolean result = te.addItem(player, stack, hand);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
 			return result;
