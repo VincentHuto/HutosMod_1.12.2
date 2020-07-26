@@ -10,6 +10,7 @@ import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.models.ClientTickHandler;
 import com.huto.hutosmod.models.ModelDrumMagatamas;
 import com.huto.hutosmod.models.ModelRedTuningFork;
+import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.models.ModelBlueTuningFork;
 import com.huto.hutosmod.tileentity.TileEntityManaResonator;
 import com.huto.hutosmod.tileentity.TileModMana;
@@ -79,8 +80,25 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 			}
 			GlStateManager.popMatrix();
 		}
-		int repeat = 3;
-	//	int repeat = (int) te.getManaValue() / 9;
+		int blueRepeat = 0;
+		int redRepeat = 0;
+		te.checkStructure();
+		if (te.getResonantState() == EnumEssecenceType.MANA) {
+			blueRepeat = 30;
+		} else if (te.getResonantState() == EnumEssecenceType.KARMIC) {
+			redRepeat = 30;
+		} else if (te.getResonantState() == EnumEssecenceType.GREY) {
+			blueRepeat = 5;
+			redRepeat = 5;
+		} else if (te.getResonantState() == EnumEssecenceType.REVERT) {
+			blueRepeat = 40;
+			redRepeat = 40;
+		} else {
+			blueRepeat = 0;
+			redRepeat = 0;
+		}
+
+		// System.out.println(te.getResonantState());
 
 		GlStateManager.disableAlpha();
 		GlStateManager.pushMatrix();
@@ -88,7 +106,7 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.rotate(180F, 1F, 0F, 1F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.translate(-0.5F, -0.4F, -0.5F);
-		redForks.renderForks(1, repeat,repeat);
+		redForks.renderForks(1, redRepeat, redRepeat);
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
@@ -99,19 +117,18 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.rotate(180F, 1F, 0F, 1F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.translate(0.5F, -0.4F, 0.5F);
-		blueForks.renderForks(1, repeat,repeat);
+		blueForks.renderForks(1, blueRepeat, blueRepeat);
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
 
-		
 		GlStateManager.disableAlpha();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(0F, 1.5F,0.5F);
+		GlStateManager.translate(0F, 1.5F, 0.5F);
 		GlStateManager.rotate(180F, 1F, 0F, 1F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.translate(0.5F, -0.4F, 0.5F);
-		redForks.renderForks(1, repeat,repeat);
+		redForks.renderForks(1, redRepeat, redRepeat);
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();
@@ -122,7 +139,7 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.rotate(180F, 1F, 0F, 1F);
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 		GlStateManager.translate(-.5F, -0.4F, 0.5F);
-		blueForks.renderForks(1, repeat,repeat);
+		blueForks.renderForks(1, blueRepeat, blueRepeat);
 		GlStateManager.enableAlpha();
 		GlStateManager.popMatrix();
 		GlStateManager.enableAlpha();

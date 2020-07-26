@@ -17,7 +17,7 @@ public class BlockRegistry {
 
 	// Blocks
 	public static final Block enchanted_stone = new BlockEnchantedStone("enchanted_stone", Material.IRON);
-	public static final Block enchanted_stone_smooth = new BlockBase("enchanted_stone_smooth", Material.IRON);
+	public static final Block enchanted_stone_smooth = new BlockEnchantedStone("enchanted_stone_smooth", Material.IRON);
 	public static final Block enchanted_ore = new BlockEnchantedOre("enchanted_ore", Material.ROCK);
 	public static final Block enchanted_ore_mystic = new BlockEnchantedOre("enchanted_ore_mystic", Material.ROCK);
 
@@ -36,6 +36,8 @@ public class BlockRegistry {
 	public static final Block runed_obsidian = new BlockRunedObsidian("runed_obsidian", Material.ROCK);
 	public static final Block activated_obsidian = new BlockActivatedObsidian("activated_obsidian", Material.IRON);
 	public static final Block nether_block = new BlockNetherBlock("nether_block", Material.ROCK).setHardness(5F)
+			.setResistance(15F);
+	public static final Block reversion_catalyst = new BlockBase("reversion_catalyst", Material.ROCK).setHardness(5F)
 			.setResistance(15F);
 	public static final Block morel_cap = new BlockBase("morel_cap", Material.CACTUS);
 	public static final Block morel_stem = new BlockBase("morel_stem", Material.CACTUS);

@@ -31,6 +31,7 @@ item.upgrade_player.name=Drum Upgrade:Players
 item.upgrade_mob.name=Drum Upgrade:Mobs
 item.upgrade_animal.name=Drum Upgrade:Animal
 item.upgrade_wrench.name=Upgrade Wrench
+item.resonant_fuel.name=Resonant Fuel
 
 item.raw_morel_on_a_stick.name=Raw Morel On a Stick
 item.cooked_morel_on_a_stick.name=Cooked Morel On a Stick
@@ -124,6 +125,7 @@ tile.enchanted_stone_smooth.name=Enchanted Stone
 tile.mindfog.name=Mind Fog
 tile.runic_chiselstation.name=Rune Chisel Station
 tile.mystic_planks.name=Mystic Plank
+tile.mana_resonator.name=Mana Resonator
 
 fluid.white_water=White Water
 fluid.primal_ooze=Primal Ooze

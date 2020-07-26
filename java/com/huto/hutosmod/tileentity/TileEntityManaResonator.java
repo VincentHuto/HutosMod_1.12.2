@@ -6,20 +6,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
-import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
-import com.huto.hutosmod.particles.ManaParticle;
 import com.huto.hutosmod.recipies.EnumEssecenceType;
-import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModResonatorRecipies;
-import com.huto.hutosmod.recipies.ModWandRecipies;
-import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.recipies.RecipeResonator;
-import com.huto.hutosmod.recipies.RecipeWandMaker;
-import com.huto.hutosmod.tileentity.TileManaSimpleInventory.SimpleItemStackHandler;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -29,10 +22,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
-import scala.reflect.internal.Trees.This;
+import net.minecraft.util.math.BlockPos;
 
 public class TileEntityManaResonator extends TileManaSimpleInventory implements ITickable {
 	public static final String TAG_MANA = "mana";
+	public static final String TAG_STATE = "resoantState";
 	int cooldown = 0;
 	RecipeResonator currentRecipe;
 	int recipeKeepTicks = 0;
@@ -40,6 +34,34 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 	private static final int SET_COOLDOWN_EVENT = 1;
 	private static final int CRAFT_EFFECT_EVENT = 2;
 	public int count = 0;
+	public static EnumEssecenceType resonantState;
+
+	public EnumEssecenceType getResonantState() {
+		return resonantState;
+	}
+
+	public void checkStructure() {
+		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
+		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
+
+		if (blockUnder == BlockRegistry.enchanted_stone_smooth) {
+			resonantState = EnumEssecenceType.MANA;
+
+		} else if (blockUnder == BlockRegistry.activated_obsidian) {
+			resonantState = EnumEssecenceType.KARMIC;
+
+		}  else if (blockUnder == BlockRegistry.reversion_catalyst) {
+			resonantState = EnumEssecenceType.REVERT;
+
+		} else if (blockUnder == BlockRegistry.mindfog) {
+			resonantState = EnumEssecenceType.GREY;
+
+		}else {
+			resonantState = EnumEssecenceType.NONE;
+
+		}
+
+	}
 
 	@Override
 	public int getSizeInventory() {
@@ -91,6 +113,7 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 		itemHandler = createItemHandler();
 		itemHandler.deserializeNBT(tag);
 		manaValue = tag.getFloat(TAG_MANA);
+		// resonantState = tag.getInteger(TAG_STATE);
 
 	}
 
@@ -98,7 +121,7 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 	public void writePacketNBT(NBTTagCompound tag) {
 		tag.merge(itemHandler.serializeNBT());
 		tag.setFloat(TAG_MANA, manaValue);
-
+		// tag.setInteger(TAG_STATE, resonantState);
 	}
 
 	public IBlockState getState() {
@@ -136,18 +159,20 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 
 	@Override
 	public void update() {
+		// System.out.println(this.getResonantState());
+
 		if (!world.isRemote) {
 			if (cooldown > 0) {
 				cooldown--;
 			}
 		}
 		if (this.hasValidRecipe()) {
-			for (RecipeResonator recipe :ModResonatorRecipies.resonatorRecipies) {
+			for (RecipeResonator recipe : ModResonatorRecipies.resonatorRecipies) {
 				if (recipe.matches(itemHandler) && this.getManaValue() > recipe.getMana()) {
 					Random rand = new Random();
 					count++;
 					int mod = 3 + rand.nextInt(10);
-		
+
 				}
 			}
 		}
@@ -187,6 +212,7 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 	public void onWanded(EntityPlayer player, ItemStack wand) {
 		if (world.isRemote)
 			return;
+		this.checkStructure();
 
 		RecipeResonator recipe = null;
 		if (currentRecipe != null)
@@ -199,7 +225,8 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 					break;
 				}
 			}
-		if (recipe != null && manaValue >= recipe.getMana()) {
+
+		if (recipe != null && manaValue >= recipe.getMana() && getResonantState() == recipe.getRecipeType()) {
 			ItemStack output = recipe.getOutput().copy();
 			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
 			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);

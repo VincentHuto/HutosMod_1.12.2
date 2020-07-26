@@ -16,6 +16,7 @@ public class ItemCookedMorelStick extends ItemFood {
 		setRegistryName(name);
 		setCreativeTab(MainClass.tabHutosMod);
 		ItemRegistry.ITEMS.add(this);
+		setMaxStackSize(1);
 
 	}
 

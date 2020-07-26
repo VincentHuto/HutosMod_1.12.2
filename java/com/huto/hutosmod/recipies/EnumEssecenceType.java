@@ -1,5 +1,5 @@
 package com.huto.hutosmod.recipies;
 
 public enum EnumEssecenceType {
-	KARMIC,MANA;
+	REVERT,GREY,NULL,KARMIC,MANA,NONE;
 }

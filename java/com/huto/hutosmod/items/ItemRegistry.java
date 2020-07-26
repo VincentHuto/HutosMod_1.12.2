@@ -84,6 +84,7 @@ public class ItemRegistry {
 	public static final Item energy_focus = new ItemBase("energy_focus");
 	public static final Item purging_stone = new ItemPurgingStone("purging_stone");
 	public static final Item grand_purging_stone = new ItemGrandPurgingStone("grand_purging_stone");
+	public static final Item resonant_fuel = new ItemResonantFuel("resonant_fuel");
 
 	//Food
 	public static final Item singeri_soup= new ItemSingeriSoup("singeri_soup",3);

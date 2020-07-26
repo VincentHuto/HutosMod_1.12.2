@@ -32,7 +32,7 @@ public class ManaResonatorRecipeCatagory implements IRecipeCategory<ManaResonato
 	public ManaResonatorRecipeCatagory(IGuiHelper guiHelper) {
 		background = guiHelper.createBlankDrawable(150, 110);
 		localizedName = I18n.format("hutosmod.jei.mana_resonator");
-		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/petalOverlay.png"), 0, 0, 150,
+		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/resonatoroverlay.png"), 0, 0, 150,
 				110);
 	}
 

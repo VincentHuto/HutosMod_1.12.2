@@ -28,6 +28,9 @@ public class RecipeResonator {
 
 		this.inputs = inputsToSet.build();
 	}
+	
+	
+	
 
 	public boolean matches(IItemHandler inv) {
 		List<Object> inputsMissing = new ArrayList<>(inputs);
