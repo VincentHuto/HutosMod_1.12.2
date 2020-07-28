@@ -29,19 +29,19 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 public class DreamScapeGen implements IChunkGenerator
 {
 	protected static final IBlockState STONE = BlockRegistry.Mystic_Media.getDefaultState();
-	protected static final IBlockState GRAVEL = BlockRegistry.Mystic_Earth.getDefaultState();
-	protected static final IBlockState CLAY = BlockRegistry.mindfog.getDefaultState();
-	protected static final IBlockState WATER = BlockRegistry.primal_ooze_fluid.getDefaultState();
+	protected static final IBlockState EARTH = BlockRegistry.Mystic_Earth.getDefaultState();
+	protected static final IBlockState MINDFOG = BlockRegistry.mindfog.getDefaultState();
+	protected static final IBlockState OOZE = BlockRegistry.primal_ooze_fluid.getDefaultState();
 	protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
 	protected static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 	private final Random rand;
-	private NoiseGeneratorOctaves field_185991_j;
-	private NoiseGeneratorOctaves field_185992_k;
-	private NoiseGeneratorOctaves field_185993_l;
-	private NoiseGeneratorPerlin field_185994_m;
-	public NoiseGeneratorOctaves field_185983_b;
-	public NoiseGeneratorOctaves field_185984_c;
-	public NoiseGeneratorOctaves field_185985_d;
+	private NoiseGeneratorOctaves noiseGenOct_j;
+	private NoiseGeneratorOctaves noiseGenOct_k;
+	private NoiseGeneratorOctaves noiseGenOct_l;
+	private NoiseGeneratorPerlin noiseGenPerl_m;
+	public NoiseGeneratorOctaves noiseGenOct_b;
+	public NoiseGeneratorOctaves noiseGenOct_c;
+	public NoiseGeneratorOctaves noiseGenOct_d;
 	private final World world;
 	private final WorldType terrainType;
 	private final double[] heightMap;
@@ -56,25 +56,25 @@ public class DreamScapeGen implements IChunkGenerator
 	private final NoiseGeneratorOctaves noiseGen4;
 	private double stoneNoise[];
 	private MapGenBase caveGenerator;
-	// private MapGenBaseMeta bigCaveGenerator;
     private double[] buffer;
 
 	public DreamScapeGen(World worldIn, long seed) {
-
+		
 		this.world = worldIn;
 		this.terrainType = worldIn.getWorldInfo().getTerrainType();
 		this.rand = new Random(seed);
 		this.noiseGen4 = new NoiseGeneratorOctaves(this.rand, 4);
 		this.stoneNoise = new double[256];
-		this.field_185991_j = new NoiseGeneratorOctaves(this.rand, 16);
-		this.field_185992_k = new NoiseGeneratorOctaves(this.rand, 16);
-		this.field_185993_l = new NoiseGeneratorOctaves(this.rand, 8);
-		this.field_185994_m = new NoiseGeneratorPerlin(this.rand, 4);
-		this.field_185983_b = new NoiseGeneratorOctaves(this.rand, 10);
-		this.field_185984_c = new NoiseGeneratorOctaves(this.rand, 16);
-		this.field_185985_d = new NoiseGeneratorOctaves(this.rand, 8);
+		this.noiseGenOct_j = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGenOct_k = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGenOct_l = new NoiseGeneratorOctaves(this.rand, 8);
+		this.noiseGenPerl_m = new NoiseGeneratorPerlin(this.rand, 4);
+		this.noiseGenOct_b = new NoiseGeneratorOctaves(this.rand, 10);
+		this.noiseGenOct_c = new NoiseGeneratorOctaves(this.rand, 16);
+		this.noiseGenOct_d = new NoiseGeneratorOctaves(this.rand, 8);
 		this.heightMap = new double[825];
 		this.field_185999_r = new float[25];
+		this.world.setSeaLevel(10);
 		caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(new MapGenCaves(),
 				net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
 
@@ -86,28 +86,27 @@ public class DreamScapeGen implements IChunkGenerator
 		}
 		this.settings = new ChunkGeneratorSettings.Factory().build();
 		net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld ctx = new net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld(
-				field_185991_j, field_185992_k, field_185993_l, field_185994_m, field_185983_b, field_185984_c,
-				field_185985_d);
+				noiseGenOct_j, noiseGenOct_k, noiseGenOct_l, noiseGenPerl_m, noiseGenOct_b, noiseGenOct_c,
+				noiseGenOct_d);
 
 		ctx = net.minecraftforge.event.terraingen.TerrainGen.getModdedNoiseGenerators(worldIn, this.rand, ctx);
-		this.field_185991_j = ctx.getLPerlin1();
-		this.field_185992_k = ctx.getLPerlin2();
-		this.field_185993_l = ctx.getPerlin();
-		this.field_185994_m = ctx.getHeight();
-		this.field_185983_b = ctx.getScale();
-		this.field_185984_c = ctx.getDepth();
-		this.field_185985_d = ctx.getForest();
+		this.noiseGenOct_j = ctx.getLPerlin1();
+		this.noiseGenOct_k = ctx.getLPerlin2();
+		this.noiseGenOct_l = ctx.getPerlin();
+		this.noiseGenPerl_m = ctx.getHeight();
+		this.noiseGenOct_b = ctx.getScale();
+		this.noiseGenOct_c = ctx.getDepth();
+		this.noiseGenOct_d = ctx.getForest();
 	}
 
 	@Override
 	public Chunk generateChunk(int x, int z) {
+		this.world.setSeaLevel(10);
+
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
         this.prepareHeights(x, z, chunkprimer);
-
 		this.setBlocksInChunk(x, z, chunkprimer);
-
-		// addIceForestTop(x, z, chunkprimer);
 		this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16,
 				16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
@@ -229,7 +228,7 @@ public class DreamScapeGen implements IChunkGenerator
 
 	                                if (l1 * 8 + i2 < j)
 	                                {
-	                                    iblockstate = WATER;
+	                                    iblockstate = OOZE;
 	                                }
 
 	                       
@@ -373,7 +372,7 @@ public class DreamScapeGen implements IChunkGenerator
 										// change the y to influence height  
 									//		primer.setBlockState(i * 4 + l2, i * 8 + l2, i* 4 + l2, WATER);
 
-									primer.setBlockState(i * 4 + k2, i2 *7 + j2+(80), l * 4 + l2, CLAY);
+									primer.setBlockState(i * 4 + k2, i2 *7 + j2+(80), l * 4 + l2, MINDFOG);
 								//		primer.setBlockState(i * 4 + k2, i2 *7 + j2+ 180, l * 4 + l2,CLAY);
 
 									}
@@ -398,7 +397,7 @@ public class DreamScapeGen implements IChunkGenerator
 		if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world))
 			return;
 		double d0 = 0.03125D;
-		this.field_186002_u = this.field_185994_m.getRegion(this.field_186002_u, (double) (x * 16), (double) (z * 16),
+		this.field_186002_u = this.noiseGenPerl_m.getRegion(this.field_186002_u, (double) (x * 16), (double) (z * 16),
 				16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		for (int i = 0; i < 16; ++i) {
 			for (int j = 0; j < 16; ++j) {
@@ -412,6 +411,8 @@ public class DreamScapeGen implements IChunkGenerator
 	@SuppressWarnings("unused")
 	private void generateBiomeTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z,
 			double noiseVal, Biome biome) {
+		this.world.setSeaLevel(10);
+
 		int i = worldIn.getSeaLevel();
 		IBlockState iblockstate = biome.topBlock;
 		IBlockState iblockstate1 = biome.fillerBlock;
@@ -437,7 +438,7 @@ public class DreamScapeGen implements IChunkGenerator
 							iblockstate1 = biome.fillerBlock;
 						}
 						if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
-							iblockstate1 = CLAY;
+							iblockstate1 = MINDFOG;
 						}
 						j = k;
 						if (j1 >= i - 1) {
@@ -445,7 +446,7 @@ public class DreamScapeGen implements IChunkGenerator
 						} else if (j1 < i - 7 - k) {
 							iblockstate = AIR;
 							iblockstate1 = STONE;
-							chunkPrimerIn.setBlockState(i1, j1, l, GRAVEL);
+							chunkPrimerIn.setBlockState(i1, j1, l, EARTH);
 						} else {
 							chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
 						}
@@ -462,19 +463,19 @@ public class DreamScapeGen implements IChunkGenerator
 		}
 	}
 
-	private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_) {
-		this.field_185989_h = this.field_185984_c.generateNoiseOctaves(this.field_185989_h, p_185978_1_, p_185978_3_, 5,
+	private void generateHeightmap(int x, int y, int z) {
+		this.field_185989_h = this.noiseGenOct_c.generateNoiseOctaves(this.field_185989_h, x, z, 5,
 				5, (double) this.settings.depthNoiseScaleX, (double) this.settings.depthNoiseScaleZ,
 				(double) this.settings.depthNoiseScaleExponent);
 		float f = this.settings.coordinateScale;
 		float f1 = this.settings.heightScale;
-		this.field_185986_e = this.field_185993_l.generateNoiseOctaves(this.field_185986_e, p_185978_1_, p_185978_2_,
-				p_185978_3_, 5, 33, 5, (double) (f / this.settings.mainNoiseScaleX),
+		this.field_185986_e = this.noiseGenOct_l.generateNoiseOctaves(this.field_185986_e, x, y,
+				z, 5, 33, 5, (double) (f / this.settings.mainNoiseScaleX),
 				(double) (f1 / this.settings.mainNoiseScaleY), (double) (f / this.settings.mainNoiseScaleZ));
-		this.field_185987_f = this.field_185991_j.generateNoiseOctaves(this.field_185987_f, p_185978_1_, p_185978_2_,
-				p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
-		this.field_185988_g = this.field_185992_k.generateNoiseOctaves(this.field_185988_g, p_185978_1_, p_185978_2_,
-				p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
+		this.field_185987_f = this.noiseGenOct_j.generateNoiseOctaves(this.field_185987_f, x, y,
+				z, 5, 33, 5, (double) f, (double) f1, (double) f);
+		this.field_185988_g = this.noiseGenOct_k.generateNoiseOctaves(this.field_185988_g, x, y,
+				z, 5, 33, 5, (double) f, (double) f1, (double) f);
 		int i = 0;
 		int j = 0;
 		for (int k = 0; k < 5; ++k) {

@@ -43,24 +43,17 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 	public void checkStructure() {
 		BlockPos posBlockUnder = new BlockPos(pos.getX(), (pos.getY() - 1), pos.getZ());
 		Block blockUnder = world.getBlockState(posBlockUnder).getBlock();
-
 		if (blockUnder == BlockRegistry.enchanted_stone_smooth) {
 			resonantState = EnumEssecenceType.MANA;
-
 		} else if (blockUnder == BlockRegistry.activated_obsidian) {
 			resonantState = EnumEssecenceType.KARMIC;
-
 		}  else if (blockUnder == BlockRegistry.reversion_catalyst) {
 			resonantState = EnumEssecenceType.REVERT;
-
 		} else if (blockUnder == BlockRegistry.mindfog) {
 			resonantState = EnumEssecenceType.GREY;
-
 		}else {
 			resonantState = EnumEssecenceType.NONE;
-
 		}
-
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 
 import org.lwjgl.opengl.GL11;
 
-import com.huto.hutosmod.mindrunes.IRenderBauble.RenderType;
+import com.huto.hutosmod.mindrunes.IRenderRunes.RenderType;
 import com.huto.hutosmod.mindrunes.events.IRunesItemHandler;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -44,11 +44,11 @@ public final class RuneRenderLayer implements LayerRenderer<EntityPlayer> {
 			ItemStack stack = inv.getStackInSlot(i);
 			if(stack != null && !stack.isEmpty()) {
 				Item item = stack.getItem();
-				if(item instanceof IRenderBauble) {
+				if(item instanceof IRenderRunes) {
 					GlStateManager.pushMatrix();
 					GL11.glColor3ub((byte) 255, (byte) 255, (byte) 255); 
 					GlStateManager.color(1F, 1F, 1F, 1F);
-					((IRenderBauble) stack.getItem()).onPlayerBaubleRender(stack, player, type, partialTicks);
+					((IRenderRunes) stack.getItem()).onPlayerBaubleRender(stack, player, type, partialTicks);
 					GlStateManager.popMatrix();
 				}
 			}

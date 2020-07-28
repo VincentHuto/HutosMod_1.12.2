@@ -25,7 +25,6 @@ public class BiomeTest extends Biome {
 		super(new BiomeProperties("Test").setBaseHeight(0.1F).setTemperature(0.5f).setHeightVariation(2.9f)
 				.setWaterColor(77777));
 		this.decorator.treesPerChunk = 10;
-		// topBlock = Blocks.GRASS.getDefaultState();
 		topBlock = BlockRegistry.Mystic_Earth.getDefaultState();
 		fillerBlock = BlockRegistry.enchanted_stone.getDefaultState();
 		getModdedBiomeGrassColor(8777934);

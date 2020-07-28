@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 
-public interface IRenderBauble {
+public interface IRenderRunes {
 
 	/**
 	 * Called for the rendering of the bauble on the player. The player instance can be

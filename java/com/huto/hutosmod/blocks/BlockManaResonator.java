@@ -153,14 +153,6 @@ public class BlockManaResonator extends BlockBase implements IActivatable {
 		return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
 	}
 
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		/*if (!this.canBlockStay(worldIn, pos)) {
-			worldIn.setBlockToAir(pos);
-			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(),
-					new ItemStack(BlockRegistry.mana_resonator));
-		}*/
-	}
 
 	@Override
 	public BlockRenderLayer getBlockLayer() {

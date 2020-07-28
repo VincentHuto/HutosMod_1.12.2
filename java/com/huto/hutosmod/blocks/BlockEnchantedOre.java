@@ -21,12 +21,9 @@ public class BlockEnchantedOre extends BlockBase {
 	public BlockEnchantedOre(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.STONE);
-		setHardness(5.0F);
-		setResistance(15.0F);
 		setHarvestLevel("pickaxe", 2);
 		setLightLevel(0.8F);
 		setLightOpacity(1);
-		// setBlockUnbreakable();
 	}
 	
     public Item getItemDropped(IBlockState state, Random rand, int fortune)

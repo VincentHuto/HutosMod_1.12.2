@@ -12,10 +12,13 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class BiomeRegistry 
 {
 	public static final Biome TEST_BIOME = new BiomeTest();
-	
+	public static final Biome NIGHTMARE = new BiomeNightmare();
+
 	public static void registerBiomes()
 	{
 		initBiome(TEST_BIOME, "Test Biome", BiomeType.WARM, Type.MAGICAL, Type.LUSH, Type.WET);
+		initBiome(NIGHTMARE, "Nightmare", BiomeType.WARM, Type.SPOOKY, Type.DEAD, Type.WASTELAND);
+
 	}
 	
 	private static Biome initBiome(Biome biome, String name, BiomeType bType, Type... types)

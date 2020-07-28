@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.util.Constants;
@@ -25,6 +26,16 @@ public class DimensionDreamScape extends WorldProviderSurface {
 		this.biomeProvider = new BiomeProviderDreamScape(this.world.getSeed());
 	}
 
+	@Override
+	public boolean canDoLightning(Chunk chunk) {
+		return false;
+	}
+	
+	@Override
+	public boolean canDoRainSnowIce(Chunk chunk) {
+		return false;
+	}
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IRenderHandler getSkyRenderer() {
@@ -119,7 +130,7 @@ public class DimensionDreamScape extends WorldProviderSurface {
 			float[] colors) {
 //		EntityPlayer player = this.world.getPlayerEntityByName();
 
-		final float r = 21 / 255f, g = 1 / 255f, b = 21 / 255f;
+		final float r = 50 / 255f, g = 1 / 255f, b = 50 / 255f;
 		if (!hasSkyLight) {
 			colors[0] = r + blockLight * (1.0f - r);
 			colors[1] = g + blockLight * (1.0f - g);

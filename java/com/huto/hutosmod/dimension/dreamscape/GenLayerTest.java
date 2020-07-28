@@ -9,7 +9,7 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerTest extends GenLayer 
 {
-	private Biome[] allowedBiomes = {BiomeRegistry.TEST_BIOME};
+	private Biome[] allowedBiomes = {BiomeRegistry.NIGHTMARE,BiomeRegistry.TEST_BIOME};
 	public GenLayerTest(long seed) 
 	{
 		super(seed);

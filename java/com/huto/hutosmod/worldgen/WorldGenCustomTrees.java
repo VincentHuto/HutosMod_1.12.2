@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomePlains;
+import net.minecraft.world.biome.BiomeTaiga;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -34,8 +35,7 @@ public class WorldGenCustomTrees implements IWorldGenerator
 			
 		case 0:
 			
-			runGenerator(MYSTIC_SMALL, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomePlains.class);
-			//runGenerator(MOREL, world, random, chunkX, chunkZ, 5, Blocks.MYCELIUM, BiomeMushroomIsland.class);
+			runGenerator(MYSTIC_SMALL, world, random, chunkX, chunkZ, 5, Blocks.GRASS, BiomeTaiga.class);
 
 			break;
 			
@@ -43,7 +43,6 @@ public class WorldGenCustomTrees implements IWorldGenerator
 			break;
 			
 		case -403:
-		//	runGenerator(MYSTIC_SMALL, world, random, chunkX, chunkZ, 5, BlockRegistry.Mystic_Earth, BiomeTest.class);
 			break;
 
 		}

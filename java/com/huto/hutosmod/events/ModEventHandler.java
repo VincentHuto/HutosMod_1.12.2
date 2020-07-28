@@ -41,18 +41,6 @@ public class ModEventHandler {
 	public void onPlayerPickupXP(PlayerPickupXpEvent e) {
 	}
 
-	// Replaced with InRender Hover function
-	/*
-	 * @SubscribeEvent public void playerHoverWithDebug(PlayerTickEvent e) {
-	 * RayTraceResult result = e.player.rayTrace(5, 10); BlockPos pos =
-	 * result.getBlockPos(); TileModMana te = (TileModMana)
-	 * e.player.getEntityWorld().getTileEntity(pos); ItemStack stack =
-	 * e.player.getHeldItemMainhand();
-	 * 
-	 * if (te instanceof TileModMana && te != null) { if (stack.getItem() ==
-	 * ItemRegistry.mana_debugtool) { // System.out.println(te.getManaValue()); } }
-	 * }
-	 */
 
 	@SubscribeEvent
 	public void onPlayerUseWand(PlayerTickEvent e) {
@@ -97,7 +85,6 @@ public class ModEventHandler {
 						resu.getBlockPos().getZ());
 				Vector3 vec = Vector3.fromEntityCenter(((EntityPlayer) e.getEntity()));
 				MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.red);
-				System.out.println("CSLLED");
 			}
 		}
 	}
@@ -105,9 +92,9 @@ public class ModEventHandler {
 	@SubscribeEvent
 	public void onKillWithBloodySword(LivingDeathEvent e) {
 		if (e.getSource() == ItemRegistry.NullSwordDamageSource) {
-			System.out.println("Killed with null Damage");
+			//System.out.println("Killed with null Damage");
 			Random rand = new Random();
-			e.getEntity().dropItem(ItemRegistry.essence_drop,  rand.nextInt(7));
+			e.getEntity().dropItem(ItemRegistry.anti_tear,  rand.nextInt(3));
 		}
 	}
 

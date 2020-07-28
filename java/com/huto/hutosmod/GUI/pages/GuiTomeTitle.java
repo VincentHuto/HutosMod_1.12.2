@@ -54,8 +54,8 @@ public class GuiTomeTitle extends GuiScreen {
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
 	GuiButtonTextured buttonclose,whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,
 			eyeButton;
-	String title = "Table of Contents";
-	String subtitle = "Hutos Mod";
+	String title = " Table of Contents";
+	String subtitle = " Duality of Nature";
 	ItemStack icon = new ItemStack(ItemRegistry.mana_crystal);
 
 	static boolean isElder;
