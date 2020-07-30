@@ -11,6 +11,8 @@ import com.huto.hutosmod.worldgen.WorldGenMysticTree;
 import com.huto.hutosmod.worldgen.WorldGenSmallMysticTree;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.init.Blocks;
@@ -19,24 +21,21 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class BiomeNightmare extends Biome {
+public class BiomeAphantasia extends Biome {
 
-	public static final WorldGenMysticTree MYSTIC_TREE = new WorldGenMysticTree();
-	public static final WorldGenSmallMysticTree MYSTIC_TREE_Small = new WorldGenSmallMysticTree();
-
-	public BiomeNightmare() {
-		super(new BiomeProperties("nightmare").setBaseHeight(-0.5F).setTemperature(1.5f).setHeightVariation(.5f)
-				.setWaterColor(7274618));
-		topBlock = BlockRegistry.nightmare_earth.getDefaultState();
-		fillerBlock = BlockRegistry.nightmare_media.getDefaultState();
+	public BiomeAphantasia() {
+		super(new BiomeProperties("aphantasia").setBaseHeight(-4.5F).setTemperature(1.5f).setHeightVariation(.5f)
+				.setWaterColor(5111811));
+		topBlock = BlockRegistry.anti_earth.getDefaultState();
+		fillerBlock = BlockRegistry.anti_media.getDefaultState();
 		
-		getModdedBiomeGrassColor(7274618);
+		getModdedBiomeGrassColor(5111811);
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityMooshroom.class, 1000, 3, 15));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 20000, 3, 5));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityBlaze.class, 1000, 3, 15));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityVex.class, 1000, 3, 5));
 
 	}
 

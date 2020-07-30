@@ -111,7 +111,6 @@ public class DreamScapeGen implements IChunkGenerator
 				16);
 		this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
-		this.caveGenerator.generate(this.world, x, z, chunkprimer);
 
 		Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
 
@@ -120,9 +119,12 @@ public class DreamScapeGen implements IChunkGenerator
 		for (int i = 0; i < abyte.length; ++i) {
 			abyte[i] = (byte) Biome.getIdForBiome(this.biomesForGeneration[i]);
 		}
+		this.caveGenerator.generate(this.world, x, z, chunkprimer);
+
         chunk.resetRelightChecks();
 
 		chunk.generateSkylightMap();
+		
 		return chunk;
 	}
 	private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_, int p_185938_5_, int p_185938_6_, int p_185938_7_)
@@ -142,7 +144,7 @@ public class DreamScapeGen implements IChunkGenerator
 
         for (int j = 0; j < p_185938_6_; ++j)
         {
-            adouble[j] = Math.cos((double)j * Math.PI * 6.0D / (double)p_185938_6_) * 2.0D;
+            adouble[j] = Math.sin((double)j * Math.PI * 6.0D / (double)p_185938_6_) * 2.0D;
             double d2 = (double)j;
 
             if (j > p_185938_6_ / 2)
@@ -183,14 +185,14 @@ public class DreamScapeGen implements IChunkGenerator
         return p_185938_1_;
     }
 
-	  public void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer)
+	  public void prepareHeights(int x, int z, ChunkPrimer primer)
 	    {
 	        int i = 4;
 	        int j = 20;
 	        int k = 5;
 	        int l = 17;
 	        int i1 = 5;
-	        this.buffer = this.getHeights(this.buffer, p_185936_1_ * 4, 0, p_185936_2_ * 4, 5, 17, 5);
+	        this.buffer = this.getHeights(this.buffer, x * 4, 0, z * 4, 5, 17, 5);
 
 	        for (int j1 = 0; j1 < 4; ++j1)
 	        {
@@ -373,6 +375,8 @@ public class DreamScapeGen implements IChunkGenerator
 									//		primer.setBlockState(i * 4 + l2, i * 8 + l2, i* 4 + l2, WATER);
 
 									primer.setBlockState(i * 4 + k2, i2 *7 + j2+(80), l * 4 + l2, MINDFOG);
+									primer.setBlockState(i * 4 + k2, i2 *7 + j2+(74), l * 4+ l2, AIR);
+
 								//		primer.setBlockState(i * 4 + k2, i2 *7 + j2+ 180, l * 4 + l2,CLAY);
 
 									}

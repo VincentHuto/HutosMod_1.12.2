@@ -16,13 +16,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class BiomeTest extends Biome {
+public class BiomeDreamScape extends Biome {
 
 	public static final WorldGenMysticTree MYSTIC_TREE = new WorldGenMysticTree();
 	public static final WorldGenSmallMysticTree MYSTIC_TREE_Small = new WorldGenSmallMysticTree();
 
-	public BiomeTest() {
-		super(new BiomeProperties("Test").setBaseHeight(0.1F).setTemperature(0.5f).setHeightVariation(2.9f)
+	public BiomeDreamScape() {
+		super(new BiomeProperties("dreamscape").setBaseHeight(0.1F).setTemperature(0.5f).setHeightVariation(2.1f)
 				.setWaterColor(77777));
 		this.decorator.treesPerChunk = 10;
 		topBlock = BlockRegistry.Mystic_Earth.getDefaultState();
