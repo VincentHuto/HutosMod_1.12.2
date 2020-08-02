@@ -50,7 +50,7 @@ public class IWorldGenCustomMushroom implements IWorldGenerator {
 		// get the biome. I used 64 for Y, but you can use anything between 0 and 255
 		Biome biome = world.getBiomeForCoordsBody(new BlockPos(blockX, 64, blockZ));
 		// we could also use: if(biome instanceof BiomeGenPlains)
-		if (biome == BiomeRegistry.TEST_BIOME) {
+		if (biome == BiomeRegistry.DREAMSCAPE) {
 			// how many we want to make per chunk
 			// let's make it random between MIN and MAX
 			int MIN = 9;

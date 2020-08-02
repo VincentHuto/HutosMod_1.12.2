@@ -24,7 +24,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 public class BiomeAphantasia extends Biome {
 
 	public BiomeAphantasia() {
-		super(new BiomeProperties("aphantasia").setBaseHeight(-4.5F).setTemperature(1.5f).setHeightVariation(.5f)
+		super(new BiomeProperties("aphantasia").setBaseHeight(5F).setTemperature(1.5f).setHeightVariation(.1f)
 				.setWaterColor(5111811));
 		topBlock = BlockRegistry.anti_earth.getDefaultState();
 		fillerBlock = BlockRegistry.anti_media.getDefaultState();

@@ -1,6 +1,7 @@
 package com.huto.hutosmod.dimension;
 
 import com.huto.hutosmod.dimension.dreamscape.DimensionDreamScape;
+import com.huto.hutosmod.dimension.test.DimensionTestDim;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
@@ -14,12 +15,16 @@ public class DimensionRegistry {
 			DimensionEndTemp.class, false);*/
 	public static final DimensionType ALAGADA_DIM = DimensionType.register("alagada_dim", "_alagada_dim", -403,
 			DimensionDreamScape.class, false);
+	public static final DimensionType TEST_DIM = DimensionType.register("test_dim", "_test_dim", -404,
+			DimensionTestDim.class, false);
+	
 	
 	public static void registerDimension() {
 //		DimensionManager.registerDimension(-400, OVERWORLD_TEMPLATE);
 //		DimensionManager.registerDimension(-401, NETHER_TEMPLATE);
 //		DimensionManager.registerDimension(-402, END_TEMPLATE);
 		DimensionManager.registerDimension(-403, ALAGADA_DIM);
+		DimensionManager.registerDimension(-404, TEST_DIM);
 
 	}
 

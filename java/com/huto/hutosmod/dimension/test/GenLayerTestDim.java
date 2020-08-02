@@ -1,4 +1,4 @@
-package com.huto.hutosmod.dimension.dreamscape;
+package com.huto.hutosmod.dimension.test;
 
 import com.huto.hutosmod.biomes.BiomeRegistry;
 
@@ -7,10 +7,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerTest extends GenLayer 
+public class GenLayerTestDim extends GenLayer 
 {
-	private Biome[] allowedBiomes = {BiomeRegistry.NIGHTMARE,BiomeRegistry.DREAMSCAPE,BiomeRegistry.APHANTASIA};
-	public GenLayerTest(long seed) 
+	private Biome[] allowedBiomes = {BiomeRegistry.NIGHTMARE};
+	public GenLayerTestDim(long seed) 
 	{
 		super(seed);
 	}
