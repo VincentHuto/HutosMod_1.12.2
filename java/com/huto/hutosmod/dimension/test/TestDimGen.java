@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Random;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
+import com.huto.hutosmod.worldgen.MapGenLavalessCaves;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -22,7 +22,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
@@ -70,7 +69,7 @@ public class TestDimGen implements IChunkGenerator {
 		this.forestCtx = new NoiseGeneratorOctaves(this.rand, 8);
 		this.heightMap = new double[825];
 		this.field_185999_r = new float[25];
-		caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(new MapGenCaves(),
+		caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(new MapGenLavalessCaves(),
 				net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
 		for (int i = -2; i <= 2; ++i) {
 			for (int j = -2; j <= 2; ++j) {
@@ -128,14 +127,14 @@ public class TestDimGen implements IChunkGenerator {
 		long k = this.rand.nextLong() / 2L * 2L + 1L;
 		long l = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
-		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
-		biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
+		//net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
+	//	biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 		if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false,
 				net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
 			WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
-		blockpos = blockpos.add(8, 0, 8);
+		//blockpos = blockpos.add(8, 0, 8);
 
-		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
+	//	net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
 		BlockFalling.fallInstantly = false;
 	}
 
@@ -373,15 +372,15 @@ public class TestDimGen implements IChunkGenerator {
 				double d9 = (double) f2 ;
 				//Increasing d8 mkes large gaps between land masses with more extreme peaks, so i think it just makes highs high and lows lower
 				//This value is the nice stable one the current one is jagged
-				//	d8 = d8 + d7 *8;
+					d8 = d8 + d7 *8;
 
-				d8 = d8 + d7 *MathHelper.nextDouble(rand, 6, 10);
+				//d8 = d8 + d7 *MathHelper.nextDouble(rand, 6, 10);
 				d8 = d8 * (double) this.settings.baseSize / 8.0D;
 				double d0 = (double) this.settings.baseSize + d8 * 4.0D;
 				for (int l1 = 0; l1 < 33; ++l1) {
 					double d1 = ((double) l1 - d0) * this.settings.stretchY * 128.0D / 256.0D / d9;
 					if (d1 < 0.0D) {
-						d1 *= 6.0D;
+						d1 *= 4.0D;
 					}
 					double d2 = this.perlinArray2[i] / (double) this.settings.lowerLimitScale;
 					double d3 = this.perlinArray3[i] / (double) this.settings.upperLimitScale;

@@ -47,6 +47,11 @@ public class ChiselStationRecipeWrapper implements IRecipeWrapper {
 		ingredients.setInputLists(VanillaTypes.ITEM, input);
 		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
+	
+	
+	public ArrayList<Integer> getRunes() {
+		return runes;
+	}
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
@@ -56,6 +61,7 @@ public class ChiselStationRecipeWrapper implements IRecipeWrapper {
 		fontRenderer.drawSplitString("Runes to Activate", 0, (int) (fontRenderer.FONT_HEIGHT),90, 0);
 		GlStateManager.translate(0, 10, 0);
 		fontRenderer.drawSplitString(runes.toString(), 0, (int) (fontRenderer.FONT_HEIGHT),90, 0);
+		
 		GlStateManager.disableAlpha();
 	}
 

@@ -16,7 +16,7 @@ public class BlockPrimalOozeFluid extends BlockFluidClassic
 		super(fluid, material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		
+	
 		BlockRegistry.BLOCKS.add(this);
 		ItemRegistry.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}

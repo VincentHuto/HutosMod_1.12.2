@@ -327,15 +327,15 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 
 				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
 				ItemStack stack = player.getHeldItemMainhand();
-
+/*
 				boolean foundOnHead = false;
 				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
 				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
 					foundOnHead = true;
-				}
+				}*/
 
 				if (te instanceof TileModMana && te != null) {
-					if (stack.getItem() == ItemRegistry.mana_debugtool || foundOnHead) {
+					if (stack.getItem() == ItemRegistry.mana_debugtool) {
 						return true;
 					}
 				}

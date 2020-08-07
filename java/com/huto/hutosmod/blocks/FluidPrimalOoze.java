@@ -9,6 +9,6 @@ public class FluidPrimalOoze extends Fluid
 	{
 		super(name, still, flow);
 		this.setUnlocalizedName(name);
-		viscosity= 5000;
+		viscosity= 1;
 	}
 }

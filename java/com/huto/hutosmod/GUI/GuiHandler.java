@@ -1,13 +1,17 @@
 package com.huto.hutosmod.gui;
 
+import java.util.ArrayList;
+
 import com.huto.hutosmod.container.ContainerChiselStation;
 import com.huto.hutosmod.container.ContainerRuneStation;
+import com.huto.hutosmod.container.ContainerVibratorySelector;
 import com.huto.hutosmod.gui.pages.GuiTomeTitle;
 import com.huto.hutosmod.mindrunes.container.ContainerPlayerExpanded;
 import com.huto.hutosmod.mindrunes.gui.GuiMindRunes;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
+import com.huto.hutosmod.tileentity.TileEntityVibratorySelector;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +31,9 @@ public class GuiHandler implements IGuiHandler {
 					(TileEntityChiselStation) world.getTileEntity(new BlockPos(x, y, z)), player);
 		case (Reference.GUI_MIND_RUNES):
 			return new ContainerPlayerExpanded(player.inventory, !world.isRemote, player);
+		case (Reference.GUI_VIBRATORY_SELECTOR):
+			return new ContainerVibratorySelector(player.inventory,
+					(TileEntityVibratorySelector) world.getTileEntity(new BlockPos(x, y, z)), player);
 		default:
 			return null;
 		}
@@ -46,6 +53,9 @@ public class GuiHandler implements IGuiHandler {
 		case (Reference.GUI_Runic_ChiselStation):
 			return new GuiChiselStation(player.inventory,
 					(TileEntityChiselStation) world.getTileEntity(new BlockPos(x, y, z)), player);
+		case (Reference.GUI_VIBRATORY_SELECTOR):
+			return new GuiVibratorySelector(player.inventory,
+					(TileEntityVibratorySelector) world.getTileEntity(new BlockPos(x, y, z)), player);
 		case (Reference.GUI_MIND_RUNES):
 			return new GuiMindRunes(player);
 		default:

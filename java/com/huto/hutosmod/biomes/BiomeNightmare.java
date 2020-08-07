@@ -39,7 +39,6 @@ public class BiomeNightmare extends Biome {
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityMooshroom.class, 1000, 3, 15));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 20000, 3, 5));
-
 	}
 
 	
@@ -47,6 +46,7 @@ public class BiomeNightmare extends Biome {
 	
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
+		
 	}
 
 	@Override

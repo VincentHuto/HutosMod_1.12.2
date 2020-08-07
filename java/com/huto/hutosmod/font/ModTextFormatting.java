@@ -1,5 +1,7 @@
 package com.huto.hutosmod.font;
 
+import com.huto.hutosmod.recipies.EnumEssecenceType;
+
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -8,10 +10,13 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.annotation.varargs;
+
 @SideOnly(Side.CLIENT)
 public class ModTextFormatting {
 	@SideOnly(Side.CLIENT)
 	private static FontRenderer aklo_font;
+
 	@SideOnly(Side.CLIENT)
 	public static void setAkloFont(FontRenderer font) {
 		if (aklo_font == null && Loader.instance().getLoaderState() == LoaderState.INITIALIZATION)
@@ -22,6 +27,7 @@ public class ModTextFormatting {
 	public static FontRenderer getAkloFont() {
 		return aklo_font;
 	}
+
 	@SideOnly(Side.CLIENT)
 	public static String stringToGolden(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
@@ -47,8 +53,7 @@ public class ModTextFormatting {
 		}
 		return outputString + TextFormatting.WHITE;
 	}
-	
-	
+
 	@SideOnly(Side.CLIENT)
 	public static String stringToRedObf(String parString, int parShineLocation, boolean parReturnToBlack) {
 		int stringLength = parString.length();
@@ -74,7 +79,7 @@ public class ModTextFormatting {
 		}
 		return outputString + TextFormatting.WHITE;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static String stringToRainbow(String parString, boolean parReturnToBlack) {
 		int stringLength = parString.length();
@@ -94,6 +99,41 @@ public class ModTextFormatting {
 			return outputString + TextFormatting.BLACK;
 		}
 		return outputString + TextFormatting.WHITE;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static String stringToResonant(String parString) {
+
+		float stringValue = Float.parseFloat(parString);
+		int stringLength = parString.length();
+		if (stringLength < 1) {
+			return "";
+		}
+
+		
+		System.out.println(stringValue);
+		String outputString = "";
+		TextFormatting[] karmicColors = { TextFormatting.RED, TextFormatting.DARK_RED, TextFormatting.BLUE,
+				TextFormatting.AQUA };
+		TextFormatting[] ManaColors = { TextFormatting.BLUE, TextFormatting.AQUA };
+		if (stringValue > 0) {
+			System.out.println("negative");
+
+			for (int i = 0; i < stringLength; i++) {
+				outputString = TextFormatting.ITALIC + outputString + ManaColors[i % 2] + parString.substring(i, i + 1);
+			}
+		} else if (stringValue < 0) {
+			for (int i = 0; i < stringLength; i++) {
+				outputString = TextFormatting.ITALIC + outputString + karmicColors[i % 2]
+						+ parString.substring(i, i + 1);
+			}
+
+		} else if (stringValue == 0.0) {
+			for (int i = 0; i < stringLength; i++) {
+				outputString = TextFormatting.WHITE + parString;
+			}
+		}
+		return outputString;
 	}
 
 }

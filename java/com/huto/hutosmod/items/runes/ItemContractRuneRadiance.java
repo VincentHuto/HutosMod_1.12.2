@@ -1,5 +1,7 @@
 package com.huto.hutosmod.items.runes;
 
+import java.util.List;
+
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
@@ -12,6 +14,7 @@ import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -23,6 +26,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemContractRuneRadiance extends ItemRune implements IRune {
@@ -62,7 +66,7 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 250, 0, true, true));
+			player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 250, 0, false, false));
 			sync++;
 			sync %= 10;
 			if (sync == 0)
@@ -110,4 +114,12 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 
 		
 	}
+
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(TextFormatting.AQUA + "Effect:Glowing/Mana Regen");
+
+	}
+	
 }

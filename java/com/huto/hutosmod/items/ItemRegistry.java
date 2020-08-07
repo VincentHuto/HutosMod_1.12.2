@@ -6,6 +6,7 @@ import java.util.List;
 import com.huto.hutosmod.items.armor.ArmorManaViewer;
 import com.huto.hutosmod.items.armor.ArmorMysteriousMask;
 import com.huto.hutosmod.items.armor.ArmourBase;
+import com.huto.hutosmod.items.armor.ItemFloatBoots;
 import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
 import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
 import com.huto.hutosmod.items.runes.ItemContractRuneHunter;
@@ -85,6 +86,7 @@ public class ItemRegistry {
 	public static final Item purging_stone = new ItemPurgingStone("purging_stone");
 	public static final Item grand_purging_stone = new ItemGrandPurgingStone("grand_purging_stone");
 	public static final Item resonant_fuel = new ItemResonantFuel("resonant_fuel");
+	public static final Item enhance_overlay = new ItemEnchancedOverlay("enhance_overlay");
 
 	//Food
 	public static final Item singeri_soup= new ItemSingeriSoup("singeri_soup",3);
@@ -134,6 +136,10 @@ public class ItemRegistry {
 			EntityEquipmentSlot.LEGS);
 	public static final Item null_boots = new ArmourBase("null_boots", armor_null, 1, EntityEquipmentSlot.FEET);
 
+	
+	public static final Item floatboots = new ItemFloatBoots("floatboots", armor_null, 1, EntityEquipmentSlot.FEET);
+
+	
 	public static final Item mysterious_mask = new ArmorMysteriousMask("mysterious_mask", armor_mysterious_mask, 1,
 			EntityEquipmentSlot.HEAD);
 	public static final Item mana_viewer = new ArmorManaViewer("mana_viewer", armor_mana_viewer, 1,

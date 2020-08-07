@@ -26,7 +26,6 @@ import net.minecraft.util.math.BlockPos;
 
 public class TileEntityManaResonator extends TileManaSimpleInventory implements ITickable {
 	public static final String TAG_MANA = "mana";
-	public static final String TAG_STATE = "resoantState";
 	int cooldown = 0;
 	RecipeResonator currentRecipe;
 	int recipeKeepTicks = 0;

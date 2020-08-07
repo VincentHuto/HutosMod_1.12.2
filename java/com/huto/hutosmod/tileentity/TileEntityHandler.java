@@ -20,6 +20,8 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityDisplayPedestal.class, "display_pedestal");
 		GameRegistry.registerTileEntity(TileEntityChiselStation.class, "runic_chiselstation");
 		GameRegistry.registerTileEntity(TileEntityManaResonator.class, "mana_resonator");
+		GameRegistry.registerTileEntity(TileEntityDisapperingBlock.class, "disappering_block");
+		GameRegistry.registerTileEntity(TileEntityVibratorySelector.class, "vibratory_selector");
 
 	}
 }

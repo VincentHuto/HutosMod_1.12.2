@@ -55,6 +55,7 @@ import com.huto.hutosmod.render.tile.RenderTileManaFuser;
 import com.huto.hutosmod.render.tile.RenderTileManaGatherer;
 import com.huto.hutosmod.render.tile.RenderTileManaResonator;
 import com.huto.hutosmod.render.tile.RenderTileStorageDrum;
+import com.huto.hutosmod.render.tile.RenderTileVibratorySelector;
 import com.huto.hutosmod.render.tile.RenderTileWandMaker;
 import com.huto.hutosmod.sound.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
@@ -70,6 +71,7 @@ import com.huto.hutosmod.tileentity.TileEntityManaFuser;
 import com.huto.hutosmod.tileentity.TileEntityManaGatherer;
 import com.huto.hutosmod.tileentity.TileEntityManaResonator;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileEntityVibratorySelector;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
 import com.huto.hutosmod.worldgen.IWorldGenCustomMushroom;
 import com.huto.hutosmod.worldgen.ModWorldGen;
@@ -109,6 +111,12 @@ public class RegistryHandler {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public static void onModelRegister(ModelRegistryEvent event) {
+		
+		
+	//	ModelLoaderRegistry.registerLoader(new EnhancementCustomModelLoader());
+	
+		
+		
 		RenderHandler.registerEntityRenders();
 		RenderHandler.registerCustomMeshesAndStates();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
@@ -126,7 +134,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplayPedestal.class, new RenderTileDisplayPedestal());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChiselStation.class, new RenderTileChiselStation());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaResonator.class, new RenderTileManaResonator());
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVibratorySelector.class, new RenderTileVibratorySelector());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");

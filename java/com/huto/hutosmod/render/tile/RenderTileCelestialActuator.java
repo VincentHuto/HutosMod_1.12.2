@@ -120,7 +120,6 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 		double xFraction = (x - x1) / (x2 - x1);
 		return y1 + xFraction * (y2 - y1);
 	}
-
 	public static boolean isPlayerHoverWithDebug(World world) {
 		if (world.isRemote) {
 
@@ -131,15 +130,15 @@ public class RenderTileCelestialActuator extends TileEntitySpecialRenderer<TileE
 
 				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
 				ItemStack stack = player.getHeldItemMainhand();
-
+/*
 				boolean foundOnHead = false;
 				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
 				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
 					foundOnHead = true;
-				}
+				}*/
 
 				if (te instanceof TileModMana && te != null) {
-					if (stack.getItem() == ItemRegistry.mana_debugtool || foundOnHead) {
+					if (stack.getItem() == ItemRegistry.mana_debugtool) {
 						return true;
 					}
 				}

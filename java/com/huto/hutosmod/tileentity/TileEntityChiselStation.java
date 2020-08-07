@@ -77,6 +77,7 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 
 	@Override
 	public void update() {
+		System.out.println(this.getUpdatePacket().getNbtCompound().getTag(TAG_RUNELIST));
 
 	}
 

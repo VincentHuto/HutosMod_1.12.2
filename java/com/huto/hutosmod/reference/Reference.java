@@ -24,6 +24,7 @@ public class Reference {
 	public static final int Gui_Tome = 8;
 	public static final int Gui_ElderTome = 9;
 	public static final int GUI_Runic_ChiselStation = 10;
+	public static final int GUI_VIBRATORY_SELECTOR = 11;
 
 	public static final Logger log = LogManager.getLogger(MODID.toUpperCase());
 

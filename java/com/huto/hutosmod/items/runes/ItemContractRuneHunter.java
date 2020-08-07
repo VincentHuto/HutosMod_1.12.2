@@ -1,5 +1,7 @@
 package com.huto.hutosmod.items.runes;
 
+import java.util.List;
+
 import com.huto.hutosmod.items.runes.ItemRune;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
@@ -11,6 +13,7 @@ import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -21,6 +24,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemContractRuneHunter extends ItemRune implements IRune {
@@ -60,7 +64,7 @@ public class ItemContractRuneHunter extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 250, 0, true, true));
+			player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 250, 0, false, false));
 			
 		}
 	}
@@ -86,5 +90,13 @@ public class ItemContractRuneHunter extends ItemRune implements IRune {
 		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, .75F, 2f);
 
 		
+	}
+	
+
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(TextFormatting.AQUA + "Effect:Luck");
+
 	}
 }

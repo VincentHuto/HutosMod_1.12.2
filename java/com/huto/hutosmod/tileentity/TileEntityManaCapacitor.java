@@ -251,11 +251,22 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 							}
 						}
 					}
+
+					if (tile instanceof TileEntityVibratorySelector) {
+						TileEntityVibratorySelector wandMaker = (TileEntityVibratorySelector) tile;
+						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue()) {
+							this.setManaValue(manaValue - 0.1f);
+							wandMaker.addManaValue(0.1f);
+						}
+					}
 				}
+
 			}
 		}
 
-		for (EnumFacing face : EnumFacing.values()) {
+		for (
+
+		EnumFacing face : EnumFacing.values()) {
 			BlockPos adj = getPos().offset(face);
 			TileEntity tile = world.getTileEntity(adj);
 			if (tile instanceof TileEntityManaGatherer) {

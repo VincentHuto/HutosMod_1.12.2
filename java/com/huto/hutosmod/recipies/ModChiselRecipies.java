@@ -157,11 +157,13 @@ public class ModChiselRecipies {
 				add(2);
 				add(7);
 				add(10);
+				add(11);
 				add(13);
 				add(14);
 				add(18);
 				add(19);
 				add(20);
+				add(21);
 				add(24);
 				add(25);
 				add(26);
@@ -175,11 +177,14 @@ public class ModChiselRecipies {
 				add(42);
 				add(43);
 				add(44);
+				add(45);
 				add(50);
+				add(51);
 				add(53);
 				add(54);
 				add(58);
 				add(63);
+				
 			}
 		}, new ItemStack(ItemRegistry.rune_blank, 1), new ItemStack(ItemRegistry.mana_powder, 1));
 		recipeCommunion = registerRuneAltarRecipe(new ItemStack(ItemRegistry.rune_communion, 1),

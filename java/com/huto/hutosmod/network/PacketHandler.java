@@ -38,6 +38,7 @@ public class PacketHandler {
 		INSTANCE.registerMessage(PacketReturnKarma.Handler.class, PacketReturnKarma.class, nextID(), Side.CLIENT);
 		INSTANCE.registerMessage(PacketReturnManaLimit.Handler.class, PacketReturnManaLimit.class, nextID(), Side.CLIENT);
 		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(), Side.CLIENT);
 
 		// Server packets
 		INSTANCE.registerMessage(PacketGetMana.Handler.class, PacketGetMana.class, nextID(), Side.SERVER);
@@ -45,6 +46,8 @@ public class PacketHandler {
 		INSTANCE.registerMessage(PacketGetManaLimit.Handler.class, PacketGetManaLimit.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketChiselCraftingEvent.Handler.class, PacketChiselCraftingEvent.class, nextID(), Side.SERVER);
+		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(), Side.SERVER);
+		INSTANCE.registerMessage(PacketVibratoryCraftingEvent.Handler.class, PacketVibratoryCraftingEvent.class, nextID(), Side.SERVER);
 
 	}
 
