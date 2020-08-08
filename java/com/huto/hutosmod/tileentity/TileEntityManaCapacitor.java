@@ -254,7 +254,7 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 
 					if (tile instanceof TileEntityVibratorySelector) {
 						TileEntityVibratorySelector wandMaker = (TileEntityVibratorySelector) tile;
-						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue()) {
+						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <500) {
 							this.setManaValue(manaValue - 0.1f);
 							wandMaker.addManaValue(0.1f);
 						}

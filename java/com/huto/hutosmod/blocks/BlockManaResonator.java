@@ -109,8 +109,10 @@ public class BlockManaResonator extends BlockBase implements IActivatable {
 				te.addManaValue(30);
 				mana.consume(30);
 			}
+
 			ModInventoryHelper.withdrawFromInventory(te, player);
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+
 			return true;
 
 		} else if (player.getHeldItemMainhand().getItem() == ItemRegistry.maker_activator
@@ -122,9 +124,14 @@ public class BlockManaResonator extends BlockBase implements IActivatable {
 		if (!player.isSneaking() && !stack.isEmpty()
 				&& player.getHeldItemMainhand().getItem() != ItemRegistry.mana_debugtool
 				|| player.getHeldItemMainhand().getItem() != ItemRegistry.mana_extractor) {
-			boolean result = te.addItem(player, stack, hand);
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
-			return result;
+			
+			if (player.getHeldItemMainhand().getItem() != ItemRegistry.mana_debugtool) {
+
+				boolean result = te.addItem(player, stack, hand);
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(te);
+				return result;
+			}
+		
 		}
 
 		// If player NOT is sneaking and has an extractor
@@ -152,7 +159,6 @@ public class BlockManaResonator extends BlockBase implements IActivatable {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
 	}
-
 
 	@Override
 	public BlockRenderLayer getBlockLayer() {

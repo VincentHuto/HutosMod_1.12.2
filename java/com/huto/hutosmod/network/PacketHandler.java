@@ -36,18 +36,26 @@ public class PacketHandler {
 		// Client packets
 		INSTANCE.registerMessage(PacketReturnMana.Handler.class, PacketReturnMana.class, nextID(), Side.CLIENT);
 		INSTANCE.registerMessage(PacketReturnKarma.Handler.class, PacketReturnKarma.class, nextID(), Side.CLIENT);
-		INSTANCE.registerMessage(PacketReturnManaLimit.Handler.class, PacketReturnManaLimit.class, nextID(), Side.CLIENT);
-		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.CLIENT);
-		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(), Side.CLIENT);
-
+		INSTANCE.registerMessage(PacketReturnManaLimit.Handler.class, PacketReturnManaLimit.class, nextID(),
+				Side.CLIENT);
+		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(),
+				Side.CLIENT);
+		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(),
+				Side.CLIENT);
 		// Server packets
 		INSTANCE.registerMessage(PacketGetMana.Handler.class, PacketGetMana.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketGetKarma.Handler.class, PacketGetKarma.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketGetManaLimit.Handler.class, PacketGetManaLimit.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketChiselCraftingEvent.Handler.class, PacketChiselCraftingEvent.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketVibratoryCraftingEvent.Handler.class, PacketVibratoryCraftingEvent.class, nextID(), Side.SERVER);
+		INSTANCE.registerMessage(PacketUpdateChiselRunes.Handler.class, PacketUpdateChiselRunes.class, nextID(),
+				Side.SERVER);
+		INSTANCE.registerMessage(PacketChiselCraftingEvent.Handler.class, PacketChiselCraftingEvent.class, nextID(),
+				Side.SERVER);
+		INSTANCE.registerMessage(PacketUpdateFrequency.Handler.class, PacketUpdateFrequency.class, nextID(),
+				Side.SERVER);
+		INSTANCE.registerMessage(PacketVibratoryCraftingEvent.Handler.class, PacketVibratoryCraftingEvent.class,
+				nextID(), Side.SERVER);
+		INSTANCE.registerMessage(PacketDeresonateEvent.Handler.class, PacketDeresonateEvent.class, nextID(),
+				Side.SERVER);
 
 	}
 

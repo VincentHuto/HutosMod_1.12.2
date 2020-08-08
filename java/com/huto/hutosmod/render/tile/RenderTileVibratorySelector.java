@@ -66,6 +66,7 @@ public class RenderTileVibratorySelector extends TileEntitySpecialRenderer<TileE
 			Minecraft mc = Minecraft.getMinecraft();
 			if (!stack.isEmpty()) {
 				mc.getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
+				te.sendUpdates();
 			}
 			GlStateManager.popMatrix();
 		}

@@ -117,7 +117,6 @@ public class ModTextFormatting {
 				TextFormatting.AQUA };
 		TextFormatting[] ManaColors = { TextFormatting.BLUE, TextFormatting.AQUA };
 		if (stringValue > 0) {
-			System.out.println("negative");
 
 			for (int i = 0; i < stringLength; i++) {
 				outputString = TextFormatting.ITALIC + outputString + ManaColors[i % 2] + parString.substring(i, i + 1);

@@ -9,13 +9,16 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.container.ContainerVibratorySelector;
 import com.huto.hutosmod.font.ModTextFormatting;
+import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -32,6 +35,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityLockableLoot;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -48,6 +52,11 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 	public final String TAG_FREQUENCY = "FREQUENCY";
 	public static final String TAG_MANA = "mana";
 	private int blockMetadata = -1;
+	private static final int craft_event = 3;
+	private static final int decraft_event = 4;
+
+	public static boolean active = false;
+	public static int cooldown = 0;
 
 	@Override
 	public int getSizeInventory() {
@@ -87,20 +96,45 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 	@Override
 	public void update() {
 
-		
 	}
-
-	public void craftEvent() {
-
-		
+	
+	public void deresonateEvent() {
 		ItemStack inputStack = this.getStackInSlot(0);
 		ItemStack outputStack = this.getStackInSlot(0).copy();
 
 		// Copies the item and adds both a float value of the Frequency and a displaying
 		// string tag with the lore
-		
-		
-		System.out.println(Math.abs(selectedFrequency));
+
+		if (this.getStackInSlot(0) != ItemStack.EMPTY && this.getStackInSlot(1) == ItemStack.EMPTY) {
+			if (inputStack != ItemStack.EMPTY) {
+
+				if (inputStack.hasTagCompound()) {
+					NBTTagCompound compound = outputStack.getTagCompound();
+
+					compound.removeTag("Lore");
+					compound.removeTag("display");
+					compound.removeTag(TAG_FREQUENCY);
+					world.addBlockEvent(getPos(), getBlockType(), decraft_event, 0);
+					this.setInventorySlotContents(1, outputStack);
+					this.setInventorySlotContents(0, ItemStack.EMPTY);
+					this.sendUpdates();
+					this.setManaValue(manaValue - Math.abs(selectedFrequency));
+				}
+			}
+			this.sendUpdates();
+		}
+
+	}
+
+	public void craftEvent() {
+		VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
+		ItemStack inputStack = this.getStackInSlot(0);
+		ItemStack outputStack = this.getStackInSlot(0).copy();
+
+		// Copies the item and adds both a float value of the Frequency and a displaying
+		// string tag with the lore
+
 		if (this.getManaValue() >= Math.abs(selectedFrequency) && this.getStackInSlot(1) == ItemStack.EMPTY) {
 			if (inputStack != ItemStack.EMPTY) {
 
@@ -115,24 +149,54 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 				NBTTagCompound display = new NBTTagCompound();
 				display.setTag("Lore", lore);
 				compound.setTag("display", display);
+				world.addBlockEvent(getPos(), getBlockType(), craft_event, 0);
 
 				this.setInventorySlotContents(1, outputStack);
+				
 				this.setInventorySlotContents(0, ItemStack.EMPTY);
-				
-				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
-				Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, 2, 0);
-				if(selectedFrequency > 0) {
-				MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.blue, Reference.blue);
-				}
-				if(selectedFrequency < 0) {
-					MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.red, Reference.red);
-					}
-				
 				this.sendUpdates();
-				this.setManaValue(manaValue - Math.abs(selectedFrequency) );
+				this.setManaValue(manaValue - Math.abs(selectedFrequency));
 
 			}
+
 			this.sendUpdates();
+			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
+
+		}
+
+	}
+
+	@Override
+	public boolean receiveClientEvent(int id, int param) {
+		switch (id) {
+		case craft_event: {
+			System.out.println("CALLED EVENT");
+			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
+			Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, 2, 0);
+			if (selectedFrequency > 0) {
+				MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.blue, Reference.white);
+			} else if (selectedFrequency < 0) {
+				MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.red, Reference.white);
+
+			} else {
+				MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.white, Reference.white);
+
+			}
+
+			return true;
+
+		}
+		case decraft_event: {
+			System.out.println("CALLED EVENT");
+			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
+			Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, 2, 0);
+			MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.white, Reference.black);
+			return true;
+
+		}
+
+		default:
+			return super.receiveClientEvent(id, param);
 		}
 	}
 
@@ -250,11 +314,6 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
 		markDirty();
-	}
-
-	@Override
-	public boolean receiveClientEvent(int id, int param) {
-		return super.receiveClientEvent(id, param);
 	}
 
 	@Override

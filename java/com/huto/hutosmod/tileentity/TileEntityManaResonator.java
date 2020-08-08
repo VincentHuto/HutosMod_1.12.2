@@ -5,14 +5,19 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.particles.ManaParticle;
+import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.recipies.ModResonatorRecipies;
 import com.huto.hutosmod.recipies.RecipeResonator;
+import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -164,9 +169,42 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 					Random rand = new Random();
 					count++;
 					int mod = 3 + rand.nextInt(10);
-
+					if (count % mod == 0) {
+						double ypos = pos.getY() + 1.2;
+						Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
+						Vector3 endVec = vec.add(0, 0.5, 0);
+						Vector3 redVec =  Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
+						Vector3 blueVec =  Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
+						double velocityX = 0, velocityY =- 0.05, velocityZ = 0;
+						double redValue=0;
+						double blueValue =0;
+						ManaParticle newEffect = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.9,
+								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+						ManaParticle newEffect1 = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.1,
+								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+						ManaParticle newEffect2 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.1,
+								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+						ManaParticle newEffect3 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.9,
+								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+				/*		if (world.isRemote) {
+							if (count % 3 == 0) {
+								MainClass.proxy.lightningFX(redVec, endVec, 15F, System.nanoTime(), Reference.red,
+										Reference.red);
+								MainClass.proxy.lightningFX(endVec, blueVec, 15F, System.nanoTime(), Reference.blue,
+										Reference.blue);
+							}
+						}*/
+					}
 				}
+			
 			}
+			
+			
+			
 		}
 
 	}
@@ -225,8 +263,8 @@ public class TileEntityManaResonator extends TileManaSimpleInventory implements 
 			world.spawnEntity(outputItem);
 			manaValue -= recipe.getMana();
 			currentRecipe = null;
-			world.addBlockEvent(getPos(), BlockRegistry.essecence_enhancer, SET_COOLDOWN_EVENT, 60);
-			world.addBlockEvent(getPos(), BlockRegistry.essecence_enhancer, CRAFT_EFFECT_EVENT, 0);
+			world.addBlockEvent(getPos(), BlockRegistry.mana_resonator, SET_COOLDOWN_EVENT, 60);
+			world.addBlockEvent(getPos(), BlockRegistry.mana_resonator, CRAFT_EFFECT_EVENT, 0);
 
 			for (int i = 0; i < getSizeInventory(); i++) {
 				ItemStack stack = itemHandler.getStackInSlot(i);

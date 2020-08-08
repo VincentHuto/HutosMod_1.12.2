@@ -82,7 +82,7 @@ public class RenderTileChiselStation extends TileEntitySpecialRenderer<TileEntit
 		// 0xFFFF00FF);
 		GlStateManager.translate(0, -10, 0);
 		//System.out.println(text1);
-		fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
+		//fontRenderer.drawString(text1, 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFF00FF);
 		}
 		GlStateManager.popMatrix();
 

@@ -142,6 +142,17 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 		if (cooldown > 0) {
 			cooldown--;
 		}
+		
+		// After the cooldown counter is done consume the item and add mana
+				if (cooldown == 0) {
+					if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
+						itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+						sendUpdates();
+						this.addManaValue(30);
+					}
+
+				}
+		
 		// Grabs the item above the block
 		if (!world.isRemote) {
 			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
@@ -153,15 +164,7 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 				}
 		}
 
-		// After the cooldown counter is done consume the item and add mana
-		if (cooldown == 0) {
-			if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
-				itemHandler.setStackInSlot(0, ItemStack.EMPTY);
-				sendUpdates();
-				this.addManaValue(30);
-			}
-
-		}
+		
 
 		if (checkConsumed()) {
 			EntityPlayer playerTarget = getNearestTargetablePlayer(world, pos.getX(), pos.getY(), pos.getZ());

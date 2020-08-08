@@ -45,6 +45,7 @@ public class ItemLightningWand extends Item {
 		maxStackSize = 1;
 
 	}
+
 	private EntityLiving getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
 		final double TARGETING_DISTANCE = 16;
 		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
@@ -65,31 +66,32 @@ public class ItemLightningWand extends Item {
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target,
 			EnumHand hand) {
-		if (playerIn.world.isRemote) {
-			
-			if (target instanceof EntityLiving && target !=null) {
-				Random rand = new Random();
-				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
-					target.world.spawnParticle(EnumParticleTypes.REDSTONE,
-							target.posX + (rand.nextDouble() - 0.5D) * (double) target.width,
-							target.posY + rand.nextDouble() * (double) target.height - (double) target.getYOffset()
-									- 0.5,
-							target.posZ + (rand.nextDouble() - 0.5D) * (double) target.width, 0.0D, 0.0D, 0.0D);
 
-					playerIn.world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
-							playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width,
-							playerIn.posY + rand.nextDouble() * (double) playerIn.height
-									- (double) playerIn.getYOffset() - 0.5,
-							playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
-				}
+		if (target instanceof EntityLiving && target != null) {
+			Random rand = new Random();
+			for (int countparticles = 0; countparticles <= 30; ++countparticles) {
+				target.world.spawnParticle(EnumParticleTypes.REDSTONE,
+						target.posX + (rand.nextDouble() - 0.5D) * (double) target.width,
+						target.posY + rand.nextDouble() * (double) target.height - (double) target.getYOffset() - 0.5,
+						target.posZ + (rand.nextDouble() - 0.5D) * (double) target.width, 0.0D, 0.0D, 0.0D);
 
-				EntityLiving mobTarget = getNearestTargetableMob(playerIn.world, playerIn.posX, playerIn.posY,
-						playerIn.posZ);
+				playerIn.world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+						playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width,
+						playerIn.posY + rand.nextDouble() * (double) playerIn.height - (double) playerIn.getYOffset()
+								- 0.5,
+						playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
+			}
+
+			EntityLiving mobTarget = getNearestTargetableMob(playerIn.world, playerIn.posX, playerIn.posY,
+					playerIn.posZ);
+			if (mobTarget != null) {
 				Vector3 vec = Vector3.fromEntityCenter(playerIn);
 				Vector3 trackingendVec = vec.fromEntityCenter(mobTarget);
-				if (trackingendVec != null && mobTarget != null && vec !=null) {
-					MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
-							Reference.black);
+				if (trackingendVec != null && mobTarget != null && vec != null) {
+					if (playerIn.world.isRemote) {
+						MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
+								Reference.black);
+					}
 					target.setHealth(target.getHealth() - 0.5F);
 					target.performHurtAnimation();
 				}

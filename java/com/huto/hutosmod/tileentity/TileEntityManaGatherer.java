@@ -32,23 +32,28 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 				0.9F, 70, 1);
 		count++;
 		int mod = 3 + rand.nextInt(10);
-		if (count % mod == 0) {
-			this.addManaValue(0.1F);
-		}
-		if (world.getBiome(this.getPos()) == BiomeRegistry.DREAMSCAPE || checkStructure()) {
-			this.addManaValue(0.3F);
-		}
-		if (world.isRemote) {
-			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.3, 0);
-			Vector3 endVec = vec.add(0, 0.5, 0);
-			if (count % 10 == 0) {
-				MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
-				Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+		if (this.getManaValue() < 1000) {
+			if (count % mod == 0) {
+
+				this.addManaValue(0.1F);
+			}
+			if (world.getBiome(this.getPos()) == BiomeRegistry.DREAMSCAPE || checkStructure()) {
+				this.addManaValue(0.3F);
+			}
+
+			if (world.isRemote) {
+				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.3, 0);
+				Vector3 endVec = vec.add(0, 0.5, 0);
+				if (count % 10 == 0) {
+					MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
+					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+
+				}
 
 			}
 
+			this.sendUpdates();
 		}
-		this.sendUpdates();
 	}
 
 	public boolean checkStructure() {

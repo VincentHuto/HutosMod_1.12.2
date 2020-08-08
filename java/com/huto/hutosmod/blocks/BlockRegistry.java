@@ -58,7 +58,7 @@ public class BlockRegistry {
 	public static final Block mana_capacitor = new BlockManaCapacitor("mana_capacitor", Material.GLASS);
 	public static final Block mana_storagedrum = new BlockManaStorageDrum("mana_storagedrum", Material.GLASS);
 	public static final Block Rune_Station = new BlockRuneStation("rune_station", Material.ROCK);
-	public static final Block essecence_enhancer = new BlockEssenceEnhancer("essecence_enhancer", Material.ROCK);
+//	public static final Block essecence_enhancer = new BlockEssenceEnhancer("essecence_enhancer", Material.ROCK);
 	public static final Block mana_gatherer = new BlockManaGatherer("mana_gatherer", Material.ROCK);
 	public static final Block mana_hopper = new BlockManaHopper("mana_hopper", Material.ROCK);
 	public static final Block karmic_altar = new BlockKarmicAltar("karmic_altar", Material.ROCK);

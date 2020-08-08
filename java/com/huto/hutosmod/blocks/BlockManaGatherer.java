@@ -122,7 +122,6 @@ public class BlockManaGatherer extends BlockBase {
 		if (!world.isRemote) {
 			TileEntityManaGatherer drum = (TileEntityManaGatherer) world.getTileEntity(pos);
 			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-			System.out.println(mana.getMana());
 			ItemStack stack = player.getHeldItem(hand);
 			Item stackItem = stack.getItem();
 

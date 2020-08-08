@@ -9,7 +9,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityBellJar.class, "mana_belljar");
 		GameRegistry.registerTileEntity(TileEntityStorageDrum.class, "mana_storagedrum");
 		GameRegistry.registerTileEntity(TileEntityRuneStation.class, "rune_station");
-		GameRegistry.registerTileEntity(TileEntityEssecenceEnhancer.class, "esscence_enhancer");
+	//	GameRegistry.registerTileEntity(TileEntityEssecenceEnhancer.class, "esscence_enhancer");
 		GameRegistry.registerTileEntity(TileEntityManaGatherer.class, "mana_gatherer");
 		GameRegistry.registerTileEntity(TileEntityManaCapacitor.class, "mana_capacitor");
 		GameRegistry.registerTileEntity(TileEntityManaHopper.class, "mana_hopper");

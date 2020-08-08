@@ -3,6 +3,7 @@ package com.huto.hutosmod.gui;
 import java.awt.image.ImageProducer;
 import java.io.IOException;
 
+import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.container.ContainerVibratorySelector;
 import com.huto.hutosmod.gui.pages.GuiButtonTextured;
 import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
@@ -12,6 +13,7 @@ import com.huto.hutosmod.items.runes.ItemContractRuneMilkweed;
 import com.huto.hutosmod.items.runes.ItemContractRuneRadiance;
 import com.huto.hutosmod.mindrunes.cap.IRune;
 import com.huto.hutosmod.network.PacketChiselCraftingEvent;
+import com.huto.hutosmod.network.PacketDeresonateEvent;
 import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.PacketUpdateChiselRunes;
 import com.huto.hutosmod.network.PacketUpdateFrequency;
@@ -29,15 +31,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class GuiVibratorySelector extends GuiContainer {
 	private static final ResourceLocation GUI_Vibratory_Selector = new ResourceLocation(
-			Reference.MODID + ":textures/gui/rune_station.png");
+			Reference.MODID + ":textures/gui/selector.png");
 	private final InventoryPlayer playerInv;
 	private final TileEntityVibratorySelector te;
 	GuiTextField textBox;
 	int RESONATEBUTTON = 101;
 	GuiButton buttonResonate;
+	int DERESONATEBUTTON = 102;
+	GuiButton buttonDeresonate;
 	int guiWidth = 175;
 	int guiHeight = 228;
 	int left, top;
@@ -139,10 +144,12 @@ public class GuiVibratorySelector extends GuiContainer {
 	public void initGui() {
 		left = width / 2 - guiWidth / 2;
 		top = height / 2 - guiHeight / 2;
-		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 205, top + guiHeight - 151, 50, 14);
+		textBox = new GuiTextField(0, fontRenderer, left - guiWidth + 201, top + guiHeight - 151, 50, 14);
 
-		buttonList.add(buttonResonate = new GuiButton(RESONATEBUTTON, left + guiWidth - (guiWidth - 85),
-				top + guiHeight - (151), 55, 16, "RESONATE"));
+		buttonList.add(buttonResonate = new GuiButton(RESONATEBUTTON, left + guiWidth - (guiWidth - 78),
+				top + guiHeight - (151), 65, 16, "RESONATE"));
+		buttonList.add(buttonDeresonate = new GuiButton(DERESONATEBUTTON, left + guiWidth - (guiWidth - 78),
+				top + guiHeight - (151 - 17), 65, 16, "DERESONATE"));
 
 		super.initGui();
 
@@ -161,8 +168,12 @@ public class GuiVibratorySelector extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		if (button.id == RESONATEBUTTON) {
-			System.out.println("CRAFTING");
 			PacketHandler.INSTANCE.sendToServer(new PacketVibratoryCraftingEvent());
+		}
+
+		if (button.id == DERESONATEBUTTON) {
+			PacketHandler.INSTANCE.sendToServer(new PacketDeresonateEvent());
+
 		}
 
 	}

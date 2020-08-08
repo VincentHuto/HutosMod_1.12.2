@@ -1,31 +1,15 @@
 package com.huto.hutosmod.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.huto.hutosmod.blocks.BlockRegistry;
-import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
-import com.huto.hutosmod.recipies.ModEnhancerRecipies;
-import com.huto.hutosmod.recipies.ModWandRecipies;
-import com.huto.hutosmod.recipies.RecipeEnhancer;
-import com.huto.hutosmod.recipies.RecipeWandMaker;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class TileEntityDisplayPedestal extends TileEntitySimpleInventory implements ITickable {
 

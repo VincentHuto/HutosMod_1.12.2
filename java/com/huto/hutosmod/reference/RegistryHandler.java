@@ -37,7 +37,6 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.potions.PotionEventHandler;
 import com.huto.hutosmod.potions.PotionInit;
 import com.huto.hutosmod.recipies.ModChiselRecipies;
-import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFurnaceRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
 import com.huto.hutosmod.recipies.ModResonatorRecipies;
@@ -47,7 +46,6 @@ import com.huto.hutosmod.render.tile.RenderTileBellJar;
 import com.huto.hutosmod.render.tile.RenderTileCelestialActuator;
 import com.huto.hutosmod.render.tile.RenderTileChiselStation;
 import com.huto.hutosmod.render.tile.RenderTileDisplayPedestal;
-import com.huto.hutosmod.render.tile.RenderTileEssecenceEnhancer;
 import com.huto.hutosmod.render.tile.RenderTileKarmicAltar;
 import com.huto.hutosmod.render.tile.RenderTileKarmicExtractor;
 import com.huto.hutosmod.render.tile.RenderTileManaCapacitor;
@@ -62,7 +60,6 @@ import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
 import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityDisplayPedestal;
-import com.huto.hutosmod.tileentity.TileEntityEssecenceEnhancer;
 import com.huto.hutosmod.tileentity.TileEntityHandler;
 import com.huto.hutosmod.tileentity.TileEntityKarmicAltar;
 import com.huto.hutosmod.tileentity.TileEntityKarmicExtractor;
@@ -122,8 +119,8 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWandMaker.class, new RenderTileWandMaker());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellJar.class, new RenderTileBellJar());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageDrum.class, new RenderTileStorageDrum());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class,
-				new RenderTileEssecenceEnhancer());
+	/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssecenceEnhancer.class,
+				new RenderTileEssecenceEnhancer());*/
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaGatherer.class, new RenderTileManaGatherer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaCapacitor.class, new RenderTileManaCapacitor());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKarmicAltar.class, new RenderTileKarmicAltar());
@@ -177,7 +174,7 @@ public class RegistryHandler {
 		ModFurnaceRecipies.init();
 		ModWandRecipies.init();
 		ModFuserRecipes.init();
-		ModEnhancerRecipies.init();
+	//	ModEnhancerRecipies.init();
 		ModChiselRecipies.init();
 		ModResonatorRecipies.init();
 		SoundsHandler.registerSounds();

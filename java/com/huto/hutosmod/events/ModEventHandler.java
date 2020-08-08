@@ -64,7 +64,7 @@ public class ModEventHandler {
 
 	@SubscribeEvent
 	public void onPlayerUseWandInteraction(PlayerInteractEvent e) {
-		Item heldItem = e.getEntityPlayer().getHeldItemMainhand().getItem();
+/*		Item heldItem = e.getEntityPlayer().getHeldItemMainhand().getItem();
 		if (heldItem == ItemRegistry.wand_lightning) {
 			RayTraceResult resu = e.getEntityPlayer().rayTrace(100, 10);
 			Vector3 hitVec = new Vector3(resu.getBlockPos().getX(), resu.getBlockPos().getY(),
@@ -72,7 +72,7 @@ public class ModEventHandler {
 			Vector3 vec = Vector3.fromEntityCenter(e.getEntityPlayer());
 			MainClass.proxy.lightningFX(vec, hitVec, 1F, System.nanoTime(), Reference.black, Reference.white);
 		}
-
+*/
 	}
 
 	@SubscribeEvent

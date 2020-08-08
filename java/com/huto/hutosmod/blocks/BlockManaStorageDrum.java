@@ -31,6 +31,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -213,8 +214,8 @@ public class BlockManaStorageDrum extends BlockBase {
 			}
 			// Says the tank is full
 			if (drum.getManaValue() >= drum.getTankSize()) {
-				String message = String.format("�4Drum is full �r");
-				player.sendMessage(new TextComponentString(message));
+				String message = String.format("Drum is full");
+				player.sendMessage(new TextComponentString(TextFormatting.BLUE + message));
 			}
 			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 		}

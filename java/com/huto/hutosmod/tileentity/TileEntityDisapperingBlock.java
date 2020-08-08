@@ -9,11 +9,10 @@ public class TileEntityDisapperingBlock extends TileEntity implements ITickable 
 
 	@Override
 	public void update() {
-		System.out.println(count);
 
 		if (count % 40 == 0) {
 			world.setBlockToAir(this.pos);
-
+			count =0;
 		}
 		count++;
 

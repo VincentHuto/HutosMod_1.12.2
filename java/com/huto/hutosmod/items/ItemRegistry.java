@@ -6,6 +6,10 @@ import java.util.List;
 import com.huto.hutosmod.items.armor.ArmorManaViewer;
 import com.huto.hutosmod.items.armor.ArmorMysteriousMask;
 import com.huto.hutosmod.items.armor.ArmourBase;
+import com.huto.hutosmod.items.armor.ElderBoots;
+import com.huto.hutosmod.items.armor.ElderChest;
+import com.huto.hutosmod.items.armor.ElderHelemt;
+import com.huto.hutosmod.items.armor.ElderLeggs;
 import com.huto.hutosmod.items.armor.ItemFloatBoots;
 import com.huto.hutosmod.items.runes.ItemContractRuneBeast;
 import com.huto.hutosmod.items.runes.ItemContractRuneCorrupt;
@@ -88,11 +92,12 @@ public class ItemRegistry {
 	public static final Item resonant_fuel = new ItemResonantFuel("resonant_fuel");
 	public static final Item enhance_overlay = new ItemEnchancedOverlay("enhance_overlay");
 
-	//Food
-	public static final Item singeri_soup= new ItemSingeriSoup("singeri_soup",3);
-	public static final Item raw_morel_on_a_stick= new ItemBase("raw_morel_on_a_stick");
-	public static final Item cooked_morel_on_a_stick= new ItemCookedMorelStick("cooked_morel_on_a_stick",3, false);
-	
+	// Food
+	public static final Item singeri_soup = new ItemSingeriSoup("singeri_soup", 3);
+	public static final Item raw_morel_on_a_stick = new ItemBase("raw_morel_on_a_stick");
+	public static final Item cooked_morel_on_a_stick = new ItemCookedMorelStick("cooked_morel_on_a_stick", 3, false);
+	public static final Item mana_bottle = new ItemManaBottle("mana_bottle", 1);
+
 	// Activator
 	public static final Item maker_activator = new ItemMakerActivator("maker_activator");
 	public static final Item mana_extractor = new ItemManaExtractor("mana_extractor");
@@ -122,28 +127,33 @@ public class ItemRegistry {
 	public static final ItemHoe null_hoe = new ToolHoe("null_hoe", MATERIAL_NULL);
 
 	// Adding an armor Material
-	public static final ArmorMaterial armor_null = EnumHelper.addArmorMaterial("armor_null",
-			Reference.MODID + ":null", 33, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_GLASS_BREAK, 3.0F);
+	public static final ArmorMaterial armor_null = EnumHelper.addArmorMaterial("armor_null", Reference.MODID + ":null",
+			33, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_GLASS_BREAK, 3.0F);
 	public static final ArmorMaterial armor_mysterious_mask = EnumHelper.addArmorMaterial("armor_mysterious_mask",
 			Reference.MODID + ":mysterious_mask", 0, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_ANVIL_BREAK, 3.0F);
 	public static final ArmorMaterial armor_mana_viewer = EnumHelper.addArmorMaterial("armor_mana_viewer",
 			Reference.MODID + ":mana_viewer", 0, new int[] { 3, 6, 8, 3 }, 30, SoundEvents.BLOCK_ANVIL_BREAK, 3.0F);
+	public static final ArmorMaterial armor_elder = EnumHelper.addArmorMaterial("armor_elder",
+			Reference.MODID + ":elder", 10, new int[] { 1, 3, 2, 1 }, 30, SoundEvents.AMBIENT_CAVE, 0.0F);
+
 	// Armor
 	public static final Item null_helmet = new ArmourBase("null_helmet", armor_null, 1, EntityEquipmentSlot.HEAD);
 	public static final Item null_chestplate = new ArmourBase("null_chestplate", armor_null, 1,
 			EntityEquipmentSlot.CHEST);
-	public static final Item null_leggings = new ArmourBase("null_leggings", armor_null, 2,
-			EntityEquipmentSlot.LEGS);
+	public static final Item null_leggings = new ArmourBase("null_leggings", armor_null, 2, EntityEquipmentSlot.LEGS);
 	public static final Item null_boots = new ArmourBase("null_boots", armor_null, 1, EntityEquipmentSlot.FEET);
 
-	
 	public static final Item floatboots = new ItemFloatBoots("floatboots", armor_null, 1, EntityEquipmentSlot.FEET);
 
-	
 	public static final Item mysterious_mask = new ArmorMysteriousMask("mysterious_mask", armor_mysterious_mask, 1,
 			EntityEquipmentSlot.HEAD);
 	public static final Item mana_viewer = new ArmorManaViewer("mana_viewer", armor_mana_viewer, 1,
 			EntityEquipmentSlot.HEAD);
+
+	public static final Item elder_helmet = new ElderHelemt(armor_elder, 1, EntityEquipmentSlot.HEAD);
+	public static final Item elder_chestplate = new ElderChest(armor_elder, 1, EntityEquipmentSlot.CHEST);
+	public static final Item elder_leggings = new ElderLeggs(armor_elder, 2, EntityEquipmentSlot.LEGS);
+	public static final Item elder_boots = new ElderBoots(armor_elder, 1, EntityEquipmentSlot.FEET);
 
 	// Drum Upgrades
 	public static final Item upgrade_wrench = new ItemBase("upgrade_wrench").setMaxStackSize(1);

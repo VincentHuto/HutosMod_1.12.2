@@ -2,6 +2,7 @@ package com.huto.hutosmod.proxy;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.RayTraceResult;
@@ -66,6 +67,11 @@ public class CommonProxy {
 
 	public void openElderBook() {
 
+	}
+
+	public ModelBiped getArmorModel(int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

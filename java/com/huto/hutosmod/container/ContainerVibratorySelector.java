@@ -22,7 +22,7 @@ public class ContainerVibratorySelector extends Container {
 		// SLOTS
 		this.addSlotToContainer(new Slot(chestInventory, 0, 8, 54));
 		//Output
-		this.addSlotToContainer(new Slot(chestInventory, 1, 145,  54));
+		this.addSlotToContainer(new SlotSelectorOutput(chestInventory, 1, 145,  54));
 		// INVENTORY
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {

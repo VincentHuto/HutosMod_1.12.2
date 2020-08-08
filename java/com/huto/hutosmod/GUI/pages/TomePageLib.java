@@ -104,8 +104,8 @@ public class TomePageLib {
 				new ItemStack(BlockRegistry.mana_belljar), I18n.format(MACHINE_PAGE_3)));
 		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
 				new ItemStack(BlockRegistry.mana_storagedrum), I18n.format(MACHINE_PAGE_4)));
-		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Essence Enhancer", "Infusing and Upgrading",
-				new ItemStack(BlockRegistry.essecence_enhancer), I18n.format(MACHINE_PAGE_5)));
+		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
+				new ItemStack(BlockRegistry.mana_resonator), I18n.format(MACHINE_PAGE_5)));
 		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
 				new ItemStack(BlockRegistry.mana_fuser), I18n.format(MACHINE_PAGE_6)));
 		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",

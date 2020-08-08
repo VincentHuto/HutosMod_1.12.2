@@ -13,9 +13,7 @@ import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.particles.ManaParticle;
 import com.huto.hutosmod.proxy.Vector3;
-import com.huto.hutosmod.recipies.ModEnhancerRecipies;
 import com.huto.hutosmod.recipies.ModFuserRecipes;
-import com.huto.hutosmod.recipies.RecipeEnhancer;
 import com.huto.hutosmod.recipies.RecipeManaFuser;
 import com.huto.hutosmod.reference.Reference;
 

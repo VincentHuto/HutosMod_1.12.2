@@ -3,12 +3,14 @@ package com.huto.hutosmod.items;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.mana.IMana;
 import com.huto.hutosmod.mana.ManaProvider;
+import com.huto.hutosmod.tileentity.TileEntityVibratorySelector;
 import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 import com.huto.hutosmod.tileentity.TileModMana;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -48,16 +50,32 @@ public class ItemDebugTool extends Item {
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		TileModMana drum = (TileModMana) worldIn.getTileEntity(pos);
+		TileEntity te = worldIn.getTileEntity(pos);
 		ItemStack stack = player.getHeldItem(hand);
 		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
 
-		if (!player.isSneaking() && drum instanceof TileModMana || !player.isSneaking() && drum instanceof TileManaSimpleInventory ) {
-			String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
-			player.sendMessage(new TextComponentString(message));
+		if (te instanceof TileModMana) {
+			TileModMana drum = (TileModMana) te;
+			if (player.isSneaking()) {
+				String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(message));
 
+			}
+		} else if (te instanceof TileManaSimpleInventory) {
+			TileManaSimpleInventory drum = (TileManaSimpleInventory) te;
+			if (player.isSneaking()) {
+				String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(message));
+
+			}
+		} else if (te instanceof TileEntityVibratorySelector) {
+			if (player.isSneaking()) {
+				TileEntityVibratorySelector drum = (TileEntityVibratorySelector) worldIn.getTileEntity(pos);
+				String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(message));
+
+			}
 		}
-
 		return EnumActionResult.SUCCESS;
 	}
 
