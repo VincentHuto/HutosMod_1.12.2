@@ -36,7 +36,6 @@ public class BiomeAphantasia extends Biome {
 		this.spawnableWaterCreatureList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityBlaze.class, 1000, 3, 15));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityVex.class, 1000, 3, 5));
-
 	}
 
 	@Override

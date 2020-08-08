@@ -2,6 +2,8 @@ package com.huto.hutosmod.mana;
 
 import com.huto.hutosmod.commands.Teleport;
 import com.huto.hutosmod.items.ItemRegistry;
+import com.huto.hutosmod.karma.IKarma;
+import com.huto.hutosmod.karma.KarmaProvider;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
 
@@ -62,7 +64,7 @@ public class ManaEventHandler {
 		if (slotItemStack.getItem() == ItemRegistry.mysterious_mask) {
 			foundOnHead = true;
 		}
-		if (player.dimension == -403) {
+		if (player.dimension == -403 || player.dimension == -404) {
 			if (!foundOnHead) {
 				if (!player.world.isRemote) {
 					Teleport.teleportToDimention(player, 0, player.getPosition().getX(), 255,
@@ -91,7 +93,7 @@ public class ManaEventHandler {
 	@SubscribeEvent
 	public void onPlayerSleep(PlayerSleepInBedEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
-
+		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY,null);
 		if (player.world.isRemote)
 			return;
 		// teleports to dreamscape if wearing viewer
@@ -101,9 +103,13 @@ public class ManaEventHandler {
 			foundOnHead = true;
 		}
 		if (foundOnHead && player.dimension == 0) {
+			if(karma.getKarma()>=0) {
 			Teleport.teleportToDimention(player, -403, player.getPosition().getX(), 255, player.getPosition().getZ());
 			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 250,250, true, true));
-
+			}else {
+				Teleport.teleportToDimention(player, -404, player.getPosition().getX(), 255, player.getPosition().getZ());
+				player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 250,250, true, true));
+			}
 		}
 	}
 

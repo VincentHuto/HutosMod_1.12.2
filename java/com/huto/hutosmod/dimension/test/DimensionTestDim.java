@@ -29,7 +29,7 @@ public class DimensionTestDim extends WorldProviderSurface {
 
 	@Override
 	public boolean isSurfaceWorld() {
-		return true;
+		return false;
 	}
 
 	@Override
