@@ -23,6 +23,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ManaResonatorRecipeWrapper implements IRecipeWrapper {
@@ -54,16 +55,19 @@ public class ManaResonatorRecipeWrapper implements IRecipeWrapper {
 		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
 
+	public RecipeResonator getCurrentRecipe() {
+		return currentRecipe;
+	}
+	
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		GlStateManager.enableAlpha();
-		GlStateManager.translate(65, 90, 0);
+		GlStateManager.translate(25, 90, 0);
 		TileEntityManaResonator te = new TileEntityManaResonator();
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-		//FontRenderer akloRenderer = TextFormating.getAkloFont();
-		fontRenderer.drawString(Float.toString(manaUsage), 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFFFFFF);
-		GlStateManager.translate(-40, 0, 0);
-		fontRenderer.drawString(currentRecipe.getRecipeType().toString(), 0, (int) (fontRenderer.FONT_HEIGHT), 0xFFFFFFFF);
+		fontRenderer.drawString("Vibrational Cost: "+TextFormatting.ITALIC +Float.toString(manaUsage), 0, (int) (fontRenderer.FONT_HEIGHT), 0);
+		GlStateManager.translate(0, -10, 0);
+		fontRenderer.drawString("Phase:" + TextFormatting.ITALIC +currentRecipe.getRecipeType().toString(), 0, (int) (fontRenderer.FONT_HEIGHT), 0);
 		GlStateManager.disableAlpha();
 	}
 

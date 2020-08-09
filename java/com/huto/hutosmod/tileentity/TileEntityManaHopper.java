@@ -44,7 +44,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class TileEntityManaHopper extends TileEntityLockableLoot implements IHopper, ITickable {
-	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(5, ItemStack.EMPTY);
+	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
 	private int transferCooldown = -1;
 	private long tickedGameTime;
 
@@ -126,7 +126,7 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 	 * possibly will be extended.
 	 */
 	public int getInventoryStackLimit() {
-		return 64;
+		return 1;
 	}
 
 	/**
@@ -556,6 +556,11 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 				if (itemstack.isEmpty() || itemstack.getCount() != itemstack.getMaxStackSize()) {
 					return false;
 				}
+				
+				if (itemstack.getCount() >= inventoryIn.itemHandler.getSlotLimit(j)) {
+					return true;
+				}
+				
 			}
 		}
 
@@ -720,11 +725,11 @@ public class TileEntityManaHopper extends TileEntityLockableLoot implements IHop
 			stack = ItemStack.EMPTY;
 			flag = true;
 		} else if (canCombine(itemstack, stack)) {
-			int i = stack.getMaxStackSize() - itemstack.getCount();
+			/*int i = stack.getMaxStackSize() - itemstack.getCount();
 			int j = Math.min(stack.getCount(), i);
 			stack.shrink(j);
 			itemstack.grow(j);
-			flag = j > 0;
+			flag = j > 0;*/
 		}
 		// }
 

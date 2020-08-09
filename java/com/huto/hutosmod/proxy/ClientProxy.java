@@ -21,6 +21,7 @@ import com.huto.hutosmod.render.runicHealthRenderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +36,7 @@ public class ClientProxy extends CommonProxy {
 	public static manaViewerHud manaViewerHudIn;
 	public static karmaViewHud karmaViewerHudIn;
 
-	private static final ModelRobes ModelRobes = new ModelRobes(.1f);
+	private static final ModelRobes ModelRobes = new ModelRobes(.15f);
 
 	@Override
 	public ModelBiped getArmorModel(int id) {
@@ -58,6 +59,13 @@ public class ClientProxy extends CommonProxy {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new FXLightning(Minecraft.getMinecraft().world, vectorStart,
 				vectorEnd, ticksPerMeter, seed, colorOuter, colorInner));
 	}
+	
+	@Override
+	public void spawnEffect(Particle partilce) {
+		Minecraft.getMinecraft().effectRenderer.addEffect(partilce);
+	}
+
+	
 
 	@Override
 	public void registerItemRenderer(Item item, int meta, String id) {

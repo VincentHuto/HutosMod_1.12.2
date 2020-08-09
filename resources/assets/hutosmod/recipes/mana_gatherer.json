@@ -12,7 +12,7 @@
     {
         "N":
         {
-            "item": "minecraft:nether_brick"
+            "item": "hutosmod:runed_obsidian"
         },
         
         "F":
@@ -24,15 +24,51 @@
         {
             "item": "hutosmod:activated_obsidian"
         },
-        "S":
-        {
-            "item": "minecraft:log2",
-            "data": 1
-        },
+      
          "L":
         {
             "item": "hutosmod:mystic_leaves"
+        },
+        
+          "S":[ 
+               {
+            "item": "minecraft:log",
+            "data": 0        
+        
+        },
+          
+            {
+            "item": "minecraft:log",
+            "data": 1        
+        
+        },
+        {
+            "item": "minecraft:log",
+            "data": 2      
+        
+        },
+        {
+            "item": "minecraft:log",
+            "data": 3        
+        
+        },
+         {
+            "item": "minecraft:log2",
+            "data": 0        
+        
+        },
+        {
+            "item": "minecraft:log2",
+            "data": 1       
+        
+        },
+          {
+            "item": "hutosmod:mystic_log"
+        
         }
+        
+        
+        ]
     },
     
     

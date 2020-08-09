@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 
 import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.jei.wrappers.ManaResonatorRecipeWrapper;
+import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.reference.Reference;
 
 import mezz.jei.api.IGuiHelper;
@@ -16,9 +17,11 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -32,8 +35,8 @@ public class ManaResonatorRecipeCatagory implements IRecipeCategory<ManaResonato
 	public ManaResonatorRecipeCatagory(IGuiHelper guiHelper) {
 		background = guiHelper.createBlankDrawable(150, 110);
 		localizedName = I18n.format("hutosmod.jei.mana_resonator");
-		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/resonatoroverlay.png"), 0, 0, 150,
-				110);
+		overlay = guiHelper.createDrawable(new ResourceLocation("hutosmod", "textures/gui/resonatoroverlay.png"), 0, 0,
+				150, 110);
 	}
 
 	@Nonnull
@@ -67,9 +70,31 @@ public class ManaResonatorRecipeCatagory implements IRecipeCategory<ManaResonato
 	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull ManaResonatorRecipeWrapper recipeWrapper,
 			@Nonnull IIngredients ingredients) {
 		recipeLayout.getItemStacks().init(0, true, 64, 52);
+		recipeLayout.getItemStacks().init(3, false, 64, 70);
+
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(1.2, 4.2, 1.2);
+
+		Block catalyst;
+		if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.MANA) {
+			catalyst = BlockRegistry.enchanted_stone_smooth;
+		} else if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.KARMIC) {
+			catalyst = BlockRegistry.activated_obsidian;
+
+		} else if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.REVERT) {
+			catalyst = BlockRegistry.reversion_catalyst;
+
+		} else if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.GREY) {
+			catalyst = BlockRegistry.mindfog;
+
+		} else {
+			catalyst = Blocks.AIR;
+
+		}
+		ItemStack catalystStack = new ItemStack(catalyst);
+
 		recipeLayout.getItemStacks().set(0, new ItemStack(BlockRegistry.mana_resonator));
+		recipeLayout.getItemStacks().set(3, catalystStack);
 		GlStateManager.popMatrix();
 
 		int index = 1;

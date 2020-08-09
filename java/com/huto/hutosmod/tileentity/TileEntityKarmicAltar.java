@@ -66,6 +66,8 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 		return 1;
 	}
 
+	
+	 
 	@Override
 	protected SimpleItemStackHandler createItemHandler() {
 		return new SimpleItemStackHandler(this, false) {
@@ -74,6 +76,7 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 				return 1;
 			}
 		};
+		
 	}
 
 	public boolean isEmpty() {

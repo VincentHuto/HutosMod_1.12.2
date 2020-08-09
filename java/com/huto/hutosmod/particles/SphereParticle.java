@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class ManaParticle extends Particle {
+public class SphereParticle extends Particle {
 	private final ResourceLocation smoothBubbleRL = new ResourceLocation(Reference.MODID + ":particle/SmoothBuble1");
 
 	/**
@@ -25,9 +25,10 @@ public class ManaParticle extends Particle {
 	 * initial velocity.
 	 */
 
-	public ManaParticle(World world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
-			float r, float g, float b){
+	public SphereParticle(World world, double x, double y, double z, double velocityX, double velocityY,
+			double velocityZ, float r, float g, float b) {
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
+		this.canCollide = false;
 		this.particleRed = r;
 		this.particleGreen = g;
 		this.particleBlue = b;
@@ -43,12 +44,12 @@ public class ManaParticle extends Particle {
 		setParticleTexture(sprite); // initialise the icon to our custom texture
 	}
 
-	public ManaParticle(World world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
-			float r, float g, float b, int age, float scale)
-
-	{
+	public SphereParticle(World world, double x, double y, double z, double velocityX, double velocityY,
+			double velocityZ, float r, float g, float b, int age, float scale) {
 
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
+		this.canCollide = false;
+
 		this.particleRed = r;
 		this.particleGreen = g;
 		this.particleBlue = b;
@@ -85,47 +86,11 @@ public class ManaParticle extends Particle {
 	public int getBrightnessForRender(float partialTick) {
 		final int FULL_BRIGHTNESS_VALUE = 0xf000f0;
 		return FULL_BRIGHTNESS_VALUE;
-
-		// if you want the brightness to be the local illumination (from block light and
-		// sky light) you can just use
-		// Entity.getBrightnessForRender() base method, which contains:
-		// BlockPos blockpos = new BlockPos(this.posX, this.posY, this.posZ);
-		// return this.worldObj.isBlockLoaded(blockpos) ?
-		// this.worldObj.getCombinedLight(blockpos, 0) : 0;
 	}
 
-	// this function is used by ParticleManager.addEffect() to determine whether
-	// depthmask writing should be on or not.
-	// FlameBreathFX uses alphablending (i.e. the FX is partially transparent) but
-	// we want depthmask writing on,
-	// otherwise translucent objects (such as water) render over the top of our
-	// breath, even if the particle is in front
-	// of the water and not behind
 	@Override
 	public boolean shouldDisableDepth() {
 		return false;
-	}
-
-	/**
-	 * call once per tick to update the Particle position, calculate collisions,
-	 * remove when max lifetime is reached, etc
-	 */
-
-	private EntityPlayer getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
-		final double TARGETING_DISTANCE = 16;
-		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
-				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
-		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
-		EntityPlayer nearestMob = null;
-		double closestDistance = Double.MAX_VALUE;
-		for (EntityPlayer nextMob : allNearbyMobs) {
-			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
-			if (nextClosestDistance < closestDistance) {
-				closestDistance = nextClosestDistance;
-				nearestMob = nextMob;
-			}
-		}
-		return nearestMob;
 	}
 
 	@Override
@@ -134,26 +99,14 @@ public class ManaParticle extends Particle {
 		prevPosY = posY;
 		prevPosZ = posZ;
 		move(motionX, motionY, motionZ);
-		EntityPlayer player = this.getNearestTargetableMob(world, posX, posY, posZ);
-		if (player != null) {
-			DecimalFormat df = new DecimalFormat("0");
-			if (Double.parseDouble((df.format(posX))) == Double.parseDouble((df.format(player.posX)))
-					&& Double.parseDouble((df.format(posY))) == Double.parseDouble((df.format(player.posY + 1)))
-					&& Double.parseDouble((df.format(posZ))) == Double.parseDouble((df.format(player.posZ)))) {
-				this.setExpired();
-			} else if (Double.parseDouble((df.format(posX))) == Double.parseDouble((df.format(player.posX)))
-					&& Double.parseDouble((df.format(posY))) == Double.parseDouble((df.format(player.posY + 2)))
-					&& Double.parseDouble((df.format(posZ))) == Double.parseDouble((df.format(player.posZ)))) {
-				this.setExpired();
-			}
-		}
+
 		if (onGround) {
 			this.setExpired();
 
 		}
-
-		if (prevPosY == posY && motionY > 0) { // detect a collision while moving upwards (can't move up at all)
+		if (prevPosY == posY && motionY > 0) {
 			this.setExpired();
+
 		}
 
 		if (this.particleMaxAge-- <= 0) {
@@ -161,44 +114,6 @@ public class ManaParticle extends Particle {
 		}
 	}
 
-	/**
-	 * Render the Particle onto the screen. For more help with the tessellator see
-	 * http://greyminecraftcoder.blogspot.co.at/2014/12/the-tessellator-and-worldrenderer-18.html
-	 * <p/>
-	 * You don't actually need to override this method, this is just a deobfuscated
-	 * example of the vanilla, to show you how it works in case you want to do
-	 * something a bit unusual.
-	 * <p/>
-	 * The Particle is rendered as a two-dimensional object (Quad) in the world
-	 * (three-dimensional coordinates). The corners of the quad are chosen so that
-	 * the Particle is drawn directly facing the viewer (or in other words, so that
-	 * the quad is always directly face-on to the screen.) In order to manage this,
-	 * it needs to know two direction vectors: 1) the 3D vector direction
-	 * corresponding to left-right on the viewer's screen (edgeLRdirection) 2) the
-	 * 3D vector direction corresponding to up-down on the viewer's screen
-	 * (edgeUDdirection) These two vectors are calculated by the caller. For
-	 * example, the top right corner of the quad on the viewer's screen is equal to:
-	 * the centre point of the quad (x,y,z) plus the edgeLRdirection vector
-	 * multiplied by half the quad's width plus the edgeUDdirection vector
-	 * multiplied by half the quad's height. NB edgeLRdirectionY is not provided
-	 * because it's always 0, i.e. the top of the viewer's screen is always directly
-	 * up, so moving left-right on the viewer's screen doesn't affect the y
-	 * coordinate position in the world
-	 *
-	 * @param bufferBuilder
-	 * @param entity
-	 * @param partialTick
-	 * @param edgeLRdirectionX edgeLRdirection[XYZ] is the vector direction pointing
-	 *                         left-right on the player's screen
-	 * @param edgeUDdirectionY edgeUDdirection[XYZ] is the vector direction pointing
-	 *                         up-down on the player's screen
-	 * @param edgeLRdirectionZ edgeLRdirection[XYZ] is the vector direction pointing
-	 *                         left-right on the player's screen
-	 * @param edgeUDdirectionX edgeUDdirection[XYZ] is the vector direction pointing
-	 *                         up-down on the player's screen
-	 * @param edgeUDdirectionZ edgeUDdirection[XYZ] is the vector direction pointing
-	 *                         up-down on the player's screen
-	 */
 	@Override
 	public void renderParticle(BufferBuilder bufferBuilder, Entity entity, float partialTick, float edgeLRdirectionX,
 			float edgeUDdirectionY, float edgeLRdirectionZ, float edgeUDdirectionX, float edgeUDdirectionZ) {
@@ -207,7 +122,7 @@ public class ManaParticle extends Particle {
 		double minV = this.particleTexture.getMinV();
 		double maxV = this.particleTexture.getMaxV();
 		Random rand = new Random();
-		double scale = 0.5 * (this.particleScale) * this.particleMaxAge / 300; // vanilla scaling factor
+		double scale = 0.5 * (this.particleScale); // vanilla scaling factor
 		final double scaleLR = scale;
 		final double scaleUD = scale;
 		double x = this.prevPosX + (this.posX - this.prevPosX) * partialTick - interpPosX;

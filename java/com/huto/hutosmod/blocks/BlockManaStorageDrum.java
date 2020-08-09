@@ -177,8 +177,8 @@ public class BlockManaStorageDrum extends BlockBase {
 
 			// If NOT sneaking and your hand IS empty
 			if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
-				String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
-				player.sendMessage(new TextComponentString(message));
+	/*			String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
+				player.sendMessage(new TextComponentString(TextFormatting.BLUE + message));*/
 
 			}
 

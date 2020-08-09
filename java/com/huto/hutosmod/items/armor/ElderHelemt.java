@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ElderHelemt extends ItemArmor {
 
@@ -33,6 +35,7 @@ public class ElderHelemt extends ItemArmor {
 		}
 	}
 */
+	@SideOnly(Side.CLIENT)
 	@Override
 	public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack,
 			EntityEquipmentSlot armorSlot, net.minecraft.client.model.ModelBiped _default) {

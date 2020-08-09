@@ -3,6 +3,7 @@ package com.huto.hutosmod.proxy;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.RayTraceResult;
@@ -72,6 +73,10 @@ public class CommonProxy {
 	public ModelBiped getArmorModel(int i) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void spawnEffect(Particle partilce) {
+		
 	}
 
 }

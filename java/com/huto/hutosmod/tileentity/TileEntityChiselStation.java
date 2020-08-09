@@ -123,23 +123,18 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 			// Checks if the two inventories have the exact same values
 			boolean matcher = false;
 			if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem() && recipieInputs.size() == 1) {
-				System.out.println("1");
 
 				matcher = true;
 			}
 
 			else if (chestStuff.get(0).getItem() == recipieInputs.get(0).getItem()
 					&& chestStuff.get(1).getItem() == recipieInputs.get(1).getItem() && recipieInputs.size() == 2) {
-				System.out.println("2");
 
 				matcher = true;
 			}
-			System.out.println(matcher);
-			System.out.println(recipe.getOutput());
 
 			if (list1.equals(list2) && matcher) {
 				{
-					System.out.println("CRAFTING");
 
 					ItemStack output = recipe.getOutput().copy();
 					EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,

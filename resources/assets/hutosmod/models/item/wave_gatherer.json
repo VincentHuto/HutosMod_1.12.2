@@ -1,0 +1,22 @@
+{
+    "parent": "hutosmod:block/wave_gatherer",
+    "display": {
+        "gui": {
+            "rotation": [
+                35,
+                40,
+                0
+            ],
+            "translation": [
+                0,
+                -3.6,
+                0
+            ],
+            "scale": [
+                100.5325,
+                0.5325,
+                0.5325
+            ]
+        }
+    }
+}

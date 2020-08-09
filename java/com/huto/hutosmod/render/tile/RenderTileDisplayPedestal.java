@@ -53,7 +53,7 @@ public class RenderTileDisplayPedestal extends TileEntitySpecialRenderer<TileEnt
 			// Edit Radius Movement
 			GlStateManager.translate(0D, 0.175D + i * 0.25, 0F);
 			// Block/Item Scale
-			GlStateManager.scale(0.5, 0.5, 0.5);
+			GlStateManager.scale(0.75, 0.75, 0.75);
 			ItemStack stack = te.getItemHandler().getStackInSlot(i);
 			Minecraft mc = Minecraft.getMinecraft();
 			if (!stack.isEmpty()) {

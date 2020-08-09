@@ -131,6 +131,10 @@ public class GuiTomePage extends GuiScreen {
 				if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
 					arrowF.drawButton(mc, mouseX, mouseY, 111);
 				}
+			case GENERATION:
+				if (pageNum != (TomePageLib.GeneratePageList.size() - 1)) {
+					arrowF.drawButton(mc, mouseX, mouseY, 111);
+				}
 				break;
 			case WORLDGEN:
 				if (pageNum != (TomePageLib.WorldGenPageList.size() - 1)) {
@@ -234,6 +238,14 @@ public class GuiTomePage extends GuiScreen {
 				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
 			}
 			break;
+		case GENERATION:
+			if (pageNum != (TomePageLib.GeneratePageList.size() - 1)) {
+				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
+			}
+			if (pageNum != 0) {
+				buttonList.add(arrowB = new GuiButtonArrowBackward(ARROWB, left, top + guiHeight - 10));
+			}
+			break;
 		case RUNES:
 			if (pageNum != (TomePageLib.RunesPageList.size() - 1)) {
 				buttonList.add(arrowF = new GuiButtonArrowForward(ARROWF, left + guiWidth - 18, top + guiHeight - 10));
@@ -321,6 +333,13 @@ public class GuiTomePage extends GuiScreen {
 						mc.displayGuiScreen(TomePageLib.BlocksPageList.get(TomePageLib.BlocksPageList.size() - 1));
 					}
 					break;
+				case GENERATION:
+					if (searchNum < TomePageLib.GeneratePageList.size()) {
+						mc.displayGuiScreen(TomePageLib.GeneratePageList.get(searchNum));
+					} else if (searchNum >= TomePageLib.GeneratePageList.size()) {
+						mc.displayGuiScreen(TomePageLib.GeneratePageList.get(TomePageLib.GeneratePageList.size() - 1));
+					}
+					break;
 				case RUNES:
 					if (searchNum < TomePageLib.RunesPageList.size()) {
 						mc.displayGuiScreen(TomePageLib.RunesPageList.get(searchNum));
@@ -395,6 +414,16 @@ public class GuiTomePage extends GuiScreen {
 					break;
 				}
 			}
+			if (this.catagory == EnumTomeCatagories.GENERATION) {
+				if (pageNum != (TomePageLib.GeneratePageList.size() - 1)) {
+					mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum + 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum)));
+					break;
+				}
+			}
+
 			if (this.catagory == EnumTomeCatagories.WANDS) {
 				if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
 					mc.displayGuiScreen(TomePageLib.WandsPageList.get((pageNum + 1)));
@@ -465,6 +494,15 @@ public class GuiTomePage extends GuiScreen {
 					break;
 				} else {
 					mc.displayGuiScreen(TomePageLib.BlocksPageList.get((pageNum)));
+					break;
+				}
+			}
+			if (this.catagory == EnumTomeCatagories.GENERATION) {
+				if (pageNum != 0) {
+					mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum - 1)));
+					break;
+				} else {
+					mc.displayGuiScreen(TomePageLib.GeneratePageList.get((pageNum)));
 					break;
 				}
 			}

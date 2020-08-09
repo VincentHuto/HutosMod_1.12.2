@@ -21,6 +21,7 @@ public class TomePageLib {
 	public static List<GuiTomePage> WorldGenPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> ArmorPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> BlocksPageList = new ArrayList<GuiTomePage>();
+	public static List<GuiTomePage> GeneratePageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> WandsPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> RunesPageList = new ArrayList<GuiTomePage>();
 	public static List<GuiTomePage> ElderPageList = new ArrayList<GuiTomePage>();
@@ -50,6 +51,11 @@ public class TomePageLib {
 	public static String MACHINE_PAGE_6 = "mystictome.blocks.page.6.text";
 	public static String MACHINE_PAGE_7 = "mystictome.blocks.page.7.text";
 	public static String MACHINE_PAGE_8 = "mystictome.blocks.page.8.text";
+	
+	//Generate
+	public static String GENERATION_PAGE_1 = "mystictome.blocks.page.1.text";
+
+	
 	// Wands
 	public static String WANDS_PAGE_1 = "mystictome.wands.page.1.text";
 	// Runes
@@ -65,6 +71,7 @@ public class TomePageLib {
 		WorldGenPageList.clear();
 		ArmorPageList.clear();
 		BlocksPageList.clear();
+		GeneratePageList.clear();
 		WandsPageList.clear();
 		RunesPageList.clear();
 		ElderPageList.clear();
@@ -112,6 +119,15 @@ public class TomePageLib {
 				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
 		BlocksPageList.add(new GuiTomePage(7, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
 				new ItemStack(BlockRegistry.wand_maker), I18n.format(MACHINE_PAGE_8)));
+		
+		//Generate
+		GeneratePageList.add(new GuiTomePage(0, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
+				new ItemStack(BlockRegistry.mana_gatherer), I18n.format(GENERATION_PAGE_1)));
+		GeneratePageList.add(new GuiTomePage(1, EnumTomeCatagories.GENERATION, "Karmic Altar", "Give some food, get power back",
+				new ItemStack(BlockRegistry.karmic_altar), I18n.format(GENERATION_PAGE_1)));
+		GeneratePageList.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
+				new ItemStack(BlockRegistry.wave_gatherer), I18n.format(GENERATION_PAGE_1)));
+		
 		// Wands & Magic Gloves
 		WandsPageList.add(new GuiTomePage(0, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemRegistry.wand_consume_mana), I18n.format(WANDS_PAGE_1)));

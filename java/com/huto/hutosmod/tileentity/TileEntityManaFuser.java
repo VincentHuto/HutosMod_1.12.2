@@ -139,6 +139,8 @@ public class TileEntityManaFuser extends TileManaSimpleInventory implements ITic
 						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
 						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
 						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						count = 0;
+
 						if (world.isRemote) {
 							if (count % 3 == 0) {
 								MainClass.proxy.lightningFX(redVec, endVec, 15F, System.nanoTime(), Reference.red,

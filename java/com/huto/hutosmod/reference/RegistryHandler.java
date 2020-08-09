@@ -55,6 +55,7 @@ import com.huto.hutosmod.render.tile.RenderTileManaResonator;
 import com.huto.hutosmod.render.tile.RenderTileStorageDrum;
 import com.huto.hutosmod.render.tile.RenderTileVibratorySelector;
 import com.huto.hutosmod.render.tile.RenderTileWandMaker;
+import com.huto.hutosmod.render.tile.RenderTileWaveGatherer;
 import com.huto.hutosmod.sound.SoundsHandler;
 import com.huto.hutosmod.tileentity.TileEntityBellJar;
 import com.huto.hutosmod.tileentity.TileEntityCelestialActuator;
@@ -70,6 +71,7 @@ import com.huto.hutosmod.tileentity.TileEntityManaResonator;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
 import com.huto.hutosmod.tileentity.TileEntityVibratorySelector;
 import com.huto.hutosmod.tileentity.TileEntityWandMaker;
+import com.huto.hutosmod.tileentity.TileEntityWaveGatherer;
 import com.huto.hutosmod.worldgen.IWorldGenCustomMushroom;
 import com.huto.hutosmod.worldgen.ModWorldGen;
 import com.huto.hutosmod.worldgen.WorldGenCustomTrees;
@@ -132,6 +134,7 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChiselStation.class, new RenderTileChiselStation());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManaResonator.class, new RenderTileManaResonator());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVibratorySelector.class, new RenderTileVibratorySelector());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWaveGatherer.class, new RenderTileWaveGatherer());
 
 		for (Item item : ItemRegistry.ITEMS) {
 			MainClass.proxy.registerItemRenderer(item, 0, "inventory");

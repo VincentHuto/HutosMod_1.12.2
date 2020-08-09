@@ -17,11 +17,15 @@ public class ModResonatorRecipies {
 			recipeNullCrystal, recipeNullPowder, recipeEnhancedPick, recipeEnhancedSword, recipeEnhancedShovel,
 			recipeEnhancedAxe, recipeEnhancedHoe, recipeEnhancedHelm, recipeEnhancedChestplate, recipeEnhancedPants,
 			recipeEnhancedBoots, recipeManaGem, recipeChannelingRod, recipeManaDust, recipeEnchantedEarth,
-			recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling;
+			recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,recipieGreyIngot;
 	// ReversionRecipies
 	public static RecipeResonator recipeAntiTearREVERT, recipeResonantFuelREVERT;
 
 	public static void init() {
+		
+		recipeAntiTear = registerEnhancerRecipe(new ItemStack(ItemRegistry.grey_ingot, 1), 30, EnumEssecenceType.GREY,
+				new ItemStack(Items.IRON_INGOT, 1));
+		
 		recipeAntiTear = registerEnhancerRecipe(new ItemStack(ItemRegistry.anti_tear, 1), 30, EnumEssecenceType.KARMIC,
 				new ItemStack(ItemRegistry.essence_drop, 1));
 		recipeResonantFuel = registerEnhancerRecipe(new ItemStack(ItemRegistry.resonant_fuel, 1), 30,

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.soap.Text;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -49,10 +51,11 @@ public class GuiTomeTitle extends GuiScreen {
 	final int BUTTONRED = 5;
 	final int BUTTONORANGE = 6;
 	final int BUTTONCYAN = 7;
+	final int BUTTONDARKBLUE = 9;
 	final int BUTTONEYE = 8;
 
 	FontRenderer akloRenderer = ModTextFormatting.getAkloFont();
-	GuiButtonTextured buttonclose,whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,
+	GuiButtonTextured buttonclose,whiteButton, yellowButton, blueButton, greenButton, redButton, orangeButton, cyanButton,darkBlueButton,
 			eyeButton;
 	String title = " Table of Contents";
 	String subtitle = " Duality of Nature";
@@ -100,6 +103,8 @@ public class GuiTomeTitle extends GuiScreen {
 		redButton.drawButton(mc, mouseX, mouseY, 16);
 		orangeButton.drawButton(mc, mouseX, mouseY, 16);
 		cyanButton.drawButton(mc, mouseX, mouseY, 16);
+		darkBlueButton.drawButton(mc, mouseX, mouseY, 16);
+
 		if (isElder) {
 			eyeButton.drawButton(mc, mouseX, mouseY, 16);
 		}
@@ -144,43 +149,48 @@ public class GuiTomeTitle extends GuiScreen {
 		drawTooltip(text, mouseX, mouseY, centerX, centerY, 16 * 2, 16 * 2, false);
 
 		List<String> cat1 = new ArrayList<String>();
-		cat1.add(I18n.format("Introduction"));
+		cat1.add(I18n.format(TextFormatting.ITALIC +"Introduction"));
 		cat1.add(I18n.format("Magic and its basis"));
-		drawTooltip(cat1, mouseX, mouseY, left + guiWidth - (guiWidth - 176), top + guiHeight - 206, 24, 16, false);
+		drawTooltip(cat1, mouseX, mouseY, left + guiWidth - (guiWidth - 174), top + guiHeight - 226, 24, 16, false);
 
 		List<String> cat2 = new ArrayList<String>();
-		cat2.add(I18n.format("The World"));
+		cat2.add(I18n.format(TextFormatting.ITALIC +"The World"));
 		cat2.add(I18n.format("Mana All Around Us"));
 		drawTooltip(cat2, mouseX, mouseY, left + guiWidth - (guiWidth - 175), top + guiHeight - 181, 24, 16, false);
 
 		List<String> cat3 = new ArrayList<String>();
-		cat3.add(I18n.format("Equipables"));
+		cat3.add(I18n.format(TextFormatting.ITALIC +"Equipables"));
 		cat3.add(I18n.format("Mystical Wearables"));
 		drawTooltip(cat3, mouseX, mouseY, left + guiWidth - (guiWidth - 175), top + guiHeight - 153, 24, 16, false);
 
 		List<String> cat4 = new ArrayList<String>();
-		cat4.add(I18n.format("Wands"));
+		cat4.add(I18n.format(TextFormatting.ITALIC +"Wands"));
 		cat4.add(I18n.format("Magical Conduction"));
 		drawTooltip(cat4, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 121, 24, 16, false);
 
 		List<String> cat5 = new ArrayList<String>();
-		cat5.add(I18n.format("Runes"));
+		cat5.add(I18n.format(TextFormatting.ITALIC +"Runes"));
 		cat5.add(I18n.format("Chiseling your own mind"));
-		drawTooltip(cat5, mouseX, mouseY, left + guiWidth - (guiWidth - 180), top + guiHeight - 81, 24, 16, false);
+		drawTooltip(cat5, mouseX, mouseY, left + guiWidth - (guiWidth - 180), top + guiHeight - 91, 24, 16, false);
 
 		List<String> cat6 = new ArrayList<String>();
-		cat6.add(I18n.format("Machines"));
+		cat6.add(I18n.format(TextFormatting.ITALIC +"Machines"));
 		cat6.add(I18n.format("Functional Aparatus"));
 		drawTooltip(cat6, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 49, 24, 16, false);
 
+		List<String> cat10 = new ArrayList<String>();
+		cat10.add(I18n.format(TextFormatting.ITALIC +"Generation"));
+		cat10.add(I18n.format("Gather the vibes"));
+		drawTooltip(cat10, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 69, 24, 16, false);
+		
 		List<String> cat7 = new ArrayList<String>();
-		cat7.add(I18n.format("Karma"));
+		cat7.add(I18n.format(TextFormatting.ITALIC +"Karma"));
 		cat7.add(I18n.format("You wont get away with this"));
-		drawTooltip(cat7, mouseX, mouseY, left + guiWidth - (guiWidth - 176), top + guiHeight - 30, 24, 16, false);
+		drawTooltip(cat7, mouseX, mouseY, left + guiWidth - (guiWidth - 177), top + guiHeight - 200, 24, 16, false);
 		if (isElder) {
 			List<String> cat8 = new ArrayList<String>();
 			cat8.add(I18n.format(TextFormatting.DARK_PURPLE + "The Elders"));
-			cat8.add(I18n.format(TextFormatting.DARK_PURPLE + "Some serious stuff"));
+			cat8.add(I18n.format(TextFormatting.OBFUSCATED + "Some serious stuff"));
 			drawTooltip(cat8, mouseX, mouseY, left + guiWidth - (guiWidth - 155), top + guiHeight - 30, 16, 16, false);
 		}
 		
@@ -278,8 +288,8 @@ public class GuiTomeTitle extends GuiScreen {
 		buttonList.clear();
 		buttonList.add(buttonclose = new GuiButtonTextured(texture, BUTTONCLOSE, sideLoc - (guiWidth -10),
 				verticalLoc - 50, 32, 32, 209, 32));
-		buttonList.add(whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc - (guiWidth - 176),
-				verticalLoc - 206, 23, 16, 186, 0));
+		buttonList.add(whiteButton = new GuiButtonTextured(texture, BUTTONWHITE, sideLoc - (guiWidth - 174),
+				verticalLoc - 226, 23, 16, 186, 0));
 		buttonList.add(yellowButton = new GuiButtonTextured(texture, BUTTONYELLOW, sideLoc - (guiWidth - 175),
 				verticalLoc - 181, 23, 16, 186, 32));
 		buttonList.add(blueButton = new GuiButtonTextured(texture, BUTTONBLUE, sideLoc - (guiWidth - 175),
@@ -287,11 +297,13 @@ public class GuiTomeTitle extends GuiScreen {
 		buttonList.add(greenButton = new GuiButtonTextured(texture, BUTTONGREEN, sideLoc - (guiWidth - 177),
 				verticalLoc - 121, 24, 16, 186, 96));
 		buttonList.add(redButton = new GuiButtonTextured(texture, BUTTONRED, sideLoc - (guiWidth - 180),
-				verticalLoc - 81, 24, 16, 186, 128));
+				verticalLoc - 91, 24, 16, 186, 128));
 		buttonList.add(orangeButton = new GuiButtonTextured(texture, BUTTONORANGE, sideLoc - (guiWidth - 177),
 				verticalLoc - 49, 24, 16, 186, 160));
-		buttonList.add(cyanButton = new GuiButtonTextured(texture, BUTTONCYAN, sideLoc - (guiWidth - 176),
-				verticalLoc - 30, 24, 16, 186, 192));
+		buttonList.add(darkBlueButton = new GuiButtonTextured(texture, BUTTONDARKBLUE, sideLoc - (guiWidth - 177),
+				verticalLoc - 69, 24, 16, 209, 160));
+		buttonList.add(cyanButton = new GuiButtonTextured(texture, BUTTONCYAN, sideLoc - (guiWidth - 177),
+				verticalLoc - 200, 24, 16, 186, 192));
 		if (isElder) {
 
 			buttonList.add(eyeButton = new GuiButtonTextured(texture, BUTTONEYE, sideLoc - (guiWidth - 155),
@@ -330,6 +342,9 @@ public class GuiTomeTitle extends GuiScreen {
 			break;
 		case BUTTONCYAN:
 			mc.displayGuiScreen(TomePageLib.KarmaPageList.get(0));
+			break;
+		case BUTTONDARKBLUE:
+			mc.displayGuiScreen(TomePageLib.GeneratePageList.get(0));
 			break;
 		case BUTTONEYE:
 			if (isElder) {

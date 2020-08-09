@@ -12,49 +12,20 @@ import com.huto.hutosmod.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityManaGatherer extends TileModMana implements ITickable {
+public class TileEntityWaveGatherer extends TileModMana implements ITickable {
 	public int count = 0;
 	public static final String TAG_MANA = "mana";
 
 	@Override
 	public void update() {
-		Random rand = new Random();
-		double xpos = pos.getX() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
-		double ypos = pos.getY() + 1.3;
-		double zpos = pos.getZ() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
-		double velocityX = 0, velocityY = -0.2, velocityZ = 0;
-		ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ, 0.0F, 0.9F,
-				0.9F, 70, 1);
-		count++;
-		int mod = 3 + rand.nextInt(10);
-		if (this.getManaValue() < 1000) {
-			if (count % mod == 0) {
-
-				this.addManaValue(0.1F);
-			}
-			if (world.getBiome(this.getPos()) == BiomeRegistry.DREAMSCAPE || checkStructure()) {
-				this.addManaValue(0.3F);
-			}
-
-			if (world.isRemote) {
-				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.3, 0);
-				Vector3 endVec = vec.add(0, 0.5, 0);
-				if (count % 10 == 0) {
-					MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
-					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-
-				}
-
-			}
-
-			this.sendUpdates();
-			count = 0;
-
+		if(checkStructure() && this.getManaValue()<100) {
+			this.addManaValue(0.2F);
 		}
 	}
 
@@ -62,11 +33,12 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 		BlockPos adj = getPos().offset(EnumFacing.DOWN);
 		IBlockState blockState = world.getBlockState(adj);
 		Block block = blockState.getBlock();
-		if (block == BlockRegistry.enchanted_stone) {
+		if (block == Blocks.WATER) {
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 	@Override

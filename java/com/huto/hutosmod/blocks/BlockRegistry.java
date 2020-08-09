@@ -54,12 +54,15 @@ public class BlockRegistry {
 	public static final Block passion_flower = new BlockPassionFlower("passion_flower", Material.CACTUS);
 	public static final Block display_pedestal = new BlockDisplayPedestal("display_pedestal", Material.ROCK);
 	public static final Block wand_maker = new BlockWandMaker("wand_maker", Material.ROCK);
+	public static final Block vibratory_selector = new BlockVibratorySelector("vibratory_selector", Material.ROCK);
 	public static final Block mana_belljar = new BlockManaBelljar("mana_belljar", Material.GLASS);
 	public static final Block mana_capacitor = new BlockManaCapacitor("mana_capacitor", Material.GLASS);
 	public static final Block mana_storagedrum = new BlockManaStorageDrum("mana_storagedrum", Material.GLASS);
 	public static final Block Rune_Station = new BlockRuneStation("rune_station", Material.ROCK);
 //	public static final Block essecence_enhancer = new BlockEssenceEnhancer("essecence_enhancer", Material.ROCK);
 	public static final Block mana_gatherer = new BlockManaGatherer("mana_gatherer", Material.ROCK);
+	public static final Block wave_gatherer = new BlockWaveGatherer("wave_gatherer", Material.ROCK);
+
 	public static final Block mana_hopper = new BlockManaHopper("mana_hopper", Material.ROCK);
 	public static final Block karmic_altar = new BlockKarmicAltar("karmic_altar", Material.ROCK);
 	public static final Block mana_fuser = new BlockManaFuser("mana_fuser", Material.ROCK);
@@ -68,7 +71,6 @@ public class BlockRegistry {
 	public static final Block celestial_actuator = new BlockCelestialActuator("celestial_actuator", Material.ROCK);
 	public static final Block runic_chiselstation = new BlockChiselStation("runic_chiselstation", Material.ROCK);
 	public static final Block disappering_block = new BlockDisapperingBlock("disappering_block", Material.ROCK);
-	public static final Block vibratory_selector = new BlockVibratorySelector("vibratory_selector", Material.ROCK);
 
 	// Fluids
 	public static final Block WHITE_WATER_FLUID = new BlockWhiteWaterFluid("white_water", FluidInit.WHITE_WATER_FLUID,

@@ -20,5 +20,8 @@ public class ParticleTextureStitcher
     event.getMap().registerSprite(smoothBubbleRL);
     ResourceLocation BaseFxRL = new ResourceLocation(Reference.MODID + ":particle/smoothbuble1");
     event.getMap().registerSprite(BaseFxRL);
+    ResourceLocation ringEffectRL = new ResourceLocation(Reference.MODID + ":particle/ring_particle");
+    event.getMap().registerSprite(ringEffectRL);
+    
   }
 }

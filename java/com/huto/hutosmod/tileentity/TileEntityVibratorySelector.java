@@ -5,6 +5,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 
@@ -13,11 +14,13 @@ import com.huto.hutosmod.blocks.BlockRegistry;
 import com.huto.hutosmod.container.ContainerVibratorySelector;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
+import com.huto.hutosmod.particles.SphereParticle;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.recipies.EnumEssecenceType;
 import com.huto.hutosmod.reference.Reference;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -93,11 +96,46 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 		return Reference.MODID + ":vibratory_selector";
 	}
 
+	public static int count = 0;
+	public static int spiralCount = 0;
+
 	@Override
 	public void update() {
+		Random rand = new Random();
+		count++;
 
+		// spiralCount++;
+		if (spiralCount == 360) {
+			while (spiralCount > 0) {
+				spiralCount--;
+			}
+
+		} else {
+			spiralCount++;
+
+		}
+		double ypos = pos.getY() + 0.65;
+		double velocityX = 0, velocityBlueY = 0.0015, velocityRedY = -0.0015, velocityZ = 0;
+		double redValue = 0;
+		double blueValue = 0;
+		double xMod = Math.sin(spiralCount);
+		double zMod = Math.cos(spiralCount);
+		int mod = 3 + rand.nextInt(10);
+		int age = 100;
+		if (count > 0 && count % 6 == 0) {
+			SphereParticle newEffect = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
+					pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityBlueY, (zMod * 0.1) * 0.01, 0.0F, 0.0F,
+					2.0F, age, 0.1f);
+			MainClass.proxy.spawnEffect(newEffect);
+
+			SphereParticle newEffect1 = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
+					pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityRedY, (zMod * 0.1) * 0.01, 2.0F, 0.0F,
+					0.0F, age, 0.1f);
+			MainClass.proxy.spawnEffect(newEffect1);
+			count = 0;
+		}
 	}
-	
+
 	public void deresonateEvent() {
 		ItemStack inputStack = this.getStackInSlot(0);
 		ItemStack outputStack = this.getStackInSlot(0).copy();
@@ -152,7 +190,7 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 				world.addBlockEvent(getPos(), getBlockType(), craft_event, 0);
 
 				this.setInventorySlotContents(1, outputStack);
-				
+
 				this.setInventorySlotContents(0, ItemStack.EMPTY);
 				this.sendUpdates();
 				this.setManaValue(manaValue - Math.abs(selectedFrequency));
