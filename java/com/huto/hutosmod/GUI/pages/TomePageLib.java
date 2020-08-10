@@ -103,23 +103,18 @@ public class TomePageLib {
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
 				new ItemStack(ItemRegistry.null_chestplate), I18n.format(EQUIP_PAGE_1)));
 		// Machines
-		BlocksPageList.add(new GuiTomePage(0, EnumTomeCatagories.MACHINES, "Mana Gathering", "It comes from the air",
-				new ItemStack(BlockRegistry.mana_gatherer), I18n.format(MACHINE_PAGE_1)));
-		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Karmic Altar", "Mana, at what cost?",
-				new ItemStack(BlockRegistry.karmic_altar), I18n.format(MACHINE_PAGE_2)));
-		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
+		BlocksPageList.add(new GuiTomePage(0, EnumTomeCatagories.MACHINES, "Mana Belljar", "Clunky but works",
 				new ItemStack(BlockRegistry.mana_belljar), I18n.format(MACHINE_PAGE_3)));
-		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
+		BlocksPageList.add(new GuiTomePage(1, EnumTomeCatagories.MACHINES, "Mana Storage", "Its like a cool battery",
 				new ItemStack(BlockRegistry.mana_storagedrum), I18n.format(MACHINE_PAGE_4)));
-		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
+		BlocksPageList.add(new GuiTomePage(2, EnumTomeCatagories.MACHINES, "Mana Resonator", "Infusing and Upgrading",
 				new ItemStack(BlockRegistry.mana_resonator), I18n.format(MACHINE_PAGE_5)));
-		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
+		BlocksPageList.add(new GuiTomePage(3, EnumTomeCatagories.MACHINES, "Mana Collider", "Mix this and that...",
 				new ItemStack(BlockRegistry.mana_fuser), I18n.format(MACHINE_PAGE_6)));
-		BlocksPageList.add(new GuiTomePage(6, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
-				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
-		BlocksPageList.add(new GuiTomePage(7, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
+		BlocksPageList.add(new GuiTomePage(4, EnumTomeCatagories.MACHINES, "Wand Fabricator", "Channeling finally",
 				new ItemStack(BlockRegistry.wand_maker), I18n.format(MACHINE_PAGE_8)));
-		
+		BlocksPageList.add(new GuiTomePage(5, EnumTomeCatagories.MACHINES, "Karmic Extractor", "Clean yourself up",
+				new ItemStack(BlockRegistry.karmic_extractor), I18n.format(MACHINE_PAGE_7)));
 		//Generate
 		GeneratePageList.add(new GuiTomePage(0, EnumTomeCatagories.GENERATION, "Mana Gathering", "It comes from the air",
 				new ItemStack(BlockRegistry.mana_gatherer), I18n.format(GENERATION_PAGE_1)));

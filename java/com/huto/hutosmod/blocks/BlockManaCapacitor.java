@@ -2,6 +2,8 @@ package com.huto.hutosmod.blocks;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.items.ItemUpgrade;
 import com.huto.hutosmod.mana.IMana;
@@ -10,6 +12,7 @@ import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.tileentity.TileEntityManaCapacitor;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -236,5 +239,10 @@ public class BlockManaCapacitor extends BlockBase {
 		super.addInformation(stack, player, tooltip, advanced);
 
 	}
-
+	@Override
+	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+		TileManaSimpleInventory inv = (TileManaSimpleInventory) world.getTileEntity(pos);
+		ModInventoryHelper.dropInventory(inv, world, state, pos);
+		super.breakBlock(world, pos, state);
+	}
 }

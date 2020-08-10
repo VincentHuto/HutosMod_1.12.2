@@ -23,6 +23,7 @@ public class TileEntityHandler {
 		GameRegistry.registerTileEntity(TileEntityDisapperingBlock.class, "disappering_block");
 		GameRegistry.registerTileEntity(TileEntityVibratorySelector.class, "vibratory_selector");
 		GameRegistry.registerTileEntity(TileEntityWaveGatherer.class, "wave_gatherer");
+		GameRegistry.registerTileEntity(TileEntityManaAbsorber.class, "mana_absorber");
 
 	}
 }

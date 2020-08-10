@@ -162,6 +162,9 @@ public class ItemRegistry {
 	public static final Item upgrade_player = new ItemUpgrade("upgrade_player");
 	public static final Item upgrade_animal = new ItemUpgrade("upgrade_animal");
 	public static final Item upgrade_mob = new ItemUpgrade("upgrade_mob");
+	public static final Item upgrade_absorber = new ItemUpgrade("upgrade_absorber");
+	public static final Item upgrade_import = new ItemUpgrade("upgrade_import");
+
 	// Contract Runes
 	public static final Item rune_beast_c = new ItemContractRuneBeast("rune_beast_c");
 	public static final Item rune_corruption_c = new ItemContractRuneCorrupt("rune_corruption_c");

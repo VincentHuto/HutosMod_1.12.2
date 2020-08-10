@@ -66,7 +66,7 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 		if (mana > 600 && mana <= 900) {
 			heightModifier = ((mana - 580) / 300) * 1.4;
 		} else if (mana > 900) {
-			heightModifier = ((mana - 880) / 300) * 1.4;
+			heightModifier = ((mana - 880) / 300) * 3.5;
 
 		}
 
@@ -327,12 +327,11 @@ public class RenderTileStorageDrum extends TileEntitySpecialRenderer<TileEntityS
 
 				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
 				ItemStack stack = player.getHeldItemMainhand();
-/*
-				boolean foundOnHead = false;
-				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
-				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
-					foundOnHead = true;
-				}*/
+				/*
+				 * boolean foundOnHead = false; ItemStack slotItemStack =
+				 * player.inventory.armorItemInSlot(3); if (slotItemStack.getItem() ==
+				 * ItemRegistry.mana_viewer) { foundOnHead = true; }
+				 */
 
 				if (te instanceof TileModMana && te != null) {
 					if (stack.getItem() == ItemRegistry.mana_debugtool) {

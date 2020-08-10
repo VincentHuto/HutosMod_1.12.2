@@ -70,6 +70,8 @@ public class BlockRegistry {
 	public static final Block karmic_extractor = new BlockKarmicExtractor("karmic_extractor", Material.ROCK);
 	public static final Block celestial_actuator = new BlockCelestialActuator("celestial_actuator", Material.ROCK);
 	public static final Block runic_chiselstation = new BlockChiselStation("runic_chiselstation", Material.ROCK);
+	public static final Block mana_absorber = new BlockManaAbsorber("mana_absorber", Material.ROCK);
+
 	public static final Block disappering_block = new BlockDisapperingBlock("disappering_block", Material.ROCK);
 
 	// Fluids

@@ -30,13 +30,21 @@ item.upgrade_block.name=Drum Upgrade:Blocks
 item.upgrade_player.name=Drum Upgrade:Players
 item.upgrade_mob.name=Drum Upgrade:Mobs
 item.upgrade_animal.name=Drum Upgrade:Animal
+item.upgrade_absorber.name=Drum Upgrade:Export
+item.upgrade_import.name=Drum Upgrade:Import
+item.elder_boots.name=Elder Boots
+item.elder_leggings.name=Elder Leggings
+item.elder_chestplate.name=Elder Jacket
+item.elder_helmet.name=Elder Hood
+item.floatboots.name=Float Boots
 item.upgrade_wrench.name=Upgrade Wrench
 item.resonant_fuel.name=Resonant Fuel
 
 item.raw_morel_on_a_stick.name=Raw Morel On a Stick
 item.cooked_morel_on_a_stick.name=Cooked Morel On a Stick
 item.singeri_soup.name=Singeri Soup
-
+item.mana_bottle.name=Vibrational Drank
+item.enhance_overlay.name=Overlay
 
 
 item.purging_stone.name=Purging Stone
@@ -126,6 +134,15 @@ tile.mindfog.name=Mind Fog
 tile.runic_chiselstation.name=Rune Chisel Station
 tile.mystic_planks.name=Mystic Plank
 tile.mana_resonator.name=Mana Harmonizer
+tile.disappering_block.name=Disappering Tile
+tile.mana_absorber.name=Mana Absorber
+tile.wave_gatherer.name=Wave Gatherer
+tile.vibratory_selector.name=Vibratory Selector
+tile.anti_earth.name=Anti Earth
+tile.anti_media.name=Anti Media
+tile.nightmare_earth.name=Nightmare Earth
+tile.nightmare_media.name=Nightmare Media
+tile.reversion_catalyst.name=Reversion Catalyst
 
 fluid.white_water=White Water
 fluid.primal_ooze=Primal Ooze
@@ -139,7 +156,8 @@ entity.Test Mob.name=Test Mob
 entity.Colin.name=Colin
 entity.MaskedPraetor.name=Masked Praetor
 entity.Elemental.name=Mana Elemental
-
+entity.Dream Walker.name=Dream Walker
+entity.Memory Flicker.name=Memory Flicker
 effectrunic_health=Runic Health
 potion.effect.runic_health=Potion of Runic Health
 splash_potion.effect.runic_health=Splash Potion of Runic Health

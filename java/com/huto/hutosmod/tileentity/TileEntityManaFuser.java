@@ -156,41 +156,6 @@ public class TileEntityManaFuser extends TileManaSimpleInventory implements ITic
 
 	}
 
-	public static void tryToSetLastRecipe(EntityPlayer player, IItemHandlerModifiable inv, List<ItemStack> lastRecipe) {
-		if (lastRecipe == null || lastRecipe.isEmpty() || player.world.isRemote)
-			return;
-
-		int index = 0;
-		boolean didAny = false;
-		for (ItemStack stack : lastRecipe) {
-			if (stack.isEmpty())
-				continue;
-
-			for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-				ItemStack pstack = player.inventory.getStackInSlot(i);
-				if (!pstack.isEmpty() && pstack.isItemEqual(stack) && ItemStack.areItemStackTagsEqual(stack, pstack)) {
-					inv.setStackInSlot(index, pstack.splitStack(1));
-					didAny = true;
-					index++;
-					break;
-				}
-			}
-		}
-
-		if (didAny) {
-			player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GENERIC_SPLASH,
-					SoundCategory.BLOCKS, 0.1F, 10F);
-			EntityPlayerMP mp = (EntityPlayerMP) player;
-			mp.inventoryContainer.detectAndSendChanges();
-		}
-	}
-
-	public void trySetLastRecipe(EntityPlayer player) {
-		tryToSetLastRecipe(player, itemHandler, lastRecipe);
-		if (!isEmpty())
-			VanillaPacketDispatcher.dispatchTEToNearbyPlayers(world, pos);
-	}
-
 	public void updateRecipe() {
 		for (RecipeManaFuser recipe : ModFuserRecipes.manaFuserRecipies)
 			if (recipe.matches(itemHandler)) {

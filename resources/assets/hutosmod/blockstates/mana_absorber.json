@@ -1,0 +1,23 @@
+{
+    "forge_marker": 1,
+    "defaults": { "model": "hutosmod:mana_absorber" },
+    "variants": {
+        "facing=north": {
+            "y":180
+        },
+        "facing=east": {
+            "y": 270
+        },
+        "facing=south": {
+            "y": 0
+        },
+        "facing=west": {
+            "y": 90
+        },
+
+        "inventory": {
+            "model": "hutosmod:mana_absorber",
+            "transform": "forge:default-block"
+        }
+    }
+}

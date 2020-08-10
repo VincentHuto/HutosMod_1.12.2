@@ -62,11 +62,11 @@ public class RenderTileManaCapacitor extends TileEntitySpecialRenderer<TileEntit
 		if (mana > 0 && mana <= 50)
 			heightModifier = mana / 50 * 0.75;
 		if (mana > 50 && mana <= 100)
-			heightModifier = ((mana - 50) / 100) * 1.6;
+			heightModifier = ((mana - 50) / 100) * 1.6 +0.065;
 		if (mana > 100 && mana <= 150) {
 			heightModifier = ((mana - 90) / 150) * 1.9;
 		} else if (mana > 150) {
-			heightModifier = ((mana - 140) / 200) * 2.5;
+			heightModifier = ((mana - 140) / 200) * 1+0.02;
 
 		}
 

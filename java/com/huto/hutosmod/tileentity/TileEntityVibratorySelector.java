@@ -57,7 +57,7 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 	private int blockMetadata = -1;
 	private static final int craft_event = 3;
 	private static final int decraft_event = 4;
-
+	public static int maxMana = 1000;
 	public static boolean active = false;
 	public static int cooldown = 0;
 

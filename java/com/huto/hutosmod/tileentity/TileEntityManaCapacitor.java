@@ -113,6 +113,24 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 
 	}
 
+	public boolean checkImportFromAbsorber() {
+		for (int i = 0; i < this.getSizeInventory(); i++) {
+			if (this.itemHandler.getStackInSlot(i).getItem() == ItemRegistry.upgrade_import) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkExportToAbsorber() {
+		for (int i = 0; i < this.getSizeInventory(); i++) {
+			if (this.itemHandler.getStackInSlot(i).getItem() == ItemRegistry.upgrade_absorber) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean checkAllowBlock() {
 		for (int i = 0; i < this.getSizeInventory(); i++) {
 			if (this.itemHandler.getStackInSlot(i).getItem() == ItemRegistry.upgrade_block) {
@@ -254,9 +272,10 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 
 					if (tile instanceof TileEntityVibratorySelector) {
 						TileEntityVibratorySelector wandMaker = (TileEntityVibratorySelector) tile;
-						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue() && wandMaker.getManaValue() <500) {
-							this.setManaValue(manaValue - 0.1f);
-							wandMaker.addManaValue(0.1f);
+						if (this.manaValue >= 20 && this.manaValue > wandMaker.getManaValue()
+								&& wandMaker.getManaValue() < wandMaker.maxMana) {
+							this.setManaValue(manaValue - 0.4f);
+							wandMaker.addManaValue(0.4f);
 						}
 					}
 				}

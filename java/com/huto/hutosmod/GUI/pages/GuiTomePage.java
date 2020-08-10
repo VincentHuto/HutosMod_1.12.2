@@ -87,7 +87,7 @@ public class GuiTomePage extends GuiScreen {
 		{
 			GlStateManager.translate((width / 2) - 20, centerY + 10, 0);
 			GlStateManager.scale(0.9, 1, 1);
-			GlStateManager.translate(-65, 20, 0);
+			GlStateManager.translate(-65, 25, 0);
 			fontRenderer.drawSplitString(text, 0, 0, 175, 0);
 
 		}

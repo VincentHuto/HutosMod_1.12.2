@@ -80,7 +80,7 @@ public class ModelDrumMagatamas extends ModelBase {
 			Random rand = new Random();
 			GlStateManager.rotate(deg, xRotate, yRotate, zRotate);
 			if(repeat < origRepeat) {
-				GlStateManager.color(.3F, 0.2F, 0.0F, (float) repeat / (float) origRepeat * 0.4F);
+				GlStateManager.color(.1F, 0.0F, 0.1F, (float) repeat / (float) origRepeat * 0.4F);
 				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GlStateManager.disableAlpha();

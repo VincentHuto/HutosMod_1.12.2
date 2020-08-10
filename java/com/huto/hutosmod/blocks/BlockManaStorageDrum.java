@@ -2,6 +2,8 @@ package com.huto.hutosmod.blocks;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.items.ItemUpgrade;
 import com.huto.hutosmod.mana.IMana;
@@ -11,6 +13,7 @@ import com.huto.hutosmod.network.PacketHandler;
 import com.huto.hutosmod.network.VanillaPacketDispatcher;
 import com.huto.hutosmod.recipies.ModInventoryHelper;
 import com.huto.hutosmod.tileentity.TileEntityStorageDrum;
+import com.huto.hutosmod.tileentity.TileManaSimpleInventory;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -177,8 +180,11 @@ public class BlockManaStorageDrum extends BlockBase {
 
 			// If NOT sneaking and your hand IS empty
 			if (!player.isSneaking() && player.getHeldItemMainhand().getItem() == ItemRegistry.mana_debugtool) {
-	/*			String message = String.format("Tile contains §9%d§r mana ", (int) drum.getManaValue());
-				player.sendMessage(new TextComponentString(TextFormatting.BLUE + message));*/
+				/*
+				 * String message = String.format("Tile contains §9%d§r mana ", (int)
+				 * drum.getManaValue()); player.sendMessage(new
+				 * TextComponentString(TextFormatting.BLUE + message));
+				 */
 
 			}
 
@@ -238,10 +244,10 @@ public class BlockManaStorageDrum extends BlockBase {
 		}
 	}
 
-/*	@Override
-	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.add("§3Mana Storage! §r");
-		super.addInformation(stack, player, tooltip, advanced);
-
-	}*/
+	@Override
+	public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+		TileManaSimpleInventory inv = (TileManaSimpleInventory) world.getTileEntity(pos);
+		ModInventoryHelper.dropInventory(inv, world, state, pos);
+		super.breakBlock(world, pos, state);
+	}
 }

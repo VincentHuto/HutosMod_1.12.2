@@ -35,10 +35,10 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 		if (this.getManaValue() < 1000) {
 			if (count % mod == 0) {
 
-				this.addManaValue(0.1F);
+				this.addManaValue(0.2F);
 			}
 			if (world.getBiome(this.getPos()) == BiomeRegistry.DREAMSCAPE || checkStructure()) {
-				this.addManaValue(0.3F);
+				this.addManaValue(0.4F);
 			}
 
 			if (world.isRemote) {
@@ -48,12 +48,15 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 					MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 
+
 				}
+				
 
 			}
-
-			this.sendUpdates();
+			if(count>10) {
 			count = 0;
+			}
+			this.sendUpdates();
 
 		}
 	}
