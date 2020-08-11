@@ -30,6 +30,7 @@ import com.huto.hutosmod.items.runes.ItemRuneMorph;
 import com.huto.hutosmod.items.runes.ItemRuneMorphCW;
 import com.huto.hutosmod.items.runes.ItemRuneOedon;
 import com.huto.hutosmod.items.runes.ItemRuneRapture;
+import com.huto.hutosmod.items.tools.ItemKnapper;
 import com.huto.hutosmod.items.tools.ToolAxe;
 import com.huto.hutosmod.items.tools.ToolHoe;
 import com.huto.hutosmod.items.tools.ToolNullSword;
@@ -56,6 +57,7 @@ import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -91,7 +93,7 @@ public class ItemRegistry {
 	public static final Item grand_purging_stone = new ItemGrandPurgingStone("grand_purging_stone");
 	public static final Item resonant_fuel = new ItemResonantFuel("resonant_fuel");
 	public static final Item enhance_overlay = new ItemEnchancedOverlay("enhance_overlay");
-
+	public static final Item GUI_PORTA_BENCH = new ItemPortaBench("porta_bench");
 	// Food
 	public static final Item singeri_soup = new ItemSingeriSoup("singeri_soup", 3);
 	public static final Item raw_morel_on_a_stick = new ItemBase("raw_morel_on_a_stick");
@@ -119,12 +121,17 @@ public class ItemRegistry {
 	// Adding a toolMaterial
 	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 256, 8.0F, 0.3F,
 			200);
+	public static final ToolMaterial MATERIAL_OBSIDIAN_KNAPPER = EnumHelper.addToolMaterial("material_obsidian_knapper",
+			1, 256, 0.5F, 0.3F, 5);
 	// Tools
 	public static final ItemSword null_sword = new ToolNullSword("null_sword", MATERIAL_NULL);
 	public static final ItemPickaxe null_pickaxe = new ToolPickaxe("null_pickaxe", MATERIAL_NULL);
 	public static final ItemAxe null_axe = new ToolAxe("null_axe", MATERIAL_NULL);
 	public static final ItemSpade null_shovel = new ToolShovel("null_shovel", MATERIAL_NULL);
 	public static final ItemHoe null_hoe = new ToolHoe("null_hoe", MATERIAL_NULL);
+	
+	public static final ItemTool iron_knapper = new ItemKnapper("iron_knapper", 25f, MATERIAL_OBSIDIAN_KNAPPER);
+	public static final ItemTool obsidian_knapper = new ItemKnapper("obsidian_knapper", 50f, MATERIAL_OBSIDIAN_KNAPPER);
 
 	// Adding an armor Material
 	public static final ArmorMaterial armor_null = EnumHelper.addArmorMaterial("armor_null", Reference.MODID + ":null",

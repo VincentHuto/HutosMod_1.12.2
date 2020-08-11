@@ -27,7 +27,8 @@ public class BlockRegistry {
 	public static final Block Mystic_Media = new BlockBase("mystic_media", Material.ROCK).setHardness(1.5F)
 			.setResistance(10.0F);
 	public static final Block anti_earth = new BlockMysticEarth("anti_earth", Material.GROUND).setHardness(0.5F);
-	public static final Block anti_media = new BlockBase("anti_media", Material.ROCK).setHardness(1.5F).setResistance(10.0F);
+	public static final Block anti_media = new BlockBase("anti_media", Material.ROCK).setHardness(1.5F)
+			.setResistance(10.0F);
 	public static final Block nightmare_earth = new BlockMysticEarth("nightmare_earth", Material.GROUND)
 			.setHardness(0.5F);
 	public static final Block nightmare_media = new BlockBase("nightmare_media", Material.ROCK).setHardness(1.5F)
@@ -43,8 +44,8 @@ public class BlockRegistry {
 			.setResistance(2000.0F);
 	public static final Block activated_obsidian = new BlockBase("activated_obsidian", Material.ROCK).setHardness(50.0F)
 			.setResistance(2000.0F);
-	public static final Block nether_block = new BlockNetherBlock("nether_block", Material.ROCK).setHardness(5F)
-			.setResistance(15F);
+	public static final Block nether_block = new BlockNetherBlock("nether_block", Material.ROCK).setHardness(50.0F)
+			.setResistance(2000.0F);
 	public static final Block reversion_catalyst = new BlockBase("reversion_catalyst", Material.ROCK).setHardness(5F)
 			.setResistance(15F);
 	public static final Block morel_cap = new BlockBase("morel_cap", Material.CACTUS).setHardness(0.2F);

@@ -13,7 +13,9 @@ import com.huto.hutosmod.tileentity.TileEntityChiselStation;
 import com.huto.hutosmod.tileentity.TileEntityRuneStation;
 import com.huto.hutosmod.tileentity.TileEntityVibratorySelector;
 
+import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -34,6 +36,8 @@ public class GuiHandler implements IGuiHandler {
 		case (Reference.GUI_VIBRATORY_SELECTOR):
 			return new ContainerVibratorySelector(player.inventory,
 					(TileEntityVibratorySelector) world.getTileEntity(new BlockPos(x, y, z)), player);
+		case (Reference.GUI_PORTA_BENCH):
+			return new ContainerWorkbench(player.inventory, world, new BlockPos(x, y, z));
 		default:
 			return null;
 		}
@@ -58,6 +62,8 @@ public class GuiHandler implements IGuiHandler {
 					(TileEntityVibratorySelector) world.getTileEntity(new BlockPos(x, y, z)), player);
 		case (Reference.GUI_MIND_RUNES):
 			return new GuiMindRunes(player);
+		case (Reference.GUI_PORTA_BENCH):
+			return new GuiCrafting(player.inventory, world);
 		default:
 			return null;
 		}

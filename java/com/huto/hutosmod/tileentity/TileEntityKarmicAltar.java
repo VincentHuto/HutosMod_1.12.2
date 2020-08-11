@@ -174,11 +174,10 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 			EntityLiving mobTarget = getNearestTargetableMob(world, pos.getX(), pos.getY(), pos.getZ());
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
 			Vector3 endVec = vec.add(0, 1, 0);
-			Vector3 trackingendVec = vec.fromEntity(playerTarget).add(0, 1, 0);
 			Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
 			Vector3 belowVec = vec.add(0, 0, 0);
 
-			if (mod % 6 == 0 && playerTarget != null) {
+			if (mod % 6 ==0) {
 				for (int i = 0; i < 10; i++) {
 					world.spawnParticle(EnumParticleTypes.PORTAL, xpos, ypos - .5, zpos, 0, 0.05, 0);
 				}

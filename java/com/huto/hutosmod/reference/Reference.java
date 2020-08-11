@@ -27,6 +27,7 @@ public class Reference {
 	public static final int GUI_VIBRATORY_SELECTOR = 11;
 
 	public static final Logger log = LogManager.getLogger(MODID.toUpperCase());
+	public static final int GUI_PORTA_BENCH =12;
 
 	// Colors
 	public static int white = 0xFFFFFF;

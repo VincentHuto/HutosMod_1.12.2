@@ -90,7 +90,7 @@ public class KarmaEventHandler {
 	public void applyKarmaDebuffs(PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		if (karma.getKarma() <= -20.0F) {
+		if (karma.getKarma() <= -150.0F) {
 			player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 1));
 		}
 	}

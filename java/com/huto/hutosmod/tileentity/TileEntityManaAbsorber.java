@@ -43,18 +43,17 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 	public static int count = 0;
 	public static final String TAG_MANA = "mana";
 	public static final String TAG_RANK = "rank";
-	public int rank ;
+	public int rank;
 	public float rate = 0.2f;
 	public int maxMana = 1000;
 
-	
 	@Override
 	public void onLoad() {
 		super.onLoad();
 		this.updateRate();
 
 	}
-	
+
 	public void addRankUp(float rankUp) {
 		this.rank += rankUp;
 	}
@@ -198,14 +197,34 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 				}
 
 				// Functional
-				if (tile instanceof TileEntityKarmicAltar || tile instanceof TileEntityWaveGatherer
-						|| tile instanceof TileEntityManaGatherer) {
+				if (tile instanceof TileEntityWaveGatherer || tile instanceof TileEntityManaGatherer) {
 					TileModMana manaStor = (TileModMana) tile;
 
 					if (manaStor.getManaValue() > this.rate && this.getManaValue() < maxMana) {
 						this.addManaValue(this.rate);
 						manaStor.setManaValue(manaStor.manaValue - this.rate);
 						Vector3 exportLoc = Vector3.fromTileEntityCenter(manaStor);
+						// Particle Stuff
+						double xpos = pos.getX() + 0.5, ypos = pos.getY() + 1, zpos = pos.getZ() + 0.5;
+						double velocityX, velocityY, velocityZ;
+						Vec3d manaDirection = new Vec3d(manaStor.getPos().getX() - this.pos.getX(),
+								manaStor.getPos().getY() - this.pos.getY(), manaStor.getPos().getZ() - this.pos.getZ());
+						velocityX = -manaDirection.x * 0.1;
+						velocityY = -manaDirection.y * 0.1;
+						velocityZ = -manaDirection.z * 0.1;
+						if (count % 20 == 0) {
+							SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+									velocityY, velocityZ, 11, 0, 1, 10, .2f);
+							MainClass.proxy.spawnEffect(effect);
+						}
+					}
+				}
+				// Functional
+				if (tile instanceof TileEntityKarmicAltar) {
+					TileEntityKarmicAltar manaStor = (TileEntityKarmicAltar) tile;
+					if (manaStor.getManaValue() > this.rate && this.getManaValue() < maxMana) {
+						this.addManaValue(this.rate * 0.3f);
+						manaStor.setManaValue(manaStor.getManaValue() - this.rate * 0.3f);
 						// Particle Stuff
 						double xpos = pos.getX() + 0.5, ypos = pos.getY() + 1, zpos = pos.getZ() + 0.5;
 						double velocityX, velocityY, velocityZ;
@@ -295,7 +314,8 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 				}
 				// MOST mana based machines
 				if (tile instanceof TileManaSimpleInventory && !(tile instanceof TileEntityStorageDrum)
-						&& !(tile instanceof TileEntityManaCapacitor) && !(tile instanceof TileEntityManaAbsorber)) {
+						&& !(tile instanceof TileEntityManaCapacitor) && !(tile instanceof TileEntityManaAbsorber)
+						&& !(tile instanceof TileEntityKarmicAltar)) {
 					TileManaSimpleInventory manaStor = (TileManaSimpleInventory) tile;
 					if (manaStor.getManaValue() < manaStor.getMaxMana() && this.getManaValue() > this.rate) {
 						manaStor.addManaValue(this.rate);
