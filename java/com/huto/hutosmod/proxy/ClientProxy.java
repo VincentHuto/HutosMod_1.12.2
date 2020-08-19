@@ -8,6 +8,7 @@ import com.huto.hutosmod.font.LovecraftFont;
 import com.huto.hutosmod.font.ModTextFormatting;
 import com.huto.hutosmod.gui.pages.TomePageLib;
 import com.huto.hutosmod.keybinds.KeyBindRegistry;
+import com.huto.hutosmod.keybinds.KeyInputEvents;
 import com.huto.hutosmod.mindrunes.events.ClientEventHandler;
 import com.huto.hutosmod.mindrunes.events.GuiEvents;
 import com.huto.hutosmod.models.ClientTickHandler;
@@ -27,10 +28,13 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy implements IProxy {
 
 	public static runicHealthRenderer runicBarRendererIn;
 	public static manaViewerHud manaViewerHudIn;
@@ -49,7 +53,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerEventHandlers() {
-		super.registerEventHandlers();
 		MinecraftForge.EVENT_BUS.register(new GuiEvents());
 	}
 
@@ -96,7 +99,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
-		// replaceRenderers();
+		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 
 		TomePageLib.registerPages();
 		ModTextFormatting.setAkloFont(new LovecraftFont(Minecraft.getMinecraft().gameSettings,
@@ -147,6 +150,42 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new ManaViewerHandler(manaViewerHudIn));
 		karmaViewerHudIn = new karmaViewHud(mc);
 		MinecraftForge.EVENT_BUS.register(new KarmaViewHandler(karmaViewerHudIn));
+	}
+
+	@Override
+	public void registerRenderThings() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public World getClientWorld() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RayTraceResult rayTrace(double blockReachDistance, float partialTicks, EntityPlayer player, World worldIn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vec3d getPositionEyes(float partialTicks, EntityPlayer player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openTomeBook() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openElderBook() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

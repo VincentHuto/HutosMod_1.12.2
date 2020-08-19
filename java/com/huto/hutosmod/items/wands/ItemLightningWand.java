@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.huto.hutosmod.MainClass;
+import com.huto.hutosmod.damage.ParticleEntityDamageSource;
 import com.huto.hutosmod.entities.EntityElemental;
 import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mana.IMana;
@@ -92,37 +93,15 @@ public class ItemLightningWand extends Item {
 						MainClass.proxy.lightningFX(vec, trackingendVec, 1F, System.nanoTime(), Reference.yellow,
 								Reference.black);
 					}
-					target.setHealth(target.getHealth() - 0.5F);
+					ParticleEntityDamageSource damage = new ParticleEntityDamageSource("lightning", null, playerIn);
+					target.attackEntityFrom(damage, 2F);
+					if(playerIn.world.isRemote) {
 					target.performHurtAnimation();
+					}
 				}
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		ItemStack itemStack = playerIn.getHeldItem(handIn);
-		RayTraceResult resu = playerIn.rayTrace(100, 10);
-		Vector3 hitVec = new Vector3(resu.getBlockPos().getX(), resu.getBlockPos().getY(), resu.getBlockPos().getZ());
-		Vector3 vec = Vector3.fromEntityCenter(playerIn);
-		// MainClass.proxy.lightningFX(vec, hitVec, 5F, System.nanoTime(),
-		// Reference.black, Reference.white);
-
-		// System.out.println(resu.toString());
-
-		if (!playerIn.world.isRemote) {
-			WorldServer ws = (WorldServer) playerIn.world;
-			/*
-			 * ws.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, playerIn.posX +
-			 * playerIn.width / 2, playerIn.posY + playerIn.height / 2, playerIn.posZ +
-			 * playerIn.width / 2, 100, playerIn.width, playerIn.height, playerIn.width,
-			 * 0.05);
-			 */
-		}
-
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
-
 	}
 
 }

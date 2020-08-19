@@ -57,7 +57,7 @@ public class ItemRuneMoon extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 ==0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 250, 0, false, false));
+			player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 250, this.getLevel(), false, false));
 		}
 	}
 

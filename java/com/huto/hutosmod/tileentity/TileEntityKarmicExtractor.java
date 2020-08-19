@@ -45,9 +45,11 @@ public class TileEntityKarmicExtractor extends TileModMana implements ITickable 
 
 	@Override
 	public void update() {
-		ManaParticle part1 = new ManaParticle(world, this.getPos().getX() + .5, this.getPos().getY() + .8,
-				this.getPos().getZ() + .5, 0, -0.1, 0, 0, 0, 0, 6, 10);
-		Minecraft.getMinecraft().effectRenderer.addEffect(part1);
+		if (world.isRemote) {
+			ManaParticle part1 = new ManaParticle(world, this.getPos().getX() + .5, this.getPos().getY() + .8,
+					this.getPos().getZ() + .5, 0, -0.1, 0, 0, 0, 0, 6, 10);
+			Minecraft.getMinecraft().effectRenderer.addEffect(part1);
+		}
 	}
 
 	public IBlockState getState() {
@@ -70,19 +72,20 @@ public class TileEntityKarmicExtractor extends TileModMana implements ITickable 
 			return;
 
 		IKarma karma = player.getCapability(KarmaProvider.KARMA_CAPABILITY, null);
-		EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, new ItemStack(ItemRegistry.karmic_drop));
-			if (karma.getKarma() >= 1) {
-				karma.consume(1);
-				addManaValue(20);
-				world.spawnEntity(outputItem);
+		EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
+				new ItemStack(ItemRegistry.karmic_drop));
+		if (karma.getKarma() >= 1) {
+			karma.consume(1);
+			addManaValue(20);
+			world.spawnEntity(outputItem);
 
-			}
-			if (karma.getKarma() < 0) {
-				karma.add(1);
-				addManaValue(10);
-				world.spawnEntity(outputItem);
+		}
+		if (karma.getKarma() < 0) {
+			karma.add(1);
+			addManaValue(10);
+			world.spawnEntity(outputItem);
 
-			}
-			this.sendUpdates();
+		}
+		this.sendUpdates();
 	}
 }

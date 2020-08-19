@@ -25,7 +25,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class TileEntityKarmicAltar extends TileManaSimpleInventory implements ITickable {
-	public static int cooldown = 0;
+	int cooldown = 0;
 	private static final int SET_COOLDOWN_EVENT = 1;
 
 	@Override
@@ -66,8 +66,6 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 		return 1;
 	}
 
-	
-	 
 	@Override
 	protected SimpleItemStackHandler createItemHandler() {
 		return new SimpleItemStackHandler(this, false) {
@@ -76,7 +74,7 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 				return 1;
 			}
 		};
-		
+
 	}
 
 	public boolean isEmpty() {
@@ -87,105 +85,55 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 		return true;
 	}
 
-	private EntityPlayer getNearestTargetablePlayer(World world, double xpos, double ypos, double zpos) {
-		final double TARGETING_DISTANCE = 16;
-		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
-				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
-		List<EntityPlayer> allNearbyMobs = world.getEntitiesWithinAABB(EntityPlayer.class, targetRange);
-		EntityPlayer nearestMob = null;
-		double closestDistance = Double.MAX_VALUE;
-		for (EntityPlayer nextMob : allNearbyMobs) {
-			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
-			if (nextClosestDistance < closestDistance) {
-				closestDistance = nextClosestDistance;
-				nearestMob = nextMob;
-			}
-		}
-		return nearestMob;
-	}
-
-	private EntityLiving getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
-		final double TARGETING_DISTANCE = 16;
-		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
-				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
-		List<EntityLiving> allNearbyMobs = world.getEntitiesWithinAABB(EntityLiving.class, targetRange);
-		EntityLiving nearestMob = null;
-		double closestDistance = Double.MAX_VALUE;
-		for (EntityLiving nextMob : allNearbyMobs) {
-			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
-			if (nextClosestDistance < closestDistance) {
-				closestDistance = nextClosestDistance;
-				nearestMob = nextMob;
-			}
-		}
-		return nearestMob;
-	}
-
 	public int count = 0;
 	boolean consumed = false;
 
-	public static boolean checkConsumed() {
-		if (cooldown > 0) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
 	@Override
 	public void update() {
+
 		Random rand = new Random();
 		double xpos = pos.getX() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
 		double ypos = pos.getY() + 1.3;
 		double zpos = pos.getZ() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
 		int mod = 3 + rand.nextInt(10);
 
+		// Grabs the item above the block
+		List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
+				new AxisAlignedBB(pos, pos.add(1, 1, 1)));
+		for (EntityItem item : items)
+			if (!item.isDead && !item.getItem().isEmpty()) {
+				ItemStack stack = item.getItem();
+				addItem(null, stack, null);
+			}
+
+		// After the cooldown counter is done consume the item and add mana
+		if (cooldown == 0) {
+			if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
+				itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+				sendUpdates();
+				this.addManaValue(30);
+			}
+
+		}
+
+		// System.out.println(cooldown);
+		count++;
+		if (cooldown > 0) {
+			if (count % 10 == 0) {
+				count = 0;
+				if (world.isRemote) {
+					Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
+					Vector3 belowVec = Vector3.fromTileEntityCenter(this);
+					MainClass.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), Reference.white,
+							Reference.black);
+				}
+			}
+
+		}
+
 		// Decement the cooldown
 		if (cooldown > 0) {
 			cooldown--;
-		}
-		
-		// After the cooldown counter is done consume the item and add mana
-				if (cooldown == 0) {
-					if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY) {
-						itemHandler.setStackInSlot(0, ItemStack.EMPTY);
-						sendUpdates();
-						this.addManaValue(30);
-					}
-
-				}
-		
-		// Grabs the item above the block
-		if (!world.isRemote) {
-			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-					new AxisAlignedBB(pos, pos.add(1, 1, 1)));
-			for (EntityItem item : items)
-				if (!item.isDead && !item.getItem().isEmpty()) {
-					ItemStack stack = item.getItem();
-					addItem(null, stack, null);
-				}
-		}
-
-		
-
-		if (checkConsumed()) {
-			EntityPlayer playerTarget = getNearestTargetablePlayer(world, pos.getX(), pos.getY(), pos.getZ());
-			EntityLiving mobTarget = getNearestTargetableMob(world, pos.getX(), pos.getY(), pos.getZ());
-			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
-			Vector3 endVec = vec.add(0, 1, 0);
-			Vector3 vecabove = Vector3.fromTileEntityCenter(this).add(0, 1, 0);
-			Vector3 belowVec = vec.add(0, 0, 0);
-
-			if (mod % 6 ==0) {
-				for (int i = 0; i < 10; i++) {
-					world.spawnParticle(EnumParticleTypes.PORTAL, xpos, ypos - .5, zpos, 0, 0.05, 0);
-				}
-//				MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.white, Reference.black);
-				MainClass.proxy.lightningFX(vecabove, belowVec, 15F, System.nanoTime(), Reference.white,
-						Reference.black);
-
-			}
 		}
 
 	}
@@ -205,4 +153,11 @@ public class TileEntityKarmicAltar extends TileManaSimpleInventory implements IT
 		markDirty();
 	}
 
+	public int getCooldown() {
+		return cooldown;
+	}
+
+	public void setCooldown(int cooldown) {
+		this.cooldown = cooldown;
+	}
 }

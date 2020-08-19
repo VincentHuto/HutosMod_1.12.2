@@ -1,11 +1,14 @@
 package com.huto.hutosmod.particles;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.huto.hutosmod.damage.ParticleEntityDamageSource;
+import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.proxy.Vector3;
 
 import gnu.trove.map.hash.TIntIntHashMap;
@@ -15,6 +18,10 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -57,6 +64,57 @@ public class FXLightning extends Particle {
 		calculateCollisionAndDiffs();
 
 		Collections.sort(segments, (o1, o2) -> Float.compare(o2.light, o1.light));
+	}
+
+
+	private EntityLiving getNearestTargetableMob(World world, double xpos, double ypos, double zpos) {
+		final double TARGETING_DISTANCE = 16;
+		AxisAlignedBB targetRange = new AxisAlignedBB(xpos - TARGETING_DISTANCE, ypos, zpos - TARGETING_DISTANCE,
+				xpos + TARGETING_DISTANCE, ypos + TARGETING_DISTANCE, zpos + TARGETING_DISTANCE);
+		List<EntityLiving> allNearbyMobs = world.getEntitiesWithinAABB(EntityLiving.class, targetRange);
+		EntityLiving nearestMob = null;
+		double closestDistance = Double.MAX_VALUE;
+		for (EntityLiving nextMob : allNearbyMobs) {
+			double nextClosestDistance = nextMob.getDistanceSq(xpos, ypos, zpos);
+			if (nextClosestDistance < closestDistance) {
+				closestDistance = nextClosestDistance;
+				nearestMob = nextMob;
+			}
+		}
+		return nearestMob;
+	}
+	@Override
+	public void onUpdate() {
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
+
+		if (this.particleAge++ >= this.particleMaxAge) {
+			this.setExpired();
+		}
+
+		this.motionY -= 0.04D * (double) this.particleGravity;
+		this.move(this.motionX, this.motionY, this.motionZ);
+		this.motionX *= 0.9800000190734863D;
+		this.motionY *= 0.9800000190734863D;
+		this.motionZ *= 0.9800000190734863D;
+
+		if (this.onGround) {
+			this.motionX *= 0.699999988079071D;
+			this.motionZ *= 0.699999988079071D;
+		}
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
+		move(motionX, motionY, motionZ);
+		EntityLiving player = this.getNearestTargetableMob(world, posX, posY, posZ);
+		if (player != null) {
+			ParticleEntityDamageSource damage = new ParticleEntityDamageSource("vibration",null,player);
+				player.attackEntityFrom(damage, 0.5f);
+
+			}
+		
+
 	}
 
 	@Override

@@ -97,6 +97,7 @@ public class BlockVibratorySelector extends BlockBase {
 
 		if (worldIn.isRemote)
 			return true;
+		
 		TileEntityVibratorySelector te = (TileEntityVibratorySelector) worldIn.getTileEntity(pos);
 
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);

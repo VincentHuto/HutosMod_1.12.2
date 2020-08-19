@@ -58,6 +58,9 @@ public class BlockRuneStation extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if(worldIn.isRemote)
+			return true;
+		
 		playerIn.openGui(MainClass.instance, Reference.GUI_Rune_Station, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}

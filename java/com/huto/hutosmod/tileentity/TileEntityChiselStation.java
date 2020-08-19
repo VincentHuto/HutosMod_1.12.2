@@ -139,7 +139,11 @@ public class TileEntityChiselStation extends TileEntityLockableLoot implements I
 					ItemStack output = recipe.getOutput().copy();
 					EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5,
 							output);
-					world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+					if (world.isRemote) {
+
+						world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D,
+								0.0D);
+					}
 					chestContents.set(0, output);
 					currentRecipe = null;
 					for (int i = 0; i < getSizeInventory(); i++) {

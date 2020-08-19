@@ -39,6 +39,8 @@ public class TomePageLib {
 	public static String WORLD_PAGE_1 = "mystictome.world.page.1.text";
 	public static String WORLD_PAGE_2 = "mystictome.world.page.2.text";
 	public static String WORLD_PAGE_3 = "mystictome.world.page.3.text";
+	public static String WORLD_PAGE_4 = "mystictome.world.page.4.text";
+	public static String WORLD_PAGE_5 = "mystictome.world.page.5.text";
 
 	// Equips
 	public static String EQUIP_PAGE_1 = "mystictome.equip.page.1.text";
@@ -60,6 +62,8 @@ public class TomePageLib {
 	public static String WANDS_PAGE_1 = "mystictome.wands.page.1.text";
 	// Runes
 	public static String RUNES_PAGE_1 = "mystictome.runes.page.1.text";
+	public static String RUNES_PAGE_2 = "mystictome.runes.page.2.text";
+
 	// Karma
 	public static String KARMA_PAGE_1 = "mystictome.karma.page.1.text";
 	// Elder
@@ -92,13 +96,23 @@ public class TomePageLib {
 				new ItemStack(ItemRegistry.null_crystal), I18n.format(INTRO_PAGE_6)));
 		IntroPageList.add(new GuiTomePage(6, EnumTomeCatagories.INTRO, "Page 7", "The power of vitals",
 				new ItemStack(ItemRegistry.null_ingot), I18n.format(INTRO_PAGE_7)));
+		
+		// Karma
+				KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
+						new ItemStack(ItemRegistry.karmic_drop), I18n.format(KARMA_PAGE_1)));
+		
 		// World Gen
 		WorldGenPageList.add(new GuiTomePage(0, EnumTomeCatagories.WORLDGEN, "Page 1", "Its all Natural!",
 				new ItemStack(BlockRegistry.Mystic_Earth), I18n.format(WORLD_PAGE_1)));
 		WorldGenPageList.add(new GuiTomePage(1, EnumTomeCatagories.WORLDGEN, "Page 2", "Vibrational Flora",
 				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_2)));
 		WorldGenPageList.add(new GuiTomePage(2, EnumTomeCatagories.WORLDGEN, "Page 3", "DreamScape",
-				new ItemStack(BlockRegistry.Mystic_Sapling), I18n.format(WORLD_PAGE_3)));
+				new ItemStack(BlockRegistry.Mystic_Earth), I18n.format(WORLD_PAGE_3)));
+		WorldGenPageList.add(new GuiTomePage(3, EnumTomeCatagories.WORLDGEN, "Page 4", "Mysterious Mask",
+				new ItemStack(ItemRegistry.mysterious_mask), I18n.format(WORLD_PAGE_4)));
+		WorldGenPageList.add(new GuiTomePage(4, EnumTomeCatagories.WORLDGEN, "Page 5", "Nightmares",
+				new ItemStack(BlockRegistry.nightmare_earth), I18n.format(WORLD_PAGE_5)));
+		
 		// Weapons and Armor
 		ArmorPageList.add(new GuiTomePage(0, EnumTomeCatagories.EQUIPS, "Page 1", "Form AND Function",
 				new ItemStack(ItemRegistry.null_chestplate), I18n.format(EQUIP_PAGE_1)));
@@ -122,16 +136,15 @@ public class TomePageLib {
 				new ItemStack(BlockRegistry.karmic_altar), I18n.format(GENERATION_PAGE_1)));
 		GeneratePageList.add(new GuiTomePage(2, EnumTomeCatagories.GENERATION, "Wave Generator", "Go with the Flow",
 				new ItemStack(BlockRegistry.wave_gatherer), I18n.format(GENERATION_PAGE_1)));
-		
 		// Wands & Magic Gloves
 		WandsPageList.add(new GuiTomePage(0, EnumTomeCatagories.WANDS, "Wands", "Watch where your pointing it",
 				new ItemStack(ItemRegistry.wand_consume_mana), I18n.format(WANDS_PAGE_1)));
 		// Runes
-		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "Etching your mind",
+		RunesPageList.add(new GuiTomePage(0, EnumTomeCatagories.RUNES, "Runes", "More than goodluck",
 				new ItemStack(ItemRegistry.rune_blank), I18n.format(RUNES_PAGE_1)));
-		// Karma
-		KarmaPageList.add(new GuiTomePage(0, EnumTomeCatagories.KARMA, "Karma", "Be careful what you do",
-				new ItemStack(ItemRegistry.karmic_drop), I18n.format(KARMA_PAGE_1)));
+		RunesPageList.add(new GuiTomePage(1, EnumTomeCatagories.RUNES, "Runes cont.", "Etching your mind",
+				new ItemStack(ItemRegistry.rune_beast), I18n.format(RUNES_PAGE_2)));
+		
 		// Elder
 		ElderPageList.add(new GuiTomePage(0, EnumTomeCatagories.ELDER, " The Elders", "Of the aeons old",
 				new ItemStack(ItemRegistry.rune_milkweed_c), I18n.format(ELDER_PAGE_1)));

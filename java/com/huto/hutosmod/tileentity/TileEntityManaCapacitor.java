@@ -182,31 +182,43 @@ public class TileEntityManaCapacitor extends TileManaSimpleInventory implements 
 					r = 0.2F;
 					g = 0.0F;
 					b = 1.0F;
-					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b, 70, scaleF);
-					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+			
+					if (world.isRemote) {
+						ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+								r, g, b, 70, scaleF);
+
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else if (this.getManaValue() > 50 && this.getManaValue() <= 100) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 1.0F;
-					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b, 70, scaleF);
-					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+			
+					if (world.isRemote) {
+						ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+								r, g, b, 70, scaleF);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else if (this.getManaValue() > 100 && this.getManaValue() <= 150) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 0.0F;
-					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b, 70, scaleF);
-					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+				
+					if (world.isRemote) {
+						ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+								r, g, b, 70, scaleF);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else {
 					r = 0.0F;
 					g = 0.0F;
 					b = 0.0F;
-					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
-							r, g, b, 70, scaleF);
-					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-
+				
+					if (world.isRemote) {
+						ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
+								r, g, b, 70, scaleF);
+						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				}
 			}
 		}

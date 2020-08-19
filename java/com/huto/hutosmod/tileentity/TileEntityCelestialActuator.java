@@ -55,7 +55,6 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 
 		if (cooldown > 0) {
 			cooldown--;
-			System.out.println(cooldown);
 		}
 
 	}
@@ -78,7 +77,6 @@ public class TileEntityCelestialActuator extends TileModMana implements ITickabl
 				Vector3 endVec = vec.add(0, 0.5, 0);
 				this.setManaValue(manaValue - 10);
 				cooldown = 10;
-				System.out.println("WANDED: " + this.getClass().getSimpleName());
 				if (state == false) {
 					world.setWorldTime(world.getWorldTime() + 1000);
 					MainClass.proxy.lightningFX(vec, endVec, 1F, System.nanoTime(), Reference.orange, Reference.yellow);

@@ -72,8 +72,8 @@ public class BlockRegistry {
 	public static final Block celestial_actuator = new BlockCelestialActuator("celestial_actuator", Material.ROCK);
 	public static final Block runic_chiselstation = new BlockChiselStation("runic_chiselstation", Material.ROCK);
 	public static final Block mana_absorber = new BlockManaAbsorber("mana_absorber", Material.ROCK);
-
 	public static final Block disappering_block = new BlockDisapperingBlock("disappering_block", Material.ROCK);
+	public static final Block slime_repelent = new BlockSlimeRepelent("slime_repelent", Material.ROCK);
 
 	// Fluids
 	public static final Block WHITE_WATER_FLUID = new BlockWhiteWaterFluid("white_water", FluidInit.WHITE_WATER_FLUID,

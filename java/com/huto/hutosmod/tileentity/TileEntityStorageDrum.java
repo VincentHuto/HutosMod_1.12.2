@@ -211,31 +211,41 @@ public class TileEntityStorageDrum extends TileManaSimpleInventory implements IT
 					r = 0.2F;
 					g = 0.0F;
 					b = 1.0F;
+					if(world.isRemote) {
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else if (this.getManaValue() > 300 && this.getManaValue() <= 600) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 1.0F;
+					if(world.isRemote) {
+
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else if (this.getManaValue() > 600 && this.getManaValue() <= 900) {
 					r = 1.0F;
 					g = 0.0F;
 					b = 0.0F;
+					if(world.isRemote) {
+
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+					}
 				} else {
 					r = 0.0F;
 					g = 0.0F;
 					b = 0.0F;
+					if(world.isRemote) {
+
 					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ,
 							r, g, b, 70, scaleF);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-
+					}
 				}
 			}
 		}

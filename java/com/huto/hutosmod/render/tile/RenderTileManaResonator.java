@@ -91,6 +91,9 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 			blueRepeat = 5;
 			redRepeat = 5;
 		} else if (te.getResonantState() == EnumEssecenceType.REVERT) {
+			blueRepeat = 20;
+			redRepeat = 20;
+		} else if (te.getResonantState() == EnumEssecenceType.BOTH) {
 			blueRepeat = 40;
 			redRepeat = 40;
 		} else {
@@ -168,12 +171,11 @@ public class RenderTileManaResonator extends TileEntitySpecialRenderer<TileEntit
 
 				TileModMana te = (TileModMana) player.getEntityWorld().getTileEntity(pos);
 				ItemStack stack = player.getHeldItemMainhand();
-/*
-				boolean foundOnHead = false;
-				ItemStack slotItemStack = player.inventory.armorItemInSlot(3);
-				if (slotItemStack.getItem() == ItemRegistry.mana_viewer) {
-					foundOnHead = true;
-				}*/
+				/*
+				 * boolean foundOnHead = false; ItemStack slotItemStack =
+				 * player.inventory.armorItemInSlot(3); if (slotItemStack.getItem() ==
+				 * ItemRegistry.mana_viewer) { foundOnHead = true; }
+				 */
 
 				if (te instanceof TileModMana && te != null) {
 					if (stack.getItem() == ItemRegistry.mana_debugtool) {

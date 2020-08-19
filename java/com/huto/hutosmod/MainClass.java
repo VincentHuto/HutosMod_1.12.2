@@ -3,6 +3,7 @@ package com.huto.hutosmod;
 import com.huto.hutosmod.creativetabs.HutosTab;
 import com.huto.hutosmod.gui.GuiHandler;
 import com.huto.hutosmod.proxy.CommonProxy;
+import com.huto.hutosmod.proxy.IProxy;
 import com.huto.hutosmod.reference.Reference;
 import com.huto.hutosmod.reference.RegistryHandler;
 
@@ -26,7 +27,8 @@ public class MainClass {
 	public static MainClass instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
-	public static CommonProxy proxy;
+	public static IProxy proxy;
+	
 	public static SimpleNetworkWrapper network;
 	public static final CreativeTabs tabHutosMod = new HutosTab("tabHutosMod");
 

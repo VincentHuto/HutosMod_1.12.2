@@ -36,10 +36,12 @@ import com.huto.hutosmod.items.tools.ToolHoe;
 import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.items.tools.ToolPickaxe;
 import com.huto.hutosmod.items.tools.ToolShovel;
+import com.huto.hutosmod.items.tools.ToolVeinPickaxe;
 import com.huto.hutosmod.items.wands.ItemAbsorbWand;
 import com.huto.hutosmod.items.wands.ItemConsumeWand;
 import com.huto.hutosmod.items.wands.ItemFireballWand;
 import com.huto.hutosmod.items.wands.ItemGreatFireballWand;
+import com.huto.hutosmod.items.wands.ItemGreatStormWand;
 import com.huto.hutosmod.items.wands.ItemHealOthersWand;
 import com.huto.hutosmod.items.wands.ItemHealSelfWand;
 import com.huto.hutosmod.items.wands.ItemLightningWand;
@@ -94,6 +96,11 @@ public class ItemRegistry {
 	public static final Item resonant_fuel = new ItemResonantFuel("resonant_fuel");
 	public static final Item enhance_overlay = new ItemEnchancedOverlay("enhance_overlay");
 	public static final Item GUI_PORTA_BENCH = new ItemPortaBench("porta_bench");
+	public static final Item drying_agent = new ItemDryingAgent("drying_agent");
+	public static final Item repulsion_charm = new ItemRepulsionCharm("repulsion_charm");
+	public static final Item attraction_charm = new ItemAttractionCharm("attraction_charm");
+
+
 	// Food
 	public static final Item singeri_soup = new ItemSingeriSoup("singeri_soup", 3);
 	public static final Item raw_morel_on_a_stick = new ItemBase("raw_morel_on_a_stick");
@@ -117,9 +124,10 @@ public class ItemRegistry {
 	public static final Item wand_healself = new ItemHealSelfWand("wand_healself");
 	public static final Item wand_healother = new ItemHealOthersWand("wand_healother");
 	public static final Item wand_lightning = new ItemLightningWand("wand_lightning");
+	public static final Item wand_greatstorm = new ItemGreatStormWand("wand_greatstorm");
 
 	// Adding a toolMaterial
-	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 256, 8.0F, 0.3F,
+	public static final ToolMaterial MATERIAL_NULL = EnumHelper.addToolMaterial("material_null", 3, 2000, 12.0F, 0.3F,
 			200);
 	public static final ToolMaterial MATERIAL_OBSIDIAN_KNAPPER = EnumHelper.addToolMaterial("material_obsidian_knapper",
 			1, 256, 0.5F, 0.3F, 5);
@@ -129,7 +137,8 @@ public class ItemRegistry {
 	public static final ItemAxe null_axe = new ToolAxe("null_axe", MATERIAL_NULL);
 	public static final ItemSpade null_shovel = new ToolShovel("null_shovel", MATERIAL_NULL);
 	public static final ItemHoe null_hoe = new ToolHoe("null_hoe", MATERIAL_NULL);
-	
+	public static final ItemPickaxe duality_pick = new ToolVeinPickaxe("duality_pick", MATERIAL_NULL);
+
 	public static final ItemTool iron_knapper = new ItemKnapper("iron_knapper", 25f, MATERIAL_OBSIDIAN_KNAPPER);
 	public static final ItemTool obsidian_knapper = new ItemKnapper("obsidian_knapper", 50f, MATERIAL_OBSIDIAN_KNAPPER);
 

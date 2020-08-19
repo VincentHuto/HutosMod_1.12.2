@@ -87,7 +87,10 @@ public class ManaResonatorRecipeCatagory implements IRecipeCategory<ManaResonato
 		} else if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.GREY) {
 			catalyst = BlockRegistry.mindfog;
 
-		} else {
+		} else if (recipeWrapper.getCurrentRecipe().getRecipeType() == EnumEssecenceType.BOTH) {
+			catalyst = BlockRegistry.primal_ooze_fluid;
+
+		}else {
 			catalyst = Blocks.AIR;
 
 		}

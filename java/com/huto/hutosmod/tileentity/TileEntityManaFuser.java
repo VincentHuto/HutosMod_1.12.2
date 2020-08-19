@@ -122,23 +122,26 @@ public class TileEntityManaFuser extends TileManaSimpleInventory implements ITic
 						double ypos = pos.getY() + 1.2;
 						Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
 						Vector3 endVec = vec.add(0, 0.5, 0);
-						Vector3 redVec =  Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
-						Vector3 blueVec =  Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
+						Vector3 redVec = Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
+						Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, -0.2, 0);
 						double velocityX = 0, velocityY = 0.05, velocityZ = 0;
-						double redValue=0;
-						double blueValue =0;
-						ManaParticle newEffect = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.9,
-								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
-						ManaParticle newEffect1 = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.1,
-								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
-						ManaParticle newEffect2 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.1,
-								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
-						ManaParticle newEffect3 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.9,
-								velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						double redValue = 0;
+						double blueValue = 0;
+
+						if (world.isRemote) {
+							ManaParticle newEffect = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+							ManaParticle newEffect1 = new ManaParticle(world, pos.getX() + 0.1, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+							ManaParticle newEffect2 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.1,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+							ManaParticle newEffect3 = new ManaParticle(world, pos.getX() + 0.9, ypos, pos.getZ() + 0.9,
+									velocityX, velocityY, velocityZ, 1.0F, 0.0F, 1.0F, 13, 4);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect2);
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect3);
+						}
 						count = 0;
 
 						if (world.isRemote) {
@@ -226,7 +229,9 @@ public class TileEntityManaFuser extends TileManaSimpleInventory implements ITic
 		if (recipe != null && manaValue >= recipe.getMana()) {
 			ItemStack output = recipe.getOutput().copy();
 			EntityItem outputItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, output);
-			world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+			if (world.isRemote) {
+				world.spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(), pos.getZ(), 0.0D, 0.0D, 0.0D);
+			}
 			world.spawnEntity(outputItem);
 			manaValue -= recipe.getMana();
 			currentRecipe = null;

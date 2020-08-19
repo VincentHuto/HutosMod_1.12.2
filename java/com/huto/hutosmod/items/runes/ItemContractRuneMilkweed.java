@@ -2,22 +2,20 @@ package com.huto.hutosmod.items.runes;
 
 import java.util.List;
 
-import com.huto.hutosmod.MainClass;
-import com.huto.hutosmod.items.ItemRegistry;
 import com.huto.hutosmod.mindrunes.RuneApi;
 import com.huto.hutosmod.mindrunes.RuneType;
 import com.huto.hutosmod.mindrunes.cap.IRune;
 import com.huto.hutosmod.mindrunes.events.IRunesItemHandler;
+import com.huto.hutosmod.network.PacketHandler;
+import com.huto.hutosmod.network.UpdateFlyingPacket;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -73,7 +71,9 @@ public class ItemContractRuneMilkweed extends ItemRune implements IRune {
 		player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, .75F, 1.9f);
 		if (player instanceof EntityPlayer) {
 			EntityPlayer capaPlayer = (EntityPlayer) player;
-			((EntityPlayer) player).capabilities.allowFlying = true;
+			if (!player.getEntityWorld().isRemote) {
+				updateClientServerFlight((EntityPlayerMP) player, true);
+			}
 		}
 	}
 
@@ -83,11 +83,22 @@ public class ItemContractRuneMilkweed extends ItemRune implements IRune {
 		if (player instanceof EntityPlayer) {
 			EntityPlayer capaPlayer = (EntityPlayer) player;
 			if (!((EntityPlayer) player).isCreative()) {
-				((EntityPlayer) player).capabilities.allowFlying = false;
-				((EntityPlayer) player).capabilities.isFlying = false;
+				if (!player.getEntityWorld().isRemote) {
+					updateClientServerFlight((EntityPlayerMP) player, false, false);
+				}
 			}
 		}
 
+	}
+
+	public static void updateClientServerFlight(EntityPlayerMP player, boolean allowFlying) {
+		updateClientServerFlight(player, allowFlying, allowFlying && player.capabilities.isFlying);
+	}
+
+	public static void updateClientServerFlight(EntityPlayerMP player, boolean allowFlying, boolean isFlying) {
+		PacketHandler.sendTo(new UpdateFlyingPacket(allowFlying, isFlying), player);
+		player.capabilities.allowFlying = allowFlying;
+		player.capabilities.isFlying = isFlying;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.huto.hutosmod.reference;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.biomes.BiomeRegistry;
 import com.huto.hutosmod.blocks.BlockRegistry;
+import com.huto.hutosmod.blocks.CustomOreDictionary;
 import com.huto.hutosmod.blocks.FluidInit;
 import com.huto.hutosmod.commands.CommandClearKarma;
 import com.huto.hutosmod.commands.CommandClearMana;
@@ -105,14 +106,12 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(BlockRegistry.BLOCKS.toArray(new Block[0]));
-		TileEntityHandler.registerTileEntities();
 
 	}
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public static void onModelRegister(ModelRegistryEvent event) {
-		
 		
 	//	ModelLoaderRegistry.registerLoader(new EnhancementCustomModelLoader());
 	
@@ -148,6 +147,7 @@ public class RegistryHandler {
 	}
 
 	public static void preInitRegistries(FMLPreInitializationEvent event) {
+		TileEntityHandler.registerTileEntities();
 		FluidInit.registerFluids();
 		BiomeRegistry.registerBiomes();
 		GameRegistry.registerWorldGenerator(new ModWorldGen(), 0);
@@ -161,8 +161,8 @@ public class RegistryHandler {
 	}
 
 	public static void initRegistries() {
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(MainClass.instance, new GuiHandler());
-		MinecraftForge.EVENT_BUS.register(new KeyInputEvents());
 		MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerEntity());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerItem());
@@ -188,6 +188,7 @@ public class RegistryHandler {
 	}
 
 	public static void postInitRegistries() {
+		CustomOreDictionary.init();
 
 	}
 

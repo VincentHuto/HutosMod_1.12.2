@@ -59,7 +59,7 @@ public class ItemRuneRapture extends ItemRune implements IRune {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 ==0) {
 			if (!player.isPotionActive(MobEffects.HEALTH_BOOST))
 
-				player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 250, 2, false, false));
+				player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 250, this.getLevel(), false, false));
 
 			else {
 
@@ -67,7 +67,7 @@ public class ItemRuneRapture extends ItemRune implements IRune {
 
 			    if (potionEffect.getDuration() < 250)
 
-			        potionEffect.combine(new PotionEffect(MobEffects.HEALTH_BOOST, 250, 2, false,false));
+			        potionEffect.combine(new PotionEffect(MobEffects.HEALTH_BOOST, 250, this.getLevel(), false,false));
 
 			    }		}
 	}

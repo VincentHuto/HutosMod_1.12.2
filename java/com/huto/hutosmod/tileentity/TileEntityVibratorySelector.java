@@ -123,15 +123,21 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 		int mod = 3 + rand.nextInt(10);
 		int age = 100;
 		if (count > 0 && count % 6 == 0) {
-			SphereParticle newEffect = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
-					pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityBlueY, (zMod * 0.1) * 0.01, 0.0F, 0.0F,
-					2.0F, age, 0.1f);
-			MainClass.proxy.spawnEffect(newEffect);
+			if (world.isRemote) {
 
-			SphereParticle newEffect1 = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
-					pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityRedY, (zMod * 0.1) * 0.01, 2.0F, 0.0F,
-					0.0F, age, 0.1f);
-			MainClass.proxy.spawnEffect(newEffect1);
+				SphereParticle newEffect = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
+						pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityBlueY, (zMod * 0.1) * 0.01, 0.0F,
+						0.0F, 2.0F, age, 0.1f);
+
+				MainClass.proxy.spawnEffect(newEffect);
+			}
+			if (world.isRemote) {
+
+				SphereParticle newEffect1 = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.25, ypos,
+						pos.getZ() + 0.5 + zMod * 0.25, (xMod * 0.1) * 0.01, velocityRedY, (zMod * 0.1) * 0.01, 2.0F,
+						0.0F, 0.0F, age, 0.1f);
+				MainClass.proxy.spawnEffect(newEffect1);
+			}
 			count = 0;
 		}
 	}
@@ -152,6 +158,7 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 					compound.removeTag("Lore");
 					compound.removeTag("display");
 					compound.removeTag(TAG_FREQUENCY);
+					outputStack.setTagCompound(null);
 					world.addBlockEvent(getPos(), getBlockType(), decraft_event, 0);
 					this.setInventorySlotContents(1, outputStack);
 					this.setInventorySlotContents(0, ItemStack.EMPTY);

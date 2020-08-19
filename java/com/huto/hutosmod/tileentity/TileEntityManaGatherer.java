@@ -28,8 +28,8 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 		double ypos = pos.getY() + 1.3;
 		double zpos = pos.getZ() + 0.5 + ((rand.nextDouble() - rand.nextDouble()) * .3);
 		double velocityX = 0, velocityY = -0.2, velocityZ = 0;
-		ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ, 0.0F, 0.9F,
-				0.9F, 70, 1);
+		
+		
 		count++;
 		int mod = 3 + rand.nextInt(10);
 		if (this.getManaValue() < 1000) {
@@ -45,6 +45,9 @@ public class TileEntityManaGatherer extends TileModMana implements ITickable {
 				Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0.3, 0);
 				Vector3 endVec = vec.add(0, 0.5, 0);
 				if (count % 10 == 0) {
+					
+					ManaParticle newEffect = new ManaParticle(world, xpos, ypos, zpos, velocityX, velocityY, velocityZ, 0.0F, 0.9F,
+							0.9F, 70, 1);
 					MainClass.proxy.lightningFX(vec, endVec, 15F, System.nanoTime(), Reference.blue, Reference.white);
 					Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
 

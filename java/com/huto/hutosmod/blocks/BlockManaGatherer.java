@@ -119,20 +119,20 @@ public class BlockManaGatherer extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing side, float par7, float par8, float par9) {
-		if (!world.isRemote) {
-			TileEntityManaGatherer drum = (TileEntityManaGatherer) world.getTileEntity(pos);
-			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-			ItemStack stack = player.getHeldItem(hand);
-			Item stackItem = stack.getItem();
+		if(world.isRemote)
+			return true;
+		TileEntityManaGatherer drum = (TileEntityManaGatherer) world.getTileEntity(pos);
+		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
+		ItemStack stack = player.getHeldItem(hand);
+		Item stackItem = stack.getItem();
 
-			// If player NOT is sneaking and has an extractor
-			if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
-				if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
-					mana.fill(30);
-					drum.setManaValue(drum.getManaValue() - 30);
-					drum.sendUpdates();
-					VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
-				}
+		// If player NOT is sneaking and has an extractor
+		if (!player.isSneaking() && stackItem == ItemRegistry.mana_extractor) {
+			if (drum.getManaValue() > 30 && mana.getMana() <= mana.manaLimit() - 30) {
+				mana.fill(30);
+				drum.setManaValue(drum.getManaValue() - 30);
+				drum.sendUpdates();
+				VanillaPacketDispatcher.dispatchTEToNearbyPlayers(drum);
 			}
 		}
 		return true;

@@ -131,6 +131,7 @@ public class GuiTomePage extends GuiScreen {
 				if (pageNum != (TomePageLib.WandsPageList.size() - 1)) {
 					arrowF.drawButton(mc, mouseX, mouseY, 111);
 				}
+				break;
 			case GENERATION:
 				if (pageNum != (TomePageLib.GeneratePageList.size() - 1)) {
 					arrowF.drawButton(mc, mouseX, mouseY, 111);
@@ -351,7 +352,7 @@ public class GuiTomePage extends GuiScreen {
 					if (searchNum < TomePageLib.WandsPageList.size()) {
 						mc.displayGuiScreen(TomePageLib.WandsPageList.get(searchNum));
 					} else if (searchNum >= TomePageLib.WandsPageList.size()) {
-						mc.displayGuiScreen(TomePageLib.WandsPageList.get(TomePageLib.RunesPageList.size() - 1));
+						mc.displayGuiScreen(TomePageLib.WandsPageList.get(TomePageLib.WandsPageList.size() - 1));
 					}
 					break;
 				case WORLDGEN:

@@ -57,7 +57,7 @@ public class ItemContractRuneCorrupt extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 250, 0, false, false));
+			player.addPotionEffect(new PotionEffect(MobEffects.HASTE, 250, this.getLevel(), false, false));
 		}
 	}
 
@@ -84,7 +84,7 @@ public class ItemContractRuneCorrupt extends ItemRune implements IRune {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(TextFormatting.AQUA + "Effect:Strength");
+		tooltip.add(TextFormatting.AQUA + "Effect:Haste");
 
 	}
 }

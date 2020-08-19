@@ -11,7 +11,6 @@ import com.huto.hutosmod.mana.ManaProvider;
 import com.huto.hutosmod.network.PacketGetMana;
 import com.huto.hutosmod.network.PacketGetManaLimit;
 import com.huto.hutosmod.network.PacketHandler;
-import com.huto.hutosmod.particles.ManaParticle;
 import com.huto.hutosmod.proxy.Vector3;
 import com.huto.hutosmod.reference.Reference;
 

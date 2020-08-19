@@ -14,18 +14,19 @@ import net.minecraft.item.ItemStack;
 public class ModResonatorRecipies {
 	public static final List<RecipeResonator> resonatorRecipies = new ArrayList<>();
 	public static RecipeResonator recipeAntiTear, recipeResonantFuel, recipeEnhancedMagatama, recipeNullRod,
-			recipeNullCrystal, recipeNullPowder, recipeEnhancedPick, recipeEnhancedSword, recipeEnhancedShovel,
-			recipeEnhancedAxe, recipeEnhancedHoe, recipeEnhancedHelm, recipeEnhancedChestplate, recipeEnhancedPants,
-			recipeEnhancedBoots, recipeManaGem, recipeChannelingRod, recipeManaDust, recipeEnchantedEarth,
-			recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,recipieGreyIngot;
+			recipeNullCrystal, recipeNullPowder, recipeEnhancedPick, recipeDualPick1, recipeDualPick2,
+			recipeEnhancedSword, recipeEnhancedShovel, recipeEnhancedAxe, recipeEnhancedHoe, recipeEnhancedHelm,
+			recipeEnhancedChestplate, recipeEnhancedPants, recipeEnhancedBoots, recipeManaGem, recipeChannelingRod,
+			recipeManaDust, recipeEnchantedEarth, recipeEnchantedStone, recipeEnchantedMedia, recipeEnchantedSapling,
+			recipieGreyIngot;
 	// ReversionRecipies
 	public static RecipeResonator recipeAntiTearREVERT, recipeResonantFuelREVERT;
 
 	public static void init() {
-		
+
 		recipeAntiTear = registerEnhancerRecipe(new ItemStack(ItemRegistry.grey_ingot, 1), 30, EnumEssecenceType.GREY,
 				new ItemStack(Items.IRON_INGOT, 1));
-		
+
 		recipeAntiTear = registerEnhancerRecipe(new ItemStack(ItemRegistry.anti_tear, 1), 30, EnumEssecenceType.KARMIC,
 				new ItemStack(ItemRegistry.essence_drop, 1));
 		recipeResonantFuel = registerEnhancerRecipe(new ItemStack(ItemRegistry.resonant_fuel, 1), 30,
@@ -46,6 +47,10 @@ public class ModResonatorRecipies {
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_SHOVEL, 1));
 		recipeEnhancedAxe = registerEnhancerRecipe(new ItemStack(ItemRegistry.null_axe, 1), 100,
 				EnumEssecenceType.KARMIC, new ItemStack(Items.DIAMOND_AXE, 1));
+		recipeDualPick1 = registerEnhancerRecipe(new ItemStack(ItemRegistry.duality_pick, 1), 100,
+				EnumEssecenceType.MANA, new ItemStack(ItemRegistry.null_pickaxe, 1));
+		recipeDualPick2 = registerEnhancerRecipe(new ItemStack(ItemRegistry.duality_pick, 1), 200,
+				EnumEssecenceType.BOTH, new ItemStack(Items.DIAMOND_PICKAXE, 1));
 		recipeManaGem = registerEnhancerRecipe(new ItemStack(ItemRegistry.mana_crystal, 1), 15, EnumEssecenceType.MANA,
 				new ItemStack(ItemRegistry.grey_crystal, 1));
 		recipeManaDust = registerEnhancerRecipe(new ItemStack(ItemRegistry.mana_powder, 1), 10, EnumEssecenceType.MANA,

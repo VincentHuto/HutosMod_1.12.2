@@ -177,20 +177,28 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 							Vec3d manaDirection = new Vec3d(otherAbsorber.getPos().getX() - this.pos.getX(),
 									otherAbsorber.getPos().getY() - this.pos.getY(),
 									otherAbsorber.getPos().getZ() - this.pos.getZ());
+							Vec3d otherManaDirection = new Vec3d(this.pos.getX() - otherAbsorber.getPos().getX(),
+									this.pos.getY() - otherAbsorber.getPos().getY(),
+									this.pos.getZ() - otherAbsorber.getPos().getZ());
+
 							velocityX = -manaDirection.x * 0.1;
 							velocityY = -manaDirection.y * 0.1;
 							velocityZ = -manaDirection.z * 0.1;
 							if (count % 2 == 0) {
-								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-										velocityY, velocityZ, 1, 1, 1, 10, .1f);
+								if (world.isRemote) {
+									SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+											velocityY, velocityZ, 1, 1, 1, 10, .1f);
 
-								MainClass.proxy.spawnEffect(effect);
-
+									MainClass.proxy.spawnEffect(effect);
+								}
 							}
 							if (count % 3 == 0) {
-								SphereParticle effect1 = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-										velocityY, velocityZ, 0, 0, 0, 10, .1f);
-								MainClass.proxy.spawnEffect(effect1);
+								if (world.isRemote) {
+									SphereParticle effect1 = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+											velocityY, velocityZ, 0, 0, 0, 10, .1f);
+
+									MainClass.proxy.spawnEffect(effect1);
+								}
 							}
 						}
 					}
@@ -213,9 +221,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						velocityY = -manaDirection.y * 0.1;
 						velocityZ = -manaDirection.z * 0.1;
 						if (count % 20 == 0) {
-							SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-									velocityY, velocityZ, 11, 0, 1, 10, .2f);
-							MainClass.proxy.spawnEffect(effect);
+							if (world.isRemote) {
+
+								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+										velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+								MainClass.proxy.spawnEffect(effect);
+							}
 						}
 					}
 				}
@@ -234,9 +246,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						velocityY = -manaDirection.y * 0.1;
 						velocityZ = -manaDirection.z * 0.1;
 						if (count % 20 == 0) {
-							SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-									velocityY, velocityZ, 11, 0, 1, 10, .2f);
-							MainClass.proxy.spawnEffect(effect);
+							if (world.isRemote) {
+
+								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+										velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+								MainClass.proxy.spawnEffect(effect);
+							}
 						}
 					}
 				}
@@ -248,10 +264,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						if (manaStor.getManaValue() > this.rate && this.getManaValue() < maxMana) {
 							this.addManaValue(this.rate);
 							manaStor.setManaValue(manaStor.manaValue - this.rate);
-							Vector3 exportLoc = Vector3.fromTileEntityCenter(manaStor).add(0, 1, 0);
-							if (count % 50 == 0) {
-								MainClass.proxy.lightningFX(exportLoc, loc, 10f, System.nanoTime(), Reference.red,
-										Reference.white);
+							Vector3 exportLoc = Vector3.fromTileEntityCenter(manaStor).add(0, 0.5, 0);
+							if (count % 100 == 0) {
+								if (world.isRemote) {
+
+									MainClass.proxy.lightningFX(exportLoc, loc, 10, System.nanoTime(), Reference.red,
+											Reference.white);
+								}
 							}
 						}
 					}
@@ -270,9 +289,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 							velocityY = -manaDirection.y * 0.1;
 							velocityZ = -manaDirection.z * 0.1;
 							if (count % 20 == 0) {
-								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-										velocityY, velocityZ, 11, 0, 1, 10, .2f);
-								MainClass.proxy.spawnEffect(effect);
+								if (world.isRemote) {
+
+									SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+											velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+									MainClass.proxy.spawnEffect(effect);
+								}
 							}
 						}
 					}
@@ -283,10 +306,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						if (manaStor.getManaValue() > this.rate && this.getManaValue() < maxMana) {
 							this.addManaValue(this.rate);
 							manaStor.setManaValue(manaStor.getManaValue() - this.rate);
-							Vector3 exportLoc = Vector3.fromTileEntityCenter(manaStor).add(0, 1, 0);
-							if (count % 50 == 0) {
-								MainClass.proxy.lightningFX(exportLoc, loc, 0f, System.nanoTime(), Reference.red,
-										Reference.white);
+							Vector3 exportLoc = Vector3.fromTileEntityCenter(manaStor).add(0, 1.1, 0);
+							if (count % 100 == 0) {
+								if (world.isRemote) {
+
+									MainClass.proxy.lightningFX(exportLoc, loc, 10f, System.nanoTime(), Reference.red,
+											Reference.white);
+								}
 							}
 						}
 					}
@@ -305,9 +331,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 							velocityY = -manaDirection.y * 0.1;
 							velocityZ = -manaDirection.z * 0.1;
 							if (count % 20 == 0) {
-								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-										velocityY, velocityZ, 11, 0, 1, 10, .2f);
-								MainClass.proxy.spawnEffect(effect);
+								if (world.isRemote) {
+
+									SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+											velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+									MainClass.proxy.spawnEffect(effect);
+								}
 							}
 						}
 					}
@@ -330,9 +360,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						velocityY = -manaDirection.y * 0.1;
 						velocityZ = -manaDirection.z * 0.1;
 						if (count % 20 == 0) {
-							SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-									velocityY, velocityZ, 11, 0, 1, 10, .2f);
-							MainClass.proxy.spawnEffect(effect);
+							if (world.isRemote) {
+
+								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+										velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+								MainClass.proxy.spawnEffect(effect);
+							}
 						}
 					}
 
@@ -354,10 +388,13 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						velocityY = -manaDirection.y * 0.1;
 						velocityZ = -manaDirection.z * 0.1;
 						if (count % 20 == 0) {
-							SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
-									velocityY, velocityZ, 11, 0, 1, 10, .2f);
-							MainClass.proxy.spawnEffect(effect);
+							if (world.isRemote) {
 
+								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+										velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+								MainClass.proxy.spawnEffect(effect);
+							}
 						}
 					}
 				}

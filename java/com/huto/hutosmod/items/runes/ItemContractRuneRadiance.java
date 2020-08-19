@@ -66,20 +66,11 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
 		if (itemstack.getItemDamage() == 0 && player.ticksExisted % 1 == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 250, 0, false, false));
-			sync++;
-			sync %= 10;
-			if (sync == 0)
-				PacketHandler.INSTANCE.sendToServer(
-						new PacketGetMana(mana, "com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "mana"));
-			PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(manaLimit,
-					"com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "manaLimit"));
-			IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-			if (mana.manaLimit() <= 900) {
-				mana.setLimit(900);
-
+			player.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 250, this.getLevel(), false, false));
+			IMana manaCap = player.getCapability(ManaProvider.MANA_CAP, null);
+			if (manaCap.getMana() < 300) {
+				manaCap.fill(1*this.getLevel());
 			}
-			mana.fill(1);
 		}
 	}
 
@@ -107,12 +98,13 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 		if (sync == 0)
 			PacketHandler.INSTANCE.sendToServer(
 					new PacketGetMana(mana, "com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "mana"));
-		PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(manaLimit,
-				"com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "manaLimit"));
-		IMana mana = player.getCapability(ManaProvider.MANA_CAP, null);
-		mana.setLimit(300);
+		/*
+		 * PacketHandler.INSTANCE.sendToServer(new PacketGetManaLimit(manaLimit,
+		 * "com.huto.hutosmod.items.runes.ItemContractRuneRadiance", "manaLimit"));
+		 */
+		IMana manaCap = player.getCapability(ManaProvider.MANA_CAP, null);
+		manaCap.setLimit(300);
 
-		
 	}
 
 	@Override
@@ -121,5 +113,5 @@ public class ItemContractRuneRadiance extends ItemRune implements IRune {
 		tooltip.add(TextFormatting.AQUA + "Effect:Glowing/Mana Regen");
 
 	}
-	
+
 }

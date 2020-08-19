@@ -10,12 +10,12 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class CommonProxy {
+public class CommonProxy implements IProxy{
 
 	public void registerEventHandlers() {
 	}
 
-	long getWorldElapsedTicks() {
+	public long getWorldElapsedTicks() {
 		return 0;
 	}
 

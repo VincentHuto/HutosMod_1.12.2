@@ -56,7 +56,7 @@ public class RenderTileKarmicAltar extends TileEntitySpecialRenderer<TileEntityK
 		double time = ClientTickHandler.ticksInGame + partticks;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		float heightMod = te.cooldown;
+		float heightMod = te.getCooldown();
 
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			GlStateManager.pushMatrix();
@@ -83,7 +83,7 @@ public class RenderTileKarmicAltar extends TileEntitySpecialRenderer<TileEntityK
 
 		DecimalFormat df = new DecimalFormat("0.00");
 		String text = df.format(te.getManaValue());
-		String text1 = df.format(te.cooldown);
+		String text1 = df.format(te.getCooldown());
 
 		GlStateManager.translate(0, 1.75, -0.5);
 		GlStateManager.rotate(180, 1, 0, 1);
