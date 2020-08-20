@@ -1,4 +1,4 @@
-package com.huto.hutosmod.tileentity;
+/*package com.huto.hutosmod.tileentity;
 
 import javax.annotation.Nonnull;
 
@@ -20,12 +20,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class TileEntityRuneStation extends TileEntityLockableLoot implements ITickable {
+public class TileEntityRuneStationNew extends TileEntityLockableLoot implements ITickable {
 	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(5, ItemStack.EMPTY);
 	public int numPlayersUsing, ticksSinceSync;
 	public float lidAngle, prevLidAngle;
 	float manaValue;
-	public static int maxMana = 500;
 	public static final String TAG_MANA = "mana";
 
 	public float getManaValue() {
@@ -213,3 +212,4 @@ public class TileEntityRuneStation extends TileEntityLockableLoot implements ITi
 		this.world.notifyNeighborsOfStateChange(pos, this.getBlockType(), false);
 	}
 }
+*/

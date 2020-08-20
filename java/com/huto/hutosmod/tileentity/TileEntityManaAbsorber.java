@@ -204,7 +204,7 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 					}
 				}
 
-				// Functional
+				// Generation
 				if (tile instanceof TileEntityWaveGatherer || tile instanceof TileEntityManaGatherer) {
 					TileModMana manaStor = (TileModMana) tile;
 
@@ -371,7 +371,7 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 					}
 
 				}
-				// MOST mana based machines
+				// Other mana based machines
 				if (tile instanceof TileEntityVibratorySelector) {
 					TileEntityVibratorySelector manaStor = (TileEntityVibratorySelector) tile;
 					if (manaStor.getManaValue() < manaStor.maxMana && this.getManaValue() > this.rate) {
@@ -398,6 +398,31 @@ public class TileEntityManaAbsorber extends TileManaSimpleInventory implements I
 						}
 					}
 				}
+				if (tile instanceof TileEntityRuneStation) {
+					TileEntityRuneStation manaStor = (TileEntityRuneStation) tile;
+					if (manaStor.getManaValue() < manaStor.maxMana && this.getManaValue() > this.rate) {
+						manaStor.addManaValue(this.rate);
+						this.setManaValue(this.manaValue - this.rate);
+						// Particle Stuff
+						double xpos = this.pos.getX() + 0.5, ypos = this.pos.getY() + 1, zpos = this.pos.getZ() + 0.5;
+						double velocityX, velocityY, velocityZ;
+						Vec3d manaDirection = new Vec3d(this.getPos().getX() - manaStor.getPos().getX(),
+								this.getPos().getY() - manaStor.getPos().getY(),
+								this.getPos().getZ() - manaStor.getPos().getZ());
+						velocityX = -manaDirection.x * 0.1;
+						velocityY = -manaDirection.y * 0.1;
+						velocityZ = -manaDirection.z * 0.1;
+						if (count % 20 == 0) {
+							if (world.isRemote) {
+								SphereParticle effect = new SphereParticle(getWorld(), xpos, ypos, zpos, velocityX,
+										velocityY, velocityZ, 11, 0, 1, 10, .2f);
+
+								MainClass.proxy.spawnEffect(effect);
+							}
+						}
+					}
+				}
+
 			}
 		}
 	}

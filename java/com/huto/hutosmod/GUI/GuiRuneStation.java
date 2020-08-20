@@ -47,7 +47,8 @@ public class GuiRuneStation extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		this.fontRenderer.drawString(this.te.getDisplayName().getUnformattedText(), 8, 6, 65444444);
 		this.fontRenderer.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 000000);
-
+		String manaString = String.format("%.2f", this.te.getManaValue());
+		this.fontRenderer.drawString("Mana: " + manaString, 100, 6, 471711);
 		for (int i = 0; i < te.getSizeInventory(); i++) {
 			int color;
 			if (this.te.getStackInSlot(i).getItem() instanceof ItemContractRuneBeast) {
