@@ -36,6 +36,7 @@ import com.huto.hutosmod.items.tools.ToolHoe;
 import com.huto.hutosmod.items.tools.ToolNullSword;
 import com.huto.hutosmod.items.tools.ToolPickaxe;
 import com.huto.hutosmod.items.tools.ToolShovel;
+import com.huto.hutosmod.items.tools.ToolTreecapitator;
 import com.huto.hutosmod.items.tools.ToolVeinPickaxe;
 import com.huto.hutosmod.items.wands.ItemAbsorbWand;
 import com.huto.hutosmod.items.wands.ItemConsumeWand;
@@ -138,6 +139,7 @@ public class ItemRegistry {
 	public static final ItemSpade null_shovel = new ToolShovel("null_shovel", MATERIAL_NULL);
 	public static final ItemHoe null_hoe = new ToolHoe("null_hoe", MATERIAL_NULL);
 	public static final ItemPickaxe duality_pick = new ToolVeinPickaxe("duality_pick", MATERIAL_NULL);
+	public static final ItemAxe duality_axe = new ToolTreecapitator("duality_axe", MATERIAL_NULL);
 
 	public static final ItemTool iron_knapper = new ItemKnapper("iron_knapper", 25f, MATERIAL_OBSIDIAN_KNAPPER);
 	public static final ItemTool obsidian_knapper = new ItemKnapper("obsidian_knapper", 50f, MATERIAL_OBSIDIAN_KNAPPER);
