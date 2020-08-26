@@ -46,7 +46,7 @@ public class ItemSoakingAgent extends Item {
 		BlockPos pos = entityItem.getPosition();
 		World world = entityItem.getEntityWorld();
 		double ypos = pos.getY() + .5;
-		double velocityX = 0, velocityBlueY =-0.005, velocityRedY = +0.005, velocityZ = 0;
+		double velocityX = 0, velocityBlueY = -0.005, velocityRedY = +0.005, velocityZ = 0;
 		double redValue = 0;
 		double blueValue = 0;
 		double xMod = Math.sin(spiralCount);
@@ -65,14 +65,15 @@ public class ItemSoakingAgent extends Item {
 					}
 					count = 0;
 				}
+			if (entityItem.ticksExisted > 150) {
+				world.getWorldInfo().setRainTime(0);
+				world.getWorldInfo().setThunderTime(0);
+				world.getWorldInfo().setRaining(true);
+				world.getWorldInfo().setThundering(false);
+				entityItem.setDead();
+			}
 		}
-		if (entityItem.ticksExisted > 150) {
-			world.getWorldInfo().setRainTime(0);
-			world.getWorldInfo().setThunderTime(0);
-			world.getWorldInfo().setRaining(true);
-			world.getWorldInfo().setThundering(false);
-			entityItem.setDead();
-		}
+
 		return super.onEntityItemUpdate(entityItem);
 
 	}

@@ -99,6 +99,7 @@ public class ItemRegistry {
 	public static final Item GUI_PORTA_BENCH = new ItemPortaBench("porta_bench");
 	public static final Item drying_agent = new ItemDryingAgent("drying_agent");
 	public static final Item soaking_agent = new ItemSoakingAgent("soaking_agent");
+	public static final Item storming_agent = new ItemStormingAgent("storming_agent");
 	public static final Item repulsion_charm = new ItemRepulsionCharm("repulsion_charm");
 	public static final Item attraction_charm = new ItemAttractionCharm("attraction_charm");
 

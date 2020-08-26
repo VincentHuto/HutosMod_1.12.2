@@ -13,9 +13,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemDryingAgent extends Item {
+public class ItemStormingAgent extends Item {
 
-	public ItemDryingAgent(String name) {
+	public ItemStormingAgent(String name) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MainClass.tabHutosMod);
@@ -46,7 +46,7 @@ public class ItemDryingAgent extends Item {
 		BlockPos pos = entityItem.getPosition();
 		World world = entityItem.getEntityWorld();
 		double ypos = pos.getY() + .5;
-		double velocityX = 0, velocityBlueY = +0.005, velocityRedY = -0.005, velocityZ = 0;
+		double velocityX = 0, velocityBlueY = -0.005, velocityRedY = +0.005, velocityZ = 0;
 		double redValue = 0;
 		double blueValue = 0;
 		double xMod = Math.sin(spiralCount);
@@ -54,22 +54,32 @@ public class ItemDryingAgent extends Item {
 		int mod = 3 + rand.nextInt(10);
 		int age = 200;
 
-		if (entityItem.getEntityWorld().isRaining() || entityItem.getEntityWorld().isThundering()) {
+		if (!entityItem.getEntityWorld().isRaining()) {
 			if (!entityItem.isAirBorne)
 				if (count > 0) {
 					if (world.isRemote) {
-						SphereParticle newEffect = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.5, ypos,
-								pos.getZ() + 0.5 + zMod * 0.5, (xMod * 0.1) * 0.01, velocityBlueY, (zMod * 0.1) * 0.01,
-								0.84F, 0.84F, 0.0F, age, 0.1f);
-						Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+						if (entityItem.ticksExisted % 6 != 0) {
+							SphereParticle newEffect = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.5, ypos,
+									pos.getZ() + 0.5 + zMod * 0.5, (xMod * 0.1) * 0.01, velocityBlueY,
+									(zMod * 0.1) * 0.01, 0.84F, 0.84F, 0.84F, age, 0.1f);
+
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+						} else if (entityItem.ticksExisted % 6 == 0) {
+							SphereParticle newEffect1 = new SphereParticle(world, pos.getX() + 0.5 + xMod * 0.5, ypos,
+									pos.getZ() + 0.5 + zMod * 0.5, (xMod * 0.1) * 0.01, velocityBlueY,
+									(zMod * 0.1) * 0.01, 0.84F, 0.84F, 0.0f, age, 0.1f);
+
+							Minecraft.getMinecraft().effectRenderer.addEffect(newEffect1);
+
+						}
 					}
 					count = 0;
 				}
 			if (entityItem.ticksExisted > 150) {
 				world.getWorldInfo().setRainTime(0);
 				world.getWorldInfo().setThunderTime(0);
-				world.getWorldInfo().setRaining(false);
-				world.getWorldInfo().setThundering(false);
+				world.getWorldInfo().setRaining(true);
+				world.getWorldInfo().setThundering(true);
 				entityItem.setDead();
 			}
 		}
