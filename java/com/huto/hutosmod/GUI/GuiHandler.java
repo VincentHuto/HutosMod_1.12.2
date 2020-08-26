@@ -37,7 +37,7 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerVibratorySelector(player.inventory,
 					(TileEntityVibratorySelector) world.getTileEntity(new BlockPos(x, y, z)), player);
 		case (Reference.GUI_PORTA_BENCH):
-			return new ContainerWorkbench(player.inventory, world, new BlockPos(x, y, z));
+			return new ContainerWorkbench(player.inventory, world, player.getPosition());
 		default:
 			return null;
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.huto.hutosmod.MainClass;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IProjectile;
@@ -34,14 +35,24 @@ import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySkeletonHorse;
 import net.minecraft.entity.passive.EntityZombieHorse;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemAttractionCharm extends Item {
+
+	public static boolean state;
+	public String TAG_STATE = "state";
 
 	public ItemAttractionCharm(String name) {
 		setUnlocalizedName(name);
@@ -49,16 +60,70 @@ public class ItemAttractionCharm extends Item {
 		setCreativeTab(MainClass.tabHutosMod);
 		ItemRegistry.ITEMS.add(this);
 		maxStackSize = 1;
+	}
 
+	public boolean getState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		repelSlimeInAABBFromPoint(worldIn,
-				new AxisAlignedBB(entityIn.getPosition().add(-4, -4, -4), entityIn.getPosition().add(4, 4, 4)),
-				entityIn.getPosition().getX() + 0.5, entityIn.getPosition().getY() + 0.5,
-				entityIn.getPosition().getZ() + 0.5);
+
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound compound = stack.getTagCompound();
+			compound.setBoolean(TAG_STATE, false);
+		}
+		NBTTagCompound compound = stack.getTagCompound();
+
+		if (compound.hasKey(TAG_STATE)) {
+			if (compound.getBoolean(TAG_STATE) == true) {
+				repelSlimeInAABBFromPoint(worldIn,
+						new AxisAlignedBB(entityIn.getPosition().add(-4, -4, -4), entityIn.getPosition().add(4, 4, 4)),
+						entityIn.getPosition().getX() + 0.5, entityIn.getPosition().getY() + 0.5,
+						entityIn.getPosition().getZ() + 0.5);
+			}
+		}
+
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound compound = stack.getTagCompound();
+			compound.setBoolean(TAG_STATE, false);
+		}
+		NBTTagCompound compound = stack.getTagCompound();
+
+		if (compound.hasKey(TAG_STATE)) {
+			boolean lev = compound.getBoolean(TAG_STATE);
+			compound.setBoolean(TAG_STATE, !lev);
+		}
+		stack.setTagCompound(compound);
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_STATE)) {
+			if (stack.getTagCompound().getBoolean(TAG_STATE)) {
+				tooltip.add(TextFormatting.BLUE + "State: On");
+			} else {
+				tooltip.add(TextFormatting.RED + "State: Off");
+
+			}
+
+		}
 
 	}
 

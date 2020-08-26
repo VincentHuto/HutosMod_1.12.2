@@ -25,8 +25,7 @@ public class ItemPortaBench extends Item {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
 		if (worldIn.isRemote) {
-			playerIn.openGui(Reference.MODID, Reference.GUI_PORTA_BENCH, worldIn, playerIn.getPosition().getX(),
-					playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+			playerIn.openGui(Reference.MODID, Reference.GUI_PORTA_BENCH, worldIn,0,0,0);
 		}
 
 		return super.onItemRightClick(worldIn, playerIn, handIn);

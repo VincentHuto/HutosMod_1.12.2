@@ -92,6 +92,9 @@ public class ToolTreecapitator extends ItemAxe {
 					((WorldServer) world).spawnParticle(EnumParticleTypes.PORTAL, pos.getX(), pos.getY(),
 							pos.getZ(), 2, 0, 0, 0, 0, new int[0]);
 				}
+				int damage = drops.size();
+
+				player.getHeldItemMainhand().damageItem(damage, player);
 
 			}
 		}

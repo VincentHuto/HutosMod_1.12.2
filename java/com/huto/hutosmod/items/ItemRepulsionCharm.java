@@ -5,22 +5,33 @@ import java.util.List;
 import com.huto.hutosmod.MainClass;
 import com.huto.hutosmod.entities.EntityColin;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemRepulsionCharm extends Item {
+
+	public static boolean state;
+	public String TAG_STATE = "state";
 
 	public ItemRepulsionCharm(String name) {
 		setUnlocalizedName(name);
@@ -31,13 +42,68 @@ public class ItemRepulsionCharm extends Item {
 
 	}
 
+	public boolean getState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound compound = stack.getTagCompound();
+			compound.setBoolean(TAG_STATE, false);
+		}
+		NBTTagCompound compound = stack.getTagCompound();
+
+		if (compound.hasKey(TAG_STATE)) {
+			boolean lev = compound.getBoolean(TAG_STATE);
+			compound.setBoolean(TAG_STATE, !lev);
+		}
+		stack.setTagCompound(compound);
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_STATE)) {
+			if (stack.getTagCompound().getBoolean(TAG_STATE)) {
+				tooltip.add(TextFormatting.BLUE + "State: On");
+			} else {
+				tooltip.add(TextFormatting.RED + "State: Off");
+
+			}
+
+		}
+
+	}
+
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		repelSlimeInAABBFromPoint(worldIn,
-				new AxisAlignedBB(entityIn.getPosition().add(-4, -4, -4), entityIn.getPosition().add(4, 4, 4)),
-				entityIn.getPosition().getX() + 0.5, entityIn.getPosition().getY() + 0.5,
-				entityIn.getPosition().getZ() + 0.5);
+
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound compound = stack.getTagCompound();
+			compound.setBoolean(TAG_STATE, false);
+		}
+		NBTTagCompound compound = stack.getTagCompound();
+
+		if (compound.hasKey(TAG_STATE)) {
+			if (compound.getBoolean(TAG_STATE) == true) {
+				repelSlimeInAABBFromPoint(worldIn,
+						new AxisAlignedBB(entityIn.getPosition().add(-4, -4, -4), entityIn.getPosition().add(4, 4, 4)),
+						entityIn.getPosition().getX() + 0.5, entityIn.getPosition().getY() + 0.5,
+						entityIn.getPosition().getZ() + 0.5);
+			}
+		}
 
 	}
 
@@ -68,7 +134,7 @@ public class ItemRepulsionCharm extends Item {
 								ent.posZ + (world.rand.nextDouble() - 0.5D) * (double) ent.width, 0.0D, 0.0D, 0.0D);
 					}
 				}
-			//	ent.attackEntityFrom(DamageSource.GENERIC, 1f);
+				// ent.attackEntityFrom(DamageSource.GENERIC, 1f);
 
 			}
 		}

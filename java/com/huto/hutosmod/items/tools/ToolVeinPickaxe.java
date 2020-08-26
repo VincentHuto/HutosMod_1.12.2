@@ -128,8 +128,9 @@ public class ToolVeinPickaxe extends ItemPickaxe {
 				new BlockPos(aabb.maxX, aabb.maxY, aabb.maxZ))) {
 			IBlockState state = player.getEntityWorld().getBlockState(pos);
 			if (isSameOre(target, state)) {
-				int damage = harvestVein(player.getEntityWorld(), player, stack, pos, state, drops, 0);
 				harvestVein(player.getEntityWorld(), player, stack, pos, state, drops, 0);
+				int damage = harvestVein(player.getEntityWorld(), player, stack, pos, state, drops, 0);
+
 				player.getHeldItemMainhand().damageItem(damage, player);
 			}
 		}
