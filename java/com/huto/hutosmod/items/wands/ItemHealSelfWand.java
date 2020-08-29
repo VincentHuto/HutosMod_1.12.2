@@ -42,27 +42,28 @@ public class ItemHealSelfWand extends Item {
 			PacketHandler.INSTANCE
 					.sendToServer(new PacketGetMana(mana, "com.huto.hutosmod.items.wands.ItemHealSelfWand", "mana"));
 		IMana mana = playerIn.getCapability(ManaProvider.MANA_CAP, null);
-		
+
 		if (mana.getMana() > 20F) {
+			if (playerIn.getHealth() != playerIn.getMaxHealth()) {
 
-		Random rand = new Random();
-		for (int countparticles = 0; countparticles <= 30; ++countparticles) {
-			if (worldIn.isRemote) {
-				worldIn.spawnParticle(EnumParticleTypes.HEART,
-						playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width,
-						playerIn.posY + rand.nextDouble() * (double) playerIn.height - (double) playerIn.getYOffset()
-								- 0.5,
-						playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
+				Random rand = new Random();
+				for (int countparticles = 0; countparticles <= 30; ++countparticles) {
+					if (worldIn.isRemote) {
+						worldIn.spawnParticle(EnumParticleTypes.HEART,
+								playerIn.posX + (rand.nextDouble() - 0.5D) * (double) playerIn.width,
+								playerIn.posY + rand.nextDouble() * (double) playerIn.height
+										- (double) playerIn.getYOffset() - 0.5,
+								playerIn.posZ + (rand.nextDouble() - 0.5D) * (double) playerIn.width, 0.0D, 0.0D, 0.0D);
+					}
+
+				}
+				playerIn.setHealth(playerIn.getHealth() + 2);
+				mana.consume(20);
 			}
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 
-		}
-		playerIn.setHealth(playerIn.getHealth()+2);
-		mana.consume(20);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
-
-	}else
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+		} else
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
 	}
-
 
 }

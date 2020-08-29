@@ -74,6 +74,10 @@ item.wand_rending.name=Wand Of Rending
 item.wand_healself.name=Wand Of Healing
 item.wand_healother.name=Wand Of Generosity
 item.wand_lightning.name=Wand of Shocking
+item.repulsion_charm.name=Repulsion Charm
+item.attraction_charm.name=Attraction Charm
+
+
 item.rune_blank.name=Blank Rune
 item.rune_metamorphosis.name=Anti Metamorphosis Rune
 item.rune_lake.name=Arcane Lake Rune

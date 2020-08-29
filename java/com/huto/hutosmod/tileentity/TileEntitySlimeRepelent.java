@@ -55,7 +55,7 @@ public class TileEntitySlimeRepelent extends TileEntity implements ITickable {
 
 				if (world.isRemote) {
 					for (int countparticles = 0; countparticles <= 30; ++countparticles) {
-						ent.world.spawnParticle(EnumParticleTypes.REDSTONE,
+						ent.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC,
 								ent.posX + (world.rand.nextDouble() - 0.5D) * (double) ent.width,
 								ent.posY + world.rand.nextDouble() * (double) ent.height - (double) ent.getYOffset()
 										- 0.5,

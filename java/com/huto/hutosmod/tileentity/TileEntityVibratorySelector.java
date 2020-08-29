@@ -52,7 +52,7 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	public float selectedFrequency;
 	float manaValue;
-	public final String TAG_FREQUENCY = "FREQUENCY";
+	public final String TAG_FREQUENCY = "frequency";
 	public static final String TAG_MANA = "mana";
 	private int blockMetadata = -1;
 	private static final int craft_event = 3;
@@ -215,7 +215,6 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 	public boolean receiveClientEvent(int id, int param) {
 		switch (id) {
 		case craft_event: {
-			System.out.println("CALLED EVENT");
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
 			Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, 2, 0);
 			if (selectedFrequency > 0) {
@@ -232,7 +231,6 @@ public class TileEntityVibratorySelector extends TileEntityLockableLoot implemen
 
 		}
 		case decraft_event: {
-			System.out.println("CALLED EVENT");
 			Vector3 vec = Vector3.fromTileEntityCenter(this).add(0, 0, 0);
 			Vector3 blueVec = Vector3.fromTileEntityCenter(this).add(0, 2, 0);
 			MainClass.proxy.lightningFX(vec, blueVec, 25F, System.nanoTime(), Reference.white, Reference.black);

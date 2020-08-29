@@ -54,7 +54,7 @@ public class ItemStormingAgent extends Item {
 		int mod = 3 + rand.nextInt(10);
 		int age = 200;
 
-		if (!entityItem.getEntityWorld().isRaining()) {
+		if (entityItem.getEntityWorld().isRaining()) {
 			if (!entityItem.isAirBorne)
 				if (count > 0) {
 					if (world.isRemote) {

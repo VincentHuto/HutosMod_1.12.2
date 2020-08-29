@@ -1,6 +1,9 @@
 {
    "parent": "item/handheld",
    "textures": {
-       "layer0": "hutosmod:items/blood_sword"
-   }
+       "layer0": "hutosmod:items/null_sword"
+   },
+    "overrides": [
+    {"predicate": {"hutosmod:FREQ": 1}, "model": "hutosmod:item/null_sword_freq"}
+  ]
 }
